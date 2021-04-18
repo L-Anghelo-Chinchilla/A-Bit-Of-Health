@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'routes.dart'; 
+import 'routes.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -22,9 +23,9 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/',
-      routes: getRoutes() ,
-    //  home: MyHomePage(title: 'Flutter Demo Home Page'),
+      initialRoute: 'FoodCounter',
+      routes: getRoutes(),
+      //  home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
@@ -41,8 +42,6 @@ class MyHomePage extends StatefulWidget {
   // used by the build method of the State. Fields in a Widget subclass are
   // always marked "final".
 
-
-
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -57,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
       // so that the display can reflect the updated values. If we changed
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
-      Navigator.pushNamed(context, 'FoodSelector');
+      Navigator.pushNamed(context, 'FoodCounter');
     });
   }
 
