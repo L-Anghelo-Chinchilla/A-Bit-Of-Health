@@ -1,0 +1,156 @@
+{
+    "database": {
+        "Calendario": {
+            "-asdasdaadasdasada": {
+                "2021": {
+                    "04": {
+                        "14": [
+                            {
+                                "agua": 6,
+                                "comida": [
+                                    {
+                                        "hora": "14:45",
+                                        "registro": [
+                                            {
+                                                "alimento": "Pan",
+                                                "cantidad": 5
+                                            },
+                                            {
+                                                "alimento": "Café",
+                                                "cantidad": 1
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "comida": {
+            "Almuerzo": {
+                "foodOffer": [
+                    {
+                        "typeOfFood": "Aperitivos",
+                        "aliments": [
+                            "Ensalada"
+                        ]
+                    },
+                    {
+                        "typeOfFood": "Refrescos",
+                        "aliments": [
+                            "Refresco de Canela",
+                            "Refresco de Durazno",
+                            "Refresco de Mocochinchi"
+                        ]
+                    }
+                ]
+            },
+            "Cena": {
+                "foodOffer": [
+                    {
+                        "typeOfFood": "calientes",
+                        "aliments": [
+                            "Té",
+                            "Mate"
+                        ]
+                    }
+                ]
+            },
+            "Desayuno": {
+                "foodOffer": [
+                    {
+                        "typeOfFood": "Acompañantes",
+                        "Alimentos": [
+                            "Huevos",
+                            "Queso",
+                            "Mermelada",
+                            "Mantequilla",
+                            "Aceitunas",
+                            "Tocino",
+                            "Jamón",
+                            "Queso crema",
+                            "Miel"
+                        ]
+                    },
+                    {
+                        "typeOfFood": "Calientes",
+                        "alimetos": [
+                            "Café",
+                            "Te negro",
+                            "Te verde",
+                            "Avena",
+                            "Leche",
+                            "Chocolate",
+                            "Api",
+                            "Tojori"
+                        ]
+                    },
+                    {
+                        "typeOfFood": "Frios",
+                        "alimentos": [
+                            "Jugo verde",
+                            "Jugo de naranja",
+                            "Jugo de limón",
+                            "Jugo de frutilla",
+                            "Yogourt"
+                        ]
+                    },
+                    {
+                        "typeOfFood": "Otro",
+                        "alimentos": [
+                            "Torta",
+                            "Dona",
+                            "Salteña",
+                            "Tucumana",
+                            "Relleno de papa",
+                            "Relleno de achojcha",
+                            "Pasteles de queso"
+                        ]
+                    },
+                    {
+                        "typeOfFood": "Panes",
+                        "alimentos": [
+                            "Pan blanco",
+                            "Pan integral",
+                            "Waffles",
+                            "Hotcakes"
+                        ]
+                    }
+                ]
+            },
+            "Snack": {
+                "foodOffer": [
+                    {
+                        "typeOfFood": "refresco",
+                        "aliments": [
+                            "COCA-COLA",
+                            "Refresco de Canela",
+                            "Refresco de Durazno",
+                            "Refresco de Mocochinchi"
+                        ]
+                    }
+                ]
+            }
+        },
+        "users": {
+            "-asdasdaadasdasada": {
+                "altura": 1.65,
+                "correo": "juanitoalcachofa@gmail.com",
+                "genero": "M",
+                "limiteAgua": 9,
+                "nombre": "Juanito Alcachofa",
+                "peso ": 99.5
+            },
+            "-wqweqwewqeqwewq": {
+                "altura": 1.7,
+                "correo": "sanchopanza@gmail.com",
+                "genero": "M",
+                "limiteAgua": 8,
+                "nombre": "Sancho Panza",
+                "peso": 85.3
+            }
+        }
+    }
+}
