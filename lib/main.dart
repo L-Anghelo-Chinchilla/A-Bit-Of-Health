@@ -4,11 +4,11 @@ import 'providers/UserProvider.dart' ;
 
 void main() {
 
-  final provider = FoodProvider();
+  //final provider = FoodProvider();
    //print('{"Almuerzo":[{"lista":["Ensalada"],"tipo":"Aperitivos"},{"lista":["Refresco de Canela","Refresco de Durazno","Refresco de Mocochinchi"],"tipo":"Refrescos"}],"Cena":[{"lista":["Té","Mate"],"tipo":"calientes"}],"Desayuno":[{"Alimentos":["Huevos","Queso","Mermelada","Mantequilla","Aceitunas","Tocino","Jamón","Queso crema","Miel"],"tipo":"Acompañantes"},{"alimetos":["Café","Te negro","Te verde","Avena","Leche","Chocolate","Api","Tojori"],"tipo":"Calientes"},{"alimentos":["Jugo verde","Jugo de naranja","Jugo de limón","Jugo de frutilla","Yogourt"],"tipo":"Frios"},{"alimentos":["Torta","Dona","Salteña","Tucumana","Relleno de papa","Relleno de achojcha","Pasteles de queso"],"tipo":"Otro"},{"alimentos":["Pan blanco","Pan integral","Waffles","Hotcakes"],"tipo":"Panes"}],"Snack":[{"lista":["COCA-COLA","Refresco de Canela","Refresco de Durazno","Refresco de Mocochinchi"],"tipo":"refresco"}]}');
    
-    provider.setUserWaterLimit('-asdasdaadasdasada', 10);
-    provider.setUserWaterLimit('-wqweqwewqeqwewq',11);
+  //  provider.setUserWaterLimit('-asdasdaadasdasada', 10);
+   // provider.setUserWaterLimit('-wqweqwewqeqwewq',11);
    
    runApp(MyApp());
 }
@@ -68,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
       // so that the display can reflect the updated values. If we changed
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
-      //Navigator.pushNamed(context, 'FoodSelector');
+      Navigator.pushNamed(context, 'FoodSelector');
     });
   }
 

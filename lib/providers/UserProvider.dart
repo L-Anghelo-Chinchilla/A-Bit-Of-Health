@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 
 class FoodProvider 
 {
-  final _url = 'https://a-bit-of-health-default-rtdb.firebaseio.com/-MY_m2kmg4IPP50j4HbU/database/users/';  
+  final _url = 'https://a-bit-of-health-default-rtdb.firebaseio.com/-MYaJTE_mruliEHN8Ger/database/users/';  
 
   Future<UserModel> getUserData(String userID) async {
      final url = '$_url$userID.json';
