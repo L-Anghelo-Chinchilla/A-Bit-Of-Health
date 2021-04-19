@@ -18,27 +18,40 @@ class FoodCounter extends StatelessWidget {
   Widget build(BuildContext context) {
      //String _formatdate = new DateFormat.yMMMd().format(_currentDate);
     final _TabPages = <Widget>[
-      GridView.count(
-        crossAxisCount: 3,
+      ListView(
+        scrollDirection: Axis.horizontal,
         children: <Widget>[
+                    Center(
+                        child: Container(
+                          alignment:  Alignment.topCenter,
+                        child: Text('Añadir Comidas'),
+                        )
+                    ),
                     Card(
-                      
-                     elevation: 5,
                        child: Container(
-                        //Alignment.centerLeft es Alignment(-1.0, 0.0),
-                        child: Image.asset('assets/panes.png',width:200)
+                         alignment: Alignment.topCenter,
+                        child: Image.asset('assets/bebidaCaliente.jpg',width:250),
                      )
                    ),
                      Card(
                      elevation: 5,
                        child: Container(
-                        child: Image.asset('assets/acompañantes.jpg',width:200)
+                         alignment: Alignment.topCenter,
+                        child: Image.asset('assets/BebidaFria.jpg',width:250)
                )
             ),
              Card(
                      elevation: 5,
                        child: Container(
-                        child: Image.asset('assets/bebidaCal.jfif',width:200)
+                         alignment: Alignment.topCenter,
+                        child: Image.asset('assets/Masas.jpg',width:250)
+               ) 
+           ),
+           Card(
+                     elevation: 5,
+                       child: Container(
+                         alignment: Alignment.topCenter,
+                        child: Image.asset('assets/mermelada.jpg',width:250)
                )
             )
         ]
