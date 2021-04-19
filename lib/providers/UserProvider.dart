@@ -4,12 +4,11 @@ import 'package:http/http.dart' as http;
 
 class FoodProvider 
 {
-  final _url = 'https://a-bit-of-health-default-rtdb.firebaseio.com/-MYaJTE_mruliEHN8Ger/database/users/';  
+  final _url = 'https://a-bit-of-health-default-rtdb.firebaseio.com/database/users/';  
 
   Future<UserModel> getUserData(String userID) async {
      final url = '$_url$userID.json';
      final answer =await http.get(url);
-     print(answer.body);
      Map<String , dynamic> data = json.decode(answer.body);
     UserModel userData = (UserModel.fromJson(data));
     userData.setID(userID);
