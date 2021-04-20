@@ -21,12 +21,6 @@ class FoodCounter extends StatelessWidget {
       ListView(
         scrollDirection: Axis.horizontal,
         children: <Widget>[
-                    Center(
-                        child: Container(
-                          alignment:  Alignment.topCenter,
-                        child: Text('Añadir Comidas'),
-                        )
-                    ),
                     Card(
                        child: Container(
                          alignment: Alignment.topCenter,
