@@ -1,3 +1,4 @@
+import 'package:a_bit_of_health/models/UserModel.dart';
 import 'package:flutter/material.dart';
 import 'routes.dart'; 
 import 'providers/UserProvider.dart' ;
@@ -62,13 +63,17 @@ class _MyHomePageState extends State<MyHomePage> {
   void _incrementCounter() {
     
   
-    setState(() {
+    setState(() async{
+      UserProvider provider = UserProvider();
+      UserModel user = await provider.getUserData('-wqweqwewqeqwewq');
+      print(user.toJson());
+      
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
       // so that the display can reflect the updated values. If we changed
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
-      Navigator.pushNamed(context, 'FoodSelector');
+      Navigator.pushNamed(context, 'FoodSelector', arguments:user);
     });
   }
 
@@ -106,13 +111,13 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              's many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
+           // Text(
+            //  's many times:',
+            //),
+           // Text(
+            //  '$_counter',
+            //  style: Theme.of(context).textTheme.headline4,
+           // ),
           ],
         ),
       ),

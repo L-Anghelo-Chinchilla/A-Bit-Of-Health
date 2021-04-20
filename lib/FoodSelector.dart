@@ -1,6 +1,9 @@
-import 'package:a_bit_of_health/models/FoodModel.dart';
-import 'package:a_bit_of_health/providers/FoodProvider.dart';
+import 'package:a_bit_of_health/GlassesOfWater.dart';
+import 'package:a_bit_of_health/models/UserModel.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:a_bit_of_health/providers/FoodProvider.dart';
+import 'package:a_bit_of_health/models/FoodModel.dart';
 
 class FoodSelector extends StatelessWidget {
   const FoodSelector({Key key}) : super(key: key);
@@ -17,12 +20,15 @@ class FoodSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+   // UserModel user = ModalRoute.of(context).settings.arguments;
     //String _formatdate = new DateFormat.yMMMd().format(_currentDate);
     final _TabPages = [
       FoodSelector2(),
       Center(child: Icon(Icons.analytics)),
       Center(child: Icon(Icons.calendar_today_rounded)),
-      const Center(child: Icon(Icons.star)),
+      GlassesOfWater1(user: ModalRoute.of(context).settings.arguments,)
+      //const Center(child: Icon(Icons.star)),
       //const Center(child: Text("Date: $_currentDate")),
     ];
     final _KTabs = <Tab>[
@@ -144,7 +150,7 @@ class _FoodOfferListState extends State<FoodOfferList> {
       shrinkWrap: true,
       scrollDirection: Axis.horizontal,
       itemCount: widget.offer.foodOffers.length,
-      itemBuilder: (context, i) {
+      itemBuilder: (_, i) {
         return Container(
             margin: EdgeInsets.all(15),
           // height: MediaQuery.of(context).size.height * 0.4 - 20,
@@ -173,11 +179,18 @@ class OfferScroll extends StatelessWidget {
           child: ListView.builder(
             shrinkWrap: true,
             itemCount: list.aliments.length,
-            itemBuilder: (context, i) {
+            itemBuilder: (_, i) {
+            
+            String name = list.aliments[i];
+            bool value = false ;
               return CheckboxListTile(
-                  title: Text(list.aliments[i]),
-                  value: false,
-                  onChanged: (value) {});
+                  title: Text(name),
+                  value: value,
+                  onChanged: (value) {
+                    Provider.of<FoodOfferModel>(context,listen: false).valueChanged('Desayuno', name, value);
+                    
+                  
+                  });
             },
           )))
     ]));

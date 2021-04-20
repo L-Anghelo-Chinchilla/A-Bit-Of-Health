@@ -1,11 +1,13 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
+
 FoodOfferModel foodOfferModelFromJson(String str) =>
     FoodOfferModel.fromJson(json.decode(str));
 
 String foodOfferModelToJson(FoodOfferModel data) => json.encode(data.toJson());
 
-class FoodOfferModel {
+class FoodOfferModel with ChangeNotifier{
   List<FoodOffer> foodOffers;
 
   FoodOfferModel({this.foodOffers});
@@ -21,15 +23,24 @@ class FoodOfferModel {
 
   @override
   String toString() => '{ ${foodOffers.toString()} }';
+
+  void valueChanged(String name ,String foodName , bool value){
+
+    foodOffers.forEach((element) {if(element.typeOfFood == name) element.setValueChanged(foodName ,  value); });
+    notifyListeners();
+  }
+
+
 }
 
-class FoodOffer {
+class FoodOffer with ChangeNotifier{
   String typeOfFood;
   List<String> aliments;
+ // List<bool> values;
 
 
+  FoodOffer({this.typeOfFood, this.aliments, /*this.values*/});
 
-  FoodOffer({this.typeOfFood, this.aliments});
 
 
     FoodOffer foodOfferFromJson(String str) =>
@@ -56,4 +67,8 @@ List<String> aliments = List<String>.from(l.map((model)=> model ));
   String toString() => '{ ${this.typeOfFood} , ${jsonEncode(this.aliments)} }';
 
 
+  void setValueChanged(String name , bool value){
+    aliments.forEach((element) { if(name == element) print('$element set to $value');});
+  notifyListeners();
+  }
 }

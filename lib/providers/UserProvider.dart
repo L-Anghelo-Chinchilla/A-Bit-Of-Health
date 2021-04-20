@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:a_bit_of_health/models/UserModel.dart';
 import 'package:http/http.dart' as http;
 
-class FoodProvider 
+class UserProvider 
 {
   final _url = 'https://a-bit-of-health-default-rtdb.firebaseio.com/database/users/';  
 
