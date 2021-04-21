@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 //import 'package:intl/intl.dart';
 
 class FoodCounter extends StatelessWidget {
@@ -18,39 +19,57 @@ class FoodCounter extends StatelessWidget {
   Widget build(BuildContext context) {
      //String _formatdate = new DateFormat.yMMMd().format(_currentDate);
     final _TabPages = <Widget>[
-      ListView(
+        ListView(
         scrollDirection: Axis.horizontal,
         children: <Widget>[
-                    Card(
+                    Center(
+
+                        child: Text('Añadir Comidas')
+                    ),
+                    /*ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: <Widget>[
+                        Card(
+                          child:  Container(
+                                  child: Image.asset('assets/bebidaCaliente.jpg',width:250),
+                          )
+                      )
+                      ],
+                    ),*/
+                      Container(
+                      height: 200,
                        child: Container(
-                         alignment: Alignment.topCenter,
-                        child: Image.asset('assets/bebidaCaliente.jpg',width:250),
-                     )
+                         //alignment: Alignment.topCenter,
+                        child: Image.asset('assets/calientes.png',width:200),
+                        
+                      )
+                    ),
+                       Container(
+                     height: 200,
+                       child: Container(
+                         //alignment: Alignment.topCenter,
+                        child: Image.asset('assets/frios.png',width:200)
+                    )
                    ),
-                     Card(
-                     elevation: 5,
+                   Container(
+                     height: 200,
                        child: Container(
-                         alignment: Alignment.topCenter,
-                        child: Image.asset('assets/BebidaFria.jpg',width:250)
-               )
-            ),
-             Card(
-                     elevation: 5,
+                         //alignment: Alignment.topCenter,
+                        child: Image.asset('assets/masas.png',width:200)
+                    ) 
+                   ),
+                    Container(
+                     height: 200,
                        child: Container(
-                         alignment: Alignment.topCenter,
-                        child: Image.asset('assets/Masas.jpg',width:250)
-               ) 
-           ),
-           Card(
-                     elevation: 5,
-                       child: Container(
-                         alignment: Alignment.topCenter,
-                        child: Image.asset('assets/mermelada.jpg',width:250)
-               )
-            )
+                         //alignment: Alignment.topCenter,
+                        child: Image.asset('assets/acompanantes.png',width:200)
+                      )
+                     )
+                    
+      
         ]
       ),
-       Center(child: Icon(Icons.analytics)),
+      Center(child: Icon(Icons.analytics)),
        Center(child: Icon(Icons.calendar_today_rounded)),
       const Center(child: Icon(Icons.star)),
       //const Center(child: Text("Date: $_currentDate")),
@@ -85,4 +104,14 @@ class FoodCounter extends StatelessWidget {
       ),
     );
   }
-}
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: Column(children: [
+          Text('Añadir comida'),
+        ]
+        )
+    );
+  }
+
