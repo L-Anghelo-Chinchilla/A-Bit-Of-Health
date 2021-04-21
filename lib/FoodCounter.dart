@@ -1,7 +1,4 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class FoodCounter extends StatelessWidget {
   //const FoodCounter({Key key}) : super(key: key);
@@ -79,6 +76,13 @@ class NextPage extends StatelessWidget {
                   padding: EdgeInsets.all(10),
                   decoration:
                       BoxDecoration(border: Border.all(color: Colors.black)),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text('Tostada'),
+                        CounterView(),
+                      ]),
+                  alignment: Alignment.topCenter,
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width * 0.2,
@@ -157,3 +161,88 @@ class NextPage extends StatelessWidget {
     );
   }
 }
+
+//--------------------------------COUNTER----------------------------------------
+class CounterView extends StatefulWidget {
+  final int initNumber;
+  final Function(int) counterCallback;
+  final Function increaseCallback;
+  final Function decreaseCallback;
+  CounterView(
+      {this.initNumber,
+      this.counterCallback,
+      this.increaseCallback,
+      this.decreaseCallback});
+  @override
+  _CounterViewState createState() => _CounterViewState();
+}
+
+class _CounterViewState extends State<CounterView> {
+  int _currentCount;
+  Function _counterCallback;
+  Function _increaseCallback;
+  Function _decreaseCallback;
+
+  @override
+  void initState() {
+    _currentCount = widget.initNumber ?? 1;
+    _counterCallback = widget.counterCallback ?? (int number) {};
+    _increaseCallback = widget.increaseCallback ?? () {};
+    _decreaseCallback = widget.decreaseCallback ?? () {};
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.zero,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: Colors.white,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          _createIncrementDicrementButton(Icons.remove, () => _dicrement()),
+          Text(_currentCount.toString()),
+          _createIncrementDicrementButton(Icons.add, () => _increment()),
+        ],
+      ),
+    );
+  }
+
+  void _increment() {
+    setState(() {
+      _currentCount++;
+      _counterCallback(_currentCount);
+      _increaseCallback();
+    });
+  }
+
+  void _dicrement() {
+    setState(() {
+      if (_currentCount > 1) {
+        _currentCount--;
+        _counterCallback(_currentCount);
+        _decreaseCallback();
+      }
+    });
+  }
+
+  Widget _createIncrementDicrementButton(IconData icon, Function onPressed) {
+    return RawMaterialButton(
+      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      constraints: BoxConstraints(minWidth: 10.0, minHeight: 10.0),
+      onPressed: onPressed,
+      elevation: 0.2,
+      fillColor: Colors.limeAccent[700],
+      child: Icon(
+        icon,
+        color: Colors.white,
+        size: 15.0,
+      ),
+      shape: CircleBorder(),
+    );
+  }
+}
+//-------------------------------------------------------------------------------
