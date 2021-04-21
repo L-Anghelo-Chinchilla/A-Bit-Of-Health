@@ -27,7 +27,8 @@ class FoodSelector extends StatelessWidget {
       FoodSelector2(),
       Center(child: Icon(Icons.analytics)),
       Center(child: Icon(Icons.calendar_today_rounded)),
-      GlassesOfWater1(user: ModalRoute.of(context).settings.arguments,)
+      GlassesOfWater()
+      //GlassesOfWater1(user: ModalRoute.of(context).settings.arguments,)
       //const Center(child: Icon(Icons.star)),
       //const Center(child: Text("Date: $_currentDate")),
     ];

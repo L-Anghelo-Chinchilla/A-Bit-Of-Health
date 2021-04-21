@@ -6,14 +6,30 @@ import 'package:a_bit_of_health/providers/UserProvider.dart';
 import 'package:flutter/material.dart';
 
 class GlassesOfWater extends StatelessWidget{
-
+  UserProvider _provider = UserProvider();
   @override 
   Widget build(BuildContext context){
       //final ScreenArguments args =
        // ModalRoute.of(context)!.settings.arguments as ScreenArguments;
 
     return Scaffold(
-      body : GlassesOfWater1(user: UserModel(weight: 85.3, height: 1.7, email: "sanchopanza@gmail.com", gender: "M", name: "Sancho Panza", waterLimit: 10, newWaterLimit: 8, waterLimitDate: "14/04/2021", glasses: 3) )//ModalRoute.of(context).settings.arguments )
+      body : FutureBuilder<UserModel>(
+                      future: _provider.getUserData('-wqweqwewqeqwewq' ), // a previously-obtained Future<String> or null
+                      builder: (BuildContext context,
+                          AsyncSnapshot<UserModel> snapshot) {
+                        if (snapshot.hasData) {
+                          return GlassesOfWater1(user: snapshot.data);
+                        } else {
+                          return Center(
+                            child:SizedBox(
+                            child: CircularProgressIndicator(),
+                            width: 60,
+                            height: 60,
+                          ));
+                        }
+                      })//
+      
+     // GlassesOfWater1(user: UserModel(weight: 85.3, height: 1.7, email: "sanchopanza@gmail.com", gender: "M", name: "Sancho Panza", waterLimit: 10, newWaterLimit: 8, waterLimitDate: "14/04/2021", glasses: 3) )//ModalRoute.of(context).settings.arguments )
     );
 
 
@@ -83,7 +99,7 @@ class _GlassesOfWatterState extends State<GlassesOfWater1>{
                           alignment: Alignment.center,
                         children: [
                           Image.asset('lib/assets/vaso_$state.png',width: 150,height: 150,),
-                          Text('${i+1}'),
+                          Text('${i+1}',style: TextStyle(color: Color(0xFF3FBCF0))),
                         ]);},)
                   )
                 ) ,

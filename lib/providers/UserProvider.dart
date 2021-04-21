@@ -11,6 +11,7 @@ class UserProvider
      final answer =await http.get(url);
      Map<String , dynamic> data = json.decode(answer.body);
     UserModel userData = (UserModel.fromJson(data));
+    print(userData.toJson());
     userData.setID(userID);
     return userData;
   }
