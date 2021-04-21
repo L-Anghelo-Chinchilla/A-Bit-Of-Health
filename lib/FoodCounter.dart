@@ -1,80 +1,132 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-//import 'package:intl/intl.dart';
+import 'package:intl/intl.dart';
 
 class FoodCounter extends StatelessWidget {
-  const FoodCounter({Key key}) : super(key: key);
+  //const FoodCounter({Key key}) : super(key: key);
 
-  //DateTime _currentDate = new DateTime.now();
-
-  /*Future<Null> selectdate(BuildContext context) async {
-    final DateTime _seldate = await showDatePicker(
-        context: context,
-        initialDate: _currentDate,
-        firstDate: DateTime(1990),
-        lastDate: DateTime(2021));
-  }*/
-
+//The date displayed in the app
   @override
   Widget build(BuildContext context) {
-     //String _formatdate = new DateFormat.yMMMd().format(_currentDate);
-    final _TabPages = <Widget>[
-        ListView(
-        scrollDirection: Axis.horizontal,
-        children: <Widget>[
-                    Center(
+    return NextPage();
+  }
+}
 
-                        child: Text('Añadir Comidas')
-                    ),
-                    /*ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: <Widget>[
-                        Card(
-                          child:  Container(
-                                  child: Image.asset('assets/bebidaCaliente.jpg',width:250),
-                          )
-                      )
-                      ],
-                    ),*/
-                      Container(
-                      height: 200,
-                       child: Container(
-                         //alignment: Alignment.topCenter,
-                        child: Image.asset('assets/calientes.png',width:200),
-                        
-                      )
-                    ),
-                       Container(
-                     height: 200,
-                       child: Container(
-                         //alignment: Alignment.topCenter,
-                        child: Image.asset('assets/frios.png',width:200)
-                    )
-                   ),
-                   Container(
-                     height: 200,
-                       child: Container(
-                         //alignment: Alignment.topCenter,
-                        child: Image.asset('assets/masas.png',width:200)
-                    ) 
-                   ),
-                    Container(
-                     height: 200,
-                       child: Container(
-                         //alignment: Alignment.topCenter,
-                        child: Image.asset('assets/acompanantes.png',width:200)
-                      )
-                     )
-                    
-      
-        ]
-      ),
+class NextPage extends StatelessWidget {
+  const NextPage({Key key}) : super(key: key);
+  // DateTime _currentDate = new DateTime.now();
+  @override
+  Widget build(BuildContext context) {
+    // String _formatdate = new DateFormat.yMMMd().format(_currentDate);
+    Size size = MediaQuery.of(context).size;
+
+    final _TabPages = <Widget>[
+      // CENTER OF THE HOME PAGE -----------------------------------------------------------
+      Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Text(
+          'Añadir Comidas',
+          style: TextStyle(fontStyle: FontStyle.italic, fontSize: 32),
+        ),
+        Expanded(
+          child: Container(
+            //alignment: Alignment.center,
+            child: ListView(
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              children: <Widget>[
+                Container(
+                    height: 100,
+                    width: 100,
+                    //alignment: Alignment.center,
+                    child: Image.asset(
+                      'assets/calientes.png',
+                      width: 100,
+                      height: 100,
+                    )),
+                Container(
+                    height: 100,
+                    width: 100,
+                    //alignment: Alignment.center,
+                    child: Image.asset('assets/frios.png',
+                        width: 100, height: 100)),
+                Container(
+                    height: 100,
+                    width: 100,
+                    //alignment: Alignment.center,
+                    child: Image.asset('assets/masas.png',
+                        width: 100, height: 100)),
+                Container(
+                    height: 100,
+                    width: 100,
+                    //alignment: Alignment.center,
+                    child: Image.asset('assets/frutas.png',
+                        width: 100, height: 100)),
+              ],
+            ),
+          ),
+        ),
+        Expanded(
+          //child: Container(
+          child: ListView(
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              children: <Widget>[
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.2,
+                  height: MediaQuery.of(context).size.height * 0.4,
+                  margin: EdgeInsets.all(10),
+                  padding: EdgeInsets.all(10),
+                  decoration:
+                      BoxDecoration(border: Border.all(color: Colors.black)),
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.2,
+                  height: MediaQuery.of(context).size.height * 0.4,
+                  margin: EdgeInsets.all(10),
+                  padding: EdgeInsets.all(10),
+                  decoration:
+                      BoxDecoration(border: Border.all(color: Colors.black)),
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.2,
+                  height: MediaQuery.of(context).size.height * 0.4,
+                  margin: EdgeInsets.all(10),
+                  padding: EdgeInsets.all(10),
+                  decoration:
+                      BoxDecoration(border: Border.all(color: Colors.black)),
+                ),
+              ]),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            FloatingActionButton.extended(
+                label: Text('Atrás'),
+                backgroundColor: Colors.limeAccent[700],
+                onPressed: () {}),
+            FloatingActionButton.extended(
+              label: Text('Evaluar'),
+              backgroundColor: Colors.limeAccent[700],
+              onPressed: () {},
+            )
+          ],
+        ),
+      ]),
+      //------------------------------------------------------------------------------
+      //CENTER OF THE STATISTICS
       Center(child: Icon(Icons.analytics)),
-       Center(child: Icon(Icons.calendar_today_rounded)),
-      const Center(child: Icon(Icons.star)),
+      //------------------------------------------------------------------------------
+      //CENTER OF THEE CALENDAR
+      Center(child: Icon(Icons.calendar_today_rounded)),
+      //------------------------------------------------------------------------------
+      //CENTER OF TODAY
+      Center(child: Icon(Icons.star)),
+      //------------------------------------------------------------------------------
       //const Center(child: Text("Date: $_currentDate")),
     ];
-      final _KTabs = <Tab>[
+
+    final _KTabs = <Tab>[
       const Tab(icon: Icon(Icons.home), text: 'Inicio'),
       const Tab(icon: Icon(Icons.analytics), text: 'Estadísticas'),
       const Tab(icon: Icon(Icons.calendar_today_rounded), text: 'Calendario'),
@@ -104,14 +156,4 @@ class FoodCounter extends StatelessWidget {
       ),
     );
   }
-  }
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        body: Column(children: [
-          Text('Añadir comida'),
-        ]
-        )
-    );
-  }
-
+}
