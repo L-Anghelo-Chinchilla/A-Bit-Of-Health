@@ -1,20 +1,13 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
+class FoodCounter extends StatefulWidget {
+  FoodCounter({Key key}) : super(key: key);
 
-class FoodCounter extends StatelessWidget {
-  //const FoodCounter({Key key}) : super(key: key);
-
-//The date displayed in the app
   @override
-  Widget build(BuildContext context) {
-    return NextPage();
-  }
+  _FoodCounterState createState() => _FoodCounterState();
 }
 
-class NextPage extends StatelessWidget {
-  const NextPage({Key key}) : super(key: key);
-  // DateTime _currentDate = new DateTime.now();
+class _FoodCounterState extends State<FoodCounter> {
+ 
   @override
   Widget build(BuildContext context) {
     // String _formatdate = new DateFormat.yMMMd().format(_currentDate);
@@ -22,7 +15,27 @@ class NextPage extends StatelessWidget {
 
     final _TabPages = <Widget>[
       // CENTER OF THE HOME PAGE -----------------------------------------------------------
-      Container(
+      
+      //------------------------------------------------------------------------------
+      //CENTER OF THE STATISTICS
+      Center(child: Icon(Icons.analytics)),
+      //------------------------------------------------------------------------------
+      //CENTER OF THEE CALENDAR
+      Center(child: Icon(Icons.calendar_today_rounded)),
+      //------------------------------------------------------------------------------
+      //CENTER OF TODAY
+      Center(child: Icon(Icons.star)),
+      //------------------------------------------------------------------------------
+      //const Center(child: Text("Date: $_currentDate")),
+    ];
+
+    final _KTabs = <Tab>[
+      const Tab(icon: Icon(Icons.home), text: 'Inicio'),
+      const Tab(icon: Icon(Icons.analytics), text: 'Estadísticas'),
+      const Tab(icon: Icon(Icons.calendar_today_rounded), text: 'Calendario'),
+      const Tab(icon: Icon(Icons.star), text: 'Hoy'),
+    ];
+    return Container(
         padding: EdgeInsets.all(30),
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Text(
@@ -166,49 +179,7 @@ class NextPage extends StatelessWidget {
             ],
           ),
         ]),
-      ),
-      //------------------------------------------------------------------------------
-      //CENTER OF THE STATISTICS
-      Center(child: Icon(Icons.analytics)),
-      //------------------------------------------------------------------------------
-      //CENTER OF THEE CALENDAR
-      Center(child: Icon(Icons.calendar_today_rounded)),
-      //------------------------------------------------------------------------------
-      //CENTER OF TODAY
-      Center(child: Icon(Icons.star)),
-      //------------------------------------------------------------------------------
-      //const Center(child: Text("Date: $_currentDate")),
-    ];
-
-    final _KTabs = <Tab>[
-      const Tab(icon: Icon(Icons.home), text: 'Inicio'),
-      const Tab(icon: Icon(Icons.analytics), text: 'Estadísticas'),
-      const Tab(icon: Icon(Icons.calendar_today_rounded), text: 'Calendario'),
-      const Tab(icon: Icon(Icons.star), text: 'Hoy'),
-    ];
-    return DefaultTabController(
-      length: _KTabs.length,
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('A Bit Of Health'),
-          backgroundColor: Colors.limeAccent[700],
-          brightness: Brightness.dark,
-          actions: [
-            Image(
-              image: AssetImage('assets/ABitOfHealth.png'),
-              fit: BoxFit.contain,
-              height: 60,
-            )
-          ],
-          bottom: TabBar(
-            tabs: _KTabs,
-          ),
-        ),
-        body: TabBarView(
-          children: _TabPages,
-        ),
-      ),
-    );
+      );
   }
 }
 

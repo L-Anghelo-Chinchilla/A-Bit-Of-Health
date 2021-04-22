@@ -1,3 +1,4 @@
+import 'package:a_bit_of_health/HomePage.dart';
 import 'package:a_bit_of_health/main.dart';
 import 'package:flutter/material.dart';
 import 'FoodCounter.dart';
@@ -12,7 +13,7 @@ import 'GlassesOfWater.dart';
 Map<String, WidgetBuilder> getRoutes(){
 
  return <String , WidgetBuilder>{
-    '/':(context ) => MyHomePage(),
+    '/':(context ) => HomePage(),
     'FoodSelector': (context) => FoodSelector(),
     'FoodCounter': (context) => FoodCounter(),
    'GlassesOfWater' : (context) => GlassesOfWater()

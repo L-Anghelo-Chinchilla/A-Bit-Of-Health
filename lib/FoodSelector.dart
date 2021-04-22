@@ -1,77 +1,19 @@
-import 'package:a_bit_of_health/GlassesOfWater.dart';
-import 'package:a_bit_of_health/models/UserModel.dart';
 import 'package:flutter/material.dart';
+
 import 'package:provider/provider.dart';
 import 'package:a_bit_of_health/providers/FoodProvider.dart';
 import 'package:a_bit_of_health/models/FoodModel.dart';
 
-class FoodSelector extends StatelessWidget {
-  const FoodSelector({Key key}) : super(key: key);
 
-  //DateTime _currentDate = new DateTime.now();
 
-  /*Future<Null> selectdate(BuildContext context) async {
-    final DateTime _seldate = await showDatePicker(
-        context: context,
-        initialDate: _currentDate,
-        firstDate: DateTime(1990),
-        lastDate: DateTime(2021));
-  }*/
-
-  @override
-  Widget build(BuildContext context) {
-
-   // UserModel user = ModalRoute.of(context).settings.arguments;
-    //String _formatdate = new DateFormat.yMMMd().format(_currentDate);
-    final _TabPages = [
-      FoodSelector2(),
-      Center(child: Icon(Icons.analytics)),
-      Center(child: Icon(Icons.calendar_today_rounded)),
-      GlassesOfWater()
-      //GlassesOfWater1(user: ModalRoute.of(context).settings.arguments,)
-      //const Center(child: Icon(Icons.star)),
-      //const Center(child: Text("Date: $_currentDate")),
-    ];
-    final _KTabs = <Tab>[
-      const Tab(icon: Icon(Icons.home), text: 'Inicio'),
-      const Tab(icon: Icon(Icons.analytics), text: 'Estadísticas'),
-      const Tab(icon: Icon(Icons.calendar_today_rounded), text: 'Calendario'),
-      const Tab(icon: Icon(Icons.star), text: 'Hoy'),
-    ];
-    return DefaultTabController(
-      length: _KTabs.length,
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('A Bit Of Health'),
-          backgroundColor: Colors.limeAccent[700],
-          brightness: Brightness.dark,
-          actions: [
-            Image(
-              image: AssetImage('assets/ABitOfHealth.png'),
-              fit: BoxFit.contain,
-              height: 60,
-            )
-          ],
-          bottom: TabBar(
-            tabs: _KTabs,
-          ),
-        ),
-        body: TabBarView(
-          children: _TabPages,
-        ),
-      ),
-    );
-  }
-}
-
-class FoodSelector2 extends StatefulWidget {
-  FoodSelector2({Key key}) : super(key: key);
+class FoodSelector extends StatefulWidget {
+  FoodSelector({Key key}) : super(key: key);
 
   @override
   _FoodSelectorState createState() => _FoodSelectorState();
 }
 
-class _FoodSelectorState extends State<FoodSelector2> {
+class _FoodSelectorState extends State<FoodSelector> {
   FoodProvider _provider = FoodProvider();
   FoodOfferModel _offer;
   String foodSelected = 'Desayuno';
@@ -151,7 +93,7 @@ class _FoodOfferListState extends State<FoodOfferList> {
       shrinkWrap: true,
       scrollDirection: Axis.horizontal,
       itemCount: widget.offer.foodOffers.length,
-      itemBuilder: (_, i) {
+      itemBuilder: (context, i) {
         return Container(
             margin: EdgeInsets.all(15),
           // height: MediaQuery.of(context).size.height * 0.4 - 20,
@@ -187,8 +129,10 @@ class OfferScroll extends StatelessWidget {
               return CheckboxListTile(
                   title: Text(name),
                   value: value,
-                  onChanged: (value) {
-                    Provider.of<FoodOfferModel>(context,listen: false).valueChanged('Desayuno', name, value);
+                  onChanged: (newValue) {
+                  
+                  value = newValue ; 
+                  //  Provider.of<FoodOfferModel>(context,listen: false).valueChanged('Desayuno', name, value);
                     
                   
                   });
