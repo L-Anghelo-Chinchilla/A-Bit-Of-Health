@@ -30,13 +30,13 @@ class FoodOfferModel with ChangeNotifier{
     notifyListeners();
   }
 
-
+    FoodOfferModel getItself() => this;
 }
 
 class FoodOffer with ChangeNotifier{
   String typeOfFood;
   List<String> aliments;
- // List<bool> values;
+
 
 
   FoodOffer({this.typeOfFood, this.aliments, /*this.values*/});

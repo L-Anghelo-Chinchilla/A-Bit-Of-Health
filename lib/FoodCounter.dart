@@ -13,28 +13,6 @@ class _FoodCounterState extends State<FoodCounter> {
     // String _formatdate = new DateFormat.yMMMd().format(_currentDate);
     Size size = MediaQuery.of(context).size;
 
-    final _TabPages = <Widget>[
-      // CENTER OF THE HOME PAGE -----------------------------------------------------------
-      
-      //------------------------------------------------------------------------------
-      //CENTER OF THE STATISTICS
-      Center(child: Icon(Icons.analytics)),
-      //------------------------------------------------------------------------------
-      //CENTER OF THEE CALENDAR
-      Center(child: Icon(Icons.calendar_today_rounded)),
-      //------------------------------------------------------------------------------
-      //CENTER OF TODAY
-      Center(child: Icon(Icons.star)),
-      //------------------------------------------------------------------------------
-      //const Center(child: Text("Date: $_currentDate")),
-    ];
-
-    final _KTabs = <Tab>[
-      const Tab(icon: Icon(Icons.home), text: 'Inicio'),
-      const Tab(icon: Icon(Icons.analytics), text: 'Estadísticas'),
-      const Tab(icon: Icon(Icons.calendar_today_rounded), text: 'Calendario'),
-      const Tab(icon: Icon(Icons.star), text: 'Hoy'),
-    ];
     return Container(
         padding: EdgeInsets.all(30),
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
