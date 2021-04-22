@@ -22,104 +22,151 @@ class NextPage extends StatelessWidget {
 
     final _TabPages = <Widget>[
       // CENTER OF THE HOME PAGE -----------------------------------------------------------
-
-      Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        Text(
-          'Añadir Comidas',
-          style: TextStyle(fontStyle: FontStyle.italic, fontSize: 32),
-        ),
-        Expanded(
-          child: Container(
-            //alignment: Alignment.center,
-            child: ListView(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              children: <Widget>[
-                Container(
-                    height: 100,
-                    width: 100,
-                    //alignment: Alignment.center,
-                    child: Image.asset(
-                      'assets/calientes.png',
-                      width: 100,
+      Container(
+        padding: EdgeInsets.all(30),
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Text(
+            'Añadir Comidas\n  Cantidades',
+            style: TextStyle(fontStyle: FontStyle.italic, fontSize: 32),
+          ),
+          Expanded(
+            child: Container(
+              //alignment: Alignment.center,
+              child: ListView(
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                children: <Widget>[
+                  Container(
                       height: 100,
-                    )),
-                Container(
-                    height: 100,
-                    width: 100,
-                    //alignment: Alignment.center,
-                    child: Image.asset('assets/frios.png',
-                        width: 100, height: 100)),
-                Container(
-                    height: 100,
-                    width: 100,
-                    //alignment: Alignment.center,
-                    child: Image.asset('assets/masas.png',
-                        width: 100, height: 100)),
-                Container(
-                    height: 100,
-                    width: 100,
-                    //alignment: Alignment.center,
-                    child: Image.asset('assets/frutas.png',
-                        width: 100, height: 100)),
-              ],
+                      width: 100,
+                      //alignment: Alignment.center,
+                      child: Image.asset(
+                        'assets/calientes.png',
+                        width: 100,
+                        height: 100,
+                      )),
+                  Container(
+                      height: 100,
+                      width: 100,
+                      //alignment: Alignment.center,
+                      child: Image.asset('assets/frios.png',
+                          width: 100, height: 100)),
+                  Container(
+                      height: 100,
+                      width: 100,
+                      //alignment: Alignment.center,
+                      child: Image.asset('assets/masas.png',
+                          width: 100, height: 100)),
+                  Container(
+                      height: 100,
+                      width: 100,
+                      //alignment: Alignment.center,
+                      child: Image.asset('assets/frutas.png',
+                          width: 100, height: 100)),
+                ],
+              ),
             ),
           ),
-        ),
-        Expanded(
-          //child: Container(
-          child: ListView(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              children: <Widget>[
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.2,
-                  height: MediaQuery.of(context).size.height * 0.4,
-                  margin: EdgeInsets.all(10),
-                  padding: EdgeInsets.all(10),
-                  decoration:
-                      BoxDecoration(border: Border.all(color: Colors.black)),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text('Tostada'),
-                        CounterView(),
-                      ]),
-                  alignment: Alignment.topCenter,
-                ),
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.2,
-                  height: MediaQuery.of(context).size.height * 0.4,
-                  margin: EdgeInsets.all(10),
-                  padding: EdgeInsets.all(10),
-                  decoration:
-                      BoxDecoration(border: Border.all(color: Colors.black)),
-                ),
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.2,
-                  height: MediaQuery.of(context).size.height * 0.4,
-                  margin: EdgeInsets.all(10),
-                  padding: EdgeInsets.all(10),
-                  decoration:
-                      BoxDecoration(border: Border.all(color: Colors.black)),
-                ),
-              ]),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            FloatingActionButton.extended(
-                label: Text('Atrás'),
+          SizedBox(
+              height: 60,
+              child: ListView(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  children: <Widget>[
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.2,
+                      height: MediaQuery.of(context).size.height * 0.4,
+                      margin: EdgeInsets.all(10),
+                      padding: EdgeInsets.all(10),
+                      child: Text(
+                        'Calientes',
+                        style: TextStyle(
+                            fontStyle: FontStyle.italic, fontSize: 15),
+                      ),
+                      alignment: Alignment.bottomCenter,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.2,
+                      height: MediaQuery.of(context).size.height * 0.4,
+                      margin: EdgeInsets.all(10),
+                      padding: EdgeInsets.all(10),
+                      child: Text(
+                        'Panes',
+                        style: TextStyle(
+                            fontStyle: FontStyle.italic, fontSize: 15),
+                      ),
+                      alignment: Alignment.bottomCenter,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.2,
+                      height: MediaQuery.of(context).size.height * 0.4,
+                      margin: EdgeInsets.all(10),
+                      padding: EdgeInsets.all(10),
+                      child: Text(
+                        'Acompañantes',
+                        style: TextStyle(
+                            fontStyle: FontStyle.italic, fontSize: 15),
+                      ),
+                      alignment: Alignment.bottomCenter,
+                    ),
+                  ])),
+          Expanded(
+            //child: Container(
+            child: ListView(
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                children: <Widget>[
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    height: MediaQuery.of(context).size.height * 0.4,
+                    margin: EdgeInsets.all(10),
+                    padding: EdgeInsets.all(10),
+                    decoration:
+                        BoxDecoration(border: Border.all(color: Colors.black)),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text('Tostada'),
+                          CounterView(),
+                        ]),
+                    alignment: Alignment.topCenter,
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    height: MediaQuery.of(context).size.height * 0.4,
+                    margin: EdgeInsets.all(10),
+                    padding: EdgeInsets.all(10),
+                    decoration:
+                        BoxDecoration(border: Border.all(color: Colors.black)),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    height: MediaQuery.of(context).size.height * 0.4,
+                    margin: EdgeInsets.all(10),
+                    padding: EdgeInsets.all(10),
+                    decoration:
+                        BoxDecoration(border: Border.all(color: Colors.black)),
+                  ),
+                ]),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              FloatingActionButton.extended(
+                  label: Text('Atrás'),
+                  backgroundColor: Colors.limeAccent[700],
+                  onPressed: () {}),
+              FloatingActionButton.extended(
+                label: Text('Evaluar'),
                 backgroundColor: Colors.limeAccent[700],
-                onPressed: () {}),
-            FloatingActionButton.extended(
-              label: Text('Evaluar'),
-              backgroundColor: Colors.limeAccent[700],
-              onPressed: () {},
-            )
-          ],
-        ),
-      ]),
+                onPressed: () {},
+              )
+            ],
+          ),
+        ]),
+      ),
       //------------------------------------------------------------------------------
       //CENTER OF THE STATISTICS
       Center(child: Icon(Icons.analytics)),
@@ -249,6 +296,7 @@ class _CounterViewState extends State<CounterView> {
   }
 }
 
+//-----------------------------------ITERATIVE FORMAT---------------------------------
 class ImagestoDisplay extends StatelessWidget {
   String imageName;
 
