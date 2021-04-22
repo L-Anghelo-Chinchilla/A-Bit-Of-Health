@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 
 class FoodCounter extends StatelessWidget {
@@ -20,6 +22,7 @@ class NextPage extends StatelessWidget {
 
     final _TabPages = <Widget>[
       // CENTER OF THE HOME PAGE -----------------------------------------------------------
+
       Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         Text(
           'Añadir Comidas',
@@ -245,4 +248,24 @@ class _CounterViewState extends State<CounterView> {
     );
   }
 }
+
+class ImagestoDisplay extends StatelessWidget {
+  String imageName;
+
+  ImagestoDisplay({this.imageName});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        height: 100,
+        width: 100,
+        //alignment: Alignment.center,
+        child: Image.asset(
+          'assets/$imageName.png',
+          width: 100,
+          height: 100,
+        ));
+  }
+}
+
 //-------------------------------------------------------------------------------
