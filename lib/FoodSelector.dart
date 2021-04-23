@@ -88,7 +88,7 @@ class _FoodSelectorState extends State<FoodSelector> {
                               },
                             )
                           ],
-                        )
+                        ) 
                       ]))))
         ]));
   }
