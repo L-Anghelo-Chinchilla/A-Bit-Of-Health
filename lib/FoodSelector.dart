@@ -82,8 +82,9 @@ class _FoodSelectorState extends State<FoodSelector> {
                               child: Text('Siguiente'),
                               onPressed: () {
                                 
-                                List<FoodOffer> list =  Provider.of<FoodOfferModel>(context).getSelectedOnes();
-                                
+                                List<FoodOffer> list = [];
+                                list =  Provider.of<FoodOfferModel>(context,listen: false ).getSelectedOnes();
+                                print(list.toString()); 
                                 Navigator.pushNamed(context, 'FoodCounter', arguments:  list);
                               },
                             )

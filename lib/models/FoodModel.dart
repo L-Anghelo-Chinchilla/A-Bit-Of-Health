@@ -41,8 +41,9 @@ class FoodOfferModel with ChangeNotifier {
 
 
   List<FoodOffer> getSelectedOnes(){
-    List<FoodOffer> list = foodOffers.where((element) => element.getSelectedOnes().aliments.length < 0  ).toList();
-
+     List<FoodOffer> list = [];
+      foodOffers.forEach((element) { list.add(element.getSelectedOnes());  });
+    return list;
 
   }
 }

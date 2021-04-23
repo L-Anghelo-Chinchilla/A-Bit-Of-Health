@@ -12,6 +12,8 @@ class _FoodCounterState extends State<FoodCounter> {
   @override
   Widget build(BuildContext context) {
     // String _formatdate = new DateFormat.yMMMd().format(_currentDate);
+    
+    print(ModalRoute.of(context).settings.arguments.toString());
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
