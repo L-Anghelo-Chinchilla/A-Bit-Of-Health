@@ -147,10 +147,115 @@ modifica tu límite de vasos diarios si lo deseas.'''),
                                       })
                                 ],
                               ),
-                              TextButton(
-                                  onPressed: () {},
-                                  child: Text('Editar Límite'))
+
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children:[
+                                Text('Editar límite   '),
+
+                                CounterView(initNumber: widget.user.waterLimit),
+                              OutlinedButton(
+                                  child: Text('Editar Límite'),
+                                  onPressed: () async {
+
+                                    
+
+                                  },)
+                                ]
+                                  )
                             ],
                           )));
+  }
+}
+
+
+
+class CounterView extends StatefulWidget {
+  final int initNumber;
+  final Function(int) counterCallback;
+  final Function increaseCallback;
+  final Function decreaseCallback;
+  CounterView(
+      {this.initNumber,
+      this.counterCallback,
+      this.increaseCallback,
+      this.decreaseCallback});
+  @override
+  _CounterViewState createState() => _CounterViewState();
+}
+
+class _CounterViewState extends State<CounterView> {
+  int _currentCount;
+  Function _counterCallback;
+  Function _increaseCallback;
+  Function _decreaseCallback;
+
+  @override
+  void initState() {
+    _currentCount = widget.initNumber ?? 1;
+    _counterCallback = widget.counterCallback ?? (int number) {};
+    _increaseCallback = widget.increaseCallback ?? () {};
+    _decreaseCallback = widget.decreaseCallback ?? () {};
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.zero,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: Colors.white,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          _createIncrementDicrementButton(Icons.remove, () => _dicrement()),
+          Text(   _currentCount.toString()   ),
+          _createIncrementDicrementButton(Icons.add, () => _increment()),
+        ],
+      ),
+    );
+  }
+
+  void _increment() {
+    setState((){
+      if(_currentCount < 20){
+      
+      _currentCount++;
+      _counterCallback(_currentCount);
+      _increaseCallback();
+      final provider =UserProvider();
+      provider.setUserWaterLimit('-wqweqwewqeqwewq', _currentCount );
+    }});
+  }
+
+  void _dicrement() {
+    setState(() {
+      if (_currentCount > 5) {
+        _currentCount--;
+        _counterCallback(_currentCount);
+        _decreaseCallback();
+         final provider =UserProvider();
+       provider.setUserWaterLimit('-wqweqwewqeqwewq', _currentCount );
+
+      }
+    });
+  }
+
+  Widget _createIncrementDicrementButton(IconData icon, Function onPressed) {
+    return RawMaterialButton(
+      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      constraints: BoxConstraints(minWidth: 10.0, minHeight: 10.0),
+      onPressed: onPressed,
+      elevation: 0.2,
+      fillColor: Colors.limeAccent[700],
+      child: Icon(
+        icon,
+        color: Colors.white,
+        size: 15.0,
+      ),
+      shape: CircleBorder(),
+    );
   }
 }

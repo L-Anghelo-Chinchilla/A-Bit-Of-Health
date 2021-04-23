@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 
 class FoodProvider 
 {
-  final _url = 'https://a-bit-of-health-default-rtdb.firebaseio.com/';  
+  final _url = 'https://a-bit-of-health-default-rtdb.firebaseio.com/q/';  
 
   //@param String the type of food the user ate
   //returns the offers of food stores in database
@@ -15,7 +15,7 @@ class FoodProvider
     FoodOfferModel foodOffer; 
   
       foodOffer = (FoodOfferModel.fromJson(data));
-    print(foodOffer.toString());
+    //print(foodOffer.toString());
     return foodOffer;
   }
  
