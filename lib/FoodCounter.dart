@@ -1,3 +1,4 @@
+import 'package:a_bit_of_health/utils.dart';
 import 'package:flutter/material.dart';
 class FoodCounter extends StatefulWidget {
   FoodCounter({Key key}) : super(key: key);
@@ -13,9 +14,12 @@ class _FoodCounterState extends State<FoodCounter> {
     // String _formatdate = new DateFormat.yMMMd().format(_currentDate);
     Size size = MediaQuery.of(context).size;
 
-    return Container(
-        padding: EdgeInsets.all(30),
-        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+    return Scaffold(
+      appBar: getAppBar(context),
+      body:    
+    
+ Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+   getDirectionsBar(context), 
           Text(
             'Añadir Comidas\n  Cantidades',
             style: TextStyle(fontStyle: FontStyle.italic, fontSize: 32),

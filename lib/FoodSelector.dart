@@ -1,3 +1,4 @@
+import 'package:a_bit_of_health/utils.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
@@ -24,11 +25,19 @@ class _FoodSelectorState extends State<FoodSelector> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return Scaffold(
+      appBar: getAppBar(context),
+      body:Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          getDirectionsBar(context),
+          Expanded(child: 
+      SingleChildScrollView(
       scrollDirection: Axis.vertical,
         child: Container(
             padding: EdgeInsets.all(17),
             child: Column(children: [
+              
               Text('Añadir comida'),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Text('¿Qué estás comiendo?'),
@@ -69,11 +78,15 @@ class _FoodSelectorState extends State<FoodSelector> {
                   ElevatedButton(child: Text('Atrás'), onPressed: () {}),
                   ElevatedButton(
                     child: Text('Siguiente'),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, 'FoodCounter'); 
+
+
+                    },
                   )
                 ],
               )
-            ])));
+            ]))))]));
   }
 }
 
