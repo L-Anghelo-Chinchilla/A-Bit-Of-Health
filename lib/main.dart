@@ -26,8 +26,8 @@ class MyApp extends StatelessWidget {
       providers: 
       [
         Provider(create:(_) => UserModel()),
-        Provider(create:(_) => FoodOfferModel())
-
+        Provider(create:(_) => FoodOfferModel(foodOffers:[])),
+        ChangeNotifierProvider(create: (_) => Food()) 
       ],
       
       child:MaterialApp(

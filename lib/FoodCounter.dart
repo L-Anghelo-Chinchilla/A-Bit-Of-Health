@@ -1,4 +1,4 @@
-import 'dart:html';
+import 'package:a_bit_of_health/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:a_bit_of_health/providers/FoodProvider.dart';
 import 'package:a_bit_of_health/models/FoodModel.dart';
@@ -22,106 +22,91 @@ class NextPage extends StatelessWidget {
     // String _formatdate = new DateFormat.yMMMd().format(_currentDate);
     int index = 4;
     List<FoodOffer> list = ModalRoute.of(context).settings.arguments;
-    String heh = list[index].typeOfFood;
-    String hah = list[index].aliments[index];
-    List<String> strArr = ['Carnes', 'Guarniciones', 'Bebidas'];
-    List<List<String>> supremeList = [
+    //String heh = list[index].typeOfFood;
+    //String hah = list[index].aliments[index].name;
+    //List<String> strArr = ['Carnes', 'Guarniciones', 'Bebidas'];
+    /*List<List<String>> supremeList = [
       ['pescado', 'lomo'],
       ['fideos', 'arroz', 'yucaf'],
       ['agua', 'jugo']
-    ];
+    ];*/
 
     Size size = MediaQuery.of(context).size;
 
-    final _TabPages = <Widget>[
-      // CENTER OF THE HOME PAGE -----------------------------------------------------------
-      Container(
-        padding: EdgeInsets.all(30),
-        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Text(
-            'Añadir Comidas\n  Cantidades',
-            style: TextStyle(fontStyle: FontStyle.italic, fontSize: 32),
-          ),
-          Expanded(
-            child: Container(
-              //alignment: Alignment.center,
-              child: ListView.builder(
-                // LISTVIEW OF IMAGES ------------------------------------
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: strArr.length,
-                itemBuilder: (context, i) {
-                  //Provider.of<FoodOfferModel>(context)listen = false );
-                  return ImagestoDisplay(imageName: strArr[i].toLowerCase());
-                },
-              ), //-------------------------------------------------------------------
-            ),
-          ),
-          SizedBox(
-              height: 60,
-              child: ListView.builder(
-                  // LISTVIEW OF TITLES OF TYPES OF FOODS---------------
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: strArr.length,
-                  itemBuilder: (context, i) {
-                    return TitleDisplay(titleName: strArr[i]);
-                  })), //-----------------------------------------------------------
-          Expanded(
-            //child: Container(
-            child: ListView.builder(
-                // LISTVIEW OF COLUMNS WITH FOODS AND SPINNERS-------
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: supremeList.length,
-                itemBuilder: (context, i) {
-                  return ColumnsDisplay(foods: supremeList[i]);
-                }), //------------------------------------------------
-          ),
-          Row(
-            // ROW OF BUTTONS----------------
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              FloatingActionButton.extended(
-                  label: Text('Atrás'),
-                  backgroundColor: Colors.limeAccent[700],
-                  onPressed: () {}),
-              FloatingActionButton.extended(
-                label: Text('Evaluar'),
-                backgroundColor: Colors.limeAccent[700],
-                onPressed: () {},
-              )
-            ],
-          ), //-----------------------------
-        ]),
-      ),
-      //------------------------------------------------------------------------------
-      //CENTER OF THE STATISTICS
-      Center(child: Icon(Icons.analytics)),
-      //------------------------------------------------------------------------------
-      //CENTER OF THEE CALENDAR
-      Center(child: Icon(Icons.calendar_today_rounded)),
-      //------------------------------------------------------------------------------
-      //CENTER OF TODAY
-      Center(child: Icon(Icons.star)),
-      //------------------------------------------------------------------------------
-      //const Center(child: Text("Date: $_currentDate")),
-    ];
+    // CENTER OF THE HOME PAGE -----------------------------------------------------------
 
-    final _KTabs = <Tab>[
-      const Tab(icon: Icon(Icons.home), text: 'Inicio'),
-      const Tab(icon: Icon(Icons.analytics), text: 'Estadísticas'),
-      const Tab(icon: Icon(Icons.calendar_today_rounded), text: 'Calendario'),
-      const Tab(icon: Icon(Icons.star), text: 'Hoy'),
-    ];
-    return DefaultTabController(
-      length: _KTabs.length,
-      child: Scaffold(
-        body: TabBarView(children: _TabPages),
-      ),
+    print(ModalRoute.of(context).settings.arguments.toString());
+
+    return Scaffold(
+      appBar: getAppBar(context),
+      body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        getDirectionsBar(context),
+        Text(
+          'Añadir Comidas\n  Cantidades',
+          style: TextStyle(fontStyle: FontStyle.italic, fontSize: 32),
+        ),
+        Expanded(
+          child: Container(
+            //alignment: Alignment.center,
+            child: ListView.builder(
+              // LISTVIEW OF IMAGES ------------------------------------
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              itemCount: list.length,
+              itemBuilder: (context, i) {
+                //Provider.of<FoodOfferModel>(context)listen = false );
+                return Column(children: [
+                  ImagestoDisplay(imageName: list[i].typeOfFood.toLowerCase()),
+                  TitleDisplay(titleName: list[i].typeOfFood),
+                  ColumnsDisplay(foods: list[i].aliments)
+                ]);
+              },
+            ), //-------------------------------------------------------------------
+          ),
+        ),
+        /*SizedBox(
+            height: 60,
+            child: ListView.builder(
+                // LISTVIEW OF TITLES OF TYPES OF FOODS---------------
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemCount: list.length,
+                itemBuilder: (context, i) {
+                  return TitleDisplay(titleName: list[i].typeOfFood);
+                })),*/ //-----------------------------------------------------------
+        /* Expanded(
+          //child: Container(
+          child: ListView.builder(
+              // LISTVIEW OF COLUMNS WITH FOODS AND SPINNERS-------
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              itemCount: list.length,
+              itemBuilder: (context, i) {
+                return ColumnsDisplay(foods: list[i].aliments);
+              }), //------------------------------------------------
+        ),*/
+        Row(
+          // ROW OF BUTTONS----------------
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            FloatingActionButton.extended(
+                label: Text('Atrás'),
+                backgroundColor: Colors.limeAccent[700],
+                onPressed: () {
+                  Navigator.pop(context);
+                }),
+            FloatingActionButton.extended(
+              label: Text('Evaluar'),
+              backgroundColor: Colors.limeAccent[700],
+              onPressed: () {},
+            )
+          ],
+        ), //-----------------------------
+      ]),
     );
+    //------------------------------------------------------------------------------
   }
 }
 
@@ -218,13 +203,14 @@ class ImagestoDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 100,
-        width: 100,
+        //height: 130,
+        //width: 130,
+        padding: EdgeInsets.all(15),
         //alignment: Alignment.center,
         child: Image.asset(
           'assets/$imageName.png',
-          width: 100,
-          height: 100,
+          width: 130,
+          height: 130,
         ));
   }
 }
@@ -251,14 +237,14 @@ class TitleDisplay extends StatelessWidget {
 }
 
 class ColumnsDisplay extends StatelessWidget {
-  List<String> foods;
+  List<Food> foods;
 
   ColumnsDisplay({this.foods});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.14,
+      width: 250,
       height: MediaQuery.of(context).size.height * 0.35,
       margin: EdgeInsets.all(10),
       padding: EdgeInsets.all(10),
@@ -269,9 +255,11 @@ class ColumnsDisplay extends StatelessWidget {
           scrollDirection: Axis.vertical,
           itemCount: foods.length,
           itemBuilder: (context, i) {
-            return Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [Text(foods[i]), CounterView()]);
+            return Padding(
+                padding: EdgeInsets.symmetric(horizontal: 1, vertical: 10),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [Text('${foods[i].name}  '), CounterView()]));
           }),
     );
   }

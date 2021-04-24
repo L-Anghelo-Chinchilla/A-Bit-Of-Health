@@ -1,10 +1,9 @@
+import 'package:a_bit_of_health/utils.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 import 'package:a_bit_of_health/providers/FoodProvider.dart';
 import 'package:a_bit_of_health/models/FoodModel.dart';
-
-
 
 class FoodSelector extends StatefulWidget {
   FoodSelector({Key key}) : super(key: key);
@@ -24,63 +23,98 @@ class _FoodSelectorState extends State<FoodSelector> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.vertical,
-        child: Container(
-            padding: EdgeInsets.all(17),
-            child: Column(children: [
-              Text('Añadir comida'),
-              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Text('¿Qué estás comiendo?'),
-                DropdownButton<String>(
-                  value: foodSelected,
-                  items: items,
-                  onChanged: (String newValue) {
-                    foodSelected = newValue;
-                    setState(() {});
-                  },
-                ),
-              ]),
-              Container(
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  height: MediaQuery.of(context).size.height * 0.6,
-                  margin: EdgeInsets.all(15),
-                  padding: EdgeInsets.all(15),
-                  decoration:
-                      BoxDecoration(border: Border.all(color: Colors.black)),
-                  child: FutureBuilder<FoodOfferModel>(
-                      future: _provider.getFoodOffers(
-                          foodSelected), // a previously-obtained Future<String> or null
-                      builder: (BuildContext context,
-                          AsyncSnapshot<FoodOfferModel> snapshot) {
-                        if (snapshot.hasData) {
-                          return FoodOfferList(offer: snapshot.data);
-                        } else {
-                          return SizedBox(
-                            child: CircularProgressIndicator(),
-                            width: 60,
-                            height: 60,
-                          );
-                        }
-                      })),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ElevatedButton(child: Text('Atrás'), onPressed: () {}),
-                  ElevatedButton(
-                    child: Text('Siguiente'),
-                    onPressed: () {},
-                  )
-                ],
-              )
-            ])));
+    return Scaffold(
+        appBar: getAppBar(context),
+        body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          getDirectionsBar(context),
+          Expanded(
+              child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: Container(
+                      padding: EdgeInsets.all(17),
+                      child: Column(children: [
+                        Text('Añadir comida'),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text('¿Qué estás comiendo?'),
+                              DropdownButton<String>(
+                                value: foodSelected,
+                                items: items,
+                                onChanged: (String newValue) {
+                                  foodSelected = newValue;
+                                  setState(() {});
+                                },
+                              ),
+                            ]),
+                        Container(
+                            width: MediaQuery.of(context).size.width * 0.8,
+                            height: MediaQuery.of(context).size.height * 0.6,
+                            margin: EdgeInsets.all(15),
+                            padding: EdgeInsets.all(15),
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.black)),
+                            child: FutureBuilder<FoodOfferModel>(
+                                future: _provider.getFoodOffers(
+                                    foodSelected), // a previously-obtained Future<String> or null
+                                builder: (BuildContext context,
+                                    AsyncSnapshot<FoodOfferModel> snapshot) {
+                                  if (snapshot.hasData) {
+                                    Provider.of<FoodOfferModel>(context,
+                                            listen: false)
+                                        .setFoodOffers(
+                                            snapshot.data.foodOffers);
+                                    return FoodOfferList(offer: snapshot.data);
+                                  } else {
+                                    return SizedBox(
+                                      child: CircularProgressIndicator(),
+                                      width: 60,
+                                      height: 60,
+                                    );
+                                  }
+                                })),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            ElevatedButton(
+                                child: Text('Atrás'), onPressed: () {}),
+                            ElevatedButton(
+                              child: Text('Siguiente'),
+                              onPressed: () {
+                                
+                                List<FoodOffer> list = [];
+                                list =  Provider.of<FoodOfferModel>(context,listen: false ).getSelectedOnes();
+                                list.removeWhere((element) => element.aliments.isEmpty);
+                                if(list.isNotEmpty)
+                                Navigator.pushNamed(context, 'FoodCounter', arguments:  list);
+                                else{
+                                  final snackBar = SnackBar(
+                                            content: Text('Has seleccionado nada! El aire no cuenta como comida... '),
+                                            action: SnackBarAction(
+                                              label: 'Vale!',
+                                              onPressed: () {
+                                                // Some code to undo the change.
+                                              },
+                                            ),
+                                          );
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(snackBar);
+
+                                }
+                              },
+                            )
+                          ],
+                        ) 
+                      ]))))
+        ]));
   }
 }
 
 class FoodOfferList extends StatefulWidget {
   FoodOfferModel offer;
+  int position;
 
-  FoodOfferList({Key key, this.offer}) : super(key: key);
+  FoodOfferList({Key key, this.offer, this.position}) : super(key: key);
 
   @override
   _FoodOfferListState createState() => _FoodOfferListState();
@@ -92,52 +126,97 @@ class _FoodOfferListState extends State<FoodOfferList> {
     return ListView.builder(
       shrinkWrap: true,
       scrollDirection: Axis.horizontal,
-      itemCount: widget.offer.foodOffers.length,
+      itemCount:
+          Provider.of<FoodOfferModel>(context, listen: false).foodOffers.length,
       itemBuilder: (context, i) {
         return Container(
             margin: EdgeInsets.all(15),
-          // height: MediaQuery.of(context).size.height * 0.4 - 20,
             width: 235, //MediaQuery.of(context).size.width*0.8 /5   ,
-            child: OfferScroll(list: widget.offer.foodOffers[i]));
+            child: OfferScroll(
+                list: Provider.of<FoodOfferModel>(context, listen: false)
+                    .foodOffers[i],
+                position: i));
       },
     );
   }
 }
 
-class OfferScroll extends StatelessWidget {
-  OfferScroll({this.list});
-
+class OfferScroll extends StatefulWidget {
+  OfferScroll({Key key, this.list, this.position}) : super(key: key);
   FoodOffer list;
+  int position;
 
+  @override
+  _OfferScrollState createState() => _OfferScrollState();
+}
+
+class _OfferScrollState extends State<OfferScroll> {
   @override
   Widget build(BuildContext context) {
     return Container(
         child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-      Text('${list.typeOfFood}'),
+      Text('${widget.list.typeOfFood}'),
       Divider(),
-      Expanded(child:
-      Container(
-          height: 300,
-          decoration: BoxDecoration(border: Border.all(color: Colors.black45)),
-          child: ListView.builder(
-            shrinkWrap: true,
-            itemCount: list.aliments.length,
-            itemBuilder: (_, i) {
-            
-            String name = list.aliments[i];
-            bool value = false ;
-              return CheckboxListTile(
-                  title: Text(name),
-                  value: value,
-                  onChanged: (newValue) {
-                  
-                  value = newValue ; 
-                  //  Provider.of<FoodOfferModel>(context,listen: false).valueChanged('Desayuno', name, value);
-                    
-                  
+      Expanded(
+          child: Container(
+              height: 300,
+              decoration:
+                  BoxDecoration(border: Border.all(color: Colors.black45)),
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: Provider.of<FoodOfferModel>(context, listen: false)
+                    .foodOffers[widget.position]
+                    .aliments
+                    .length,
+                itemBuilder: (_, i) {
+                  String name =
+                      Provider.of<FoodOfferModel>(context, listen: false)
+                          .foodOffers[widget.position]
+                          .aliments[i]
+                          .name; //widget.list.aliments[i].name;
+                  bool value =
+                      Provider.of<FoodOfferModel>(context, listen: true)
+                          .foodOffers[widget.position]
+                          .aliments[i]
+                          .isSelected; //widget.list.aliments[i].isSelected;
+                  return Consumer<Food>(builder: (context, food, child) {
+
+                  Food fod =
+                      Provider.of<FoodOfferModel>(context, listen: true)
+                          .foodOffers[widget.position]
+                          .aliments[i];
+
+                    return CheckboxListTile(
+                        title: Text(name),
+                        tristate: true,
+                        value: fod.isSelected,
+                        onChanged: (newValue) {
+                          if(name == 'Ninguno')
+                             Provider.of<FoodOfferModel>(context, listen: false)
+                              .foodOffers[widget.position].deselectAll();
+                          else           
+                          Provider.of<FoodOfferModel>(context, listen: false)
+                              .foodOffers[widget.position]
+                              .aliments[0]
+                              .deselect();
+                          Provider.of<FoodOfferModel>(context, listen: false)
+                              .foodOffers[widget.position]
+                              .aliments[i]
+                              .setIsSelected();
+                          
+
+                          print(Provider.of<FoodOfferModel>(context,
+                                  listen: false)
+                              .foodOffers[widget.position]
+                              .aliments[i]
+                              .isSelected);
+                              setState(() {
+                                
+                              });
+                        });
                   });
-            },
-          )))
+                },
+              )))
     ]));
   }
 }

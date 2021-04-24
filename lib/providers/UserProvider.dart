@@ -26,7 +26,7 @@ class UserProvider {
   Future<bool> setUserWaterLimit(String userID, int newLimit) async {
     final url = '$_url$userID/.json';
     var user = await getUserData(userID);
-    user.waterLimit = newLimit;
+    user.newWaterLimit = newLimit;
     http.put(url, body: user.toJson().toString());
     return true;
   }
