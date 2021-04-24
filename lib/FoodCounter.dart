@@ -21,12 +21,11 @@ class NextPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // String _formatdate = new DateFormat.yMMMd().format(_currentDate);
 
-    List<String> strArr = ['Carnes', 'Guarniciones', 'Vegetales'];
-    List<String> strArr2 = ['pescado', 'lomo', 'fideos', 'arroz', 'lechuga'];
+    List<String> strArr = ['Carnes', 'Guarniciones', 'Bebidas'];
     List<List<String>> supremeList = [
       ['pescado', 'lomo'],
-      ['fideos', 'arroz'],
-      ['lechuga']
+      ['fideos', 'arroz', 'yucaf'],
+      ['agua', 'jugo']
     ];
 
     Size size = MediaQuery.of(context).size;
@@ -49,24 +48,6 @@ class NextPage extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 itemCount: strArr.length,
                 itemBuilder: (context, i) {
-                  var arr = [
-                    'acompanantes',
-                    'aderezos',
-                    'bebidas',
-                    'caldos',
-                    'calientes',
-                    'carnes',
-                    'dulces',
-                    'frios',
-                    'frutas',
-                    'frutos secos',
-                    'guarniciones',
-                    'masas',
-                    'panes',
-                    'populares',
-                    'salados',
-                    'vegetales'
-                  ];
                   //Provider.of<FoodOfferModel>(context)listen = false );
                   return ImagestoDisplay(imageName: strArr[i].toLowerCase());
                 },
@@ -92,42 +73,7 @@ class NextPage extends StatelessWidget {
                 itemCount: supremeList.length,
                 itemBuilder: (context, i) {
                   return ColumnsDisplay(foods: supremeList[i]);
-                }
-                //     ColumnsDisplay(),
-/*
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.2,
-                    height: MediaQuery.of(context).size.height * 0.4,
-                    margin: EdgeInsets.all(10),
-                    padding: EdgeInsets.all(10),
-                    decoration:
-                        BoxDecoration(border: Border.all(color: Colors.black)),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Text('Tostada'),
-                          CounterView(),
-                        ]),
-                    alignment: Alignment.topCenter,
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.2,
-                    height: MediaQuery.of(context).size.height * 0.4,
-                    margin: EdgeInsets.all(10),
-                    padding: EdgeInsets.all(10),
-                    decoration:
-                        BoxDecoration(border: Border.all(color: Colors.black)),
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.2,
-                    height: MediaQuery.of(context).size.height * 0.4,
-                    margin: EdgeInsets.all(10),
-                    padding: EdgeInsets.all(10),
-                    decoration:
-                        BoxDecoration(border: Border.all(color: Colors.black)),
-                  ),
-                */
-                ), //------------------------------------------------
+                }), //------------------------------------------------
           ),
           Row(
             // ROW OF BUTTONS----------------
