@@ -14,22 +14,14 @@ class FoodCounter extends StatelessWidget {
 }
 
 class NextPage extends StatelessWidget {
-  const NextPage({Key key}) : super(key: key);
+  //const NextPage({Key key}) : super(key: key);
 
-  // DateTime _currentDate = new DateTime.now();
+  DateTime _currentDate = new DateTime.now();
   @override
   Widget build(BuildContext context) {
     // String _formatdate = new DateFormat.yMMMd().format(_currentDate);
     int index = 4;
     List<FoodOffer> list = ModalRoute.of(context).settings.arguments;
-    //String heh = list[index].typeOfFood;
-    //String hah = list[index].aliments[index].name;
-    //List<String> strArr = ['Carnes', 'Guarniciones', 'Bebidas'];
-    /*List<List<String>> supremeList = [
-      ['pescado', 'lomo'],
-      ['fideos', 'arroz', 'yucaf'],
-      ['agua', 'jugo']
-    ];*/
 
     Size size = MediaQuery.of(context).size;
 
@@ -54,7 +46,6 @@ class NextPage extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemCount: list.length,
               itemBuilder: (context, i) {
-                //Provider.of<FoodOfferModel>(context)listen = false );
                 return Column(children: [
                   ImagestoDisplay(imageName: list[i].typeOfFood.toLowerCase()),
                   TitleDisplay(titleName: list[i].typeOfFood),
@@ -64,27 +55,7 @@ class NextPage extends StatelessWidget {
             ), //-------------------------------------------------------------------
           ),
         ),
-        /*SizedBox(
-            height: 60,
-            child: ListView.builder(
-                // LISTVIEW OF TITLES OF TYPES OF FOODS---------------
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: list.length,
-                itemBuilder: (context, i) {
-                  return TitleDisplay(titleName: list[i].typeOfFood);
-                })),*/ //-----------------------------------------------------------
-        /* Expanded(
-          //child: Container(
-          child: ListView.builder(
-              // LISTVIEW OF COLUMNS WITH FOODS AND SPINNERS-------
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemCount: list.length,
-              itemBuilder: (context, i) {
-                return ColumnsDisplay(foods: list[i].aliments);
-              }), //------------------------------------------------
-        ),*/
+
         Row(
           // ROW OF BUTTONS----------------
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -203,10 +174,7 @@ class ImagestoDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        //height: 130,
-        //width: 130,
         padding: EdgeInsets.all(15),
-        //alignment: Alignment.center,
         child: Image.asset(
           'assets/$imageName.png',
           width: 130,
