@@ -20,7 +20,10 @@ class NextPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // String _formatdate = new DateFormat.yMMMd().format(_currentDate);
-
+    int index = 4;
+    List<FoodOffer> list = ModalRoute.of(context).settings.arguments;
+    String heh = list[index].typeOfFood;
+    String hah = list[index].aliments[index];
     List<String> strArr = ['Carnes', 'Guarniciones', 'Bebidas'];
     List<List<String>> supremeList = [
       ['pescado', 'lomo'],
