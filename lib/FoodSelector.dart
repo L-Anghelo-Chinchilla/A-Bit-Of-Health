@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:a_bit_of_health/utils.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +20,7 @@ class _FoodSelectorState extends State<FoodSelector> {
   String foodSelected = 'Desayuno';
   final items = ['Desayuno', 'Almuerzo', 'Cena', 'Snack']
       .map(
-          (value) => DropdownMenuItem<String>(value: value, child: Text(value)))
+          (value) => DropdownMenuItem<String>(value: value, child: Text(value, style: TextStyle(fontFamily: 'Pt', fontSize: 19.0),)))   //XXXXXXXXXXXXXXXXXXXXXXXXXX
       .toList();
 
   @override
@@ -28,84 +30,99 @@ class _FoodSelectorState extends State<FoodSelector> {
         body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           getDirectionsBar(context),
           Expanded(
-              child: SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-                  child: Container(
-                      padding: EdgeInsets.all(17),
-                      child: Column(children: [
-                        Text('Añadir comida'),
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+              child: Container(
+                  decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('assets/fondo_selector.jpg'),
+                          fit: BoxFit.cover
+                        ),
+                      ),
+                child: SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: Container(
+                        /*decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage('assets/fondo_selector.jpg'),
+                            fit: BoxFit.cover
+                          ),
+                        ),*/
+                        padding: EdgeInsets.all(17),
+                        child: Column(children: [
+                          Text('Añadir comida', style: TextStyle(fontFamily: 'Mont', fontSize: 32.0),),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text('¿Qué estás comiendo?  ', style: TextStyle(fontFamily: 'Sans', fontSize: 20.0),),
+                                DropdownButton<String>(
+                                  value: foodSelected,
+                                  items: items,
+                                  onChanged: (String newValue) {
+                                    foodSelected = newValue;
+                                    setState(() {});
+                                  },
+                                ),
+                              ]),
+                          Container(
+                              width: MediaQuery.of(context).size.width * 0.8,
+                              height: MediaQuery.of(context).size.height * 0.6,
+                              margin: EdgeInsets.all(15),
+                              padding: EdgeInsets.all(15),
+                              decoration: BoxDecoration(
+                                  color: Color(0xffffffff).withOpacity(0.8),
+                                  border: Border.all(color: Colors.black)),
+                              child: FutureBuilder<FoodOfferModel>(
+                                  future: _provider.getFoodOffers(
+                                      foodSelected), // a previously-obtained Future<String> or null
+                                  builder: (BuildContext context,
+                                      AsyncSnapshot<FoodOfferModel> snapshot) {
+                                    if (snapshot.hasData) {
+                                      Provider.of<FoodOfferModel>(context,
+                                              listen: false)
+                                          .setFoodOffers(
+                                              snapshot.data.foodOffers);
+                                      return FoodOfferList(offer: snapshot.data);
+                                    } else {
+                                      return SizedBox(
+                                        child: CircularProgressIndicator(),
+                                        width: 60,
+                                        height: 60,
+                                      );
+                                    }
+                                  })),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text('¿Qué estás comiendo?'),
-                              DropdownButton<String>(
-                                value: foodSelected,
-                                items: items,
-                                onChanged: (String newValue) {
-                                  foodSelected = newValue;
-                                  setState(() {});
-                                },
-                              ),
-                            ]),
-                        Container(
-                            width: MediaQuery.of(context).size.width * 0.8,
-                            height: MediaQuery.of(context).size.height * 0.6,
-                            margin: EdgeInsets.all(15),
-                            padding: EdgeInsets.all(15),
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.black)),
-                            child: FutureBuilder<FoodOfferModel>(
-                                future: _provider.getFoodOffers(
-                                    foodSelected), // a previously-obtained Future<String> or null
-                                builder: (BuildContext context,
-                                    AsyncSnapshot<FoodOfferModel> snapshot) {
-                                  if (snapshot.hasData) {
-                                    Provider.of<FoodOfferModel>(context,
-                                            listen: false)
-                                        .setFoodOffers(
-                                            snapshot.data.foodOffers);
-                                    return FoodOfferList(offer: snapshot.data);
-                                  } else {
-                                    return SizedBox(
-                                      child: CircularProgressIndicator(),
-                                      width: 60,
-                                      height: 60,
-                                    );
-                                  }
-                                })),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            ElevatedButton(
-                                child: Text('Atrás'), onPressed: () {}),
-                            ElevatedButton(
-                              child: Text('Siguiente'),
-                              onPressed: () {
-                                
-                                List<FoodOffer> list = [];
-                                list =  Provider.of<FoodOfferModel>(context,listen: false ).getSelectedOnes();
-                                list.removeWhere((element) => element.aliments.isEmpty);
-                                if(list.isNotEmpty)
-                                Navigator.pushNamed(context, 'FoodCounter', arguments:  list);
-                                else{
-                                  final snackBar = SnackBar(
-                                            content: Text('Has seleccionado nada! El aire no cuenta como comida... '),
-                                            action: SnackBarAction(
-                                              label: 'Vale!',
-                                              onPressed: () {
-                                                // Some code to undo the change.
-                                              },
-                                            ),
-                                          );
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(snackBar);
+                              ElevatedButton(
+                                  child: Text('Atrás'), onPressed: () {}),
+                              ElevatedButton(
+                                child: Text('Siguiente'),
+                                onPressed: () {
+                                  
+                                  List<FoodOffer> list = [];
+                                  list =  Provider.of<FoodOfferModel>(context,listen: false ).getSelectedOnes();
+                                  list.removeWhere((element) => element.aliments.isEmpty);
+                                  if(list.isNotEmpty)
+                                  Navigator.pushNamed(context, 'FoodCounter', arguments:  list);
+                                  else{
+                                    final snackBar = SnackBar(
+                                              content: Text('Has seleccionado nada! El aire no cuenta como comida... '),
+                                              action: SnackBarAction(
+                                                label: 'Vale!',
+                                                onPressed: () {
+                                                  // Some code to undo the change.
+                                                },
+                                              ),
+                                            );
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(snackBar);
 
-                                }
-                              },
-                            )
-                          ],
-                        ) 
-                      ]))))
+                                  }
+                                },
+                              )
+                            ],
+                          ) 
+                        ]))),
+              ))
         ]));
   }
 }
@@ -130,6 +147,7 @@ class _FoodOfferListState extends State<FoodOfferList> {
           Provider.of<FoodOfferModel>(context, listen: false).foodOffers.length,
       itemBuilder: (context, i) {
         return Container(
+            color: Color(0xFF76D7C4),
             margin: EdgeInsets.all(15),
             width: 235, //MediaQuery.of(context).size.width*0.8 /5   ,
             child: OfferScroll(
@@ -154,14 +172,15 @@ class _OfferScrollState extends State<OfferScroll> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      decoration: BoxDecoration(color: Color(0xFFDC7633)),
         child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-      Text('${widget.list.typeOfFood}'),
-      Divider(),
+      Text('${widget.list.typeOfFood}', style: TextStyle(fontFamily: 'Mont2', fontSize: 20.0),),
+      //Divider(color: Colors.white),
       Expanded(
           child: Container(
               height: 300,
               decoration:
-                  BoxDecoration(border: Border.all(color: Colors.black45)),
+                  BoxDecoration(color: Color(0xFFF4D03F), border: Border.all(color: Colors.black45)),
               child: ListView.builder(
                 shrinkWrap: true,
                 itemCount: Provider.of<FoodOfferModel>(context, listen: false)

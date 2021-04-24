@@ -8,16 +8,24 @@ class Stats extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: getAppBar(context),
-      body: Column(
-        mainAxisAlignment:  MainAxisAlignment.center,
-        children: [
-          getDirectionsBar(context),
-          Expanded(child: Container())
+      body: Container(
+                decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('fondo_Stats.jpg'),
+              fit: BoxFit.cover
+            ),
+          ),
+        child: Column(
+          mainAxisAlignment:  MainAxisAlignment.center,
+          children: [
+            getDirectionsBar(context),
+            Expanded(child: Container())
 
 
 
-        ],
+          ],
 
+        ),
       ),
         );
   }

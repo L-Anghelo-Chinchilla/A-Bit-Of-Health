@@ -15,18 +15,26 @@ class HomePage extends StatelessWidget {
     return 
        Scaffold(
         appBar: getAppBar(context), 
-    body: Column(    
-      mainAxisAlignment:  MainAxisAlignment.center,
-      children: [
+    body: Container(
+      decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('fondo_inicio.jpg'),
+              fit: BoxFit.cover
+            ),
+          ),
+      child: Column(    
+        mainAxisAlignment:  MainAxisAlignment.center,
+        children: [
 
-        getDirectionsBar(context), 
-        Expanded(child: Container(),)
+          getDirectionsBar(context), 
+          Expanded(child: Container(),)
 
 
-      ],
+        ],
 
 
 
+      ),
     ));
   }
 }

@@ -11,29 +11,37 @@ class GlassesOfWater extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Scaffold(appBar: getAppBar(context),
-        body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          getDirectionsBar(context),
-          Expanded(
-              child: Center(
-                  child:
-         FutureBuilder<UserModel>(
-            future: _provider.getUserData(
-                '-wqweqwewqeqwewq'), // a previously-obtained Future<String> or null
-            builder: (BuildContext context, AsyncSnapshot<UserModel> snapshot) {
-              if (snapshot.hasData) {
-                return GlassesOfWater1(user: snapshot.data);
-              } else {
-                return Center(
-                    child: SizedBox(
-                  child: CircularProgressIndicator(),
-                  width: 60,
-                  height: 60,
-                ));
-              }
-            }) //
+        body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/fondo_agua.jpg'),
+              fit: BoxFit.cover
+            ),
+          ),
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            getDirectionsBar(context),
+            Expanded(
+                child: Center(
+                    child:
+           FutureBuilder<UserModel>(
+              future: _provider.getUserData(
+                  '-wqweqwewqeqwewq'), // a previously-obtained Future<String> or null
+              builder: (BuildContext context, AsyncSnapshot<UserModel> snapshot) {
+                if (snapshot.hasData) {
+                  return GlassesOfWater1(user: snapshot.data);
+                } else {
+                  return Center(
+                      child: SizedBox(
+                    child: CircularProgressIndicator(),
+                    width: 60,
+                    height: 60,
+                  ));
+                }
+              }) //
 
-        // GlassesOfWater1(user: UserModel(weight: 85.3, height: 1.7, email: "sanchopanza@gmail.com", gender: "M", name: "Sancho Panza", waterLimit: 10, newWaterLimit: 8, waterLimitDate: "14/04/2021", glasses: 3) )//ModalRoute.of(context).settings.arguments )
-        ))]));
+          // GlassesOfWater1(user: UserModel(weight: 85.3, height: 1.7, email: "sanchopanza@gmail.com", gender: "M", name: "Sancho Panza", waterLimit: 10, newWaterLimit: 8, waterLimitDate: "14/04/2021", glasses: 3) )//ModalRoute.of(context).settings.arguments )
+          ))]),
+        ));
   }
 }
 
@@ -51,19 +59,17 @@ class _GlassesOfWatterState extends State<GlassesOfWater1> {
   @override
   Widget build(BuildContext context) {
     return
-         Card(
-                      child: Padding(
-                          padding: EdgeInsets.all(29),
+                       Padding(
+                          padding: EdgeInsets.all(15),
                           child: Column(
                             children: [
-                              Text('Vasos de agua'),
+                              Text('Vasos de agua\n', style: TextStyle(fontFamily: 'Mont', fontSize: 32)),
                               Expanded(
                                   child: Container(
+                                      color: Colors.white.withOpacity(0.7),
                                       width: MediaQuery.of(context).size.width *
                                           0.8,
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.6,
+                                      height: MediaQuery.of(context).size.height * 0.6,
                                       child: ListView.builder(
                                         itemCount: widget.user.waterLimit,
                                         padding: EdgeInsets.all(7),
@@ -95,7 +101,7 @@ class _GlassesOfWatterState extends State<GlassesOfWater1> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   ElevatedButton(
-                                    child: Text('Quitar un vaso'),
+                                    child: Text('Vaciar un vaso'),
                                     onPressed: () async {
                                       if (widget.user.glasses > 0) {
                                         widget.user.glasses--;
@@ -151,11 +157,11 @@ modifica tu límite de vasos diarios si lo deseas.'''),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children:[
-                                Text('Editar límite   '),
+                                Text('¿Cuantos vasos puedes tomar al día?:  ', style: TextStyle(fontFamily: 'Sans', fontSize: 22.0),),
 
                                 CounterView(initNumber: widget.user.waterLimit),
                               OutlinedButton(
-                                  child: Text('Editar Límite'),
+                                  child: Text(' Editar Límite ', style: TextStyle(backgroundColor: Colors.white.withOpacity(0.8)),),               //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
                                   onPressed: () async {
 
                                     
@@ -164,7 +170,7 @@ modifica tu límite de vasos diarios si lo deseas.'''),
                                 ]
                                   )
                             ],
-                          )));
+                          ));
   }
 }
 

@@ -17,65 +17,83 @@ class NextPage extends StatelessWidget {
   //const NextPage({Key key}) : super(key: key);
 
   DateTime _currentDate = new DateTime.now();
+
+  
   @override
   Widget build(BuildContext context) {
     // String _formatdate = new DateFormat.yMMMd().format(_currentDate);
     int index = 4;
     List<FoodOffer> list = ModalRoute.of(context).settings.arguments;
+  /*if(list == null){
+    Navigator.pushNamed(context, 'FoodSelector');
+    }*/
 
     Size size = MediaQuery.of(context).size;
 
     // CENTER OF THE HOME PAGE -----------------------------------------------------------
 
     print(ModalRoute.of(context).settings.arguments.toString());
-
+    //appBar: getAppBar(context);
     return Scaffold(
       appBar: getAppBar(context),
-      body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        getDirectionsBar(context),
-        Text(
-          'Añadir Comidas\n  Cantidades',
-          style: TextStyle(fontStyle: FontStyle.italic, fontSize: 32),
-        ),
-        Expanded(
-          child: Container(
-            //alignment: Alignment.center,
-            child: ListView.builder(
-              // LISTVIEW OF IMAGES ------------------------------------
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemCount: list.length,
-              itemBuilder: (context, i) {
-                return Column(children: [
-                  ImagestoDisplay(imageName: list[i].typeOfFood.toLowerCase()),
-                  TitleDisplay(titleName: list[i].typeOfFood),
-                  ColumnsDisplay(foods: list[i].aliments)
-                ]);
-              },
-            ), //-------------------------------------------------------------------
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/fondo_cantidades.jpg'),
+            fit: BoxFit.cover
+            ),
           ),
-        ),
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          getDirectionsBar(context),
+          Text(
+            '\n Añadir cantidades de Alimentos',
+            style: TextStyle(fontFamily: 'Mont', fontSize: 32,),
+          ),
+          Expanded(
+            child: Container(
+              //alignment: Alignment.center,
+              child: ListView.builder(
+                // LISTVIEW OF IMAGES ------------------------------------
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemCount: list.length,
+                itemBuilder: (context, i) {
+                  return Column(children: [
+                    ImagestoDisplay(imageName: list[i].typeOfFood.toLowerCase()),
+                    TitleDisplay(titleName: list[i].typeOfFood),
+                    ColumnsDisplay(foods: list[i].aliments)
+                  ]);
+                },
+              ), //-------------------------------------------------------------------
+            ),
+          ),
 
-        Row(
-          // ROW OF BUTTONS----------------
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            FloatingActionButton.extended(
-                label: Text('Atrás'),
-                backgroundColor: Colors.limeAccent[700],
-                onPressed: () {
-                  Navigator.pop(context);
-                }),
-            FloatingActionButton.extended(
-              label: Text('Evaluar'),
-              backgroundColor: Colors.limeAccent[700],
-              onPressed: () {},
-            )
-          ],
-        ), //-----------------------------
-      ]),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Row(
+              // ROW OF BUTTONS----------------
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                ElevatedButton(
+                    child: Text('Atrás'),
+                    style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),),
+                    //backgroundColor: Colors.limeAccent[700],
+                    onPressed: () {
+                      Navigator.pop(context);
+                    }),
+                ElevatedButton(
+                  child: Text('Evaluar'),
+                  style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),),
+                  //backgroundColor: Colors.limeAccent[700],
+                  onPressed: () {},
+                )
+              ],
+            ),
+          ), //-----------------------------
+        ]),
+      ),
     );
     //------------------------------------------------------------------------------
   }
@@ -191,13 +209,14 @@ class TitleDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.1,
-      height: MediaQuery.of(context).size.height * 0.1,
-      margin: EdgeInsets.all(10),
-      padding: EdgeInsets.all(10),
+      color: Color(0xFFDC7633).withOpacity(0.8),    
+      width: 180.0, //MediaQuery.of(context).size.width * 0.1, 
+      height: 35.0, //MediaQuery.of(context).size.height * 0.1,
+      margin: EdgeInsets.all(5),
+      padding: EdgeInsets.all(5),
       child: Text(
         titleName,
-        style: TextStyle(fontStyle: FontStyle.italic, fontSize: 15),
+        style: TextStyle(fontFamily: 'Mont2', fontSize: 20.0,),
       ),
       alignment: Alignment.center,
     );
@@ -211,24 +230,26 @@ class ColumnsDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 250,
-      height: MediaQuery.of(context).size.height * 0.35,
-      margin: EdgeInsets.all(10),
-      padding: EdgeInsets.all(10),
-      decoration: BoxDecoration(border: Border.all(color: Colors.black)),
-      alignment: Alignment.topCenter,
-      child: ListView.builder(
-          shrinkWrap: true,
-          scrollDirection: Axis.vertical,
-          itemCount: foods.length,
-          itemBuilder: (context, i) {
-            return Padding(
-                padding: EdgeInsets.symmetric(horizontal: 1, vertical: 10),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [Text('${foods[i].name}  '), CounterView()]));
-          }),
+    return Expanded(
+        child: Container(
+        width: 250,
+        //height: MediaQuery.of(context).size.height * 0.3,
+        margin: EdgeInsets.all(10),
+        padding: EdgeInsets.all(10),
+        decoration: BoxDecoration(color: Color(0xFFF4D03F).withOpacity(0.9), border: Border.all(color: Colors.black)),      //YELLOW xxxxxxxxxxxxxxxxxx
+        alignment: Alignment.topCenter,
+        child: ListView.builder(
+            shrinkWrap: true,
+            scrollDirection: Axis.vertical,
+            itemCount: foods.length,
+            itemBuilder: (context, i) {
+              return Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 1, vertical: 10),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [Text('${foods[i].name}  ', style: TextStyle(fontSize: 14.0),), CounterView()]));        //xxxxxxxx
+            }),
+      ),
     );
   }
 }
