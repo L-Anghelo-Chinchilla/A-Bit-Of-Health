@@ -1,3 +1,4 @@
+import 'package:a_bit_of_health/Evaluation.dart';
 import 'package:a_bit_of_health/History.dart';
 import 'package:a_bit_of_health/HomePage.dart';
 import 'package:a_bit_of_health/Stats.dart';
@@ -20,7 +21,8 @@ Map<String, WidgetBuilder> getRoutes(){
     'FoodCounter': (context) => FoodCounter(),
     'GlassesOfWater' : (context) => GlassesOfWater(),
     'History' : (context) => History(),
-    'Stats' : (context) => Stats()
+    'Stats' : (context) => Stats(),
+    'Evaluation' : (context) => Evaluation()
  };
 
 

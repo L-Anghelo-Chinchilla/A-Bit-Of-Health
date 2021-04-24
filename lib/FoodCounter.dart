@@ -84,10 +84,12 @@ class NextPage extends StatelessWidget {
                       Navigator.pop(context);
                     }),
                 ElevatedButton(
-                  child: Text('Evaluar'),
+                  child: Text('Autoevaluar'),
                   style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),),
                   //backgroundColor: Colors.limeAccent[700],
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, 'Evaluation');
+                  },
                 )
               ],
             ),
