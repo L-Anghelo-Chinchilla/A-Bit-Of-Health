@@ -42,6 +42,7 @@ class FoodOfferModel with ChangeNotifier {
 
   List<FoodOffer> getSelectedOnes(){
      List<FoodOffer> list = [];
+     
       foodOffers.forEach((element) { list.add(element.getSelectedOnes());  });
     return list;
 
@@ -77,7 +78,11 @@ class FoodOffer with ChangeNotifier {
       if (name == element) print('$element set to $value');
     });
     notifyListeners();
+
+
+
   }
+    deselectAll() => aliments.forEach((element) {element.deselect(); });
 
   String getTypeOfFood() => typeOfFood;
   Food getFoodAt(int i) => aliments[i];
@@ -123,5 +128,7 @@ class Food extends ChangeNotifier{
   String getPortion () => portion;
   int getCant       () => cant; 
   setIsSelected() {isSelected = !isSelected; notifyListeners();  }
+  deselect() {isSelected = false; notifyListeners();  }
   setCant(int newValue) {cant = newValue; }
+
 }

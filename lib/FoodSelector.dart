@@ -84,8 +84,23 @@ class _FoodSelectorState extends State<FoodSelector> {
                                 
                                 List<FoodOffer> list = [];
                                 list =  Provider.of<FoodOfferModel>(context,listen: false ).getSelectedOnes();
-                                print(list.toString()); 
+                                list.removeWhere((element) => element.aliments.isEmpty);
+                                if(list.isNotEmpty)
                                 Navigator.pushNamed(context, 'FoodCounter', arguments:  list);
+                                else{
+                                  final snackBar = SnackBar(
+                                            content: Text('Has seleccionado nada! El aire no cuenta como comida... '),
+                                            action: SnackBarAction(
+                                              label: 'Vale!',
+                                              onPressed: () {
+                                                // Some code to undo the change.
+                                              },
+                                            ),
+                                          );
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(snackBar);
+
+                                }
                               },
                             )
                           ],
@@ -176,11 +191,20 @@ class _OfferScrollState extends State<OfferScroll> {
                         tristate: true,
                         value: fod.isSelected,
                         onChanged: (newValue) {
+                          if(name == 'Ninguno')
+                             Provider.of<FoodOfferModel>(context, listen: false)
+                              .foodOffers[widget.position].deselectAll();
+                          else           
+                          Provider.of<FoodOfferModel>(context, listen: false)
+                              .foodOffers[widget.position]
+                              .aliments[0]
+                              .deselect();
                           Provider.of<FoodOfferModel>(context, listen: false)
                               .foodOffers[widget.position]
                               .aliments[i]
                               .setIsSelected();
-                         // value = !value;
+                          
+
                           print(Provider.of<FoodOfferModel>(context,
                                   listen: false)
                               .foodOffers[widget.position]
