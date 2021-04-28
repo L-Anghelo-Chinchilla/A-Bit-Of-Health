@@ -1,3 +1,4 @@
+import 'package:a_bit_of_health/FoodSelector.dart';
 import 'package:a_bit_of_health/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:a_bit_of_health/providers/FoodProvider.dart';
@@ -24,9 +25,9 @@ class NextPage extends StatelessWidget {
     // String _formatdate = new DateFormat.yMMMd().format(_currentDate);
     int index = 4;
     List<FoodOffer> list = ModalRoute.of(context).settings.arguments;
-  /*if(list == null){
-    Navigator.pushNamed(context, 'FoodSelector');
-    }*/
+  if(list == null){
+    return FoodSelector();
+    }
 
     Size size = MediaQuery.of(context).size;
 
