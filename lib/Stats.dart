@@ -18,7 +18,7 @@ class Stats extends StatelessWidget {
         child: Column(
           mainAxisAlignment:  MainAxisAlignment.center,
           children: [
-            getDirectionsBar(context),
+            getDirectionsBar(context , 'Stats'),
             Expanded(child: Container())
 
 

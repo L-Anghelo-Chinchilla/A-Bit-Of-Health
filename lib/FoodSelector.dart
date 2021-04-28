@@ -28,7 +28,7 @@ class _FoodSelectorState extends State<FoodSelector> {
     return Scaffold(
         appBar: getAppBar(context),
         body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          getDirectionsBar(context),
+          getDirectionsBar(context , 'FoodSelector'),
           Expanded(
               child: Container(
                   decoration: BoxDecoration(
@@ -140,21 +140,23 @@ class FoodOfferList extends StatefulWidget {
 class _FoodOfferListState extends State<FoodOfferList> {
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      shrinkWrap: true,
-      scrollDirection: Axis.horizontal,
-      itemCount:
-          Provider.of<FoodOfferModel>(context, listen: false).foodOffers.length,
-      itemBuilder: (context, i) {
-        return Container(
-            color: Color(0xFF76D7C4),
-            margin: EdgeInsets.all(15),
-            width: 235, //MediaQuery.of(context).size.width*0.8 /5   ,
-            child: OfferScroll(
-                list: Provider.of<FoodOfferModel>(context, listen: false)
-                    .foodOffers[i],
-                position: i));
-      },
+    return Scrollbar(
+          child: ListView.builder(
+        shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
+        itemCount:
+            Provider.of<FoodOfferModel>(context, listen: false).foodOffers.length,
+        itemBuilder: (context, i) {
+          return Container(
+              color: Color(0xFF76D7C4),
+              margin: EdgeInsets.all(15),
+              width: 235, //MediaQuery.of(context).size.width*0.8 /5   ,
+              child: OfferScroll(
+                  list: Provider.of<FoodOfferModel>(context, listen: false)
+                      .foodOffers[i],
+                  position: i));
+        },
+      ),
     );
   }
 }
@@ -181,60 +183,62 @@ class _OfferScrollState extends State<OfferScroll> {
               height: 300,
               decoration:
                   BoxDecoration(color: Color(0xFFF4D03F), border: Border.all(color: Colors.black45)),
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: Provider.of<FoodOfferModel>(context, listen: false)
-                    .foodOffers[widget.position]
-                    .aliments
-                    .length,
-                itemBuilder: (_, i) {
-                  String name =
-                      Provider.of<FoodOfferModel>(context, listen: false)
-                          .foodOffers[widget.position]
-                          .aliments[i]
-                          .name; //widget.list.aliments[i].name;
-                  bool value =
-                      Provider.of<FoodOfferModel>(context, listen: true)
-                          .foodOffers[widget.position]
-                          .aliments[i]
-                          .isSelected; //widget.list.aliments[i].isSelected;
-                  return Consumer<Food>(builder: (context, food, child) {
+              child: Scrollbar(
+                              child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: Provider.of<FoodOfferModel>(context, listen: false)
+                      .foodOffers[widget.position]
+                      .aliments
+                      .length,
+                  itemBuilder: (_, i) {
+                    String name =
+                        Provider.of<FoodOfferModel>(context, listen: false)
+                            .foodOffers[widget.position]
+                            .aliments[i]
+                            .name; //widget.list.aliments[i].name;
+                    bool value =
+                        Provider.of<FoodOfferModel>(context, listen: true)
+                            .foodOffers[widget.position]
+                            .aliments[i]
+                            .isSelected; //widget.list.aliments[i].isSelected;
+                    return Consumer<Food>(builder: (context, food, child) {
 
-                  Food fod =
-                      Provider.of<FoodOfferModel>(context, listen: true)
-                          .foodOffers[widget.position]
-                          .aliments[i];
+                    Food fod =
+                        Provider.of<FoodOfferModel>(context, listen: true)
+                            .foodOffers[widget.position]
+                            .aliments[i];
 
-                    return CheckboxListTile(
-                        title: Text(name),
-                        tristate: true,
-                        value: fod.isSelected,
-                        onChanged: (newValue) {
-                          if(name == 'Ninguno')
-                             Provider.of<FoodOfferModel>(context, listen: false)
-                              .foodOffers[widget.position].deselectAll();
-                          else           
-                          Provider.of<FoodOfferModel>(context, listen: false)
-                              .foodOffers[widget.position]
-                              .aliments[0]
-                              .deselect();
-                          Provider.of<FoodOfferModel>(context, listen: false)
-                              .foodOffers[widget.position]
-                              .aliments[i]
-                              .setIsSelected();
-                          
+                      return CheckboxListTile(
+                          title: Text(name),
+                          tristate: true,
+                          value: fod.isSelected,
+                          onChanged: (newValue) {
+                            if(name == 'Ninguno')
+                               Provider.of<FoodOfferModel>(context, listen: false)
+                                .foodOffers[widget.position].deselectAll();
+                            else           
+                            Provider.of<FoodOfferModel>(context, listen: false)
+                                .foodOffers[widget.position]
+                                .aliments[0]
+                                .deselect();
+                            Provider.of<FoodOfferModel>(context, listen: false)
+                                .foodOffers[widget.position]
+                                .aliments[i]
+                                .setIsSelected();
+                            
 
-                          print(Provider.of<FoodOfferModel>(context,
-                                  listen: false)
-                              .foodOffers[widget.position]
-                              .aliments[i]
-                              .isSelected);
-                              setState(() {
-                                
-                              });
-                        });
-                  });
-                },
+                            print(Provider.of<FoodOfferModel>(context,
+                                    listen: false)
+                                .foodOffers[widget.position]
+                                .aliments[i]
+                                .isSelected);
+                                setState(() {
+                                  
+                                });
+                          });
+                    });
+                  },
+                ),
               )))
     ]));
   }

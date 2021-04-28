@@ -20,7 +20,7 @@ class History extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
 
           children: [
-            getDirectionsBar(context),
+            getDirectionsBar(context , 'History'),
             Expanded(child: Container())
           ],
         ),

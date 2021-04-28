@@ -19,7 +19,7 @@ class GlassesOfWater extends StatelessWidget {
             ),
           ),
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-            getDirectionsBar(context),
+            getDirectionsBar(context , 'GlassesOfWater'),
             Expanded(
                 child: Center(
                     child:
@@ -90,8 +90,9 @@ class _GlassesOfWatterState extends State<GlassesOfWater1> {
                                                 ),
                                                 Text('${i + 1}',
                                                     style: TextStyle(
-                                                        color:
-                                                            Color(0xFF3FBCF0))),
+                                                        color:  (i < widget.user.glasses) 
+                                                        ?Colors.white
+                                                        :Color(0xFF3FBCF0))),
                                               ]);
                                         },
                                       ))),
@@ -157,16 +158,10 @@ modifica tu límite de vasos diarios si lo deseas.'''),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children:[
-                                Text('¿Cuantos vasos puedes tomar al día?:  ', style: TextStyle(fontFamily: 'Sans', fontSize: 22.0),),
+                                Text('¿Cuántos vasos puedes tomar al día?:  ', style: TextStyle(fontFamily: 'Sans', fontSize: 22.0),),
 
                                 CounterView(initNumber: widget.user.waterLimit),
-                              OutlinedButton(
-                                  child: Text(' Editar Límite ', style: TextStyle(backgroundColor: Colors.white.withOpacity(0.8)),),               //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-                                  onPressed: () async {
-
-                                    
-
-                                  },)
+                              
                                 ]
                                   )
                             ],
@@ -217,7 +212,7 @@ class _CounterViewState extends State<CounterView> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           _createIncrementDicrementButton(Icons.remove, () => _dicrement()),
-          Text(   _currentCount.toString()   ),
+          Text( '  ${_currentCount.toString()}  ' ),
           _createIncrementDicrementButton(Icons.add, () => _increment()),
         ],
       ),

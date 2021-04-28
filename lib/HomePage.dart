@@ -26,7 +26,7 @@ class HomePage extends StatelessWidget {
         mainAxisAlignment:  MainAxisAlignment.center,
         children: [
 
-          getDirectionsBar(context), 
+          getDirectionsBar(context, '/'), 
           Expanded(child: Container(),)
 
 

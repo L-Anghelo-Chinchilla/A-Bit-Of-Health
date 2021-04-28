@@ -44,7 +44,7 @@ class NextPage extends StatelessWidget {
             ),
           ),
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          getDirectionsBar(context),
+          getDirectionsBar(context, 'FoodCounter'),
           Text(
             '\n Añadir cantidades de Alimentos',
             style: TextStyle(fontFamily: 'Mont', fontSize: 32,),
@@ -52,18 +52,20 @@ class NextPage extends StatelessWidget {
           Expanded(
             child: Container(
               //alignment: Alignment.center,
-              child: ListView.builder(
-                // LISTVIEW OF IMAGES ------------------------------------
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: list.length,
-                itemBuilder: (context, i) {
-                  return Column(children: [
-                    ImagestoDisplay(imageName: list[i].typeOfFood.toLowerCase()),
-                    TitleDisplay(titleName: list[i].typeOfFood),
-                    ColumnsDisplay(foods: list[i].aliments)
-                  ]);
-                },
+              child: Scrollbar(
+                              child: ListView.builder(
+                  // LISTVIEW OF IMAGES ------------------------------------
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: list.length,
+                  itemBuilder: (context, i) {
+                    return Column(children: [
+                      ImagestoDisplay(imageName: list[i].typeOfFood.toLowerCase()),
+                      TitleDisplay(titleName: list[i].typeOfFood),
+                      ColumnsDisplay(foods: list[i].aliments)
+                    ]);
+                  },
+                ),
               ), //-------------------------------------------------------------------
             ),
           ),
@@ -240,17 +242,19 @@ class ColumnsDisplay extends StatelessWidget {
         padding: EdgeInsets.all(10),
         decoration: BoxDecoration(color: Color(0xFFF4D03F).withOpacity(0.9), border: Border.all(color: Colors.black)),      //YELLOW xxxxxxxxxxxxxxxxxx
         alignment: Alignment.topCenter,
-        child: ListView.builder(
-            shrinkWrap: true,
-            scrollDirection: Axis.vertical,
-            itemCount: foods.length,
-            itemBuilder: (context, i) {
-              return Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 1, vertical: 10),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [Text('${foods[i].name}  ', style: TextStyle(fontSize: 14.0),), CounterView()]));        //xxxxxxxx
-            }),
+        child: Scrollbar(
+                  child: ListView.builder(
+              shrinkWrap: true,
+              scrollDirection: Axis.vertical,
+              itemCount: foods.length,
+              itemBuilder: (context, i) {
+                return Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 1, vertical: 10),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [Text('${foods[i].name}  ', style: TextStyle(fontSize: 14.0),), CounterView()]));        //xxxxxxxx
+              }),
+        ),
       ),
     );
   }
