@@ -19,14 +19,13 @@ class NextPage extends StatelessWidget {
 
   DateTime _currentDate = new DateTime.now();
 
-  
   @override
   Widget build(BuildContext context) {
     // String _formatdate = new DateFormat.yMMMd().format(_currentDate);
     int index = 4;
     List<FoodOffer> list = ModalRoute.of(context).settings.arguments;
-  if(list == null){
-    return FoodSelector();
+    if (list == null) {
+      return FoodSelector();
     }
 
     Size size = MediaQuery.of(context).size;
@@ -40,28 +39,31 @@ class NextPage extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/fondo_cantidades.jpg'),
-            fit: BoxFit.cover
-            ),
-          ),
+              image: AssetImage('assets/fondo_cantidades.jpg'),
+              fit: BoxFit.cover),
+        ),
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           getDirectionsBar(context, 'FoodCounter'),
           Text(
             '\n Añadir cantidades de Alimentos',
-            style: TextStyle(fontFamily: 'Mont', fontSize: 32,),
+            style: TextStyle(
+              fontFamily: 'Mont',
+              fontSize: 32,
+            ),
           ),
           Expanded(
             child: Container(
               //alignment: Alignment.center,
               child: Scrollbar(
-                              child: ListView.builder(
+                child: ListView.builder(
                   // LISTVIEW OF IMAGES ------------------------------------
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
                   itemCount: list.length,
                   itemBuilder: (context, i) {
                     return Column(children: [
-                      ImagestoDisplay(imageName: list[i].typeOfFood.toLowerCase()),
+                      ImagestoDisplay(
+                          imageName: list[i].typeOfFood.toLowerCase()),
                       TitleDisplay(titleName: list[i].typeOfFood),
                       ColumnsDisplay(foods: list[i].aliments)
                     ]);
@@ -81,14 +83,20 @@ class NextPage extends StatelessWidget {
               children: [
                 ElevatedButton(
                     child: Text('Atrás'),
-                    style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),),
+                    style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(Colors.blue),
+                    ),
                     //backgroundColor: Colors.limeAccent[700],
                     onPressed: () {
                       Navigator.pop(context);
                     }),
                 ElevatedButton(
                   child: Text('Autoevaluar'),
-                  style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),),
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.blue),
+                  ),
                   //backgroundColor: Colors.limeAccent[700],
                   onPressed: () {
                     Navigator.pushNamed(context, 'Evaluation');
@@ -155,9 +163,11 @@ class _CounterViewState extends State<CounterView> {
 
   void _increment() {
     setState(() {
-      _currentCount++;
-      _counterCallback(_currentCount);
-      _increaseCallback();
+      if (_currentCount < 30) {
+        _currentCount++;
+        _counterCallback(_currentCount);
+        _increaseCallback();
+      }
     });
   }
 
@@ -214,14 +224,17 @@ class TitleDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color(0xFFDC7633).withOpacity(0.8),    
-      width: 180.0, //MediaQuery.of(context).size.width * 0.1, 
+      color: Color(0xFFDC7633).withOpacity(0.8),
+      width: 180.0, //MediaQuery.of(context).size.width * 0.1,
       height: 35.0, //MediaQuery.of(context).size.height * 0.1,
       margin: EdgeInsets.all(5),
       padding: EdgeInsets.all(5),
       child: Text(
         titleName,
-        style: TextStyle(fontFamily: 'Mont2', fontSize: 20.0,),
+        style: TextStyle(
+          fontFamily: 'Mont2',
+          fontSize: 20.0,
+        ),
       ),
       alignment: Alignment.center,
     );
@@ -236,15 +249,18 @@ class ColumnsDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-        child: Container(
+      child: Container(
         width: 250,
         //height: MediaQuery.of(context).size.height * 0.3,
         margin: EdgeInsets.all(10),
         padding: EdgeInsets.all(10),
-        decoration: BoxDecoration(color: Color(0xFFF4D03F).withOpacity(0.9), border: Border.all(color: Colors.black)),      //YELLOW xxxxxxxxxxxxxxxxxx
+        decoration: BoxDecoration(
+            color: Color(0xFFF4D03F).withOpacity(0.9),
+            border:
+                Border.all(color: Colors.black)), //YELLOW xxxxxxxxxxxxxxxxxx
         alignment: Alignment.topCenter,
         child: Scrollbar(
-                  child: ListView.builder(
+          child: ListView.builder(
               shrinkWrap: true,
               scrollDirection: Axis.vertical,
               itemCount: foods.length,
@@ -253,7 +269,13 @@ class ColumnsDisplay extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 1, vertical: 10),
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [Text('${foods[i].name}  ', style: TextStyle(fontSize: 14.0),), CounterView()]));        //xxxxxxxx
+                        children: [
+                          Text(
+                            '${foods[i].name} ${foods[i].portion} ',
+                            style: TextStyle(fontSize: 14.0),
+                          ),
+                          CounterView()
+                        ])); //xxxxxxxx
               }),
         ),
       ),
