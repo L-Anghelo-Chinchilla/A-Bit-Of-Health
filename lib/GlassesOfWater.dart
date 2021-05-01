@@ -158,7 +158,9 @@ modifica tu límite de vasos diarios si lo deseas.'''),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children:[
-                                Text('¿Cuántos vasos puedes tomar al día?:  ', style: TextStyle(fontFamily: 'Sans', fontSize: 22.0),),
+                                Text('''¿Cuántos vasos puedes tomar al día?: 
+(Los cambios se harán el día de mañana.)'''
+                                  , style: TextStyle(fontFamily: 'Sans', fontSize: 22.0),),
 
                                 CounterView(initNumber: widget.user.waterLimit),
                               

@@ -17,8 +17,9 @@ class UserModel {
   int glasses;
   String waterLimitDate;
   String name;
+  String lastConnection;
 
-  UserModel({this.userID,this.email,this.gender,this.height,this.name,this.waterLimit,this.weight,this.newWaterLimit,this.waterLimitDate,this.glasses});
+  UserModel({this.userID,this.email,this.gender,this.height,this.name,this.waterLimit,this.weight,this.newWaterLimit,this.waterLimitDate,this.glasses, this.lastConnection});
 
   factory UserModel.fromJson(Map<String, dynamic> json) => 
   UserModel
@@ -31,6 +32,7 @@ class UserModel {
     name:            json["name"],
     newWaterLimit:   json['newWaterLimit'],
     glasses:   json['glasses'],
+    lastConnection:  json['lastConnection'],
     waterLimitDate:  json['waterLimitDate']
   );
 
@@ -46,14 +48,19 @@ class UserModel {
     '"waterLimit"'      :jsonEncode(waterLimit), 
     '"newWaterLimit"'   :jsonEncode(newWaterLimit), 
     '"waterLimitDate"'  :jsonEncode(waterLimitDate),
+    '"lastConnection"'  :jsonEncode(lastConnection),
     '"glasses"'  :jsonEncode(glasses),
+
      
   };
 
   @override
   String toString() => 
-  '{ ${userID.toString()},${weight.toString()}, ${height.toString()}, ${email.toString()}, ${gender.toString()}, ${waterLimit.toString()},  ${name.toString()},${newWaterLimit.toString()},${waterLimitDate.toString()},${glasses.toString()}}';
+  '{ ${userID.toString()},${weight.toString()}, ${height.toString()}, ${email.toString()}, ${gender.toString()}, ${waterLimit.toString()},  ${name.toString()},${newWaterLimit.toString()},${waterLimitDate.toString()},${glasses.toString()},${lastConnection.toString()}}';
 
 
   void setID(String id) { this.userID = id ;} 
+
+
+  
 }

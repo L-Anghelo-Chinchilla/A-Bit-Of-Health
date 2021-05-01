@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 import 'package:a_bit_of_health/providers/FoodProvider.dart';
+import 'package:a_bit_of_health/providers/UserProvider.dart';
 import 'package:a_bit_of_health/models/FoodModel.dart';
 
 class FoodSelector extends StatefulWidget {
@@ -25,6 +26,11 @@ class _FoodSelectorState extends State<FoodSelector> {
 
   @override
   Widget build(BuildContext context) {
+
+    UserProvider user; 
+    user.checkUserGlasses('-wqweqwewqeqwewq');
+    user.updateTodayGlasses('-wqweqwewqeqwewq');
+
     return Scaffold(
         appBar: getAppBar(context),
         body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
