@@ -180,7 +180,7 @@ class _GlassesOfWatterState extends State<GlassesOfWater1> {
 (Los cambios se harán el día de mañana.)'''
                                   , style: TextStyle(fontFamily: 'Sans', fontSize: 22.0),),
 
-                                CounterView(initNumber: widget.user.waterLimit),
+                                CounterView(initNumber: widget.user.newWaterLimit),
                               
                                 ]
                                   )
@@ -241,7 +241,7 @@ class _CounterViewState extends State<CounterView> {
 
   void _increment() {
     setState((){
-      if(_currentCount < 20){
+      if(_currentCount < 15){
       
       _currentCount++;
       _counterCallback(_currentCount);
