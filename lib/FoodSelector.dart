@@ -43,8 +43,8 @@ class _FoodSelectorState extends State<FoodSelector> {
                           fit: BoxFit.cover
                         ),
                       ),
-                child: SingleChildScrollView(
-                    scrollDirection: Axis.vertical,
+               // child:// SingleChildScrollView(
+                   // scrollDirection: Axis.vertical,
                     child: Container(
                         /*decoration: BoxDecoration(
                           image: DecorationImage(
@@ -68,17 +68,19 @@ class _FoodSelectorState extends State<FoodSelector> {
                                   },
                                 ),
                               ]),
-                          Container(
-                              width: MediaQuery.of(context).size.width * 0.8,
-                              height: MediaQuery.of(context).size.height * 0.6,
+                          Expanded(
+                          child:Container(
+                             // width: MediaQuery.of(context).size.width * 0.8,
+                              height:double.infinity,// MediaQuery.of(context).size.height * 0.6,
                               margin: EdgeInsets.all(15),
                               padding: EdgeInsets.all(15),
                               decoration: BoxDecoration(
                                   color: Color(0xffffffff).withOpacity(0.8),
-                                  border: Border.all(color: Colors.black)),
+                                  border: Border.all(color: Colors.black),
+                                  borderRadius: BorderRadius.all(Radius.circular(10))),
                               child: FutureBuilder<FoodOfferModel>(
                                   future: _provider.getFoodOffers(
-                                      foodSelected), // a previously-obtained Future<String> or null
+                                      foodSelected), 
                                   builder: (BuildContext context,
                                       AsyncSnapshot<FoodOfferModel> snapshot) {
                                     if (snapshot.hasData) {
@@ -94,12 +96,11 @@ class _FoodSelectorState extends State<FoodSelector> {
                                         height: 60,
                                       );
                                     }
-                                  })),
+                                  }))),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              ElevatedButton(
-                                  child: Text('Atrás'), onPressed: () {}),
+                             
                               ElevatedButton(
                                 child: Text('Siguiente'),
                                 onPressed: () {
@@ -128,7 +129,7 @@ class _FoodSelectorState extends State<FoodSelector> {
                             ],
                           ) 
                         ]))),
-              ))
+              )//)
         ]));
   }
 }

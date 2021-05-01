@@ -61,15 +61,18 @@ class _GlassesOfWatterState extends State<GlassesOfWater1> {
                        Padding(
                           padding: EdgeInsets.all(15),
                           child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text('Vasos de agua\n', style: TextStyle(fontFamily: 'Mont', fontSize: 32)),
                               Expanded(
-                                  child: Container(
+                                  child:
+                                   Container(
+                                      decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10)),
                                       color: Colors.white.withOpacity(0.7),
-                                      width: MediaQuery.of(context).size.width *
-                                          0.8,
-                                      height: MediaQuery.of(context).size.height * 0.6,
+                                      ),
+                                      height:double.infinity ,
                                       child: ListView.builder(
+                                        shrinkWrap: true,
                                         itemCount: widget.user.waterLimit,
                                         padding: EdgeInsets.all(7),
                                         scrollDirection: Axis.horizontal,
@@ -94,7 +97,9 @@ class _GlassesOfWatterState extends State<GlassesOfWater1> {
                                                         :Color(0xFF3FBCF0))),
                                               ]);
                                         },
-                                      ))),
+                                      )
+                                      ),
+                                      ),
                               SizedBox(),
                               Row(
                                 mainAxisAlignment:
@@ -134,11 +139,25 @@ class _GlassesOfWatterState extends State<GlassesOfWater1> {
                                           await provider.setUserWaterGlasses(
                                               widget.user.userID,
                                               widget.user.glasses);
+                                            if(widget.user.glasses == widget.user.waterLimit){
+                                              final snackBar = SnackBar(
+                                            content: Text('''¡¡¡Felicidades!!! ¡Completaste tus vasos diarios!.'''),
+                                            action: SnackBarAction(
+                                              label: 'Gracias!',
+                                              onPressed: () {
+                                                // Some code to undo the change.
+                                              },
+                                            ),
+                                          );
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(snackBar);
+
+
+
+                                            }
                                         } else {
                                           final snackBar = SnackBar(
-                                            content: Text('''YEY! Felicidades!, 
-completaste los vasos del día,
-modifica tu límite de vasos diarios si lo deseas.'''),
+                                            content: Text('''No tienes mas vasos que llenar, si quieres puedes aumentar tu limite diario de vasos de agua.'''),
                                             action: SnackBarAction(
                                               label: 'Gracias!',
                                               onPressed: () {
