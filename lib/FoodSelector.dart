@@ -27,7 +27,7 @@ class _FoodSelectorState extends State<FoodSelector> {
   @override
   Widget build(BuildContext context) {
 
-    UserProvider user; 
+    UserProvider user  = UserProvider(); 
     user.checkUserGlasses('-wqweqwewqeqwewq');
     user.updateTodayGlasses('-wqweqwewqeqwewq');
 

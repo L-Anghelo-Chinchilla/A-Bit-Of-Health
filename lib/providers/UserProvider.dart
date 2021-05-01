@@ -14,7 +14,7 @@ class UserProvider {
     final answer = await http.get(url);
     Map<String, dynamic> data = json.decode(answer.body);
     UserModel userData = (UserModel.fromJson(data));
-    //  print(userData.toJson());
+      print(userData.toJson());
     userData.setID(userID);
     return userData;
   }
@@ -43,7 +43,7 @@ class UserProvider {
   Future<void> checkUserGlasses(String userID) async {
     UserModel user = await getUserData(userID);
     if (user.waterLimit != user.newWaterLimit &&
-        user.waterLimitDate != DateTime.now().toString().split(" ").first) {
+        user.waterLimitDate == DateTime.now().toString().split(" ").first) {
       user.waterLimit = user.newWaterLimit;
       final url = '$_url$userID.json';
       http.put(url, body: user.toJson().toString());
