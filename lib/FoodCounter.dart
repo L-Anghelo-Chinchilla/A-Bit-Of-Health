@@ -91,17 +91,6 @@ class NextPage extends StatelessWidget {
                     onPressed: () {
                       Navigator.pop(context);
                     }),
-                ElevatedButton(
-                  child: Text('Autoevaluar'),
-                  style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.blue),
-                  ),
-                  //backgroundColor: Colors.limeAccent[700],
-                  onPressed: () {
-                    Navigator.pushNamed(context, 'Evaluation');
-                  },
-                )
               ],
             ),
           ), //-----------------------------
@@ -163,7 +152,7 @@ class _CounterViewState extends State<CounterView> {
 
   void _increment() {
     setState(() {
-      if (_currentCount < 30) {
+      if (_currentCount < 20) {
         _currentCount++;
         _counterCallback(_currentCount);
         _increaseCallback();
