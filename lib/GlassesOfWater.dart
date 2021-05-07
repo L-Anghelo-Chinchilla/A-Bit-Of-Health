@@ -1,4 +1,5 @@
 
+import 'package:a_bit_of_health/FoodCounter.dart';
 import 'package:a_bit_of_health/models/UserModel.dart';
 import 'package:a_bit_of_health/providers/UserProvider.dart';
 import 'package:a_bit_of_health/utils.dart';
@@ -54,6 +55,8 @@ class GlassesOfWater1 extends StatefulWidget {
 
 class _GlassesOfWatterState extends State<GlassesOfWater1> {
   UserProvider provider = UserProvider();
+
+
 
   @override
   Widget build(BuildContext context) {

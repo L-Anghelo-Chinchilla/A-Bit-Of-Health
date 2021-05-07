@@ -132,3 +132,22 @@ class Food extends ChangeNotifier{
   setCant(int newValue) {cant = newValue; }
 
 }
+
+
+class FoodRegister{
+
+FoodOffer food;
+DateTime time ; 
+double calories;
+int score;
+
+
+
+}
+
+
+
+
+
+
+

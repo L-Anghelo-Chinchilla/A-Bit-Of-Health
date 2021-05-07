@@ -10,11 +10,12 @@ Widget getDirectionsBar(BuildContext context, String name ){
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       crossAxisAlignment: CrossAxisAlignment.center,
       children:[
-     /* (name == '/') ?
+      (name == '/') ?
           Tab(icon: Icon(Icons.home, color: Colors.white), text: 'Inicio')
       :
-      GestureDetector(onTap:(){Navigator.pushNamed(context,'/');},child: const Tab(icon: Icon(Icons.home,), text: 'Inicio')),*/
-      (name == 'FoodSelector'  || name == 'FoodCounter') ?Tab(icon: Icon(Icons.fastfood_outlined, color: Colors.white),text: 'Comida')
+      GestureDetector(onTap:(){Navigator.pushNamed(context,'/');},child: const Tab(icon: Icon(Icons.home,), text: 'Inicio')),
+      
+      (name == 'FoodSelector'  || name == 'FoodCounter' || name == 'Evaluation') ?Tab(icon: Icon(Icons.fastfood_outlined, color: Colors.white),text: 'Comida')
       :
       GestureDetector(onTap:(){Navigator.pushReplacementNamed(context,'FoodSelector');},child:const Tab(icon: Icon(Icons.fastfood_outlined,),text: 'Comida')),
     /*  (name == 'Stats') ?Tab(icon: Icon(Icons.analytics,color: Colors.white), text: 'Estadísticas')
@@ -23,6 +24,12 @@ Widget getDirectionsBar(BuildContext context, String name ){
       (name == 'GlassesOfWater') ?Tab(icon: Icon(Icons.invert_colors,color: Colors.white), text: 'Agua')
       :
       GestureDetector(onTap:(){Navigator.pushReplacementNamed(context,'GlassesOfWater');},child:const Tab(icon: Icon(Icons.invert_colors,), text: 'Agua')),
+
+      (name == 'Today') ?Tab(icon: Icon(Icons.star, color: Colors.white), text: 'Hoy')
+      :
+      GestureDetector(onTap:(){Navigator.pushReplacementNamed(context,'Today');},child:const Tab(icon: Icon(Icons.star,), text: 'Hoy')),
+
+
     /*  (name == 'History') ?Tab(icon: Icon(Icons.star,color: Colors.white), text: 'Historial')
       :
       GestureDetector(onTap:(){Navigator.pushNamed(context,'History');},child:const Tab(icon: Icon(Icons.star,), text: 'Historial')),*/
@@ -40,13 +47,17 @@ Widget getAppBar(BuildContext context ){
           ),
           backgroundColor: Color(0xff173749),
           brightness: Brightness.dark,
-         /* actions: [
-            Image(
+          actions: [
+           /* Image(
               image: AssetImage('assets/usuario.png'),
               fit: BoxFit.contain,
               height: 60,
+            )*/
+            
+            Padding(child: TextButton.icon(onPressed: (){Navigator.pushNamed(context, 'Login');}, icon:Icon( Icons.person) , label: Text ('Login')),
+            padding: EdgeInsets.fromLTRB(10, 10, 20, 10),
             )
-          ],*/
+                     ],
           
     
     ); 

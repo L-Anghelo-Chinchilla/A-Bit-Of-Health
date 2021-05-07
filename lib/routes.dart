@@ -1,7 +1,9 @@
 import 'package:a_bit_of_health/Evaluation.dart';
 import 'package:a_bit_of_health/History.dart';
 import 'package:a_bit_of_health/HomePage.dart';
+import 'package:a_bit_of_health/Login.dart';
 import 'package:a_bit_of_health/Stats.dart';
+import 'package:a_bit_of_health/Today.dart';
 import 'package:a_bit_of_health/main.dart';
 import 'package:flutter/material.dart';
 import 'FoodCounter.dart';
@@ -22,7 +24,9 @@ Map<String, WidgetBuilder> getRoutes(){
     'GlassesOfWater' : (context) => GlassesOfWater(),
     'History' : (context) => History(),
     'Stats' : (context) => Stats(),
-    'Evaluation' : (context) => Evaluation()
+    'Evaluation' : (context) => Evaluation(),
+    'Login' : (context) => Login(),
+    'Today' : (context) => Today()
  };
 
 

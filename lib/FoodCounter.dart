@@ -91,6 +91,9 @@ class NextPage extends StatelessWidget {
                     onPressed: () {
                       Navigator.pop(context);
                     }),
+                ElevatedButton(onPressed: (){
+                  Navigator.pushNamed(context, 'Evaluation');
+                }, child: Text('Autoevaluar'))
               ],
             ),
           ), //-----------------------------
