@@ -88,6 +88,7 @@ class _FoodSelectorState extends State<FoodSelector> {
                                               listen: false)
                                           .setFoodOffers(
                                               snapshot.data.foodOffers);
+                                              print(snapshot.data.toJson());
                                       return FoodOfferList(offer: snapshot.data);
                                     } else {
                                       return SizedBox(

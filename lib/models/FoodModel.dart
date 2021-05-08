@@ -29,23 +29,23 @@ class FoodOfferModel with ChangeNotifier {
       if (element.typeOfFood == name) element.setValueChanged(foodName, value);
     });
     notifyListeners();
-
-
   }
-    setFoodOffers(List<FoodOffer> newValue){foodOffers = newValue;}
+
+  setFoodOffers(List<FoodOffer> newValue) {
+    foodOffers = newValue;
+  }
 
   FoodOfferModel getItself() => this;
 
   FoodOffer getAt(int i) => foodOffers[i];
 
+  List<FoodOffer> getSelectedOnes() {
+    List<FoodOffer> list = [];
 
-
-  List<FoodOffer> getSelectedOnes(){
-     List<FoodOffer> list = [];
-     
-      foodOffers.forEach((element) { list.add(element.getSelectedOnes());  });
+    foodOffers.forEach((element) {
+      list.add(element.getSelectedOnes());
+    });
     return list;
-
   }
 }
 
@@ -78,23 +78,25 @@ class FoodOffer with ChangeNotifier {
       if (name == element) print('$element set to $value');
     });
     notifyListeners();
-
-
-
   }
-    deselectAll() => aliments.forEach((element) {element.deselect(); });
+
+  deselectAll() => aliments.forEach((element) {
+        element.deselect();
+      });
 
   String getTypeOfFood() => typeOfFood;
   Food getFoodAt(int i) => aliments[i];
 
-
-  FoodOffer getSelectedOnes(){
-   return FoodOffer(typeOfFood:this.typeOfFood, aliments: aliments.where((element) => element.isSelected && element.name != 'Ninguno').toList());
-
+  FoodOffer getSelectedOnes() {
+    return FoodOffer(
+        typeOfFood: this.typeOfFood,
+        aliments: aliments
+            .where((element) => element.isSelected && element.name != 'Ninguno')
+            .toList());
   }
 }
 
-class Food extends ChangeNotifier{
+class Food extends ChangeNotifier {
   String name;
   double calories;
   bool isSelected;
@@ -122,32 +124,55 @@ class Food extends ChangeNotifier{
         "cant": cant
       };
 
-  String getName    () => name ;
+  String getName() => name;
   double getCalories() => calories;
   bool getIsSelected() => isSelected;
-  String getPortion () => portion;
-  int getCant       () => cant; 
-  setIsSelected() {isSelected = !isSelected; notifyListeners();  }
-  deselect() {isSelected = false; notifyListeners();  }
-  setCant(int newValue) {cant = newValue; }
+  String getPortion() => portion;
+  int getCant() => cant;
+  setIsSelected() {
+    isSelected = !isSelected;
+    notifyListeners();
+  }
 
+  deselect() {
+    isSelected = false;
+    notifyListeners();
+  }
+
+  setCant(int newValue) {
+    cant = newValue;
+  }
 }
 
+class FoodRegister {
+  String id;
+  FoodOffer food;
+  String date;
+  String time;
+  double calories;
+  int score;
 
-class FoodRegister{
+  FoodRegister({this.calories, this.food, this.score, this.time , this.id , this.date});
 
-FoodOffer food;
-DateTime time ; 
-double calories;
-int score;
+  FoodRegister foodRegisterFromJson(String str) =>
+      FoodRegister.fromJson(json.decode(str));
 
+  String foodRegisterToJson(FoodOfferModel data) => json.encode(data.toJson());
 
+  factory FoodRegister.fromJson(Map<String, dynamic> json) => FoodRegister(
+      score: json['score'],
+      calories: json['calories'],
+      time: json['time'],
+      id: json['id'],
+      date: json['date'],
+      food: FoodOffer.fromJson(jsonDecode(json['food'])));
 
+  Map<String, dynamic> toJson() => {
+        '"score"': jsonEncode(score),
+        '"calories"': jsonEncode(calories),
+        '"time"': jsonEncode(time),
+        '"id"': jsonEncode(id),
+        '"date"': jsonEncode(date),
+        '"food"': jsonEncode(food),
+      };
 }
-
-
-
-
-
-
-
