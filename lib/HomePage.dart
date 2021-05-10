@@ -1,8 +1,6 @@
-import 'package:a_bit_of_health/FoodCounter.dart';
-import 'package:a_bit_of_health/GlassesOfWater.dart';
-import 'package:a_bit_of_health/utils.dart';
+
 import 'package:flutter/material.dart';
-import 'package:a_bit_of_health/FoodSelector.dart';
+
 import 'package:a_bit_of_health/utils.dart';
 
 class HomePage extends StatelessWidget {

@@ -68,7 +68,10 @@ class FoodOffer with ChangeNotifier {
   }
 
   Map<String, dynamic> toJson() =>
-      {"typeOfFood": typeOfFood, "Aliments": jsonEncode(aliments)};
+      {
+       "typeOfFood": typeOfFood,
+       "aliments":aliments
+       };
 
   @override
   String toString() => '{ ${this.typeOfFood} , ${jsonEncode(this.aliments)} }';
@@ -105,9 +108,9 @@ class Food extends ChangeNotifier {
 
   Food({this.calories, this.cant, this.isSelected, this.name, this.portion});
 
-  FoodOffer foodFromJson(String str) => FoodOffer.fromJson(json.decode(str));
+  Food foodFromJson(String str) => Food.fromJson(json.decode(str));
 
-  String foodToJson(FoodOfferModel data) => json.encode(data.toJson());
+  String foodToJson(Food data) => json.encode(data.toJson());
 
   factory Food.fromJson(Map<String, dynamic> json) => Food(
       name: json['name'],
@@ -157,7 +160,7 @@ class FoodRegister {
   FoodRegister foodRegisterFromJson(String str) =>
       FoodRegister.fromJson(json.decode(str));
 
-  String foodRegisterToJson(FoodOfferModel data) => json.encode(data.toJson());
+  String foodRegisterToJson(FoodRegister data) => json.encode(data.toJson());
 
   factory FoodRegister.fromJson(Map<String, dynamic> json) => FoodRegister(
       score: json['score'],
@@ -165,14 +168,14 @@ class FoodRegister {
       time: json['time'],
       id: json['id'],
       date: json['date'],
-      food: FoodOffer.fromJson(jsonDecode(json['food'])));
+      food: FoodOffer.fromJson(json['food']));
 
   Map<String, dynamic> toJson() => {
-        '"score"': jsonEncode(score),
-        '"calories"': jsonEncode(calories),
-        '"time"': jsonEncode(time),
-        '"id"': jsonEncode(id),
-        '"date"': jsonEncode(date),
-        '"food"': jsonEncode(food),
+        "score": score,
+        "calories": calories,
+        "time": time,
+        "id": id,
+        "date": date,
+        "food": food,
       };
 }

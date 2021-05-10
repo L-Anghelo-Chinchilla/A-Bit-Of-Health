@@ -1,5 +1,4 @@
 
-import 'package:a_bit_of_health/FoodCounter.dart';
 import 'package:a_bit_of_health/models/UserModel.dart';
 import 'package:a_bit_of_health/providers/UserProvider.dart';
 import 'package:a_bit_of_health/utils.dart';
