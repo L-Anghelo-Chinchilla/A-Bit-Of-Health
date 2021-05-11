@@ -83,7 +83,6 @@ class HomePage extends StatelessWidget {
             ),
           Container(
             padding: EdgeInsets.all(40),
-            color: Colors.green,
             width: (MediaQuery.of(context).size.width)/1.9,
             height: MediaQuery.of(context).size.height,
             child: Column(
@@ -96,7 +95,7 @@ class HomePage extends StatelessWidget {
                                 width: (MediaQuery.of(context).size.width)/35,
                                 height: (MediaQuery.of(context).size.width)/35,
                                 decoration: BoxDecoration(
-                                  image: DecorationImage(image: AssetImage('assets/1.jpg'),
+                                  image: DecorationImage(image: AssetImage('assets/fac.jpg'),
                                   ),
                                 ),
                                 child: FlatButton(
@@ -145,32 +144,37 @@ class HomePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                             Container(
-                                      width: (MediaQuery.of(context).size.width)/35,
+                                      width: (MediaQuery.of(context).size.width)/20,
                                       height: (MediaQuery.of(context).size.width)/35,
-                                      decoration: BoxDecoration(
+                                      /*decoration: BoxDecoration(
                                         image: DecorationImage(image: AssetImage('assets/1.jpg'),
                                         ),
-                                      ),
+                                      ),*/
                                       child: FlatButton(
+                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                                        color: Color(0xFF64BEC3),
                                         padding: EdgeInsets.all(0.0),
+                                        //textTheme: ButtonTextTheme,
                                         onPressed: () {
                                           openURLfo();
                                         }, 
-                                        child: null)
+                                        child: Text('Recetas', style: TextStyle(color: Colors.white)))
                               ),
                              Container(
-                                      width: (MediaQuery.of(context).size.width)/35,
+                                      width: (MediaQuery.of(context).size.width)/20,
                                       height: (MediaQuery.of(context).size.width)/35,
-                                      decoration: BoxDecoration(
+                                      /*decoration: BoxDecoration(
                                         image: DecorationImage(image: AssetImage('assets/2.jpg'),
                                         ),
-                                      ),
+                                      ),*/
                                       child: FlatButton(
+                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                                        color: Color(0xFF64BEC3),
                                         padding: EdgeInsets.all(0.0),
                                         onPressed: () {
                                           openURLex();
                                         }, 
-                                     child: null)
+                                     child: Text('Ejercicios', style: TextStyle(color: Colors.white)),)
                                 ),
                             ],
                 ),
