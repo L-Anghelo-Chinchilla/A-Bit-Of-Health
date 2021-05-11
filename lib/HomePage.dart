@@ -69,8 +69,8 @@ class HomePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(
-                      'Our food should be our medicine & our medicine should be our food',
-                      style: TextStyle(fontSize: 25),
+                      'Our FOOD should be our medicine & our medicine should be our food',
+                      style: TextStyle(fontSize: 30),
                     ),
                     Text(
                       'A Bit of Health es tu nuevo compañero, el cual te ayudará a centrarte en un estilo de vida y elecciones de dieta saludables. Es la mejor app para alguien que comienza con un control de comida y agua, quiere perder peso o quiere ser consciente.'
