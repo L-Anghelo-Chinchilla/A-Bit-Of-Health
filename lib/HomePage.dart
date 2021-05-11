@@ -61,7 +61,7 @@ class HomePage extends StatelessWidget {
             children: [
               Container(
               padding: EdgeInsets.all(40),
-              color: Colors.blue,
+              color: Color(0xFFD0E3DA).withOpacity(0.7),
               width: (MediaQuery.of(context).size.width)/2.7,
 
               child: (
