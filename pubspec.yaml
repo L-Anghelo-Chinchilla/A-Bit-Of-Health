@@ -106,6 +106,9 @@ flutter:
     - family: Mont2
       fonts:
         - asset: fonts/Montserrat-Regular.ttf
+    - family: Mont3
+      fonts:
+        - asset: fonts/Montserrat-Italic.ttf
     - family: Sans
       fonts:
         - asset: fonts/OpenSansCondensed-LightItalic.ttf
