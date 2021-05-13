@@ -1,8 +1,14 @@
 import 'package:a_bit_of_health/FoodSelector.dart';
 import 'package:a_bit_of_health/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:a_bit_of_health/providers/FoodProvider.dart';
 import 'package:a_bit_of_health/models/FoodModel.dart';
+import 'package:tuple/tuple.dart';
+
+List<double> Thecalories = [];
+
+int num;
 
 class FoodCounter extends StatelessWidget {
   //const FoodCounter({Key key}) : super(key: key);
@@ -23,16 +29,23 @@ class NextPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // String _formatdate = new DateFormat.yMMMd().format(_currentDate);
     int index = 4;
-    List<FoodOffer> list = ModalRoute.of(context).settings.arguments;
-    if (list == null) {
+    //List<FoodOffer> list = ModalRoute.of(context).settings.arguments;
+    Tuple2<String, List<FoodOffer>> thelist =
+        ModalRoute.of(context).settings.arguments;
+    if (thelist == null) {
       return FoodSelector();
     }
+    Provider.of<List<FoodOffer>>(context, listen: false).addAll(thelist.item2);
+
+    List<FoodOffer> list = thelist.item2;
+    String KindOfFood = thelist.item1;
 
     Size size = MediaQuery.of(context).size;
 
     // CENTER OF THE HOME PAGE -----------------------------------------------------------
 
-    print(ModalRoute.of(context).settings.arguments.toString());
+    print('-> ' +
+        Provider.of<List<FoodOffer>>(context, listen: false).toString());
     //appBar: getAppBar(context);
     return Scaffold(
       appBar: getAppBar(context),
@@ -65,7 +78,7 @@ class NextPage extends StatelessWidget {
                       ImagestoDisplay(
                           imageName: list[i].typeOfFood.toLowerCase()),
                       TitleDisplay(titleName: list[i].typeOfFood),
-                      ColumnsDisplay(foods: list[i].aliments)
+                      ColumnsDisplay(foods: list[i].aliments, index: i)
                     ]);
                   },
                 ),
@@ -91,9 +104,28 @@ class NextPage extends StatelessWidget {
                     onPressed: () {
                       Navigator.pop(context);
                     }),
-                ElevatedButton(onPressed: (){
-                  Navigator.pushNamed(context, 'Evaluation');
-                }, child: Text('Autoevaluar'))
+                ElevatedButton(
+                    onPressed: () {
+                      double sum = 0;
+                      Provider.of<List<FoodOffer>>(context, listen: false)
+                          .forEach((foodOffer) {
+                        sum += foodOffer.aliments.fold(0.0,
+                            (ant, food) => ant + food.calories * food.cant);
+                      });
+                      print('la suma es : $sum ');
+
+                      final newList =
+                          Provider.of<List<FoodOffer>>(context, listen: false)
+                              .fold([], (prev, actual) {
+                        prev.addAll(actual.aliments);
+                        return prev;
+                      });
+                      print(newList.toString());
+                      Navigator.pushNamed(context, 'Evaluation',
+                          arguments: Tuple3<String, double, List<FoodOffer>>(
+                              KindOfFood, sum, list));
+                    },
+                    child: Text('Autoevaluar'))
               ],
             ),
           ), //-----------------------------
@@ -106,6 +138,8 @@ class NextPage extends StatelessWidget {
 
 //--------------------------------COUNTER----------------------------------------
 class CounterView extends StatefulWidget {
+  int x;
+  int y;
   final int initNumber;
   final Function(int) counterCallback;
   final Function increaseCallback;
@@ -114,7 +148,9 @@ class CounterView extends StatefulWidget {
       {this.initNumber,
       this.counterCallback,
       this.increaseCallback,
-      this.decreaseCallback});
+      this.decreaseCallback,
+      this.x,
+      this.y});
   @override
   _CounterViewState createState() => _CounterViewState();
 }
@@ -136,6 +172,13 @@ class _CounterViewState extends State<CounterView> {
 
   @override
   Widget build(BuildContext context) {
+    _currentCount =
+        Provider.of<List<FoodOffer>>(context, listen: false)[widget.x]
+            .aliments[widget.y]
+            .cant;
+    print(Provider.of<List<FoodOffer>>(context, listen: false)[widget.x]
+        .aliments[widget.y]
+        .cant);
     return Container(
       padding: EdgeInsets.zero,
       decoration: BoxDecoration(
@@ -145,28 +188,34 @@ class _CounterViewState extends State<CounterView> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          _createIncrementDicrementButton(Icons.remove, () => _dicrement()),
+          _createIncrementDicrementButton(Icons.remove, () => _dicrement(num)),
           Text(_currentCount.toString()),
-          _createIncrementDicrementButton(Icons.add, () => _increment()),
+          _createIncrementDicrementButton(Icons.add, () => _increment(num)),
         ],
       ),
     );
   }
 
-  void _increment() {
+  void _increment(int n) {
     setState(() {
       if (_currentCount < 20) {
         _currentCount++;
+        Provider.of<List<FoodOffer>>(context, listen: false)[widget.x]
+            .aliments[widget.y]
+            .setCant(_currentCount);
         _counterCallback(_currentCount);
         _increaseCallback();
       }
     });
   }
 
-  void _dicrement() {
+  void _dicrement(int n) {
     setState(() {
       if (_currentCount > 1) {
         _currentCount--;
+        Provider.of<List<FoodOffer>>(context, listen: false)[widget.x]
+            .aliments[widget.y]
+            .setCant(_currentCount);
         _counterCallback(_currentCount);
         _decreaseCallback();
       }
@@ -235,8 +284,9 @@ class TitleDisplay extends StatelessWidget {
 
 class ColumnsDisplay extends StatelessWidget {
   List<Food> foods;
+  int index;
 
-  ColumnsDisplay({this.foods});
+  ColumnsDisplay({this.foods, this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -257,6 +307,8 @@ class ColumnsDisplay extends StatelessWidget {
               scrollDirection: Axis.vertical,
               itemCount: foods.length,
               itemBuilder: (context, i) {
+                num = i;
+                Thecalories.add(foods[i].calories);
                 return Padding(
                     padding: EdgeInsets.symmetric(horizontal: 1, vertical: 10),
                     child: Row(
@@ -266,7 +318,7 @@ class ColumnsDisplay extends StatelessWidget {
                             '${foods[i].name} ${foods[i].portion} ',
                             style: TextStyle(fontSize: 14.0),
                           ),
-                          CounterView()
+                          CounterView(x: index, y: i)
                         ])); //xxxxxxxx
               }),
         ),
