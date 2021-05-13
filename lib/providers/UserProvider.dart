@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:a_bit_of_health/models/UserModel.dart';
 import 'package:http/http.dart' as http;
+import 'package:tuple/tuple.dart';
 
 class UserProvider {
   final _url =
@@ -63,5 +64,9 @@ class UserProvider {
     }
   }
 
- 
+ /*Future <Tuple2<bool ,String >> login(email, password){
+
+
+    return 
+  }*/ 
 }

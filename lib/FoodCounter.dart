@@ -1,8 +1,12 @@
 import 'package:a_bit_of_health/FoodSelector.dart';
+import 'package:a_bit_of_health/models/UserModel.dart';
 import 'package:a_bit_of_health/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:a_bit_of_health/providers/FoodProvider.dart';
 import 'package:a_bit_of_health/models/FoodModel.dart';
+import 'package:provider/provider.dart';
+
+import 'Login.dart';
 
 class FoodCounter extends StatelessWidget {
   //const FoodCounter({Key key}) : super(key: key);
@@ -34,8 +38,11 @@ class NextPage extends StatelessWidget {
 
     print(ModalRoute.of(context).settings.arguments.toString());
     //appBar: getAppBar(context);
-    return Scaffold(
-      appBar: getAppBar(context),
+    if(Provider.of<UserModel>(context).userID ==null)
+      return Login();
+    else
+      return Scaffold(
+      appBar: getAppBar(context:context),
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(

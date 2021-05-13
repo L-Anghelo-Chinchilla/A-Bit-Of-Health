@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:a_bit_of_health/Login.dart';
+import 'package:a_bit_of_health/models/UserModel.dart';
 import 'package:a_bit_of_health/utils.dart';
 import 'package:flutter/material.dart';
 
@@ -30,9 +32,12 @@ class _FoodSelectorState extends State<FoodSelector> {
     UserProvider user  = UserProvider(); 
     user.checkUserGlasses('-wqweqwewqeqwewq');
     user.updateTodayGlasses('-wqweqwewqeqwewq');
-
+    if(Provider.of<UserModel>(context).userID ==null)
+      return Login();
+    else
+      
     return Scaffold(
-        appBar: getAppBar(context),
+        appBar: getAppBar(context:context),
         body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           getDirectionsBar(context , 'FoodSelector'),
           Expanded(

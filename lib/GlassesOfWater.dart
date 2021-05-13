@@ -1,15 +1,20 @@
 
+import 'package:a_bit_of_health/Login.dart';
 import 'package:a_bit_of_health/models/UserModel.dart';
 import 'package:a_bit_of_health/providers/UserProvider.dart';
 import 'package:a_bit_of_health/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class GlassesOfWater extends StatelessWidget {
   UserProvider _provider = UserProvider();
   @override
   Widget build(BuildContext context) {
-
-    return Scaffold(appBar: getAppBar(context),
+    if(Provider.of<UserModel>(context).userID ==null)
+      return Login();
+    else
+      
+    return Scaffold(appBar: getAppBar(context:context),
         body: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
@@ -24,7 +29,7 @@ class GlassesOfWater extends StatelessWidget {
                     child:
            FutureBuilder<UserModel>(
               future: _provider.getUserData(
-                  '-wqweqwewqeqwewq'), // a previously-obtained Future<String> or null
+                  Provider.of<UserModel>(context, listen: false).userID), // a previously-obtained Future<String> or null
               builder: (BuildContext context, AsyncSnapshot<UserModel> snapshot) {
                 if (snapshot.hasData) {
                   return GlassesOfWater1(user: snapshot.data);

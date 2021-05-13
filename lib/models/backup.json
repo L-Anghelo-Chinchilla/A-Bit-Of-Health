@@ -4,13 +4,13 @@
             "-wqweqwewqeqwewq": {
                 "email": "sanchopanza@gmail.com",
                 "gender": "M",
-                "glasses": 0,
+                "glasses": 1,
                 "height": 1.7,
-                "lastConnection": "2021-05-08",
+                "lastConnection": "2021-05-12",
                 "name": "Sancho Panza",
                 "newWaterLimit": 7,
                 "waterLimit": 7,
-                "waterLimitDate": "2021-05-05",
+                "waterLimitDate": "2021-05-12",
                 "weight": 85.3
             }
         }
@@ -21,39 +21,2156 @@
                 "-wqweqwewqeqwewq": {
                     "2021": {
                         "5": {
-                            "8": {
-                                "-M_CKU6X9bhe-4RG9LKc": {
-                                    "calories": 500,
-                                    "date": "12-5-1",
+                            "9": {
+                                "-M_GSMjSFG3SgLJn4MGR": {
+                                    "calories": 30,
+                                    "date": "12/5/1",
                                     "food": {
-                                        "Aliments": "null"
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Cena"
                                     },
-                                    "id": "14/4/4",
-                                    "score": 4,
-                                    "time": "14-45"
+                                    "id": "",
+                                    "score": 1,
+                                    "time": "14:50"
                                 },
-                                "-M_CM1ibF6DO24N3uewB": {
+                                "-M_GSNdV-iIFoJUbuBM4": {
+                                    "calories": 30,
+                                    "date": "12/5/1",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Snack"
+                                    },
+                                    "id": "",
+                                    "score": 3,
+                                    "time": "14:40"
+                                },
+                                "-M_GSVhhCgDnguylLODC": {
+                                    "calories": 30,
+                                    "date": "12/5/1",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Desayuno"
+                                    },
+                                    "id": "",
+                                    "score": 2,
+                                    "time": "14:41"
+                                },
+                                "-M_GSjz6hYTkVJD9MBp4": {
+                                    "calories": 30,
+                                    "date": "12/5/1",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Desayuno"
+                                    },
+                                    "id": "",
+                                    "score": 4,
+                                    "time": "13:45"
+                                },
+                                "-M_GSkgOLoLzJ6tI1nkW": {
+                                    "calories": 30,
+                                    "date": "12/5/1",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Desayuno"
+                                    },
+                                    "id": "",
+                                    "score": 2,
+                                    "time": "10:45"
+                                },
+                                "-M_GT1-2ynWGop0Pj__z": {
+                                    "calories": 30,
+                                    "date": "12/5/1",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Desayuno"
+                                    },
+                                    "id": "",
+                                    "score": 3,
+                                    "time": "23:45"
+                                },
+                                "-M_GT7sgwt_5P_yR_iX0": {
                                     "calories": 500,
                                     "date": "12/5/1",
                                     "food": {
-                                        "Aliments": "null"
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Desayuno"
                                     },
                                     "id": "",
                                     "score": 4,
                                     "time": "14:45"
                                 },
-                                "-M_CMTPUyOQO_ABJR2JE": {
+                                "-M_GW7cxkhNe5aDHGg2f": {
                                     "calories": 500,
                                     "date": "12/5/1",
                                     "food": {
-                                        "Aliments": "null",
-                                        "typeOfFood": "desayuno"
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Desayuno"
                                     },
                                     "id": "",
                                     "score": 4,
                                     "time": "14:45"
                                 },
-                                "calories": 500
+                                "-M_GWXrGw5CXTy0W1YQm": {
+                                    "calories": 500,
+                                    "date": "12/5/1",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Desayuno"
+                                    },
+                                    "id": "",
+                                    "score": 4,
+                                    "time": "14:45"
+                                },
+                                "-M_GXFZ3MVuQiKzCzkty": {
+                                    "calories": 500,
+                                    "date": "12/5/1",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Desayuno"
+                                    },
+                                    "id": "",
+                                    "score": 4,
+                                    "time": "14:45"
+                                },
+                                "-M_GZcESkkotrcWvmoui": {
+                                    "calories": 500,
+                                    "date": "12/5/1",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Desayuno"
+                                    },
+                                    "id": "",
+                                    "score": 4,
+                                    "time": "14:45"
+                                },
+                                "-M_GaxRfyAKRt7PopDkQ": {
+                                    "calories": 500,
+                                    "date": "12/5/1",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Desayuno"
+                                    },
+                                    "id": "",
+                                    "score": 4,
+                                    "time": "14:45"
+                                },
+                                "-M_GbRs-mFht7H2Vj4Ta": {
+                                    "calories": 500,
+                                    "date": "12/5/1",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Desayuno"
+                                    },
+                                    "id": "",
+                                    "score": 4,
+                                    "time": "14:45"
+                                },
+                                "-M_Gc7qLRMtD85RteYTQ": {
+                                    "calories": 500,
+                                    "date": "12/5/1",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Desayuno"
+                                    },
+                                    "id": "",
+                                    "score": 4,
+                                    "time": "14:45"
+                                },
+                                "-M_GgDdnulPm3-1Qn7ml": {
+                                    "calories": 500,
+                                    "date": "12/5/1",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Desayuno"
+                                    },
+                                    "id": "",
+                                    "score": 4,
+                                    "time": "14:45"
+                                },
+                                "-M_GhLStvVkhaQfGeKV9": {
+                                    "calories": 500,
+                                    "date": "12/5/1",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Desayuno"
+                                    },
+                                    "id": "",
+                                    "score": 4,
+                                    "time": "14:45"
+                                },
+                                "-M_GhuBAwMM6P5oI7rpV": {
+                                    "calories": 500,
+                                    "date": "12/5/1",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Desayuno"
+                                    },
+                                    "id": "",
+                                    "score": 4,
+                                    "time": "14:45"
+                                },
+                                "-M_Gi3H9WrPk24XI-uGl": {
+                                    "calories": 500,
+                                    "date": "12/5/1",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Desayuno"
+                                    },
+                                    "id": "",
+                                    "score": 4,
+                                    "time": "14:45"
+                                },
+                                "-M_GilZkYuEz-BO9auMH": {
+                                    "calories": 500,
+                                    "date": "12/5/1",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Desayuno"
+                                    },
+                                    "id": "",
+                                    "score": 4,
+                                    "time": "14:45"
+                                },
+                                "-M_GnHW8CgFKYJeX3DfH": {
+                                    "calories": 500,
+                                    "date": "12/5/1",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Desayuno"
+                                    },
+                                    "id": "",
+                                    "score": 4,
+                                    "time": "14:45"
+                                },
+                                "-M_GnRUsqqvLKVqenyxi": {
+                                    "calories": 500,
+                                    "date": "12/5/1",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Desayuno"
+                                    },
+                                    "id": "",
+                                    "score": 4,
+                                    "time": "14:45"
+                                },
+                                "-M_GoeHz90tEqmOzLwrI": {
+                                    "calories": 500,
+                                    "date": "12/5/1",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Desayuno"
+                                    },
+                                    "id": "",
+                                    "score": 4,
+                                    "time": "14:45"
+                                },
+                                "-M_GtIfdILrtrYreR52I": {
+                                    "calories": 500,
+                                    "date": "12/5/1",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Desayuno"
+                                    },
+                                    "id": "",
+                                    "score": 4,
+                                    "time": "14:45"
+                                },
+                                "-M_HLUxyoOYdyn_00XNy": {
+                                    "calories": 500,
+                                    "date": "12/5/1",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Desayuno"
+                                    },
+                                    "id": "",
+                                    "score": 4,
+                                    "time": "14:45"
+                                },
+                                "-M_HLvPsFKj2V-hGnjhk": {
+                                    "calories": 500,
+                                    "date": "12/5/1",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Desayuno"
+                                    },
+                                    "id": "",
+                                    "score": 4,
+                                    "time": "14:45"
+                                },
+                                "-M_HLvhcBgzTn98MW9to": {
+                                    "calories": 500,
+                                    "date": "12/5/1",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Desayuno"
+                                    },
+                                    "id": "",
+                                    "score": 4,
+                                    "time": "14:45"
+                                },
+                                "-M_HM2ZtfQYO8rJNq54H": {
+                                    "calories": 500,
+                                    "date": "12/5/1",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Desayuno"
+                                    },
+                                    "id": "",
+                                    "score": 4,
+                                    "time": "14:45"
+                                },
+                                "-M_HMM6SPOelzraZXfQG": {
+                                    "calories": 500,
+                                    "date": "12/5/1",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Desayuno"
+                                    },
+                                    "id": "",
+                                    "score": 4,
+                                    "time": "14:45"
+                                },
+                                "-M_HMMZZuqi8yIZ0MJIE": {
+                                    "calories": 500,
+                                    "date": "12/5/1",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Desayuno"
+                                    },
+                                    "id": "",
+                                    "score": 4,
+                                    "time": "14:45"
+                                },
+                                "-M_HW10T2gosHDLjHZwR": {
+                                    "calories": 500,
+                                    "date": "12/5/1",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Desayuno"
+                                    },
+                                    "id": "",
+                                    "score": 4,
+                                    "time": "14:45"
+                                },
+                                "-M_HXJwyOG_Yfey2mRFp": {
+                                    "calories": 500,
+                                    "date": "12/5/1",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Desayuno"
+                                    },
+                                    "id": "",
+                                    "score": 4,
+                                    "time": "14:45"
+                                },
+                                "-M_HXK-JVaacEBbGPluV": {
+                                    "calories": 500,
+                                    "date": "12/5/1",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Desayuno"
+                                    },
+                                    "id": "",
+                                    "score": 4,
+                                    "time": "14:45"
+                                },
+                                "-M_HXnq18-17bIbt8b5h": {
+                                    "calories": 500,
+                                    "date": "12/5/1",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Desayuno"
+                                    },
+                                    "id": "",
+                                    "score": 4,
+                                    "time": "14:45"
+                                },
+                                "-M_HXnwtEunoX0F99Wpe": {
+                                    "calories": 500,
+                                    "date": "12/5/1",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Desayuno"
+                                    },
+                                    "id": "",
+                                    "score": 4,
+                                    "time": "14:45"
+                                },
+                                "-M_HZB-6TRmSCaX_P_JT": {
+                                    "calories": 500,
+                                    "date": "12/5/1",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Desayuno"
+                                    },
+                                    "id": "",
+                                    "score": 4,
+                                    "time": "14:45"
+                                },
+                                "-M_HZjvaSkEPKvaMXqV3": {
+                                    "calories": 500,
+                                    "date": "12/5/1",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Desayuno"
+                                    },
+                                    "id": "",
+                                    "score": 4,
+                                    "time": "14:45"
+                                },
+                                "-M_HZkuUMW_BB6v-GyTt": {
+                                    "calories": 500,
+                                    "date": "12/5/1",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Desayuno"
+                                    },
+                                    "id": "",
+                                    "score": 4,
+                                    "time": "14:45"
+                                },
+                                "-M_HZn2sXqGFiosp7A1U": {
+                                    "calories": 500,
+                                    "date": "12/5/1",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Desayuno"
+                                    },
+                                    "id": "",
+                                    "score": 4,
+                                    "time": "14:45"
+                                },
+                                "-M_HcfEk4Lye-SwWcmNg": {
+                                    "calories": 500,
+                                    "date": "12/5/1",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Desayuno"
+                                    },
+                                    "id": "",
+                                    "score": 4,
+                                    "time": "14:45"
+                                },
+                                "-M_HeVBzYnbCuugJ-Wvt": {
+                                    "calories": 500,
+                                    "date": "12/5/1",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Desayuno"
+                                    },
+                                    "id": "",
+                                    "score": 4,
+                                    "time": "14:45"
+                                },
+                                "-M_HfYff9RwwKc4aM85M": {
+                                    "calories": 500,
+                                    "date": "12/5/1",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Desayuno"
+                                    },
+                                    "id": "",
+                                    "score": 4,
+                                    "time": "14:45"
+                                },
+                                "-M_HfaCdPkyBylJ8QWzu": {
+                                    "calories": 500,
+                                    "date": "12/5/1",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Desayuno"
+                                    },
+                                    "id": "",
+                                    "score": 4,
+                                    "time": "14:45"
+                                },
+                                "-M_HgOSYjLVpjYL-rjpW": {
+                                    "calories": 500,
+                                    "date": "12/5/1",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Desayuno"
+                                    },
+                                    "id": "",
+                                    "score": 4,
+                                    "time": "14:45"
+                                },
+                                "-M_HhLK3pNxIPF8kSi2R": {
+                                    "calories": 500,
+                                    "date": "12/5/1",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Desayuno"
+                                    },
+                                    "id": "",
+                                    "score": 4,
+                                    "time": "14:45"
+                                },
+                                "-M_HrkrP_j1q98uoApco": {
+                                    "calories": 500,
+                                    "date": "12/5/1",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Desayuno"
+                                    },
+                                    "id": "",
+                                    "score": 4,
+                                    "time": "14:45"
+                                },
+                                "-M_HuQ4ipcuP_AIEybHR": {
+                                    "calories": 500,
+                                    "date": "12/5/1",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Desayuno"
+                                    },
+                                    "id": "",
+                                    "score": 4,
+                                    "time": "14:45"
+                                },
+                                "-M_HusZmbuZNcq5vA-5G": {
+                                    "calories": 500,
+                                    "date": "12/5/1",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Desayuno"
+                                    },
+                                    "id": "",
+                                    "score": 4,
+                                    "time": "14:45"
+                                },
+                                "-M_HuwQJ2SHUk2kOeQYF": {
+                                    "calories": 500,
+                                    "date": "12/5/1",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Desayuno"
+                                    },
+                                    "id": "",
+                                    "score": 4,
+                                    "time": "14:45"
+                                }
+                            },
+                            "10": {
+                                "-M_Nr9iKQxX63saR8V83": {
+                                    "calories": 30,
+                                    "date": "2021/5/10",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Cena"
+                                    },
+                                    "id": "",
+                                    "score": 1,
+                                    "time": "14:51"
+                                },
+                                "-M_NrCPa7ir_mvYfy5p-": {
+                                    "calories": 30,
+                                    "date": "2021/5/10",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Cena"
+                                    },
+                                    "id": "",
+                                    "score": 1,
+                                    "time": "14:52"
+                                },
+                                "-M_Nv1A9hoH1FcCaAlzz": {
+                                    "calories": 30,
+                                    "date": "2021/5/10",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Cena"
+                                    },
+                                    "id": "",
+                                    "score": 1,
+                                    "time": "14:21"
+                                },
+                                "-M_Nv1uZnWG4A7Om1mPR": {
+                                    "calories": 30,
+                                    "date": "2021/5/10",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Cena"
+                                    },
+                                    "id": "",
+                                    "score": 1,
+                                    "time": "14:55"
+                                },
+                                "-M_Nv3OygimZP6i41GFL": {
+                                    "calories": 30,
+                                    "date": "2021/5/10",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Cena"
+                                    },
+                                    "id": "",
+                                    "score": 1,
+                                    "time": "14:38"
+                                },
+                                "-M_Nv3jZss7Z208c6OgB": {
+                                    "calories": 30,
+                                    "date": "2021/5/10",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Cena"
+                                    },
+                                    "id": "",
+                                    "score": 1,
+                                    "time": "14:3"
+                                },
+                                "-M_Nv48PygHRSHHYnc_N": {
+                                    "calories": 30,
+                                    "date": "2021/5/10",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Cena"
+                                    },
+                                    "id": "",
+                                    "score": 1,
+                                    "time": "14:51"
+                                },
+                                "-M_Nv4_-HumttXqdBqlN": {
+                                    "calories": 30,
+                                    "date": "2021/5/10",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Cena"
+                                    },
+                                    "id": "",
+                                    "score": 1,
+                                    "time": "14:30"
+                                },
+                                "-M_Nv4x8JYeckLreahuY": {
+                                    "calories": 30,
+                                    "date": "2021/5/10",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Cena"
+                                    },
+                                    "id": "",
+                                    "score": 1,
+                                    "time": "14:28"
+                                },
+                                "-M_Nv5MiexwET4oGjMTg": {
+                                    "calories": 30,
+                                    "date": "2021/5/10",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Cena"
+                                    },
+                                    "id": "",
+                                    "score": 1,
+                                    "time": "14:33"
+                                },
+                                "-M_Nv5lVl_cqBwdDcQyO": {
+                                    "calories": 30,
+                                    "date": "2021/5/10",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Cena"
+                                    },
+                                    "id": "",
+                                    "score": 1,
+                                    "time": "14:28"
+                                },
+                                "-M_WFGg3h6Uf0h-k-v2g": {
+                                    "calories": 30,
+                                    "date": "2021/5/12",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Cena"
+                                    },
+                                    "id": "",
+                                    "score": 1,
+                                    "time": "14:54"
+                                },
+                                "-M_WFS2JYPlbELaDlX1H": {
+                                    "calories": 30,
+                                    "date": "2021/5/12",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Cena"
+                                    },
+                                    "id": "",
+                                    "score": 1,
+                                    "time": "14:34"
+                                },
+                                "-M_WFc_9S_Sl1dkESN6n": {
+                                    "calories": 30,
+                                    "date": "2021/5/12",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Cena"
+                                    },
+                                    "id": "",
+                                    "score": 1,
+                                    "time": "14:50"
+                                }
+                            },
+                            "12": {
+                                "-M_WHt3NKSM7SVzrHWUz": {
+                                    "calories": 30,
+                                    "date": "2021/5/12",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Cena"
+                                    },
+                                    "id": "",
+                                    "score": 1,
+                                    "time": "14:53"
+                                },
+                                "-M_XAjZ_znA2MsMNhLZx": {
+                                    "calories": 30,
+                                    "date": "2021/5/12",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Cena"
+                                    },
+                                    "id": "",
+                                    "score": 1,
+                                    "time": "14:18"
+                                },
+                                "-M_XAk7ToOWXbxRQSFtR": {
+                                    "calories": 30,
+                                    "date": "2021/5/12",
+                                    "food": {
+                                        "aliments": [
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            },
+                                            {
+                                                "calories": 10,
+                                                "cant": 1,
+                                                "isSelected": true,
+                                                "name": "sad",
+                                                "portion": "3"
+                                            }
+                                        ],
+                                        "typeOfFood": "Cena"
+                                    },
+                                    "id": "",
+                                    "score": 1,
+                                    "time": "14:48"
+                                }
                             }
                         }
                     }
