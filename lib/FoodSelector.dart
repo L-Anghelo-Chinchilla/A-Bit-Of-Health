@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:a_bit_of_health/providers/FoodProvider.dart';
 import 'package:a_bit_of_health/providers/UserProvider.dart';
 import 'package:a_bit_of_health/models/FoodModel.dart';
+import 'package:tuple/tuple.dart';
 
 class FoodSelector extends StatefulWidget {
   FoodSelector({Key key}) : super(key: key);
@@ -122,7 +123,8 @@ class _FoodSelectorState extends State<FoodSelector> {
                                   (element) => element.aliments.isEmpty);
                               if (list.isNotEmpty)
                                 Navigator.pushNamed(context, 'FoodCounter',
-                                    arguments: list);
+                                    arguments: Tuple2<String, List<FoodOffer>>(
+                                        foodSelected, list));
                               else {
                                 final snackBar = SnackBar(
                                   content: Text(
