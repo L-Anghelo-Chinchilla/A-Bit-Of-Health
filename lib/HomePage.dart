@@ -80,7 +80,7 @@ class HomePage extends StatelessWidget {
                     ),
                     Text(
                       'A Bit of Health es tu nuevo compañero, el cual te ayudará a centrarte en un estilo de vida y elecciones de dieta saludables. Es la mejor app para alguien que comienza con un control de comida y agua, quiere perder peso o quiere ser consciente.',
-                      style: TextStyle(fontSize: 16),
+                      style: TextStyle(fontSize: 19, fontFamily: 'Mont3'),
                     ),
                   ],
                 )
@@ -97,8 +97,8 @@ class HomePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                           Container(
-                                width: (MediaQuery.of(context).size.width)/35,
-                                height: (MediaQuery.of(context).size.width)/35,
+                                width: (MediaQuery.of(context).size.width)/45,
+                                height: (MediaQuery.of(context).size.width)/45,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(image: AssetImage('assets/fac.jpg'),
                                   ),
@@ -114,18 +114,19 @@ class HomePage extends StatelessWidget {
                 ),
                 Container(
                   color: Colors.yellow,
-                  height: (MediaQuery.of(context).size.height)/2,
-                  width: (MediaQuery.of(context).size.width)/2.5,//500 
+                  height: (MediaQuery.of(context).size.height)/1.8,
+                  width: (MediaQuery.of(context).size.width)/2.2,//500 
                   child: ListView(
                     children: [
                       SizedBox(
-                        height: (MediaQuery.of(context).size.height)/2,
-                        width: (MediaQuery.of(context).size.width)/2.5,
+                        height: (MediaQuery.of(context).size.height)/1.8,
+                        width: (MediaQuery.of(context).size.width)/2.2,
                         child: Carousel(
                           images: [
-                            Image.asset('assets/1.jpg', fit: BoxFit.cover,),
-                            Image.asset('assets/2.jpg', fit: BoxFit.cover,),
-                            Image.asset('assets/3.jpg', fit: BoxFit.cover,),
+                            Image.asset('assets/carrusel01.jpg', fit: BoxFit.cover,),
+                            Image.asset('assets/carrusel02.jpg', fit: BoxFit.cover,),
+                            Image.asset('assets/carrusel03.jpg', fit: BoxFit.cover,),
+                            Image.asset('assets/carrusel04.jpg', fit: BoxFit.cover,),
                           ],
                           boxFit: BoxFit.cover,
                           autoplay: true,
@@ -133,7 +134,7 @@ class HomePage extends StatelessWidget {
                           animationCurve: Curves.fastOutSlowIn,
                           animationDuration: Duration(milliseconds: 1000),
                           dotSize: 12.0,
-                          dotIncreasedColor: Colors.lime,
+                          dotIncreasedColor: Color(0xff173749),
                           dotBgColor: Colors.transparent,
                           dotPosition: DotPosition.bottomCenter,
                           dotVerticalPadding: 10.0,
@@ -149,37 +150,37 @@ class HomePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                             Container(
-                                      width: (MediaQuery.of(context).size.width)/20,
-                                      height: (MediaQuery.of(context).size.width)/35,
+                                      width: (MediaQuery.of(context).size.width)/18,
+                                      height: (MediaQuery.of(context).size.width)/40,
                                       /*decoration: BoxDecoration(
                                         image: DecorationImage(image: AssetImage('assets/1.jpg'),
                                         ),
                                       ),*/
                                       child: FlatButton(
-                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                                         color: Color(0xFF64BEC3),
                                         padding: EdgeInsets.all(0.0),
                                         //textTheme: ButtonTextTheme,
                                         onPressed: () {
                                           openURLfo();
                                         }, 
-                                        child: Text('Recetas', style: TextStyle(color: Colors.white)))
+                                        child: Text('Recetas', style: TextStyle(color: Colors.white, fontSize: 16)))
                               ),
                              Container(
-                                      width: (MediaQuery.of(context).size.width)/20,
-                                      height: (MediaQuery.of(context).size.width)/35,
+                                      width: (MediaQuery.of(context).size.width)/18,
+                                      height: (MediaQuery.of(context).size.width)/40,
                                       /*decoration: BoxDecoration(
                                         image: DecorationImage(image: AssetImage('assets/2.jpg'),
                                         ),
                                       ),*/
                                       child: FlatButton(
-                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                                         color: Color(0xFF64BEC3),
                                         padding: EdgeInsets.all(0.0),
                                         onPressed: () {
                                           openURLex();
                                         }, 
-                                     child: Text('Ejercicios', style: TextStyle(color: Colors.white)),)
+                                     child: Text('Ejercicios', style: TextStyle(color: Colors.white, fontSize: 16)),)
                                 ),
                             ],
                 ),
