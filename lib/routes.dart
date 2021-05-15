@@ -10,24 +10,19 @@ import 'FoodCounter.dart';
 import 'FoodSelector.dart';
 import 'GlassesOfWater.dart';
 
-
-//Mapa de Rutas de la aplicación 
+//Mapa de Rutas de la aplicación
 //parametros(nombre de ruta , contructor)
 
-
-Map<String, WidgetBuilder> getRoutes(){
-
- return <String , WidgetBuilder>{
-    '/':(context ) => HomePage(),
+Map<String, WidgetBuilder> getRoutes() {
+  return <String, WidgetBuilder>{
+    '/': (context) => HomePage(),
     'FoodSelector': (context) => FoodSelector(),
     'FoodCounter': (context) => FoodCounter(),
-    'GlassesOfWater' : (context) => GlassesOfWater(),
-    'History' : (context) => History(),
-    'Stats' : (context) => Stats(),
-    'Evaluation' : (context) => Evaluation(),
-    'Login' : (context) => Login(),
-    'Today' : (context) => Today()
- };
-
-
+    'GlassesOfWater': (context) => GlassesOfWater(),
+    'History': (context) => History(),
+    'Stats': (context) => Stats(),
+    'Evaluation': (context) => Evaluation(),
+    'Login': (context) => Login(),
+    'Today': (context) => Today()
+  };
 }

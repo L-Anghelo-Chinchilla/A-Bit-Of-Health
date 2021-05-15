@@ -6,35 +6,26 @@ import 'package:a_bit_of_health/FoodSelector.dart';
 import 'package:a_bit_of_health/utils.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage
-  ({Key key}) : super(key: key);
+  const HomePage({Key key}) : super(key: key);
 
-   @override
+  @override
   Widget build(BuildContext context) {
-
-    return 
-       Scaffold(
-        appBar: getAppBar(context), 
-    body: Container(
-      decoration: BoxDecoration(
+    return Scaffold(
+        appBar: getAppBar(context),
+        body: Container(
+          decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('fondo_inicio.jpg'),
-              fit: BoxFit.cover
-            ),
+                image: AssetImage('fondo_inicio.jpg'), fit: BoxFit.cover),
           ),
-      child: Column(    
-        mainAxisAlignment:  MainAxisAlignment.center,
-        children: [
-
-          getDirectionsBar(context, '/'), 
-          Expanded(child: Container(),)
-
-
-        ],
-
-
-
-      ),
-    ));
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              getDirectionsBar(context, '/'),
+              Expanded(
+                child: Container(),
+              )
+            ],
+          ),
+        ));
   }
 }

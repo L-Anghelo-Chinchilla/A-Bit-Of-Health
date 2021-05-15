@@ -20,7 +20,8 @@ class FoodProvider {
 
   Future<void> uploadUserRegiter(userID, date, register) {
     final url = '$_url/database/calendar/$userID/$date/.json';
-
+    print('El URl es: ${url}');
+    print('El registro es: ${register}');
     final response =
         http.post(url, body: register.foodRegisterToJson(register));
   }

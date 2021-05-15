@@ -9,6 +9,8 @@ import 'package:a_bit_of_health/providers/UserProvider.dart';
 import 'package:a_bit_of_health/models/FoodModel.dart';
 import 'package:tuple/tuple.dart';
 
+import 'models/UserModel.dart';
+
 class FoodSelector extends StatefulWidget {
   FoodSelector({Key key}) : super(key: key);
 
@@ -34,6 +36,10 @@ class _FoodSelectorState extends State<FoodSelector> {
     UserProvider user = UserProvider();
     user.checkUserGlasses('-wqweqwewqeqwewq');
     user.updateTodayGlasses('-wqweqwewqeqwewq');
+    UserProvider().getUserData('-wqweqwewqeqwewq').then((user) {
+      print(user.toJson().toString());
+      Provider.of<UserModel>(context, listen: false).setUser(user);
+    });
 
     return Scaffold(
         appBar: getAppBar(context),

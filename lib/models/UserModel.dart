@@ -84,15 +84,15 @@ class UserModel {
   }
 
   void setLastLunch(String lL) {
-    this.lastBreakfast = lL;
+    this.lastLunch = lL;
   }
 
   void setLastDinner(String lD) {
-    this.lastBreakfast = lD;
+    this.lastDinner = lD;
   }
 
   void setLastSnack(String lS) {
-    this.lastBreakfast = lS;
+    this.lastSnack = lS;
   }
 
   String getLastBreakfast() {
@@ -109,5 +109,23 @@ class UserModel {
 
   String getLastSnack() {
     return this.lastSnack;
+  }
+
+  void setUser(UserModel usr) {
+    userID = usr.userID;
+    weight = usr.weight;
+    height = usr.height;
+    email = usr.email;
+    gender = usr.gender;
+    waterLimit = usr.waterLimit;
+    newWaterLimit = usr.newWaterLimit;
+    glasses = usr.glasses;
+    waterLimitDate = usr.waterLimitDate;
+    name = usr.name;
+    lastConnection = usr.lastConnection;
+    lastBreakfast = usr.lastBreakfast;
+    lastLunch = usr.lastLunch;
+    lastDinner = usr.lastDinner;
+    lastSnack = usr.lastSnack;
   }
 }

@@ -58,7 +58,7 @@ class FoodOffer with ChangeNotifier {
   FoodOffer foodOfferFromJson(String str) =>
       FoodOffer.fromJson(json.decode(str));
 
-  String foodOfferToJson(FoodOfferModel data) => json.encode(data.toJson());
+  String foodOfferToJson(FoodOffer data) => json.encode(data.toJson());
 
   factory FoodOffer.fromJson(Map<String, dynamic> json) {
     Iterable l = json['aliments'];
@@ -68,7 +68,7 @@ class FoodOffer with ChangeNotifier {
   }
 
   Map<String, dynamic> toJson() =>
-      {"typeOfFood": typeOfFood, "Aliments": jsonEncode(aliments)};
+      {"typeOfFood": typeOfFood, "Aliments": aliments}; //THE CORRECTION
 
   @override
   String toString() => '{ ${this.typeOfFood} , ${jsonEncode(this.aliments)} }';
@@ -105,9 +105,9 @@ class Food extends ChangeNotifier {
 
   Food({this.calories, this.cant, this.isSelected, this.name, this.portion});
 
-  FoodOffer foodFromJson(String str) => FoodOffer.fromJson(json.decode(str));
+  Food foodFromJson(String str) => Food.fromJson(json.decode(str));
 
-  String foodToJson(FoodOfferModel data) => json.encode(data.toJson());
+  String foodToJson(Food data) => json.encode(data.toJson());
 
   factory Food.fromJson(Map<String, dynamic> json) => Food(
       name: json['name'],
@@ -174,6 +174,6 @@ class FoodRegister {
         "time": time,
         "id": id,
         "date": date,
-        "food": food,
+        "food": food.toJson(),
       };
 }

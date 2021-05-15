@@ -8,7 +8,7 @@ import 'package:tuple/tuple.dart';
 import 'package:a_bit_of_health/models/FoodModel.dart';
 import 'package:intl/intl.dart';
 
-int score = 0;
+int score = 1;
 
 class Evaluation extends StatelessWidget {
   Evaluation({Key key}) : super(key: key);
@@ -24,22 +24,27 @@ class Evaluation extends StatelessWidget {
 
     int healthyQuantity;
 
-    String lastRegister = UserProvider()
-        .getLastFood(
-            Provider.of<UserModel>(context, listen: false).userID, kindoffood)
-        .toString();
+    String lastRegister = "0";
 
     switch (kindoffood) {
       case "Desayuno":
+        lastRegister =
+            Provider.of<UserModel>(context, listen: false).getLastBreakfast();
         healthyQuantity = 625;
         break;
       case "Almuerzo":
+        lastRegister =
+            Provider.of<UserModel>(context, listen: false).getLastLunch();
         healthyQuantity = 875;
         break;
       case "Cena":
+        lastRegister =
+            Provider.of<UserModel>(context, listen: false).getLastDinner();
         healthyQuantity = 750;
         break;
       case "Snack":
+        lastRegister =
+            Provider.of<UserModel>(context, listen: false).getLastSnack();
         healthyQuantity = 250;
         break;
     }
@@ -335,6 +340,21 @@ class Evaluation extends StatelessWidget {
                           //THE USER REGISTER
                           UploadRegister(_provider, context, score,
                               thelist.item1, thelist.item2);
+                          Provider.of<List<FoodOffer>>(context, listen: false)
+                              .clear();
+                          Navigator.popUntil(
+                              context, ModalRoute.withName('FoodSelector'));
+                          Navigator.pushReplacementNamed(context, 'Today');
+                          final snackBar = SnackBar(
+                            content: Text('Tu registro se ha guardado'),
+                            action: SnackBarAction(
+                              label: 'OK',
+                              onPressed: () {
+                                // Some code to undo the change.
+                              },
+                            ),
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
                           print('La puntuación del usuario es ${score}');
                         }),
                   ],
@@ -383,19 +403,29 @@ void UpdateFood(
 void UploadRegister(FoodProvider _provider, BuildContext context, int score,
     double thecalories, FoodOffer thefood) {
   final DateTime now = DateTime.now();
-  final DateFormat formatter = DateFormat('yyyy-MM-dd');
+  final DateFormat formatter = DateFormat('yyyy/MM/dd');
   final String formatted = formatter.format(now);
+
+  DateTime date = DateTime.now();
+  String times = "${date.hour}:${date.minute}:${date.second}";
 
   _provider.uploadUserRegiter(
       Provider.of<UserModel>(context, listen: false).userID,
-      DateTime.now().toString(),
+      formatted,
       FoodRegister(
           score: score,
           calories: thecalories,
-          time: TimeOfDay.now().toString(),
+          time: times,
           date: formatted,
           food: thefood));
-  Navigator.pop(context);
+
+  final food = FoodRegister(
+      score: score,
+      calories: thecalories,
+      time: times,
+      date: formatted,
+      food: thefood);
+  print(food.foodRegisterToJson(food));
 }
 
 class CounterView extends StatefulWidget {
