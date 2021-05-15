@@ -12,7 +12,6 @@ void main() {
 
   //  provider.setUserWaterLimit('-asdasdaadasdasada', 10);
   // provider.setUserWaterLimit('-wqweqwewqeqwewq',11);
-
   runApp(MyApp());
 }
 
@@ -21,12 +20,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Provider.debugCheckInvalidValueType = null;
+    int score = 0;
     return MultiProvider(
         providers: [
           Provider(create: (_) => UserModel()),
           Provider(create: (_) => FoodOfferModel(foodOffers: [])),
           Provider(create: (_) => <FoodOffer>[]),
-          ChangeNotifierProvider(create: (_) => Food())
+          ChangeNotifierProvider(create: (_) => Food()),
+          Provider<int>.value(
+            value: score,
+          )
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,

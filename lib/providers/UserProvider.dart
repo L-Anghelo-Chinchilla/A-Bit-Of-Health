@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:a_bit_of_health/models/UserModel.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class UserProvider {
@@ -14,7 +15,7 @@ class UserProvider {
     final answer = await http.get(url);
     Map<String, dynamic> data = json.decode(answer.body);
     UserModel userData = (UserModel.fromJson(data));
-      print(userData.toJson());
+    print(userData.toJson());
     userData.setID(userID);
     return userData;
   }
@@ -25,7 +26,8 @@ class UserProvider {
     final url = '$_url$userID/.json';
     var user = await getUserData(userID);
     user.newWaterLimit = newLimit;
-    user.waterLimitDate = DateTime.now().add(Duration(days:1)).toString().split(" ").first;
+    user.waterLimitDate =
+        DateTime.now().add(Duration(days: 1)).toString().split(" ").first;
     http.put(url, body: user.toJson().toString());
     return true;
   }
@@ -58,8 +60,56 @@ class UserProvider {
       user.lastConnection = DateTime.now().toString().split(" ").first;
       final url = '$_url$userID.json';
       http.put(url, body: user.toJson().toString());
-
-      
     }
+  }
+
+  Future<void> updateTodayCalories(
+      String userID, String typeOdFood, String calories) async {
+    UserModel user = await getUserData(userID);
+
+    switch (typeOdFood) {
+      case "Desayuno":
+        user.setLastBreakfast(calories);
+        break;
+      case "Almuerzo":
+        user.setLastLunch(calories);
+        break;
+      case "Cena":
+        user.setLastDinner(calories);
+        break;
+      case "Snack":
+        user.setLastSnack(calories);
+        break;
+
+      default:
+        break;
+    }
+    final url = '$_url/$userID.json';
+    await http.put(url, body: user.toJson().toString());
+  }
+
+  Future<String> getLastFood(String userID, String typeofFood) async {
+    UserModel user = await getUserData(userID);
+    String res;
+    switch (typeofFood) {
+      case "Desayuno":
+        res = user.getLastBreakfast();
+        break;
+      case "Almuerzo":
+        res = user.getLastLunch();
+        break;
+      case "Cena":
+        res = user.getLastDinner();
+        break;
+      case "Snack":
+        res = user.getLastSnack();
+        break;
+
+      default:
+        break;
+    }
+    final url = '$_url/$userID.json';
+    await http.put(url, body: user.toJson().toString());
+    return res;
   }
 }

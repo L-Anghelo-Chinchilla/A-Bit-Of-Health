@@ -120,10 +120,12 @@ class NextPage extends StatelessWidget {
                         prev.addAll(actual.aliments);
                         return prev;
                       });
+
+                      final offer =
+                          FoodOffer(typeOfFood: KindOfFood, aliments: newList);
                       print('La nueva lista es ${newList.toString()}');
                       Navigator.pushNamed(context, 'Evaluation',
-                          arguments: Tuple3<String, double, List<Food>>(
-                              KindOfFood, sum, newList));
+                          arguments: Tuple2<double, FoodOffer>(sum, offer));
                     },
                     child: Text('Autoevaluar'))
               ],
