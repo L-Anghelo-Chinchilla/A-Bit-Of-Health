@@ -124,8 +124,11 @@ class NextPage extends StatelessWidget {
                       final offer =
                           FoodOffer(typeOfFood: KindOfFood, aliments: newList);
                       print('La nueva lista es ${newList.toString()}');
+                      Provider.of<List<FoodOffer>>(context, listen: false)
+                          .clear();
                       Navigator.pushNamed(context, 'Evaluation',
                           arguments: Tuple2<double, FoodOffer>(sum, offer));
+                      print('FoodCounter envía: ${offer}');
                     },
                     child: Text('Autoevaluar'))
               ],

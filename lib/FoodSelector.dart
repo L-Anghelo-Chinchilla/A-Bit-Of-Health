@@ -127,11 +127,18 @@ class _FoodSelectorState extends State<FoodSelector> {
                                   .getSelectedOnes();
                               list.removeWhere(
                                   (element) => element.aliments.isEmpty);
-                              if (list.isNotEmpty)
+                              if (list.isNotEmpty) {
                                 Navigator.pushNamed(context, 'FoodCounter',
                                     arguments: Tuple2<String, List<FoodOffer>>(
                                         foodSelected, list));
-                              else {
+                                Provider.of<FoodOfferModel>(context,
+                                        listen: false)
+                                    .foodOffers
+                                    .forEach((element) {
+                                  element.deselectAll();
+                                  print('FoodSelector envía: ${list}');
+                                });
+                              } else {
                                 final snackBar = SnackBar(
                                   content: Text(
                                       'Has seleccionado nada! El aire no cuenta como comida... '),

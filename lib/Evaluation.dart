@@ -231,7 +231,7 @@ class Evaluation extends StatelessWidget {
                             child: Column(
                               children: [
                                 Text(
-                                  '\n Tu última comida ${kindoffood} contuvo: ${lastRegister} cal',
+                                  '\n Tu última comida de ${kindoffood} contuvo: ${lastRegister} cal',
                                   style: TextStyle(
                                     fontFamily: 'Mont',
                                     fontSize: 20,
@@ -278,13 +278,22 @@ class Evaluation extends StatelessWidget {
                             alignment: Alignment.topCenter,
                             child: Column(
                               children: [
-                                Text(
-                                  '\n Un tipo de ${kindoffood} para ser balanceado, deberia contener aproximadamente ${healthyQuantity} cal \n Entonces....',
-                                  style: TextStyle(
-                                    fontFamily: 'Mont',
-                                    fontSize: 20,
+                                if (kindoffood == 'Cena')
+                                  Text(
+                                    '\n Un tipo de ${kindoffood} para ser balanceada, debería contener aproximadamente ${healthyQuantity} cal \n Entonces....',
+                                    style: TextStyle(
+                                      fontFamily: 'Mont',
+                                      fontSize: 20,
+                                    ),
+                                  )
+                                else
+                                  Text(
+                                    '\n Un tipo de ${kindoffood} para ser balanceada, debería contener aproximadamente ${healthyQuantity} cal \n Entonces....',
+                                    style: TextStyle(
+                                      fontFamily: 'Mont',
+                                      fontSize: 20,
+                                    ),
                                   ),
-                                ),
                                 Text(
                                   '¿Como puntuarias tu comida?',
                                   style: TextStyle(
@@ -326,6 +335,8 @@ class Evaluation extends StatelessWidget {
                         ),
                         //backgroundColor: Colors.limeAccent[700],
                         onPressed: () {
+                          Provider.of<List<FoodOffer>>(context, listen: false)
+                              .clear();
                           Navigator.pop(context);
                         }),
                     ElevatedButton(
@@ -342,9 +353,17 @@ class Evaluation extends StatelessWidget {
                               thelist.item1, thelist.item2);
                           Provider.of<List<FoodOffer>>(context, listen: false)
                               .clear();
+
+                          print('Lo siguiente debería estar vacío -> ' +
+                              Provider.of<List<FoodOffer>>(context,
+                                      listen: false)
+                                  .toString());
+                          flist = [];
+                          kindoffood = "";
                           Navigator.popUntil(
                               context, ModalRoute.withName('FoodSelector'));
                           Navigator.pushReplacementNamed(context, 'Today');
+                          print('Evaluation envía: ${score}');
                           final snackBar = SnackBar(
                             content: Text('Tu registro se ha guardado'),
                             action: SnackBarAction(
