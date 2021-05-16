@@ -476,8 +476,8 @@ void UploadRegister(FoodProvider _provider, BuildContext context, int score,
   final DateFormat formatter = DateFormat('yyyy/MM/dd');
   final String formatted = formatter.format(now);
 
-  DateTime date = DateTime.now();
-  String times = "${date.hour}:${date.minute}:${date.second}";
+  final DateFormat thetime = DateFormat('hh:mm:ss');
+  final String times = thetime.format(now);
 
   _provider.uploadUserRegiter(
       Provider.of<UserModel>(context, listen: false).userID,
