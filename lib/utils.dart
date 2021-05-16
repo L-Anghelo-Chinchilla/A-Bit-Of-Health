@@ -43,7 +43,7 @@ Widget getAppBar(BuildContext context ){
             leading: Container(height: 1 ,width: 1,),
             title: Padding(
             padding: const EdgeInsets.all(1.0),
-            child: Image.asset('assets/Head.png', height: 90.0),
+            child: Image.asset('assets/LL.png', height: 55.0),
           ),
           backgroundColor: Color(0xff173749),
           brightness: Brightness.dark,

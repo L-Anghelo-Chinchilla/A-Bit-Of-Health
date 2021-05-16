@@ -18,6 +18,8 @@ class HomePage extends StatelessWidget {
   List<String> phraseList = ['"NO NECESITAS COMER MENOS, NECESITAS COMER BIEN"','"COMER ES UNA NECESIDAD, PERO COMER DE FORMA INTELIGENTE ES UN ARTE”','“QUE TU MEDICINA SEA TU ALIMENTO, Y EL ALIMENTO TU MEDICINA”','“CUIDA TU CUERPO. ES EL ÚNICO LUGAR QUE TIENES PARA VIVIR”','"LA COMIDA QUE INGIERES PUEDE SER LA MÁS SEGURA Y PODEROSA FORMA DE MEDICINA O LA FORMA MÁS LENTA DE VENENO"','"UN EXTERIOR SALUDABLE, INICIA DESDE EL INTERIOR"','"NO HAY TRUCOS, ATAJOS, PASTILLAS MÁGICAS, POCIONES ESPECIALES O EQUIPO ESPECIAL. LO ÚNICO QUE NECESITAS ES DESEO Y VOLUNTAD"','"CADA VEZ QUE COMES, ES UNA OPORTUNIDAD DE NUTRIR A TU CUERPO"','“LA NUTRICIÓN ÓPTIMA ES LA MEDICINA DEL MAÑANA”','“UNA MANZANA AL DÍA MANTIENE AL DOCTOR ALEJADO”','“LA FORMA MÁS ECONÓMICA DE CONSEGUIR UNA BUENA SALUD ES CUIDANDO LA NUTRICIÓN”','“UNA ALIMENTACIÓN SALUDABLE ES UNA SALUD DURADERA”'];
   Random random = new Random();
 
+
+
   openURLfb() async {
         if (await canLaunch ("https://www.facebook.com/A-Bit-of-Health-101743945433320")){
             await launch("https://www.facebook.com/A-Bit-of-Health-101743945433320");
@@ -100,7 +102,7 @@ class HomePage extends StatelessWidget {
                                 width: (MediaQuery.of(context).size.width)/45,
                                 height: (MediaQuery.of(context).size.width)/45,
                                 decoration: BoxDecoration(
-                                  image: DecorationImage(image: AssetImage('assets/fac.jpg'),
+                                  image: DecorationImage(image: AssetImage('assets/face.png'),
                                   ),
                                 ),
                                 child: FlatButton(
