@@ -84,7 +84,7 @@ class Evaluation extends StatelessWidget {
                         margin: EdgeInsets.all(10),
                         padding: EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                            color: Color(0xFFF4D03F).withOpacity(0.9),
+                            color: Color(0xFFF4D03F).withOpacity(0.8),
                             border: Border.all(color: Colors.black)),
                         alignment: Alignment.topCenter,
                         child: Column(
@@ -96,7 +96,7 @@ class Evaluation extends StatelessWidget {
                                   'Tu comida: ${kindoffood}',
                                   style: TextStyle(
                                     fontFamily: 'Mont',
-                                    fontSize: 20,
+                                    fontSize: 24,
                                   ),
                                 )),
                             SizedBox(height: 10),
@@ -109,8 +109,9 @@ class Evaluation extends StatelessWidget {
                                       child: Text(
                                         'ALIMENTO',
                                         style: TextStyle(
-                                          fontFamily: 'Mont',
-                                          fontSize: 20,
+                                          color: Colors.black,
+                                          fontFamily: 'Mont2',
+                                          fontSize: 19,
                                         ),
                                       )),
                                   Align(
@@ -118,10 +119,10 @@ class Evaluation extends StatelessWidget {
                                       child: Text(
                                         'PORCIONES ',
                                         style: TextStyle(
-                                            fontFamily: 'Mont',
-                                            fontSize: 20,
+                                            fontFamily: 'Mont2',
+                                            fontSize: 19,
                                             color:
-                                                Colors.black.withOpacity(0.8)),
+                                                Colors.black),
                                         textAlign: TextAlign.center,
                                       )),
                                   Align(
@@ -129,10 +130,10 @@ class Evaluation extends StatelessWidget {
                                       child: Text(
                                         'CALORIAS',
                                         style: TextStyle(
-                                            fontFamily: 'Mont',
-                                            fontSize: 20,
+                                            fontFamily: 'Mont2',
+                                            fontSize: 19,
                                             color:
-                                                Colors.black.withOpacity(0.8)),
+                                                Colors.black),
                                         textAlign: TextAlign.center,
                                       ))
                                 ]),
@@ -153,9 +154,7 @@ class Evaluation extends StatelessWidget {
                                                 horizontal: 1, vertical: 10),
                                             child: Column(children: [
                                               Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceEvenly,
+                                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                                   children: [
                                                     Container(
                                                         width: 200,
@@ -165,12 +164,11 @@ class Evaluation extends StatelessWidget {
                                                           '${flist[i].name}',
                                                           style: TextStyle(
                                                               fontFamily:
-                                                                  'Mont',
-                                                              fontSize: 14,
+                                                                  'Mont3',
+                                                              fontSize: 15,
                                                               color: Colors
                                                                   .black
-                                                                  .withOpacity(
-                                                                      0.8)),
+                                                                  ),
                                                           textAlign:
                                                               TextAlign.center,
                                                         )),
@@ -182,12 +180,10 @@ class Evaluation extends StatelessWidget {
                                                           '${flist[i].cant}',
                                                           style: TextStyle(
                                                               fontFamily:
-                                                                  'Mont',
-                                                              fontSize: 14,
+                                                                  'Mont3',
+                                                              fontSize: 15,
                                                               color: Colors
-                                                                  .black
-                                                                  .withOpacity(
-                                                                      0.8)),
+                                                                  .black),
                                                           textAlign:
                                                               TextAlign.center,
                                                         )),
@@ -199,12 +195,10 @@ class Evaluation extends StatelessWidget {
                                                           '${flist[i].calories}',
                                                           style: TextStyle(
                                                               fontFamily:
-                                                                  'Mont',
-                                                              fontSize: 14,
+                                                                  'Mont3',
+                                                              fontSize: 15,
                                                               color: Colors
-                                                                  .black
-                                                                  .withOpacity(
-                                                                      0.8)),
+                                                                  .black),
                                                           textAlign:
                                                               TextAlign.center,
                                                         )),
@@ -225,16 +219,16 @@ class Evaluation extends StatelessWidget {
                             margin: EdgeInsets.all(10),
                             padding: EdgeInsets.all(10),
                             decoration: BoxDecoration(
-                                color: Color(0xFFF4D03F).withOpacity(0.9),
+                                color: Color(0xFFDC7633).withOpacity(0.8),        //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
                                 border: Border.all(color: Colors.black)),
                             alignment: Alignment.topCenter,
                             child: Column(
                               children: [
                                 Text(
-                                  '\n Tu última comida de ${kindoffood} contuvo: ${lastRegister} cal',
+                                  '\nTu última comida de ${kindoffood} contuvo: ${lastRegister} calorias.',
                                   style: TextStyle(
-                                    fontFamily: 'Mont',
-                                    fontSize: 20,
+                                    fontFamily: 'Mont2',
+                                    fontSize: 18,
                                   ),
                                 ),
                                 Expanded(
@@ -245,10 +239,10 @@ class Evaluation extends StatelessWidget {
                                           children: [
                                             Container(
                                                 child: Text(
-                                              '\n Tu comida \nActual Contiene:',
+                                              '\nTu comida \nActual Contiene:',
                                               style: TextStyle(
                                                 fontFamily: 'Mont',
-                                                fontSize: 20,
+                                                fontSize: 21,
                                               ),
                                             )),
                                             SizedBox(
@@ -259,7 +253,7 @@ class Evaluation extends StatelessWidget {
                                               '\n\n ${thetotal} Calorias',
                                               style: TextStyle(
                                                 fontFamily: 'Mont',
-                                                fontSize: 20,
+                                                fontSize: 26,
                                               ),
                                             )),
                                           ],
@@ -273,32 +267,35 @@ class Evaluation extends StatelessWidget {
                             margin: EdgeInsets.all(10),
                             padding: EdgeInsets.all(10),
                             decoration: BoxDecoration(
-                                color: Color(0xFFF4D03F).withOpacity(0.9),
+                                color: Color(0xFFF5B041).withOpacity(0.9),
                                 border: Border.all(color: Colors.black)),
                             alignment: Alignment.topCenter,
                             child: Column(
                               children: [
                                 if (kindoffood == 'Cena')
                                   Text(
-                                    '\n Un tipo de ${kindoffood} para ser balanceada, debería contener aproximadamente ${healthyQuantity} cal \n Entonces....',
+                                    '\nUn tipo de ${kindoffood} para ser balanceada, debería contener aproximadamente ${healthyQuantity} cal. Entonces....',
                                     style: TextStyle(
-                                      fontFamily: 'Mont',
-                                      fontSize: 20,
+                                      color: Colors.black,
+                                      fontFamily: 'Mont2',
+                                      fontSize: 18,
                                     ),
                                   )
                                 else
                                   Text(
-                                    '\n Un tipo de ${kindoffood} para ser balanceada, debería contener aproximadamente ${healthyQuantity} cal \n Entonces....',
+                                    '\nUn tipo de ${kindoffood} para ser balanceada, debería contener aproximadamente ${healthyQuantity} cal. Entonces....',
                                     style: TextStyle(
-                                      fontFamily: 'Mont',
-                                      fontSize: 20,
+                                      color: Colors.black,
+                                      fontFamily: 'Mont2',
+                                      fontSize: 18,
                                     ),
                                   ),
                                 Text(
-                                  '¿Como puntuarias tu comida?',
+                                  '\n¿Cómo puntuarias tu comida?',
                                   style: TextStyle(
+                                    color: Colors.black,
                                     fontFamily: 'Mont',
-                                    fontSize: 20,
+                                    fontSize: 22,
                                   ),
                                   textAlign: TextAlign.center,
                                 ),
