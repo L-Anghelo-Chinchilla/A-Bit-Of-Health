@@ -56,7 +56,7 @@ class Evaluation extends StatelessWidget {
         body: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('fondo_inicio.jpg'), fit: BoxFit.cover),
+                image: AssetImage('fondo_evaluation.jpg'), fit: BoxFit.cover),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -67,7 +67,7 @@ class Evaluation extends StatelessWidget {
                 '\n Puntuar Comidas',
                 style: TextStyle(
                   fontFamily: 'Mont',
-                  fontSize: 50,
+                  fontSize: 32,
                 ),
               ),
 
@@ -80,7 +80,7 @@ class Evaluation extends StatelessWidget {
                       Container(
                         //THE CONTAINER IN YELLOW
                         width: 800,
-                        height: 570,
+                        height: 420,
                         margin: EdgeInsets.all(10),
                         padding: EdgeInsets.all(10),
                         decoration: BoxDecoration(
@@ -138,7 +138,7 @@ class Evaluation extends StatelessWidget {
                                 ]),
                             Container(
                                 width: 800,
-                                height: 460,
+                                height: 310,
                                 margin: EdgeInsets.all(10),
                                 padding: EdgeInsets.all(10),
                                 child: Scrollbar(
