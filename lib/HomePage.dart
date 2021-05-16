@@ -129,6 +129,8 @@ class HomePage extends StatelessWidget {
                             Image.asset('assets/carrusel02.jpg', fit: BoxFit.cover,),
                             Image.asset('assets/carrusel03.jpg', fit: BoxFit.cover,),
                             Image.asset('assets/carrusel04.jpg', fit: BoxFit.cover,),
+                            Image.asset('assets/carrusel05.jpg', fit: BoxFit.cover,),
+                            Image.asset('assets/carrusel06.jpg', fit: BoxFit.cover,),
                           ],
                           boxFit: BoxFit.cover,
                           autoplay: true,
