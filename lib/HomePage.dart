@@ -154,8 +154,8 @@ class HomePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                             Container(
-                                      width: (MediaQuery.of(context).size.width)/18,
-                                      height: (MediaQuery.of(context).size.width)/40,
+                                      //width: (MediaQuery.of(context).size.width)/18,
+                                      //height: (MediaQuery.of(context).size.width)/40,
                                       /*decoration: BoxDecoration(
                                         image: DecorationImage(image: AssetImage('assets/1.jpg'),
                                         ),
@@ -171,8 +171,8 @@ class HomePage extends StatelessWidget {
                                         child: Text('Recetas', style: TextStyle(color: Colors.white, fontSize: 16)))
                               ),
                              Container(
-                                      width: (MediaQuery.of(context).size.width)/18,
-                                      height: (MediaQuery.of(context).size.width)/40,
+                                      //width: (MediaQuery.of(context).size.width)/18,
+                                      //height: (MediaQuery.of(context).size.width)/40,
                                       /*decoration: BoxDecoration(
                                         image: DecorationImage(image: AssetImage('assets/2.jpg'),
                                         ),
