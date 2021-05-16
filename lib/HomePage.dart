@@ -3,18 +3,54 @@ import 'dart:js';
 import 'package:a_bit_of_health/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:math';
 import 'package:a_bit_of_health/Login.dart';
 import 'package:a_bit_of_health/models/UserModel.dart';
 import 'package:a_bit_of_health/providers/authentification.dart';
 
-class HomePage extends StatelessWidget {
-   HomePage
+      
+class HomePage extends StatefulWidget{
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  Widget build(BuildContext context) {
+     if (Provider.of<UserModel>(context, listen: false).userID == null)
+      return FutureBuilder<bool>(
+          future: AuthProvider.getUser(context),
+          builder: (context, AsyncSnapshot<bool> future) {
+            if (future.hasData) {
+              if (future.data)
+                return Home();
+              else
+                return Home();
+            } else {
+              return Center(
+                  child: SizedBox(
+                child: CircularProgressIndicator(),
+                height: 250,
+                width: 250,
+              ));
+            }
+          });
+    else
+      return Home(); 
+  }
+}
+
+
+
+
+class Home extends StatelessWidget {
+   Home
   ({Key key}) : super(key: key);
 
 
-
+   
   final List<String> phraseList = ['"NO NECESITAS COMER MENOS, NECESITAS COMER BIEN"','"COMER ES UNA NECESIDAD, PERO COMER DE FORMA INTELIGENTE ES UN ARTE”','“QUE TU MEDICINA SEA TU ALIMENTO, Y EL ALIMENTO TU MEDICINA”','“CUIDA TU CUERPO. ES EL ÚNICO LUGAR QUE TIENES PARA VIVIR”','"LA COMIDA QUE INGIERES PUEDE SER LA MÁS SEGURA Y PODEROSA FORMA DE MEDICINA O LA FORMA MÁS LENTA DE VENENO"','"UN EXTERIOR SALUDABLE, INICIA DESDE EL INTERIOR"','"NO HAY TRUCOS, ATAJOS, PASTILLAS MÁGICAS, POCIONES ESPECIALES O EQUIPO ESPECIAL. LO ÚNICO QUE NECESITAS ES DESEO Y VOLUNTAD"','"CADA VEZ QUE COMES, ES UNA OPORTUNIDAD DE NUTRIR A TU CUERPO"','“LA NUTRICIÓN ÓPTIMA ES LA MEDICINA DEL MAÑANA”','“UNA MANZANA AL DÍA MANTIENE AL DOCTOR ALEJADO”','“LA FORMA MÁS ECONÓMICA DE CONSEGUIR UNA BUENA SALUD ES CUIDANDO LA NUTRICIÓN”','“UNA ALIMENTACIÓN SALUDABLE ES UNA SALUD DURADERA”'];
   Random random = new Random();
 
@@ -43,10 +79,11 @@ class HomePage extends StatelessWidget {
             throw 'No se encuentra pagina';
         }
   }
-
+    @override
+    Widget build(BuildContext context){
     return 
        Scaffold(
-        appBar: getAppBar(context), 
+        appBar: getAppBar(context:context), 
     body: Container(
       decoration: BoxDecoration(
             image: DecorationImage(
@@ -193,62 +230,11 @@ class HomePage extends StatelessWidget {
           ),
         ]  
       )
-          ),),
-
-          
-
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  @override
-  Widget build(BuildContext context) {
-     if (Provider.of<UserModel>(context, listen: false).userID == null)
-      return FutureBuilder<bool>(
-          future: AuthProvider.getUser(context),
-          builder: (context, AsyncSnapshot<bool> future) {
-            if (future.hasData) {
-              if (future.data)
-                return Home();
-              else
-                return Login();
-            } else {
-              return Center(
-                  child: SizedBox(
-                child: CircularProgressIndicator(),
-                height: 250,
-                width: 250,
-              ));
-            }
-          });
-    else
-      return Home(); 
-  }
-}
-
-
-class Home extends StatelessWidget {
-  const Home({Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: getAppBar(context:context),
-        body: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage('fondo_inicio.jpg'), fit: BoxFit.cover),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              getDirectionsBar(context, '/'),
-              Expanded(
-                child: Container(),
-              )
-            ],
-          ),
-        ));
-  }
-}
+    ),
+  ),
+        ])));
+ }
+ 
+ }
+ 
+    

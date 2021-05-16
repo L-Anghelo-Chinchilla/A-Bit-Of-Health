@@ -366,9 +366,9 @@ class Evaluation extends StatelessWidget {
                                       //backgroundColor: Colors.limeAccent[700],
                                       onPressed: () {
                                         Navigator.pop(context);
-                                        Provider.of<List<FoodOffer>>(context,
+                                      /*  Provider.of<List<FoodOffer>>(context,
                                                 listen: false)
-                                            .clear();
+                                            .clear();*/
                                       }),
                                   SizedBox(
                                     child: Container(),

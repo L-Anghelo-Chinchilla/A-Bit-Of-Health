@@ -74,21 +74,19 @@ class NextPage extends StatelessWidget {
             Expanded(
               child: Container(
                 //alignment: Alignment.center,
-                child: Scrollbar(
-                  child: ListView.builder(
-                    // LISTVIEW OF IMAGES ------------------------------------
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemCount: list.length,
-                    itemBuilder: (context, i) {
-                      return Column(children: [
-                        ImagestoDisplay(
-                            imageName: list[i].typeOfFood.toLowerCase()),
-                        TitleDisplay(titleName: list[i].typeOfFood),
-                        ColumnsDisplay(foods: list[i].aliments, index: i)
-                      ]);
-                    },
-                  ),
+                child: ListView.builder(
+                  // LISTVIEW OF IMAGES ------------------------------------
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: list.length,
+                  itemBuilder: (context, i) {
+                    return Column(children: [
+                      ImagestoDisplay(
+                          imageName: list[i].typeOfFood.toLowerCase()),
+                      TitleDisplay(titleName: list[i].typeOfFood),
+                      ColumnsDisplay(foods: list[i].aliments, index: i)
+                    ]);
+                  },
                 ), //-------------------------------------------------------------------
               ),
             ),
@@ -304,7 +302,7 @@ class ColumnsDisplay extends StatelessWidget {
         width: 250,
         //height: MediaQuery.of(context).size.height * 0.3,
         margin: EdgeInsets.all(10),
-        padding: EdgeInsets.all(10),
+       // padding: EdgeInsets.all(10),
         decoration: BoxDecoration(
             color: Color(0xFFF4D03F).withOpacity(0.9),
             border:
@@ -319,12 +317,13 @@ class ColumnsDisplay extends StatelessWidget {
                 num = i;
                 Thecalories.add(foods[i].calories);
                 return Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 1, vertical: 10),
+                    padding: EdgeInsets.fromLTRB(10 ,5 ,17,5 ),
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            '${foods[i].name} ${foods[i].portion} ',
+                            '''${foods[i].name} 
+${foods[i].portion}''',
                             style: TextStyle(fontSize: 14.0),
                           ),
                           CounterView(x: index, y: i)

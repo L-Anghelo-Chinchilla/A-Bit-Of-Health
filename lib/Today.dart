@@ -105,9 +105,9 @@ class _TodayPageState extends State<TodayPage> {
         ),
         Expanded(
             child: Padding(
-          padding: const EdgeInsets.all(29.0),
+          padding: const EdgeInsets.all(100.0),
           child: Image.asset(
-            'lib/assets/vaso_lleno.png',
+            'assets/patata.png',
           ),
         )),
         /*ElevatedButton(
@@ -144,7 +144,7 @@ class _TodayRegisterState extends State<TodayRegister> {
         children: [
           getScoreView(
             'Calorías de día',
-            '$caloriesSum',
+            '${caloriesSum.toStringAsFixed(1)}',
           ),
           getScoreView(
             'Puntuación de día',
