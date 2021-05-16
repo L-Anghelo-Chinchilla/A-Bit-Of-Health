@@ -79,7 +79,7 @@ class _TodayPageState extends State<TodayPage> {
                 padding: EdgeInsets.all(20),
                 child: FutureBuilder(
                   future: provider.getUserRegister(Provider.of<UserModel>(context, listen: false).userID,
-                      '${DateTime.now().year}/${DateTime.now().month}/${DateTime.now().day}'),
+                      DateTime.now().toString().split(' ').first.replaceAll('-','/')),
                   builder: (context, data) {
                     if (data.hasData) if (data.data.isEmpty)
                       return getNoFoodSignal();
@@ -195,7 +195,7 @@ class _TodayRegisterState extends State<TodayRegister> {
                                       onPressed: () async {
                                         showAlertDialog(
                                             context,
-                                            '-wqweqwewqeqwewq',
+                                            Provider.of<UserModel>(context, listen:false).userID,
                                             widget.map.values.elementAt(len-1-i).date,
                                             widget.map.values.elementAt(len-1-i).id);
 

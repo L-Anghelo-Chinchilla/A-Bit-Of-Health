@@ -1,7 +1,7 @@
 import 'dart:collection';
 import 'dart:convert';
 import 'package:a_bit_of_health/models/FoodModel.dart';
-
+import 'package:dio/dio.dart'; 
 import 'package:http/http.dart' as http;
 
 class FoodProvider {
@@ -21,6 +21,7 @@ class FoodProvider {
 
   Future<Map<String,FoodRegister>> getUserRegister(String userID, String date) async {
     final url = '$_url/database/calendar/$userID/$date.json';
+    print(url);
     final uri = Uri.parse(url);
     final answer = await http.get(uri);
     var sorted = SplayTreeMap<String , FoodRegister>();
@@ -41,8 +42,10 @@ class FoodProvider {
 
    Future<void> deleteRegisterByDate( userID , date , registerID) async {
      final url = '$_url/database/calendar/$userID/$date/$registerID.json';
+     print(url);
      final Uri uri = Uri.parse('url'); 
-     final response = await http.delete(uri);
+     final response = await Dio().delete(url );
+    
   }
 
   Future<void> uploadUserRegiter(userID ,date, register){

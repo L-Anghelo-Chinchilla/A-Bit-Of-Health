@@ -26,6 +26,7 @@ class _LoginState extends State<Login> {
     
     return Scaffold(
         appBar: getAppBar(context: context, route: ''),
+        backgroundColor: Colors.grey[400],
         body: Center(
           child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
@@ -34,13 +35,13 @@ class _LoginState extends State<Login> {
                 width: 700,
                 child: Card(
                   margin: EdgeInsets.all(100),
-                  elevation: 10,
+                  elevation: 20,
                   child: Padding(
-                      padding: EdgeInsets.all(15),
+                      padding: EdgeInsets.all(25),
                       child: Builder(
                           builder: (context) => Form(
                                key: _formKey,
-                               autovalidateMode:AutovalidateMode.always,
+                               //autovalidateMode:AutovalidateMode.always,
                                 child: Column(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
@@ -106,26 +107,28 @@ class _LoginState extends State<Login> {
   }
 
   String emailValidator(String value) {
-    final pattern = RegExp(r'^[a-zA-Z0-9._*^+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$');
+    final pattern = RegExp(r'^[\w\-\._]+@([\w-]+\.)+[\w-]{2,4}$');
     if (value.isEmpty) 
       return 'Debe llenar este campo *';
-    else if(pattern.hasMatch(value))
-      return '''Sólo se permiten caracteres afanuméricos 
-      "_" , "-" y "."''';
+    else if(value.length < 7)
+      return 'correo muy corto';
+    else if(!pattern.hasMatch(value))
+      return '''Ingrese un correo válido.
+Sólo se permiten caracteres alfanuméricos, "_" , "-" y "."''';
 
     return null;
   }
 
   String passwordValidator(String value) {
-     final pattern = RegExp(r'^[a-zA-Z]+$');
+     final pattern = RegExp(r'^[a-zA-Z\.\-_]+$');
+       //r'^[a-z]+[A-Z]+[\.\-_]+|[a-z]+[A-Z]+[\.\-_]+|[a-z]+[\.\-_]|[a-z]+[A-Z]+[\.\-_]|[a-z]+[A-Z]+[\.\-_]|[a-z]+[A-Z]+[\.\-_]$');
    //                         r'^[a-z]+[A-Z]+[0-9]+[._-]+.,$');
     if (value.isEmpty) 
       return 'Debe llenar este campo *';
     else if(value.length < 7 )
     return 'La contraseña debe ser mayor a 6 caracteres'; 
     else if (!pattern.hasMatch(value))
-     return  '''Sólo se permiten caracteres afanuméricos,  
-      "_" , "-" y "."'''; 
+     return  '''Sólo se permiten caracteres alfanuméricos,"_" , "-" y "."'''; 
 
     return null;
   }
