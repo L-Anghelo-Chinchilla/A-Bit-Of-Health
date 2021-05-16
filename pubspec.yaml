@@ -27,6 +27,14 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
+
+
+  #Para Homepage
+  carousel_pro: ^1.0.0
+  url_launcher: ^6.0.3
+
+
+
   cupertino_icons: ^1.0.2
   html: ^0.15.0
   provider: ^5.0.0
@@ -71,6 +79,7 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
+
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/
@@ -79,6 +88,12 @@ flutter:
     - lib/assets/vaso_lleno.png
     - lib/assets/vaso_vacio.png
   #   - images/a_dot_ham.jpeg
+
+  #para Homepage
+    - assets/1.jpg
+    - assets/2.jpg
+    - assets/3.jpg
+    - assets/fac.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
