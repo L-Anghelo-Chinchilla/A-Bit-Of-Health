@@ -1,5 +1,8 @@
 import 'dart:ui';
 
+import 'package:a_bit_of_health/Login.dart';
+import 'package:a_bit_of_health/models/UserModel.dart';
+import 'package:a_bit_of_health/providers/authentification.dart';
 import 'package:a_bit_of_health/utils.dart';
 import 'package:flutter/material.dart';
 
@@ -12,13 +15,47 @@ import 'package:tuple/tuple.dart';
 import 'models/UserModel.dart';
 
 class FoodSelector extends StatefulWidget {
-  FoodSelector({Key key}) : super(key: key);
+  const FoodSelector({Key key}) : super(key: key);
 
   @override
   _FoodSelectorState createState() => _FoodSelectorState();
 }
 
 class _FoodSelectorState extends State<FoodSelector> {
+  @override
+  Widget build(BuildContext context) {
+    print(Provider.of<UserModel>(context, listen: false).userID);
+    if (Provider.of<UserModel>(context, listen: false).userID == null)
+      return FutureBuilder<bool>(
+          future: AuthProvider.getUser(context),
+          builder: (context, AsyncSnapshot<bool> future) {
+            if (future.hasData) {
+              if (future.data)
+                return FoodSelectorPage();
+              else
+                return Login();
+            } else {
+              return Center(
+                  child: SizedBox(
+                child: CircularProgressIndicator(),
+                height: 250,
+                width: 250,
+              ));
+            }
+          });
+    else
+      return FoodSelectorPage();
+  }
+}
+
+class FoodSelectorPage extends StatefulWidget {
+  FoodSelectorPage({Key key}) : super(key: key);
+
+  @override
+  _FoodSelectorStatePage createState() => _FoodSelectorStatePage();
+}
+
+class _FoodSelectorStatePage extends State<FoodSelectorPage> {
   FoodProvider _provider = FoodProvider();
   FoodOfferModel _offer;
   String foodSelected = 'Desayuno';
@@ -34,15 +71,10 @@ class _FoodSelectorState extends State<FoodSelector> {
   @override
   Widget build(BuildContext context) {
     UserProvider user = UserProvider();
-    user.checkUserGlasses('-wqweqwewqeqwewq');
-    user.updateTodayGlasses('-wqweqwewqeqwewq');
-    UserProvider().getUserData('-wqweqwewqeqwewq').then((user) {
-      print(user.toJson().toString());
-      Provider.of<UserModel>(context, listen: false).setUser(user);
-    });
+   // 
 
     return Scaffold(
-        appBar: getAppBar(context),
+        appBar: getAppBar(context: context),
         body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           getDirectionsBar(context, 'FoodSelector'),
           Expanded(
@@ -270,11 +302,6 @@ class _OfferScrollState extends State<OfferScroll> {
                                     .aliments[i]
                                     .setIsSelected();
 
-                                print(Provider.of<FoodOfferModel>(context,
-                                        listen: false)
-                                    .foodOffers[widget.position]
-                                    .aliments[i]
-                                    .isSelected);
                                 setState(() {});
                               });
                         });

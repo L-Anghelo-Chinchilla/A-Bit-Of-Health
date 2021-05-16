@@ -68,7 +68,10 @@ class FoodOffer with ChangeNotifier {
   }
 
   Map<String, dynamic> toJson() =>
-      {"typeOfFood": typeOfFood, "Aliments": aliments}; //THE CORRECTION
+      {
+       "typeOfFood": typeOfFood,
+       "aliments":aliments
+       };
 
   @override
   String toString() => '{ ${this.typeOfFood} , ${jsonEncode(this.aliments)} }';
@@ -152,8 +155,7 @@ class FoodRegister {
   double calories;
   int score;
 
-  FoodRegister(
-      {this.calories, this.food, this.score, this.time, this.id, this.date});
+  FoodRegister({this.calories, this.food, this.score, this.time , this.id , this.date});
 
   FoodRegister foodRegisterFromJson(String str) =>
       FoodRegister.fromJson(json.decode(str));

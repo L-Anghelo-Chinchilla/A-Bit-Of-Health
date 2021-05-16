@@ -8,8 +8,13 @@ import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
 import 'package:a_bit_of_health/models/FoodModel.dart';
 import 'package:intl/intl.dart';
-
+import 'package:a_bit_of_health/Login.dart';
+import 'package:a_bit_of_health/models/UserModel.dart';
+import 'package:a_bit_of_health/utils.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 int score = 1;
+
 
 class Evaluation extends StatelessWidget {
   Evaluation({Key key}) : super(key: key);
@@ -55,7 +60,7 @@ class Evaluation extends StatelessWidget {
     // print('La lista es ${flist[0].name}');
 
     return Scaffold(
-        appBar: getAppBar(context),
+        appBar: getAppBar(context:context),
         body: Container(
           decoration: BoxDecoration(
             image: DecorationImage(

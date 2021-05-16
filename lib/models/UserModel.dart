@@ -54,6 +54,7 @@ class UserModel {
       lastDinner: json['lastDinner'],
       lastSnack: json['lastSnack']);
 
+
   Map<String, dynamic> toJson() => {
         '"weight"': jsonEncode(weight),
         '"height"': jsonEncode(height),
@@ -128,4 +129,7 @@ class UserModel {
     lastDinner = usr.lastDinner;
     lastSnack = usr.lastSnack;
   }
+
+  void delete(){
+    setUser(UserModel());}
 }
