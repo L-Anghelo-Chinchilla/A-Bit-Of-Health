@@ -1,3 +1,4 @@
+import 'package:a_bit_of_health/FoodSelector.dart';
 import 'package:a_bit_of_health/models/UserModel.dart';
 import 'package:a_bit_of_health/providers/FoodProvider.dart';
 import 'package:a_bit_of_health/providers/UserProvider.dart';
@@ -18,6 +19,8 @@ class Evaluation extends StatelessWidget {
   Widget build(BuildContext context) {
     Tuple2<double, FoodOffer> thelist =
         ModalRoute.of(context).settings.arguments;
+
+    if (thelist == null) return FoodSelector();
     String kindoffood = thelist.item2.typeOfFood;
     String thetotal = thelist.item1.toStringAsFixed(2);
     List<Food> flist = thelist.item2.aliments;
@@ -58,325 +61,340 @@ class Evaluation extends StatelessWidget {
             image: DecorationImage(
                 image: AssetImage('fondo_evaluation.jpg'), fit: BoxFit.cover),
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              getDirectionsBar(context, 'Evaluation'),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                getDirectionsBar(context, 'Evaluation'),
+                Expanded(
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                  Text(
+                    '\n Puntuar Comidas',
+                    style: TextStyle(
+                      fontFamily: 'Mont',
+                      fontSize: 32,
+                    ),
+                  ),
 
-              Text(
-                '\n Puntuar Comidas',
-                style: TextStyle(
-                  fontFamily: 'Mont',
-                  fontSize: 32,
-                ),
-              ),
-
-              Expanded(
-                child: Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        //THE CONTAINER IN YELLOW
-                        width: 800,
-                        height: 420,
-                        margin: EdgeInsets.all(10),
-                        padding: EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                            color: Color(0xFFF4D03F).withOpacity(0.8),
-                            border: Border.all(color: Colors.black)),
-                        alignment: Alignment.topCenter,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Align(
-                                alignment: Alignment.topLeft,
-                                child: Text(
-                                  'Tu comida: ${kindoffood}',
-                                  style: TextStyle(
-                                    fontFamily: 'Mont',
-                                    fontSize: 24,
-                                  ),
-                                )),
-                            SizedBox(height: 10),
-                            Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Align(
-                                      alignment: Alignment.center,
-                                      child: Text(
-                                        'ALIMENTO',
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontFamily: 'Mont2',
-                                          fontSize: 19,
-                                        ),
-                                      )),
-                                  Align(
-                                      alignment: Alignment.center,
-                                      child: Text(
-                                        'PORCIONES ',
-                                        style: TextStyle(
-                                            fontFamily: 'Mont2',
-                                            fontSize: 19,
-                                            color:
-                                                Colors.black),
-                                        textAlign: TextAlign.center,
-                                      )),
-                                  Align(
-                                      alignment: Alignment.center,
-                                      child: Text(
-                                        'CALORIAS',
-                                        style: TextStyle(
-                                            fontFamily: 'Mont2',
-                                            fontSize: 19,
-                                            color:
-                                                Colors.black),
-                                        textAlign: TextAlign.center,
-                                      ))
-                                ]),
-                            Container(
-                                width: 800,
-                                height: 310,
-                                margin: EdgeInsets.all(10),
-                                padding: EdgeInsets.all(10),
-                                child: Scrollbar(
-                                    isAlwaysShown: true,
-                                    child: ListView.builder(
-                                      shrinkWrap: true,
-                                      scrollDirection: Axis.vertical,
-                                      itemCount: flist.length,
-                                      itemBuilder: (context, i) {
-                                        return Padding(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 1, vertical: 10),
-                                            child: Column(children: [
-                                              Row(
-                                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                                  children: [
-                                                    Container(
-                                                        width: 200,
-                                                        alignment: Alignment
-                                                            .centerLeft,
-                                                        child: Text(
-                                                          '${flist[i].name}',
-                                                          style: TextStyle(
-                                                              fontFamily:
-                                                                  'Mont3',
-                                                              fontSize: 15,
-                                                              color: Colors
-                                                                  .black
-                                                                  ),
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                        )),
-                                                    Container(
-                                                        width: 40,
-                                                        alignment: Alignment
-                                                            .centerLeft,
-                                                        child: Text(
-                                                          '${flist[i].cant}',
-                                                          style: TextStyle(
-                                                              fontFamily:
-                                                                  'Mont3',
-                                                              fontSize: 15,
-                                                              color: Colors
-                                                                  .black),
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                        )),
-                                                    Container(
-                                                        width: 40,
-                                                        alignment:
-                                                            Alignment.center,
-                                                        child: Text(
-                                                          '${flist[i].calories}',
-                                                          style: TextStyle(
-                                                              fontFamily:
-                                                                  'Mont3',
-                                                              fontSize: 15,
-                                                              color: Colors
-                                                                  .black),
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                        )),
-                                                  ])
-                                            ]));
-                                      },
-                                    )))
-                          ],
-                        ),
-                      ),
-                      Column(
+                  Expanded(
+                    child: Container(
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Container(
-                            width: 500,
-                            height: 200,
+                            //THE CONTAINER IN YELLOW
+                            width: 800,
+                            height: 420,
                             margin: EdgeInsets.all(10),
                             padding: EdgeInsets.all(10),
                             decoration: BoxDecoration(
-                                color: Color(0xFFDC7633).withOpacity(0.8),        //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+                                color: Color(0xFFF4D03F).withOpacity(0.8),
                                 border: Border.all(color: Colors.black)),
                             alignment: Alignment.topCenter,
                             child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                Text(
-                                  '\nTu última comida de ${kindoffood} contuvo: ${lastRegister} calorias.',
-                                  style: TextStyle(
-                                    fontFamily: 'Mont2',
-                                    fontSize: 18,
-                                  ),
-                                ),
-                                Expanded(
-                                    child: SizedBox(
-                                        height: 200.0,
-                                        child: ListView(
-                                          scrollDirection: Axis.horizontal,
-                                          children: [
-                                            Container(
-                                                child: Text(
-                                              '\nTu comida \nActual Contiene:',
-                                              style: TextStyle(
-                                                fontFamily: 'Mont',
-                                                fontSize: 21,
-                                              ),
-                                            )),
-                                            SizedBox(
-                                              width: 50,
+                                Align(
+                                    alignment: Alignment.topLeft,
+                                    child: Text(
+                                      'Tu comida: ${kindoffood}',
+                                      style: TextStyle(
+                                        fontFamily: 'Mont',
+                                        fontSize: 24,
+                                      ),
+                                    )),
+                                SizedBox(height: 10),
+                                Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Align(
+                                          alignment: Alignment.center,
+                                          child: Text(
+                                            'ALIMENTO',
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontFamily: 'Mont2',
+                                              fontSize: 19,
                                             ),
-                                            Container(
-                                                child: Text(
-                                              '\n\n ${thetotal} Calorias',
-                                              style: TextStyle(
-                                                fontFamily: 'Mont',
-                                                fontSize: 26,
-                                              ),
-                                            )),
-                                          ],
+                                          )),
+                                      Align(
+                                          alignment: Alignment.center,
+                                          child: Text(
+                                            'PORCIONES ',
+                                            style: TextStyle(
+                                                fontFamily: 'Mont2',
+                                                fontSize: 19,
+                                                color: Colors.black),
+                                            textAlign: TextAlign.center,
+                                          )),
+                                      Align(
+                                          alignment: Alignment.center,
+                                          child: Text(
+                                            'CALORIAS',
+                                            style: TextStyle(
+                                                fontFamily: 'Mont2',
+                                                fontSize: 19,
+                                                color: Colors.black),
+                                            textAlign: TextAlign.center,
+                                          ))
+                                    ]),
+                                Container(
+                                    width: 800,
+                                    height: 310,
+                                    margin: EdgeInsets.all(10),
+                                    padding: EdgeInsets.all(10),
+                                    child: Scrollbar(
+                                        isAlwaysShown: true,
+                                        child: ListView.builder(
+                                          shrinkWrap: true,
+                                          scrollDirection: Axis.vertical,
+                                          itemCount: flist.length,
+                                          itemBuilder: (context, i) {
+                                            return Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 1,
+                                                    vertical: 10),
+                                                child: Column(children: [
+                                                  Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceEvenly,
+                                                      children: [
+                                                        Container(
+                                                            width: 200,
+                                                            alignment: Alignment
+                                                                .centerLeft,
+                                                            child: Text(
+                                                              '${flist[i].name}',
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      'Mont3',
+                                                                  fontSize: 15,
+                                                                  color: Colors
+                                                                      .black),
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                            )),
+                                                        Container(
+                                                            width: 40,
+                                                            alignment: Alignment
+                                                                .centerLeft,
+                                                            child: Text(
+                                                              '${flist[i].cant}',
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      'Mont3',
+                                                                  fontSize: 15,
+                                                                  color: Colors
+                                                                      .black),
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                            )),
+                                                        Container(
+                                                            width: 40,
+                                                            alignment: Alignment
+                                                                .center,
+                                                            child: Text(
+                                                              '${flist[i].calories}',
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      'Mont3',
+                                                                  fontSize: 15,
+                                                                  color: Colors
+                                                                      .black),
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                            )),
+                                                      ])
+                                                ]));
+                                          },
                                         )))
                               ],
                             ),
                           ),
-                          Container(
-                            width: 500,
-                            height: 200,
-                            margin: EdgeInsets.all(10),
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                                color: Color(0xFFF5B041).withOpacity(0.9),
-                                border: Border.all(color: Colors.black)),
-                            alignment: Alignment.topCenter,
-                            child: Column(
-                              children: [
-                                if (kindoffood == 'Cena')
-                                  Text(
-                                    '\nUn tipo de ${kindoffood} para ser balanceada, debería contener aproximadamente ${healthyQuantity} cal. Entonces....',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontFamily: 'Mont2',
-                                      fontSize: 18,
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Container(
+                                width: 500,
+                                height: 200,
+                                margin: EdgeInsets.all(10),
+                                padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                    color: Color(0xFFDC7633).withOpacity(
+                                        0.8), //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+                                    border: Border.all(color: Colors.black)),
+                                alignment: Alignment.topCenter,
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      '\nTu última comida de ${kindoffood} contuvo: ${lastRegister} calorias.',
+                                      style: TextStyle(
+                                        fontFamily: 'Mont2',
+                                        fontSize: 18,
+                                      ),
                                     ),
-                                  )
-                                else
-                                  Text(
-                                    '\nUn tipo de ${kindoffood} para ser balanceada, debería contener aproximadamente ${healthyQuantity} cal. Entonces....',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontFamily: 'Mont2',
-                                      fontSize: 18,
-                                    ),
-                                  ),
-                                Text(
-                                  '\n¿Cómo puntuarias tu comida?',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontFamily: 'Mont',
-                                    fontSize: 22,
-                                  ),
-                                  textAlign: TextAlign.center,
+                                    Expanded(
+                                        child: SizedBox(
+                                            height: 200.0,
+                                            child: ListView(
+                                              scrollDirection: Axis.horizontal,
+                                              children: [
+                                                Container(
+                                                    child: Text(
+                                                  '\nTu comida \nActual Contiene:',
+                                                  style: TextStyle(
+                                                    fontFamily: 'Mont',
+                                                    fontSize: 21,
+                                                  ),
+                                                )),
+                                                SizedBox(
+                                                  width: 50,
+                                                ),
+                                                Container(
+                                                    child: Text(
+                                                  '\n\n ${thetotal} Calorias',
+                                                  style: TextStyle(
+                                                    fontFamily: 'Mont',
+                                                    fontSize: 26,
+                                                  ),
+                                                )),
+                                              ],
+                                            )))
+                                  ],
                                 ),
-                                Expanded(
-                                    child: Align(
-                                  alignment: Alignment.center,
-                                  child: SizedBox(
-                                      height: 20,
-                                      width: 80,
-                                      child: CounterView()),
-                                ))
-                              ],
-                            ),
-                          ),
+                              ),
+                              Container(
+                                width: 500,
+                                height: 200,
+                                margin: EdgeInsets.all(10),
+                                padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                    color: Color(0xFFF5B041).withOpacity(0.9),
+                                    border: Border.all(color: Colors.black)),
+                                alignment: Alignment.topCenter,
+                                child: Column(
+                                  children: [
+                                    if (kindoffood == 'Cena')
+                                      Text(
+                                        '\nUn tipo de ${kindoffood} para ser balanceada, debería contener aproximadamente ${healthyQuantity} cal. Entonces....',
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontFamily: 'Mont2',
+                                          fontSize: 18,
+                                        ),
+                                      )
+                                    else
+                                      Text(
+                                        '\nUn tipo de ${kindoffood} para ser balanceada, debería contener aproximadamente ${healthyQuantity} cal. Entonces....',
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontFamily: 'Mont2',
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                    Text(
+                                      '\n¿Cómo puntuarias tu comida?',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontFamily: 'Mont',
+                                        fontSize: 22,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    Expanded(
+                                        child: Align(
+                                      alignment: Alignment.center,
+                                      child: SizedBox(
+                                          height: 20,
+                                          width: 80,
+                                          child: CounterView()),
+                                    ))
+                                  ],
+                                ),
+                              ),
+                            ],
+                          )
                         ],
-                      )
-                    ],
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  // ROW OF BUTTONS----------------
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    ElevatedButton(
-                        child: Text('Atrás'),
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all<Color>(Colors.blue),
-                        ),
-                        //backgroundColor: Colors.limeAccent[700],
-                        onPressed: () {
-                          Provider.of<List<FoodOffer>>(context, listen: false)
-                              .clear();
-                          Navigator.pop(context);
-                        }),
-                    ElevatedButton(
-                        child: Text('Finalizar'),
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all<Color>(Colors.blue),
-                        ),
-                        //backgroundColor: Colors.limeAccent[700],
-                        onPressed: () async {
-                          UpdateFood(kindoffood, thetotal, context);
-                          //THE USER REGISTER
-                          UploadRegister(_provider, context, score,
-                              thelist.item1, thelist.item2);
-                          Provider.of<List<FoodOffer>>(context, listen: false)
-                              .clear();
-
-                          print('Lo siguiente debería estar vacío -> ' +
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Row(
+                      // ROW OF BUTTONS----------------
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //crossAxisAlignment: CrossAxisAlignment.center,
+                     // mainAxisSize: MainAxisSize.max,
+                      children: [
+                        ElevatedButton(
+                            child: Text('Atrás'),
+                            style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all<Color>(Colors.blue),
+                            ),
+                            //backgroundColor: Colors.limeAccent[700],
+                            onPressed: () {
                               Provider.of<List<FoodOffer>>(context,
                                       listen: false)
-                                  .toString());
-                          flist = [];
-                          kindoffood = "";
-                          Navigator.popUntil(
-                              context, ModalRoute.withName('FoodSelector'));
-                          Navigator.pushReplacementNamed(context, 'Today');
-                          print('Evaluation envía: ${score}');
-                          final snackBar = SnackBar(
-                            content: Text('Tu registro se ha guardado'),
-                            action: SnackBarAction(
-                              label: 'OK',
-                              onPressed: () {
-                                // Some code to undo the change.
-                              },
+                                  .clear();
+                              Navigator.pop(context);
+                            }),
+                           SizedBox(child: Container() ,width: 500,),
+                        ElevatedButton(
+                            child: Text('Finalizar'),
+                            style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all<Color>(Colors.blue),
                             ),
-                          );
-                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                          print('La puntuación del usuario es ${score}');
-                        }),
-                  ],
-                ),
-              ), //-
-            ],
+                            //backgroundColor: Colors.limeAccent[700],
+                            onPressed: () async {
+                              UpdateFood(kindoffood, thetotal, context);
+                              //THE USER REGISTER
+                              UploadRegister(_provider, context, score,
+                                  thelist.item1, thelist.item2);
+                              Provider.of<List<FoodOffer>>(context,
+                                      listen: false)
+                                  .clear();
+
+                              print('Lo siguiente debería estar vacío -> ' +
+                                  Provider.of<List<FoodOffer>>(context,
+                                          listen: false)
+                                      .toString());
+                              flist = [];
+                              kindoffood = "";
+                                Navigator.pushNamedAndRemoveUntil(
+                                  context, 'Today', ModalRoute.withName('FoodSelector'),);
+                            //   await Navigator.pushReplacementNamed(context, 'Today');
+                              print('Evaluation envía: ${score}');
+                              final snackBar = SnackBar(
+                                content: Text('Tu registro se ha guardado'),
+                                action: SnackBarAction(
+                                  label: 'OK',
+                                  onPressed: () {
+                                    // Some code to undo the change.
+                                  },
+                                ),
+                              );
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
+                              print('La puntuación del usuario es ${score}');
+                            }),
+                      ],
+                    ),
+                  ), //-
+                ])))
+              ],
+            
           ),
         ));
   }
