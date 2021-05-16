@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:a_bit_of_health/Login.dart';
 import 'package:a_bit_of_health/models/UserModel.dart';
+import 'package:a_bit_of_health/providers/authentification.dart';
 import 'package:a_bit_of_health/utils.dart';
 import 'package:flutter/material.dart';
 
@@ -11,81 +12,118 @@ import 'package:a_bit_of_health/providers/UserProvider.dart';
 import 'package:a_bit_of_health/models/FoodModel.dart';
 
 class FoodSelector extends StatefulWidget {
-  FoodSelector({Key key}) : super(key: key);
+  const FoodSelector({Key key}) : super(key: key);
 
   @override
   _FoodSelectorState createState() => _FoodSelectorState();
 }
 
 class _FoodSelectorState extends State<FoodSelector> {
+  @override
+  Widget build(BuildContext context) {
+    print(Provider.of<UserModel>(context, listen: false).userID);
+    if (Provider.of<UserModel>(context, listen: false).userID == null)
+      return FutureBuilder<bool>(
+          future: AuthProvider.getUser(context),
+          builder: (context, AsyncSnapshot<bool> future) {
+            if (future.hasData) {
+              if (future.data)
+                return FoodSelectorPage();
+              else
+                return Login();
+            } else {
+              return Center(
+                  child: SizedBox(
+                child: CircularProgressIndicator(),
+                height: 250,
+                width: 250,
+              ));
+            }
+          });
+    else
+      return FoodSelectorPage();
+  }
+}
+
+class FoodSelectorPage extends StatefulWidget {
+  FoodSelectorPage({Key key}) : super(key: key);
+
+  @override
+  _FoodSelectorStatePage createState() => _FoodSelectorStatePage();
+}
+
+class _FoodSelectorStatePage extends State<FoodSelectorPage> {
   FoodProvider _provider = FoodProvider();
   FoodOfferModel _offer;
   String foodSelected = 'Desayuno';
   final items = ['Desayuno', 'Almuerzo', 'Cena', 'Snack']
-      .map(
-          (value) => DropdownMenuItem<String>(value: value, child: Text(value, style: TextStyle(fontFamily: 'Pt', fontSize: 19.0),)))   //XXXXXXXXXXXXXXXXXXXXXXXXXX
+      .map((value) => DropdownMenuItem<String>(
+          value: value,
+          child: Text(
+            value,
+            style: TextStyle(fontFamily: 'Pt', fontSize: 19.0),
+          ))) //XXXXXXXXXXXXXXXXXXXXXXXXXX
       .toList();
 
   @override
   Widget build(BuildContext context) {
-
-    UserProvider user  = UserProvider(); 
-    user.checkUserGlasses('-wqweqwewqeqwewq');
-    user.updateTodayGlasses('-wqweqwewqeqwewq');
-    if(Provider.of<UserModel>(context).userID ==null)
-      return Login();
-    else
-      
     return Scaffold(
-        appBar: getAppBar(context:context),
+        appBar: getAppBar(context: context),
         body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          getDirectionsBar(context , 'FoodSelector'),
+          getDirectionsBar(context, 'FoodSelector'),
           Expanded(
-              child: Container(
-                  decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage('assets/fondo_selector.jpg'),
-                          fit: BoxFit.cover
-                        ),
-                      ),
-               // child:// SingleChildScrollView(
-                   // scrollDirection: Axis.vertical,
-                    child: Container(
-                        /*decoration: BoxDecoration(
+            child: Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('assets/fondo_selector.jpg'),
+                      fit: BoxFit.cover),
+                ),
+                // child:// SingleChildScrollView(
+                // scrollDirection: Axis.vertical,
+                child: Container(
+                    /*decoration: BoxDecoration(
                           image: DecorationImage(
                             image: AssetImage('assets/fondo_selector.jpg'),
                             fit: BoxFit.cover
                           ),
                         ),*/
-                        padding: EdgeInsets.all(17),
-                        child: Column(children: [
-                          Text('Añadir comida', style: TextStyle(fontFamily: 'Mont', fontSize: 32.0),),
-                          Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text('¿Qué estás comiendo?  ', style: TextStyle(fontFamily: 'Sans', fontSize: 20.0),),
-                                DropdownButton<String>(
-                                  value: foodSelected,
-                                  items: items,
-                                  onChanged: (String newValue) {
-                                    foodSelected = newValue;
-                                    setState(() {});
-                                  },
-                                ),
-                              ]),
-                          Expanded(
-                          child:Container(
-                             // width: MediaQuery.of(context).size.width * 0.8,
-                              height:double.infinity,// MediaQuery.of(context).size.height * 0.6,
+                    padding: EdgeInsets.all(17),
+                    child: Column(children: [
+                      Text(
+                        'Añadir comida',
+                        style: TextStyle(fontFamily: 'Mont', fontSize: 32.0),
+                      ),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              '¿Qué estás comiendo?  ',
+                              style:
+                                  TextStyle(fontFamily: 'Sans', fontSize: 20.0),
+                            ),
+                            DropdownButton<String>(
+                              value: foodSelected,
+                              items: items,
+                              onChanged: (String newValue) {
+                                foodSelected = newValue;
+                                setState(() {});
+                              },
+                            ),
+                          ]),
+                      Expanded(
+                          child: Container(
+                              // width: MediaQuery.of(context).size.width * 0.8,
+                              height: double
+                                  .infinity, // MediaQuery.of(context).size.height * 0.6,
                               margin: EdgeInsets.all(15),
                               padding: EdgeInsets.all(15),
                               decoration: BoxDecoration(
                                   color: Color(0xffffffff).withOpacity(0.8),
                                   border: Border.all(color: Colors.black),
-                                  borderRadius: BorderRadius.all(Radius.circular(10))),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10))),
                               child: FutureBuilder<FoodOfferModel>(
-                                  future: _provider.getFoodOffers(
-                                      foodSelected), 
+                                  future: _provider.getFoodOffers(foodSelected),
                                   builder: (BuildContext context,
                                       AsyncSnapshot<FoodOfferModel> snapshot) {
                                     if (snapshot.hasData) {
@@ -93,8 +131,9 @@ class _FoodSelectorState extends State<FoodSelector> {
                                               listen: false)
                                           .setFoodOffers(
                                               snapshot.data.foodOffers);
-                                              print(snapshot.data.toJson());
-                                      return FoodOfferList(offer: snapshot.data);
+                                      print(snapshot.data.toJson());
+                                      return FoodOfferList(
+                                          offer: snapshot.data);
                                     } else {
                                       return SizedBox(
                                         child: CircularProgressIndicator(),
@@ -103,39 +142,41 @@ class _FoodSelectorState extends State<FoodSelector> {
                                       );
                                     }
                                   }))),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                             
-                              ElevatedButton(
-                                child: Text('Siguiente'),
-                                onPressed: () {
-                                  
-                                  List<FoodOffer> list = [];
-                                  list =  Provider.of<FoodOfferModel>(context,listen: false ).getSelectedOnes();
-                                  list.removeWhere((element) => element.aliments.isEmpty);
-                                  if(list.isNotEmpty)
-                                  Navigator.pushNamed(context, 'FoodCounter', arguments:  list);
-                                  else{
-                                    final snackBar = SnackBar(
-                                              content: Text('Has seleccionado nada! El aire no cuenta como comida... '),
-                                              action: SnackBarAction(
-                                                label: 'Vale!',
-                                                onPressed: () {
-                                                  // Some code to undo the change.
-                                                },
-                                              ),
-                                            );
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(snackBar);
-
-                                  }
-                                },
-                              )
-                            ],
-                          ) 
-                        ]))),
-              )//)
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          ElevatedButton(
+                            child: Text('Siguiente'),
+                            onPressed: () {
+                              List<FoodOffer> list = [];
+                              list = Provider.of<FoodOfferModel>(context,
+                                      listen: false)
+                                  .getSelectedOnes();
+                              list.removeWhere(
+                                  (element) => element.aliments.isEmpty);
+                              if (list.isNotEmpty)
+                                Navigator.pushNamed(context, 'FoodCounter',
+                                    arguments: list);
+                              else {
+                                final snackBar = SnackBar(
+                                  content: Text(
+                                      'Has seleccionado nada! El aire no cuenta como comida... '),
+                                  action: SnackBarAction(
+                                    label: 'Vale!',
+                                    onPressed: () {
+                                      // Some code to undo the change.
+                                    },
+                                  ),
+                                );
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(snackBar);
+                              }
+                            },
+                          )
+                        ],
+                      )
+                    ]))),
+          ) //)
         ]));
   }
 }
@@ -154,11 +195,12 @@ class _FoodOfferListState extends State<FoodOfferList> {
   @override
   Widget build(BuildContext context) {
     return Scrollbar(
-          child: ListView.builder(
+      child: ListView.builder(
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
-        itemCount:
-            Provider.of<FoodOfferModel>(context, listen: false).foodOffers.length,
+        itemCount: Provider.of<FoodOfferModel>(context, listen: false)
+            .foodOffers
+            .length,
         itemBuilder: (context, i) {
           return Container(
               color: Color(0xFF76D7C4),
@@ -187,72 +229,72 @@ class _OfferScrollState extends State<OfferScroll> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(color: Color(0xFFDC7633)),
+        decoration: BoxDecoration(color: Color(0xFFDC7633)),
         child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-      Text('${widget.list.typeOfFood}', style: TextStyle(fontFamily: 'Mont2', fontSize: 20.0),),
-      //Divider(color: Colors.white),
-      Expanded(
-          child: Container(
-              height: 300,
-              decoration:
-                  BoxDecoration(color: Color(0xFFF4D03F), border: Border.all(color: Colors.black45)),
-              child: Scrollbar(
-                              child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: Provider.of<FoodOfferModel>(context, listen: false)
-                      .foodOffers[widget.position]
-                      .aliments
-                      .length,
-                  itemBuilder: (_, i) {
-                    String name =
-                        Provider.of<FoodOfferModel>(context, listen: false)
-                            .foodOffers[widget.position]
-                            .aliments[i]
-                            .name; //widget.list.aliments[i].name;
-                    bool value =
-                        Provider.of<FoodOfferModel>(context, listen: true)
+          Text(
+            '${widget.list.typeOfFood}',
+            style: TextStyle(fontFamily: 'Mont2', fontSize: 20.0),
+          ),
+          //Divider(color: Colors.white),
+          Expanded(
+              child: Container(
+                  height: 300,
+                  decoration: BoxDecoration(
+                      color: Color(0xFFF4D03F),
+                      border: Border.all(color: Colors.black45)),
+                  child: Scrollbar(
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount:
+                          Provider.of<FoodOfferModel>(context, listen: false)
+                              .foodOffers[widget.position]
+                              .aliments
+                              .length,
+                      itemBuilder: (_, i) {
+                        String name =
+                            Provider.of<FoodOfferModel>(context, listen: false)
+                                .foodOffers[widget.position]
+                                .aliments[i]
+                                .name; //widget.list.aliments[i].name;
+                        bool value = Provider.of<FoodOfferModel>(context,
+                                listen: true)
                             .foodOffers[widget.position]
                             .aliments[i]
                             .isSelected; //widget.list.aliments[i].isSelected;
-                    return Consumer<Food>(builder: (context, food, child) {
+                        return Consumer<Food>(builder: (context, food, child) {
+                          Food fod =
+                              Provider.of<FoodOfferModel>(context, listen: true)
+                                  .foodOffers[widget.position]
+                                  .aliments[i];
 
-                    Food fod =
-                        Provider.of<FoodOfferModel>(context, listen: true)
-                            .foodOffers[widget.position]
-                            .aliments[i];
+                          return CheckboxListTile(
+                              title: Text(name),
+                              tristate: true,
+                              value: fod.isSelected,
+                              onChanged: (newValue) {
+                                if (name == 'Ninguno')
+                                  Provider.of<FoodOfferModel>(context,
+                                          listen: false)
+                                      .foodOffers[widget.position]
+                                      .deselectAll();
+                                else
+                                  Provider.of<FoodOfferModel>(context,
+                                          listen: false)
+                                      .foodOffers[widget.position]
+                                      .aliments[0]
+                                      .deselect();
+                                Provider.of<FoodOfferModel>(context,
+                                        listen: false)
+                                    .foodOffers[widget.position]
+                                    .aliments[i]
+                                    .setIsSelected();
 
-                      return CheckboxListTile(
-                          title: Text(name),
-                          tristate: true,
-                          value: fod.isSelected,
-                          onChanged: (newValue) {
-                            if(name == 'Ninguno')
-                               Provider.of<FoodOfferModel>(context, listen: false)
-                                .foodOffers[widget.position].deselectAll();
-                            else           
-                            Provider.of<FoodOfferModel>(context, listen: false)
-                                .foodOffers[widget.position]
-                                .aliments[0]
-                                .deselect();
-                            Provider.of<FoodOfferModel>(context, listen: false)
-                                .foodOffers[widget.position]
-                                .aliments[i]
-                                .setIsSelected();
-                            
-
-                            print(Provider.of<FoodOfferModel>(context,
-                                    listen: false)
-                                .foodOffers[widget.position]
-                                .aliments[i]
-                                .isSelected);
-                                setState(() {
-                                  
-                                });
-                          });
-                    });
-                  },
-                ),
-              )))
-    ]));
+                                setState(() {});
+                              });
+                        });
+                      },
+                    ),
+                  )))
+        ]));
   }
 }

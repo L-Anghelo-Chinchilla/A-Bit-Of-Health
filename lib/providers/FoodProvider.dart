@@ -11,17 +11,18 @@ class FoodProvider {
   //returns the offers of food stores in database
   Future<FoodOfferModel> getFoodOffers(String food) async {
     final url = '$_url/database/comida/$food.json';
-    final answer = await http.get(url);
+    final uri = Uri.parse(url);
+    final answer = await http.get(uri);
     Map<String, dynamic> data = json.decode(answer.body);
     FoodOfferModel foodOffer;
-
     foodOffer = (FoodOfferModel.fromJson(data));
     return foodOffer;
   }
 
   Future<Map<String,FoodRegister>> getUserRegister(String userID, String date) async {
     final url = '$_url/database/calendar/$userID/$date.json';
-    final answer = await http.get(url);
+    final uri = Uri.parse(url);
+    final answer = await http.get(uri);
     var sorted = SplayTreeMap<String , FoodRegister>();
 
     if(answer.bodyBytes.length > 4 ){
@@ -40,12 +41,14 @@ class FoodProvider {
 
    Future<void> deleteRegisterByDate( userID , date , registerID) async {
      final url = '$_url/database/calendar/$userID/$date/$registerID.json';
-     final response = await http.delete(url);
+     final Uri uri = Uri.parse('url'); 
+     final response = await http.delete(uri);
   }
 
   Future<void> uploadUserRegiter(userID ,date, register){
     final url = '$_url/database/calendar/$userID/$date/.json';
-    final response = http.post(url ,body: register.foodRegisterToJson(register) );
+    final Uri uri = Uri.parse(url);
+    final response = http.post( uri ,body: register.foodRegisterToJson(register) );
 
 
   }

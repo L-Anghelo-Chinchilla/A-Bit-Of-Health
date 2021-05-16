@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:a_bit_of_health/FoodSelector.dart';
 import 'package:a_bit_of_health/models/UserModel.dart';
 import 'package:a_bit_of_health/utils.dart';
@@ -36,7 +38,7 @@ class NextPage extends StatelessWidget {
 
     // CENTER OF THE HOME PAGE -----------------------------------------------------------
 
-    print(ModalRoute.of(context).settings.arguments.toString());
+    print(jsonEncode(ModalRoute.of(context).settings.arguments));
     //appBar: getAppBar(context);
     if(Provider.of<UserModel>(context).userID ==null)
       return Login();

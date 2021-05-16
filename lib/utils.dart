@@ -1,6 +1,9 @@
+import 'package:a_bit_of_health/Login.dart';
 import 'package:a_bit_of_health/models/UserModel.dart';
+import 'package:a_bit_of_health/providers/authentification.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 
 Widget getDirectionsBar(BuildContext context, String name ){
   return Container(
@@ -40,7 +43,8 @@ Widget getDirectionsBar(BuildContext context, String name ){
     );
 } 
 
-Widget getAppBar({BuildContext context ,String route}){
+Widget getAppBar({BuildContext context ,String route})  {
+
  return AppBar(
             leading: Container(height: 1 ,width: 1,),
             title: Padding(
@@ -50,18 +54,19 @@ Widget getAppBar({BuildContext context ,String route}){
           backgroundColor: Color(0xff173749),
           brightness: Brightness.dark,
           actions: [
-           /* Image(
-              image: AssetImage('assets/usuario.png'),
-              fit: BoxFit.contain,
-              height: 60,
-            )*/
+         
             if(route == null)
               //TextButton.icon(onPressed: (){}, icon: Icon( Icons.person) , label: Text('${Provider.of<UserModel>(context, listen: false).name}'))
-              if( Provider.of<UserModel>(context, listen: false).name != null )
-            Padding(child: TextButton.icon(onPressed: (){Navigator.pushNamed(context, 'Login');}, icon:Icon( Icons.person) , label: Text ('${Provider.of<UserModel>(context, listen: false).name}')),
+              if( Provider.of<UserModel>(context, listen: false).name != null  )
+            Padding(child: TextButton.icon(onPressed: ()async {
+              await  AuthProvider.signOut();
+              Provider.of<UserModel>(context , listen:false).delete();
+              await Navigator.pushAndRemoveUntil( context,  MaterialPageRoute(builder: (BuildContext context) => Login()),
+                ModalRoute.withName('/'));}, icon:Icon( Icons.person) , label: Text ('${Provider.of<UserModel>(context, listen: false).name}')),
             padding: EdgeInsets.fromLTRB(10, 10, 20, 10))
               else
-            Padding(child: TextButton.icon(onPressed: (){Navigator.pushNamed(context, 'Login');}, icon:Icon( Icons.person) , label: Text ('Login')),
+            Padding(child: TextButton.icon(onPressed:(){Navigator.pushNamed(context, 'Login');} ,
+             icon:Icon( Icons.person) , label: Text ('Login')),
             padding: EdgeInsets.fromLTRB(10, 10, 20, 10)
             )
             

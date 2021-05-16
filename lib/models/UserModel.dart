@@ -76,4 +76,8 @@ class UserModel {
     name = usr.name;
     lastConnection = usr.lastConnection;
   }
+
+  void delete(){
+    setUser(UserModel());
+  }
 }

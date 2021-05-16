@@ -2,13 +2,58 @@ import 'package:a_bit_of_health/Login.dart';
 import 'package:a_bit_of_health/models/FoodModel.dart';
 import 'package:a_bit_of_health/models/UserModel.dart';
 import 'package:a_bit_of_health/providers/FoodProvider.dart';
+import 'package:a_bit_of_health/providers/authentification.dart';
 import 'package:a_bit_of_health/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class Today extends StatelessWidget {
-  const Today({Key key}) : super(key: key);
+class Today extends StatefulWidget {
+  Today({Key key}) : super(key: key);
 
+  @override
+  _TodayState createState() => _TodayState();
+}
+
+class _TodayState extends State<Today> {
+  @override
+  Widget build(BuildContext context) {
+    print(Provider.of<UserModel>(context, listen: false).userID);
+    if (Provider.of<UserModel>(context, listen: false).userID == null)
+      return FutureBuilder<bool>(
+          future: AuthProvider.getUser(context),
+          builder: (context, AsyncSnapshot<bool> future) {
+            if (future.hasData) {
+              if (future.data)
+                return TodayPage();
+              else
+                return Login();
+            } else {
+              return Center(
+                  child: SizedBox(
+                child: CircularProgressIndicator(),
+                height: 250,
+                width: 250,
+              ));
+            }
+          });
+    else
+      return TodayPage(); 
+  }
+}
+
+
+
+
+class TodayPage extends StatefulWidget {
+  const TodayPage({Key key}) : super(key: key);
+
+  @override
+  _TodayPageState createState() => _TodayPageState();
+}
+
+class _TodayPageState extends State<TodayPage> {
+ 
+  
   @override
   Widget build(BuildContext context) {
     FoodProvider provider = FoodProvider();
@@ -16,9 +61,8 @@ class Today extends StatelessWidget {
     // if(Provider.of<UserModel>(context).userID == null )
     // return Login();
     // else
-     if(Provider.of<UserModel>(context).userID ==null)
-      return Login();
-    else
+    
+
          return Scaffold(
         appBar: getAppBar(context:context),
         body: Container(
@@ -284,7 +328,8 @@ class _TodayRegisterState extends State<TodayRegister> {
     );
 
     // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
+    AlertDialog alert = AlertDialog
+    (
       title: Text("Eliminar registro"),
       content: Text(
           "¿Eliminar éste registro de comida?"),

@@ -4,19 +4,22 @@ import 'package:http/http.dart' as http;
 import 'package:tuple/tuple.dart';
 
 class UserProvider {
-  final _url =
-      'https://a-bit-of-health-default-rtdb.firebaseio.com/database/users/';
+  static final _url =
+      'https://a-bit-of-health-default-rtdb.firebaseio.com/q/database/users/';
 
   // @param (string user ID in database)
   // Returns the UserData by an HTTP request
 
-  Future<UserModel> getUserData(String userID) async {
+  static Future<UserModel> getUserData(String userID) async {
     final url = '$_url$userID.json';
-    final answer = await http.get(url);
+    print(url);
+    final uri = Uri.parse(url);
+    final answer = await http.get(uri);
     Map<String, dynamic> data = json.decode(answer.body);
     UserModel userData = (UserModel.fromJson(data));
-      print(userData.toJson());
+      
     userData.setID(userID);
+    print(userData.toJson());
     return userData;
   }
 
@@ -27,7 +30,8 @@ class UserProvider {
     var user = await getUserData(userID);
     user.newWaterLimit = newLimit;
     user.waterLimitDate = DateTime.now().add(Duration(days:1)).toString().split(" ").first;
-    http.put(url, body: user.toJson().toString());
+    final uri = Uri.parse(url);
+    http.put(uri, body: user.toJson().toString());
     return true;
   }
 
@@ -37,7 +41,8 @@ class UserProvider {
     final url = '$_url$userID/.json';
     var user = await getUserData(userID);
     user.glasses = glass;
-    http.put(url, body: user.toJson().toString());
+    final uri = Uri.parse(url);
+    http.put(uri, body: user.toJson().toString());
     return true;
   }
 
@@ -47,7 +52,8 @@ class UserProvider {
         user.waterLimitDate == DateTime.now().toString().split(" ").first) {
       user.waterLimit = user.newWaterLimit;
       final url = '$_url$userID.json';
-      http.put(url, body: user.toJson().toString());
+      Uri uri = Uri.parse(url);
+      http.put(uri, body: user.toJson().toString());
     }
   }
 
@@ -58,7 +64,8 @@ class UserProvider {
       user.glasses = 0;
       user.lastConnection = DateTime.now().toString().split(" ").first;
       final url = '$_url$userID.json';
-      http.put(url, body: user.toJson().toString());
+      Uri uri = Uri.parse(url);
+      http.put(uri, body: user.toJson().toString());
 
       
     }

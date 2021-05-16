@@ -2,12 +2,56 @@
 import 'package:a_bit_of_health/Login.dart';
 import 'package:a_bit_of_health/models/UserModel.dart';
 import 'package:a_bit_of_health/providers/UserProvider.dart';
+import 'package:a_bit_of_health/providers/authentification.dart';
 import 'package:a_bit_of_health/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class GlassesOfWater extends StatelessWidget {
+class GlassesOfWater extends StatefulWidget {
+  GlassesOfWater({Key key}) : super(key: key);
+
+  @override
+  _GlassesOfWaterState createState() => _GlassesOfWaterState();
+}
+
+class _GlassesOfWaterState extends State<GlassesOfWater> {
+  @override
+  Widget build(BuildContext context) {
+     print(Provider.of<UserModel>(context, listen: false).userID);
+    if (Provider.of<UserModel>(context, listen: false).userID == null)
+      return FutureBuilder<bool>(
+          future: AuthProvider.getUser(context),
+          builder: (context, AsyncSnapshot<bool> future) {
+            if (future.hasData) {
+              if (future.data)
+                return GlassesOfWaterPage();
+              else
+                return Login();
+            } else {
+              return Center(
+                  child: SizedBox(
+                child: CircularProgressIndicator(),
+                height: 250,
+                width: 250,
+              ));
+            }
+          });
+    else
+      return GlassesOfWaterPage(); 
+  }
+}
+
+
+
+
+class GlassesOfWaterPage extends StatefulWidget {
+  @override
+  _GlassesOfWaterPageState createState() => _GlassesOfWaterPageState();
+}
+
+class _GlassesOfWaterPageState extends State<GlassesOfWaterPage> {
   UserProvider _provider = UserProvider();
+
   @override
   Widget build(BuildContext context) {
     if(Provider.of<UserModel>(context).userID ==null)
@@ -28,7 +72,7 @@ class GlassesOfWater extends StatelessWidget {
                 child: Center(
                     child:
            FutureBuilder<UserModel>(
-              future: _provider.getUserData(
+              future: UserProvider.getUserData(
                   Provider.of<UserModel>(context, listen: false).userID), // a previously-obtained Future<String> or null
               builder: (BuildContext context, AsyncSnapshot<UserModel> snapshot) {
                 if (snapshot.hasData) {

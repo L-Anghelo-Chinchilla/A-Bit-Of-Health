@@ -1,4 +1,5 @@
 import 'package:a_bit_of_health/models/UserModel.dart';
+import 'package:a_bit_of_health/providers/authentification.dart';
 import 'package:a_bit_of_health/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -35,7 +36,7 @@ class _LoginState extends State<Login> {
           SizedBox(
             height: 700,
             width: 700,
-                    child: Card(
+             child: Card(
               margin: EdgeInsets.all(100),
               elevation: 10,
             child: Padding(padding: EdgeInsets.all(15),
@@ -45,9 +46,12 @@ class _LoginState extends State<Login> {
                 Text('Inicio de sesión', style: TextStyle(fontSize: 30, ),),
                 getTextForm(_email ,'Correo electrónico' , false),
                 getTextForm(_pass,'Contraseña' , _hide),
-                ElevatedButton(onPressed: (){
-                  Provider.of<UserModel>(context , listen: false).setUser(UserModel(userID:'-wqweqwewqeqwewq' ,name: 'Pedro Perez' ));
+                ElevatedButton(onPressed: ()async {
                   
+                  
+                  final user =  await AuthProvider.signInWithEmailPassword(context , _email.text.trim(), _pass.text.trim() );
+                 
+                  if(user.uid != null )
                   Navigator.pushReplacementNamed(context, '/');
 
                 },
@@ -77,8 +81,30 @@ class _LoginState extends State<Login> {
       controller: controller, 
       obscureText:hide ,
       maxLength: 50,
+      validator: (flag)? passwordValidator:emailValidator,
     );
 
+
+  }
+
+  String emailValidator(String value){
+    if(value.isEmpty){
+      
+        return 'Debe llenar este campo *';
+
+    }
+
+    return null;
+
+  }
+  
+  String passwordValidator(String value){
+    if(value.isEmpty){
+        return 'Debe llenar este campo *';
+
+    }
+
+    return null;
 
   }
 }
