@@ -71,7 +71,7 @@ class _FoodSelectorStatePage extends State<FoodSelectorPage> {
   @override
   Widget build(BuildContext context) {
     UserProvider user = UserProvider();
-   // 
+    //
 
     return Scaffold(
         appBar: getAppBar(context: context),
@@ -168,6 +168,7 @@ class _FoodSelectorStatePage extends State<FoodSelectorPage> {
                                     .foodOffers
                                     .forEach((element) {
                                   element.deselectAll();
+                                  setState(() {});
                                   print('FoodSelector envía: ${list}');
                                 });
                               } else {

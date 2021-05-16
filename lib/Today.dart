@@ -37,12 +37,9 @@ class _TodayState extends State<Today> {
             }
           });
     else
-      return TodayPage(); 
+      return TodayPage();
   }
 }
-
-
-
 
 class TodayPage extends StatefulWidget {
   const TodayPage({Key key}) : super(key: key);
@@ -52,23 +49,20 @@ class TodayPage extends StatefulWidget {
 }
 
 class _TodayPageState extends State<TodayPage> {
- 
-  
   @override
   Widget build(BuildContext context) {
     FoodProvider provider = FoodProvider();
-   // provider.uploadUserRegiter('-wqweqwewqeqwewq', '2021/5/12', FoodRegister(date : '4546546'));
+    // provider.uploadUserRegiter('-wqweqwewqeqwewq', '2021/5/12', FoodRegister(date : '4546546'));
     // if(Provider.of<UserModel>(context).userID == null )
     // return Login();
     // else
-    
 
-         return Scaffold(
-        appBar: getAppBar(context:context),
+    return Scaffold(
+        appBar: getAppBar(context: context),
         body: Container(
-           decoration: BoxDecoration(
-           image: DecorationImage(
-              image: AssetImage('fondo_inicio.jpg'), fit: BoxFit.cover),
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('fondo_today.jpg'), fit: BoxFit.cover),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -78,8 +72,13 @@ class _TodayPageState extends State<TodayPage> {
                   child: Padding(
                 padding: EdgeInsets.all(20),
                 child: FutureBuilder(
-                  future: provider.getUserRegister(Provider.of<UserModel>(context, listen: false).userID,
-                      DateTime.now().toString().split(' ').first.replaceAll('-','/')),
+                  future: provider.getUserRegister(
+                      Provider.of<UserModel>(context, listen: false).userID,
+                      DateTime.now()
+                          .toString()
+                          .split(' ')
+                          .first
+                          .replaceAll('-', '/')),
                   builder: (context, data) {
                     if (data.hasData) if (data.data.isEmpty)
                       return getNoFoodSignal();
@@ -156,10 +155,9 @@ class _TodayRegisterState extends State<TodayRegister> {
       Expanded(
           child: Container(
               decoration: BoxDecoration(
-                                  color: Color(0xffffffff).withOpacity(0.9),
-                                 // border: Border.all(color: Colors.black),
-                                  borderRadius: BorderRadius.all(Radius.circular(7))),
-              
+                  color: Color(0xffffffff).withOpacity(0.9),
+                  // border: Border.all(color: Colors.black),
+                  borderRadius: BorderRadius.all(Radius.circular(7))),
               child: Scrollbar(
                 thickness: 13,
                 //controller: _controller ,
@@ -176,8 +174,9 @@ class _TodayRegisterState extends State<TodayRegister> {
                         Container(
                             margin: EdgeInsets.fromLTRB(5, 5, 20, 5),
                             decoration: BoxDecoration(
-                               color:Colors.orange[400] ,
-                              borderRadius: BorderRadius.all(Radius.circular(7)),
+                              color: Colors.orange[400],
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(7)),
                               border: Border.all(color: Colors.black45),
                             ),
                             padding: EdgeInsets.symmetric(
@@ -187,17 +186,23 @@ class _TodayRegisterState extends State<TodayRegister> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                      '${widget.map.values.elementAt(len-1-i).food.typeOfFood} ${getEmoji(widget.map.values.elementAt(len-1-i).food.typeOfFood)}'),
+                                      '${widget.map.values.elementAt(len - 1 - i).food.typeOfFood} ${getEmoji(widget.map.values.elementAt(len - 1 - i).food.typeOfFood)}'),
                                   Text(
-                                      '🕰️ ${widget.map.values.elementAt(len-1-i).time}'),
+                                      '🕰️ ${widget.map.values.elementAt(len - 1 - i).time}'),
                                   IconButton(
                                       icon: Icon(Icons.delete),
                                       onPressed: () async {
                                         showAlertDialog(
                                             context,
-                                            Provider.of<UserModel>(context, listen:false).userID,
-                                            widget.map.values.elementAt(len-1-i).date,
-                                            widget.map.values.elementAt(len-1-i).id);
+                                            Provider.of<UserModel>(context,
+                                                    listen: false)
+                                                .userID,
+                                            widget.map.values
+                                                .elementAt(len - 1 - i)
+                                                .date,
+                                            widget.map.values
+                                                .elementAt(len - 1 - i)
+                                                .id);
 
                                         /*final provider = FoodProvider();
                                         await provider.deleteRegisterByDate(
@@ -221,12 +226,14 @@ class _TodayRegisterState extends State<TodayRegister> {
                             child: SingleChildScrollView(
                               child: DataTable(
                                   columns: [
-                                    DataColumn(label: Text('Alimento(s)'),),
+                                    DataColumn(
+                                      label: Text('Alimento(s)'),
+                                    ),
                                     DataColumn(label: Text('Porción(es)')),
                                     DataColumn(label: Text('Calorías')),
                                   ],
                                   rows: widget.map.values
-                                      .elementAt(len-1-i)
+                                      .elementAt(len - 1 - i)
                                       .food
                                       .aliments
                                       .map((element) => DataRow(cells: [
@@ -244,26 +251,26 @@ class _TodayRegisterState extends State<TodayRegister> {
                             Container(
                                 margin: EdgeInsets.all(5),
                                 decoration: BoxDecoration(
-                                  color: Color(0xFFF4D03F),
-                                  border: Border.all(color: Colors.black45),
-                                  borderRadius: BorderRadius.all(Radius.circular(7))
-                                ),
+                                    color: Color(0xFFF4D03F),
+                                    border: Border.all(color: Colors.black45),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(7))),
                                 padding: EdgeInsets.all(10),
                                 child: Text(
-                                    'Calorías: ${widget.map.values.elementAt(len-1-i).calories}')),
+                                    'Calorías: ${widget.map.values.elementAt(len - 1 - i).calories}')),
                             SizedBox(
                               width: 10,
                             ),
                             Container(
                                 margin: EdgeInsets.all(5),
                                 decoration: BoxDecoration(
-                                  color: Color(0xFFF4D03F),
-                                  border: Border.all(color: Colors.black45),
-                                  borderRadius: BorderRadius.all(Radius.circular(7))
-                                ),
+                                    color: Color(0xFFF4D03F),
+                                    border: Border.all(color: Colors.black45),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(7))),
                                 padding: EdgeInsets.all(10),
                                 child: Text(
-                                    'Puntuación: ${widget.map.values.elementAt(len-1-i).score}'))
+                                    'Puntuación: ${widget.map.values.elementAt(len - 1 - i).score}'))
                           ],
                         )
                       ],
@@ -285,9 +292,13 @@ class _TodayRegisterState extends State<TodayRegister> {
             color: Colors.amber,
           ),
           padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-          child: Center(child: Text(score , style: TextStyle(fontSize:30 ),)),
+          child: Center(
+              child: Text(
+            score,
+            style: TextStyle(fontSize: 30),
+          )),
         ),
-        Text(title, style: TextStyle(fontSize:30 ))
+        Text(title, style: TextStyle(fontSize: 30))
       ],
     );
   }
@@ -328,11 +339,9 @@ class _TodayRegisterState extends State<TodayRegister> {
     );
 
     // set up the AlertDialog
-    AlertDialog alert = AlertDialog
-    (
+    AlertDialog alert = AlertDialog(
       title: Text("Eliminar registro"),
-      content: Text(
-          "¿Eliminar éste registro de comida?"),
+      content: Text("¿Eliminar éste registro de comida?"),
       actions: [
         cancelButton,
         continueButton,

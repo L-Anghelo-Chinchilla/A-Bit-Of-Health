@@ -10,11 +10,9 @@ import 'package:a_bit_of_health/models/FoodModel.dart';
 import 'package:tuple/tuple.dart';
 import 'Login.dart';
 
-
 List<double> Thecalories = [];
 
 int num;
-
 
 class FoodCounter extends StatelessWidget {
   //const FoodCounter({Key key}) : super(key: key);
@@ -53,99 +51,96 @@ class NextPage extends StatelessWidget {
     print('-> ' +
         Provider.of<List<FoodOffer>>(context, listen: false).toString());
     //appBar: getAppBar(context);
-    if(Provider.of<UserModel>(context).userID ==null)
+    if (Provider.of<UserModel>(context).userID == null)
       return Login();
     else
       return Scaffold(
-      appBar: getAppBar(context:context),
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage('assets/fondo_cantidades.jpg'),
-              fit: BoxFit.cover),
-        ),
-        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          getDirectionsBar(context, 'FoodCounter'),
-          Text(
-            '\n Añadir cantidades de Alimentos',
-            style: TextStyle(
-              fontFamily: 'Mont',
-              fontSize: 32,
-            ),
+        appBar: getAppBar(context: context),
+        body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/fondo_cantidades.jpg'),
+                fit: BoxFit.cover),
           ),
-          Expanded(
-            child: Container(
-              //alignment: Alignment.center,
-              child: Scrollbar(
-                child: ListView.builder(
-                  // LISTVIEW OF IMAGES ------------------------------------
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: list.length,
-                  itemBuilder: (context, i) {
-                    return Column(children: [
-                      ImagestoDisplay(
-                          imageName: list[i].typeOfFood.toLowerCase()),
-                      TitleDisplay(titleName: list[i].typeOfFood),
-                      ColumnsDisplay(foods: list[i].aliments, index: i)
-                    ]);
-                  },
-                ),
-              ), //-------------------------------------------------------------------
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            getDirectionsBar(context, 'FoodCounter'),
+            Text(
+              '\n Añadir cantidades de Alimentos',
+              style: TextStyle(
+                fontFamily: 'Mont',
+                fontSize: 32,
+              ),
             ),
-          ),
-
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-              // ROW OF BUTTONS----------------
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                ElevatedButton(
-                    child: Text('Atrás'),
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.blue),
-                    ),
-                    //backgroundColor: Colors.limeAccent[700],
-                    onPressed: () {
-                      Navigator.pop(context);
-                    }),
-                ElevatedButton(
-                    onPressed: () {
-                      double sum = 0;
-                      Provider.of<List<FoodOffer>>(context, listen: false)
-                          .forEach((foodOffer) {
-                        sum += foodOffer.aliments.fold(0.0,
-                            (ant, food) => ant + food.calories * food.cant);
-                      });
-                      print('la suma es : $sum ');
-
-                      final newList =
-                          Provider.of<List<FoodOffer>>(context, listen: false)
-                              .fold(<Food>[], (prev, actual) {
-                        prev.addAll(actual.aliments);
-                        return prev;
-                      });
-
-                      final offer =
-                          FoodOffer(typeOfFood: KindOfFood, aliments: newList);
-                      print('La nueva lista es ${newList.toString()}');
-                      Provider.of<List<FoodOffer>>(context, listen: false)
-                          .clear();
-                      Navigator.pushNamed(context, 'Evaluation',
-                          arguments: Tuple2<double, FoodOffer>(sum, offer));
-                      print('FoodCounter envía: ${offer}');
+            Expanded(
+              child: Container(
+                //alignment: Alignment.center,
+                child: Scrollbar(
+                  child: ListView.builder(
+                    // LISTVIEW OF IMAGES ------------------------------------
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: list.length,
+                    itemBuilder: (context, i) {
+                      return Column(children: [
+                        ImagestoDisplay(
+                            imageName: list[i].typeOfFood.toLowerCase()),
+                        TitleDisplay(titleName: list[i].typeOfFood),
+                        ColumnsDisplay(foods: list[i].aliments, index: i)
+                      ]);
                     },
-                    child: Text('Autoevaluar'))
-              ],
+                  ),
+                ), //-------------------------------------------------------------------
+              ),
             ),
-          ), //-----------------------------
-        ]),
-      ),
-    );
+
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Row(
+                // ROW OF BUTTONS----------------
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  ElevatedButton(
+                      child: Text('Atrás'),
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(Colors.blue),
+                      ),
+                      //backgroundColor: Colors.limeAccent[700],
+                      onPressed: () {
+                        Navigator.pop(context);
+                      }),
+                  ElevatedButton(
+                      onPressed: () {
+                        double sum = 0;
+                        Provider.of<List<FoodOffer>>(context, listen: false)
+                            .forEach((foodOffer) {
+                          sum += foodOffer.aliments.fold(0.0,
+                              (ant, food) => ant + food.calories * food.cant);
+                        });
+                        print('la suma es : $sum ');
+
+                        final newList =
+                            Provider.of<List<FoodOffer>>(context, listen: false)
+                                .fold(<Food>[], (prev, actual) {
+                          prev.addAll(actual.aliments);
+                          return prev;
+                        });
+                        final offer = FoodOffer(
+                            typeOfFood: KindOfFood, aliments: newList);
+                        print('La nueva lista es ${newList.toString()}');
+                        Navigator.pushNamed(context, 'Evaluation',
+                            arguments: Tuple2<double, FoodOffer>(sum, offer));
+                        print('FoodCounter envía: ${offer}');
+                      },
+                      child: Text('Autoevaluar'))
+                ],
+              ),
+            ), //-----------------------------
+          ]),
+        ),
+      );
     //------------------------------------------------------------------------------
   }
 }
