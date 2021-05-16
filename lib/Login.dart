@@ -12,99 +12,121 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  bool _hide = true ;
-  final _email  = TextEditingController(),
-  _pass = TextEditingController();
-  void Function() change(){
+  bool _hide = true;
+  final _email = TextEditingController(), _pass = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  void Function() change() {
     setState(() {
       _hide = !_hide;
     });
-    
   }
-
-
 
   @override
   Widget build(BuildContext context) {
-    _email.text = '';
+    
     return Scaffold(
-      appBar: getAppBar(context:context , route: ''),
-      body: Center(
-        child: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child:
-          SizedBox(
-            height: 700,
-            width: 700,
-             child: Card(
-              margin: EdgeInsets.all(100),
-              elevation: 10,
-            child: Padding(padding: EdgeInsets.all(15),
-            child:Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Text('Inicio de sesión', style: TextStyle(fontSize: 30, ),),
-                getTextForm(_email ,'Correo electrónico' , false),
-                getTextForm(_pass,'Contraseña' , _hide),
-                ElevatedButton(onPressed: ()async {
-                  
-                  
-                  final user =  await AuthProvider.signInWithEmailPassword(context , _email.text.trim(), _pass.text.trim() );
-                 
-                  if(user.uid != null )
-                  Navigator.pushReplacementNamed(context, '/');
+        appBar: getAppBar(context: context, route: ''),
+        body: Center(
+          child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: SizedBox(
+                height: 700,
+                width: 700,
+                child: Card(
+                  margin: EdgeInsets.all(100),
+                  elevation: 10,
+                  child: Padding(
+                      padding: EdgeInsets.all(15),
+                      child: Builder(
+                          builder: (context) => Form(
+                               key: _formKey,
+                               autovalidateMode:AutovalidateMode.always,
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Text(
+                                      'Inicio de sesión',
+                                      style: TextStyle(
+                                        fontSize: 30,
+                                      ),
+                                    ),
+                                    getTextForm(
+                                        _email, 'Correo electrónico', false),
+                                    getTextForm(_pass, 'Contraseña', _hide),
+                                    ElevatedButton(
+                                      onPressed: () async {
+                                        FormState state = _formKey.currentState;
+                                        if(state.validate()){
+                                        final user = await AuthProvider
+                                            .signInWithEmailPassword(
+                                                context,
+                                                _email.text.trim().toLowerCase(),
+                                                _pass.text.trim());
 
-                },
-                child: Text('Iniciar sesión'),)
-              ],
-            )), 
-            ),
-          )
-     ),
-      )
-    );
+                                        if (user.uid != null)
+                                          Navigator.pushReplacementNamed(
+                                              context, '/');}
+                                      },
+                                      child: Text('Iniciar sesión'),
+                                    )
+                                  ],
+                                ),
+                              ))),
+                ),
+              )),
+        ));
   }
 
-  Widget getTextForm(controller ,hint , hide ){
+  Widget getTextForm(controller, hint, hide) {
     bool flag = hint == 'Contraseña';
-    
-    return  TextFormField(
+
+    return TextFormField(
       decoration: InputDecoration(
         hintText: hint,
-        icon: (flag)? Icon(Icons.lock) : Icon(Icons.person_pin_rounded) , 
+        icon: (flag) ? Icon(Icons.lock) : Icon(Icons.person_pin_rounded),
         labelText: hint,
-        suffixIcon: (flag)? 
-        IconButton(onPressed: change,
-         icon:(hide)?Icon(Icons.remove_red_eye_outlined):Icon(Icons.remove_red_eye),
-         ):Container(height:1, width: 1,),
+        suffixIcon: (flag)
+            ? IconButton(
+                onPressed: change,
+                icon: (hide)
+                    ? Icon(Icons.remove_red_eye_outlined)
+                    : Icon(Icons.remove_red_eye),
+              )
+            : Container(
+                height: 1,
+                width: 1,
+              ),
       ),
-      controller: controller, 
-      obscureText:hide ,
+      controller: controller,
+      obscureText: hide,
       maxLength: 50,
-      validator: (flag)? passwordValidator:emailValidator,
+      validator: (flag) ? passwordValidator : emailValidator,
     );
-
-
   }
 
-  String emailValidator(String value){
-    if(value.isEmpty){
-      
-        return 'Debe llenar este campo *';
-
-    }
+  String emailValidator(String value) {
+    final pattern = RegExp(r'^[a-zA-Z0-9._*^+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$');
+    if (value.isEmpty) 
+      return 'Debe llenar este campo *';
+    else if(pattern.hasMatch(value))
+      return '''Sólo se permiten caracteres afanuméricos 
+      "_" , "-" y "."''';
 
     return null;
-
   }
-  
-  String passwordValidator(String value){
-    if(value.isEmpty){
-        return 'Debe llenar este campo *';
 
-    }
+  String passwordValidator(String value) {
+     final pattern = RegExp(r'^[a-zA-Z]+$');
+   //                         r'^[a-z]+[A-Z]+[0-9]+[._-]+.,$');
+    if (value.isEmpty) 
+      return 'Debe llenar este campo *';
+    else if(value.length < 7 )
+    return 'La contraseña debe ser mayor a 6 caracteres'; 
+    else if (!pattern.hasMatch(value))
+     return  '''Sólo se permiten caracteres afanuméricos,  
+      "_" , "-" y "."'''; 
 
     return null;
-
   }
 }
