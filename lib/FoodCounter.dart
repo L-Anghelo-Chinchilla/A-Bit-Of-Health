@@ -107,6 +107,8 @@ class NextPage extends StatelessWidget {
                       ),
                       //backgroundColor: Colors.limeAccent[700],
                       onPressed: () {
+                        Provider.of<List<FoodOffer>>(context, listen: false)
+                            .clear();
                         Navigator.pop(context);
                       }),
                   ElevatedButton(
@@ -302,7 +304,7 @@ class ColumnsDisplay extends StatelessWidget {
         width: 250,
         //height: MediaQuery.of(context).size.height * 0.3,
         margin: EdgeInsets.all(10),
-       // padding: EdgeInsets.all(10),
+        // padding: EdgeInsets.all(10),
         decoration: BoxDecoration(
             color: Color(0xFFF4D03F).withOpacity(0.9),
             border:
@@ -317,7 +319,7 @@ class ColumnsDisplay extends StatelessWidget {
                 num = i;
                 Thecalories.add(foods[i].calories);
                 return Padding(
-                    padding: EdgeInsets.fromLTRB(10 ,5 ,17,5 ),
+                    padding: EdgeInsets.fromLTRB(10, 5, 17, 5),
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [

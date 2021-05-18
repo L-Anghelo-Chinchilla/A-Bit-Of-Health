@@ -145,7 +145,7 @@ class Evaluation extends StatelessWidget {
                                                 Align(
                                                     alignment: Alignment.center,
                                                     child: Text(
-                                                      'CALORIAS',
+                                                      'CALORÍAS',
                                                       style: TextStyle(
                                                           fontFamily: 'Mont2',
                                                           fontSize: 19,
@@ -251,7 +251,7 @@ class Evaluation extends StatelessWidget {
                                           child: Column(
                                             children: [
                                               Text(
-                                                '\nTu última comida de ${kindoffood} contuvo: ${lastRegister} calorias.',
+                                                '\nTu última comida de ${kindoffood} contuvo: ${lastRegister} calorías.',
                                                 style: TextStyle(
                                                   fontFamily: 'Mont2',
                                                   fontSize: 18,
@@ -278,7 +278,7 @@ class Evaluation extends StatelessWidget {
                                                           ),
                                                           Container(
                                                               child: Text(
-                                                            '\n\n ${thetotal} Calorias',
+                                                            '\n\n ${thetotal} Calorías',
                                                             style: TextStyle(
                                                               fontFamily:
                                                                   'Mont',
@@ -322,7 +322,7 @@ class Evaluation extends StatelessWidget {
                                                   ),
                                                 ),
                                               Text(
-                                                '\n¿Cómo puntuarias tu comida?',
+                                                '\n¿Cómo puntuarías tu comida?',
                                                 style: TextStyle(
                                                   color: Colors.black,
                                                   fontFamily: 'Mont',
@@ -366,7 +366,7 @@ class Evaluation extends StatelessWidget {
                                       //backgroundColor: Colors.limeAccent[700],
                                       onPressed: () {
                                         Navigator.pop(context);
-                                      /*  Provider.of<List<FoodOffer>>(context,
+                                        /*  Provider.of<List<FoodOffer>>(context,
                                                 listen: false)
                                             .clear();*/
                                       }),
