@@ -132,25 +132,6 @@ class Home extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                          Container(
-                                width: (MediaQuery.of(context).size.width)/45,
-                                height: (MediaQuery.of(context).size.width)/45,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(image: AssetImage('assets/face.png'),
-                                  ),
-                                ),
-                                child: FlatButton(
-                                  padding: EdgeInsets.all(0.0),
-                                  onPressed: () {
-                                    openURLfb();
-                                  }, 
-                                  child: null)
-                          ),
-                     ],
-                ),
                 Container(
                   color: Colors.yellow,
                   height: (MediaQuery.of(context).size.height)/1.8,
@@ -224,6 +205,28 @@ class Home extends StatelessWidget {
                                      child: Text('Ejercicios', style: TextStyle(color: Colors.white, fontSize: 16)),)
                                 ),
                             ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      child: Text('¿Necesitas soporte?  Contáctanos:     ', style: TextStyle(fontFamily: 'Pt', fontSize: 18, backgroundColor: Color(0xFFD0E3DA).withOpacity(0.8)),),
+                    ),
+                    Container(
+                                width: (MediaQuery.of(context).size.width)/40,
+                                height: (MediaQuery.of(context).size.width)/40,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(image: AssetImage('assets/facebook.png'),
+                                  ),
+                                ),
+                                child: FlatButton(
+                                  padding: EdgeInsets.all(0.0),
+                                  onPressed: () {
+                                    openURLfb();
+                                  }, 
+                                  child: null)
+                          )
+                  ],
                 ),
               ],
             ),
