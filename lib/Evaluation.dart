@@ -27,7 +27,7 @@ class Evaluation extends StatelessWidget {
 
     if (thelist == null) return FoodSelector();
     String kindoffood = thelist.item2.typeOfFood;
-    String thetotal = thelist.item1.toStringAsFixed(2);
+    String thetotal = thelist.item1.toStringAsFixed(1);
     List<Food> flist = thelist.item2.aliments;
 
     int healthyQuantity;
@@ -356,31 +356,29 @@ class Evaluation extends StatelessWidget {
                                 //crossAxisAlignment: CrossAxisAlignment.center,
                                 // mainAxisSize: MainAxisSize.max,
                                 children: [
-                                  ElevatedButton(
-                                      child: Text('Atrás'),
-                                      style: ButtonStyle(
-                                        backgroundColor:
-                                            MaterialStateProperty.all<Color>(
-                                                Colors.blue),
+                                  MaterialButton(
+                                      child: Text(
+                                        'Atrás',
+                                        style: new TextStyle(fontSize: 22),
                                       ),
-                                      //backgroundColor: Colors.limeAccent[700],
+                                      height: 50,
+                                      minWidth: 140,
+                                      color: Colors.blue,
+                                      textColor: Colors.white,
                                       onPressed: () {
                                         Navigator.pop(context);
-                                        /*  Provider.of<List<FoodOffer>>(context,
-                                                listen: false)
-                                            .clear();*/
                                       }),
                                   SizedBox(
                                     child: Container(),
                                     width: 500,
                                   ),
-                                  ElevatedButton(
-                                      child: Text('Finalizar'),
-                                      style: ButtonStyle(
-                                        backgroundColor:
-                                            MaterialStateProperty.all<Color>(
-                                                Colors.blue),
-                                      ),
+                                  MaterialButton(
+                                      child: Text('Finalizar',
+                                          style: new TextStyle(fontSize: 22)),
+                                      height: 50,
+                                      minWidth: 140,
+                                      color: Colors.blue,
+                                      textColor: Colors.white,
                                       //backgroundColor: Colors.limeAccent[700],
                                       onPressed: () async {
                                         UpdateFood(
