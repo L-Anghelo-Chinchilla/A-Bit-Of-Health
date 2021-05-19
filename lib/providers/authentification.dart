@@ -45,7 +45,7 @@ static Future<User> signInWithEmailPassword(context,String email, String passwor
     }
     userName = Provider.of<UserModel>(context , listen:false).name;
   } on FirebaseAuthException catch (e) {
-    final snackbar = SnackBar(content: Text('El correo y la contraseña no coinciden') );
+    final snackbar = SnackBar(content: Text('Usuario no válido') );
     ScaffoldMessenger.of(context).showSnackBar(snackbar);    
 
     if (e.code == 'user-not-found') {

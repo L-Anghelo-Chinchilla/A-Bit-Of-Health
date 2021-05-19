@@ -70,7 +70,7 @@ class _TodayPageState extends State<TodayPage> {
               getDirectionsBar(context, 'Today'),
               Expanded(
                   child: Padding(
-                padding: EdgeInsets.all(20),
+                padding: EdgeInsets.fromLTRB(50 ,20 ,50,20),
                 child: FutureBuilder(
                   future: provider.getUserRegister(
                       Provider.of<UserModel>(context, listen: false).userID,
@@ -204,25 +204,13 @@ class _TodayRegisterState extends State<TodayRegister> {
                                                 .elementAt(len - 1 - i)
                                                 .id);
 
-                                        /*final provider = FoodProvider();
-                                        await provider.deleteRegisterByDate(
-                                            final provider = FoodProvider();
-                                        await provider.deleteRegisterByDate(
-                                            '-wqweqwewqeqwewq',
-                                            widget.map.values.elementAt(i).date,
-                                            widget.map.values.elementAt(i).id);,
-                                            widget.map.values.elementAt(i).date,
-                                            widget.map.values.elementAt(i).id);
-                                        setState(() {
-                                          widget.map.remove(key);
-                                        });*/
                                       })
                                 ])),
                         Align(
                           alignment: Alignment.centerLeft,
                           child: Container(
                             height: 250,
-                            width: 500,
+                            width:double.infinity ,// 500,
                             child: SingleChildScrollView(
                               child: DataTable(
                                   columns: [
@@ -257,7 +245,7 @@ class _TodayRegisterState extends State<TodayRegister> {
                                         BorderRadius.all(Radius.circular(7))),
                                 padding: EdgeInsets.all(10),
                                 child: Text(
-                                    'Calorías: ${widget.map.values.elementAt(len - 1 - i).calories}')),
+                                    'Calorías: ${widget.map.values.elementAt(len - 1 - i).calories.toStringAsFixed(1)}')),
                             SizedBox(
                               width: 10,
                             ),
@@ -272,7 +260,8 @@ class _TodayRegisterState extends State<TodayRegister> {
                                 child: Text(
                                     'Puntuación: ${widget.map.values.elementAt(len - 1 - i).score}'))
                           ],
-                        )
+                        ), 
+                        Divider()
                       ],
                     );
                   },

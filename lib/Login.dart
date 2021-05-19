@@ -23,13 +23,15 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
         appBar: getAppBar(context: context, route: ''),
         backgroundColor: Colors.grey[400],
-        body: Center(
-          child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
+        body: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('fondo_login.jpg'), fit: BoxFit.cover),
+            ),
+            child: Center(
               child: SizedBox(
                 height: 700,
                 width: 700,
@@ -40,8 +42,8 @@ class _LoginState extends State<Login> {
                       padding: EdgeInsets.all(25),
                       child: Builder(
                           builder: (context) => Form(
-                               key: _formKey,
-                               //autovalidateMode:AutovalidateMode.always,
+                                key: _formKey,
+                                autovalidateMode: AutovalidateMode.always,
                                 child: Column(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
@@ -58,16 +60,19 @@ class _LoginState extends State<Login> {
                                     ElevatedButton(
                                       onPressed: () async {
                                         FormState state = _formKey.currentState;
-                                        if(state.validate()){
-                                        final user = await AuthProvider
-                                            .signInWithEmailPassword(
-                                                context,
-                                                _email.text.trim().toLowerCase(),
-                                                _pass.text.trim());
+                                        if (state.validate()) {
+                                          final user = await AuthProvider
+                                              .signInWithEmailPassword(
+                                                  context,
+                                                  _email.text
+                                                      .trim()
+                                                      .toLowerCase(),
+                                                  _pass.text.trim());
 
-                                        if (user.uid != null)
-                                          Navigator.pushReplacementNamed(
-                                              context, '/');}
+                                          if (user.uid != null)
+                                            Navigator.pushReplacementNamed(
+                                                context, '/');
+                                        }
                                       },
                                       child: Text('Iniciar sesión'),
                                     )
@@ -75,8 +80,8 @@ class _LoginState extends State<Login> {
                                 ),
                               ))),
                 ),
-              )),
-        ));
+              ),
+            )));
   }
 
   Widget getTextForm(controller, hint, hide) {
@@ -108,11 +113,11 @@ class _LoginState extends State<Login> {
 
   String emailValidator(String value) {
     final pattern = RegExp(r'^[\w\-\._]+@([\w-]+\.)+[\w-]{2,4}$');
-    if (value.isEmpty) 
+    if (value.isEmpty)
       return 'Debe llenar este campo *';
-    else if(value.length < 7)
+    else if (value.length < 7)
       return 'correo muy corto';
-    else if(!pattern.hasMatch(value))
+    else if (!pattern.hasMatch(value))
       return '''Ingrese un correo válido.
 Sólo se permiten caracteres alfanuméricos, "_" , "-" y "."''';
 
@@ -120,15 +125,15 @@ Sólo se permiten caracteres alfanuméricos, "_" , "-" y "."''';
   }
 
   String passwordValidator(String value) {
-     final pattern = RegExp(r'^[a-zA-Z\.\-_]+$');
-       //r'^[a-z]+[A-Z]+[\.\-_]+|[a-z]+[A-Z]+[\.\-_]+|[a-z]+[\.\-_]|[a-z]+[A-Z]+[\.\-_]|[a-z]+[A-Z]+[\.\-_]|[a-z]+[A-Z]+[\.\-_]$');
-   //                         r'^[a-z]+[A-Z]+[0-9]+[._-]+.,$');
-    if (value.isEmpty) 
+    final pattern = RegExp(r'^[a-zA-Z0-9\.\-_]+$');
+    //r'^[a-z]+[A-Z]+[\.\-_]+|[a-z]+[A-Z]+[\.\-_]+|[a-z]+[\.\-_]|[a-z]+[A-Z]+[\.\-_]|[a-z]+[A-Z]+[\.\-_]|[a-z]+[A-Z]+[\.\-_]$');
+    //                         r'^[a-z]+[A-Z]+[0-9]+[._-]+.,$');
+    if (value.isEmpty)
       return 'Debe llenar este campo *';
-    else if(value.length < 7 )
-    return 'La contraseña debe ser mayor a 6 caracteres'; 
+    else if (value.length < 7)
+      return 'La contraseña debe ser mayor a 6 caracteres';
     else if (!pattern.hasMatch(value))
-     return  '''Sólo se permiten caracteres alfanuméricos,"_" , "-" y "."'''; 
+      return '''Sólo se permiten caracteres alfanuméricos,"_" , "-" y "."''';
 
     return null;
   }
