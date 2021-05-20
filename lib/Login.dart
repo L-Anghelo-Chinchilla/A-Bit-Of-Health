@@ -31,7 +31,7 @@ class _LoginState extends State<Login> {
               image: DecorationImage(
                   image: AssetImage('fondo_login.jpg'), fit: BoxFit.cover),
             ),
-            child: Center(
+            child: Center( 
               child: SizedBox(
                 height: 700,
                 width: 700,
