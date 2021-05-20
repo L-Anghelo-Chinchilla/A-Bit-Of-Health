@@ -90,7 +90,7 @@ Widget getAppBar({BuildContext context, String route}) {
     backgroundColor: Color(0xff173749),
     brightness: Brightness.dark,
     actions: [
-      if (route == null)
+      if (route == null) 
        
         if (Provider.of<UserModel>(context, listen: false).name != null)
           Padding(
