@@ -98,11 +98,8 @@ Widget getAppBar({BuildContext context, String route}) {
                   onPressed: () async {
                     await AuthProvider.signOut();
                     Provider.of<UserModel>(context, listen: false).delete();
-                    await Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) => Login()),
-                        ModalRoute.withName('/'));
+                   Navigator.of(context)
+    .pushNamedAndRemoveUntil('Login', (Route<dynamic> route) => false); 
                   },
                   icon: Icon(Icons.person),
                   label: Text('''Cerrar sesión
