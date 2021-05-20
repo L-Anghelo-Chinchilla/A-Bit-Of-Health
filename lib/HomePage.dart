@@ -87,7 +87,8 @@ class Home extends StatelessWidget {
     body: Container(
       decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('fondo_home.jpg'),
+              image: NetworkImage('https://images.unsplash.com/photo-1479150928156-423a69d91fe0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80'),
+   
               fit: BoxFit.cover
             ),
           ),

@@ -103,8 +103,8 @@ Widget getAppBar({BuildContext context, String route}) {
     .pushNamedAndRemoveUntil('Login', (Route<dynamic> route) => false); 
                   },
                   icon: Icon(Icons.person),
-                  label: Text('''Cerrar sesión
-${Provider.of<UserModel>(context, listen: false).name}''')),
+                  label: Text('''${Provider.of<UserModel>(context, listen: false).name}
+Cerrar sesión''')),
               padding: EdgeInsets.fromLTRB(10, 10, 20, 10))
         else
           Padding(

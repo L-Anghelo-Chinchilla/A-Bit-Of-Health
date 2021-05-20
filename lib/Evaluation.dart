@@ -64,7 +64,8 @@ class Evaluation extends StatelessWidget {
         body: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('fondo_evaluation.jpg'), fit: BoxFit.cover),
+                image: NetworkImage('https://images.unsplash.com/photo-1497888329096-51c27beff665?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1051&q=80'),fit: BoxFit.cover)
+  ,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
