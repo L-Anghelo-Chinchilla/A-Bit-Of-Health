@@ -91,7 +91,8 @@ Widget getAppBar({BuildContext context, String route}) {
     brightness: Brightness.dark,
     actions: [
       if (route == null) 
-       
+        
+        
         if (Provider.of<UserModel>(context, listen: false).name != null)
           Padding(
               child: TextButton.icon(
