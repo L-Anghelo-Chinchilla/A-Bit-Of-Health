@@ -72,7 +72,6 @@ class _FoodSelectorStatePage extends State<FoodSelectorPage> {
   Widget build(BuildContext context) {
     UserProvider user = UserProvider();
     //
-
     return Scaffold(
         appBar: getAppBar(context: context),
         body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -137,6 +136,7 @@ class _FoodSelectorStatePage extends State<FoodSelectorPage> {
                                               listen: false)
                                           .setFoodOffers(
                                               snapshot.data.foodOffers);
+
                                       return FoodOfferList(
                                           offer: snapshot.data);
                                     } else {
@@ -168,6 +168,9 @@ class _FoodSelectorStatePage extends State<FoodSelectorPage> {
                                     .foodOffers
                                     .forEach((element) {
                                   element.deselectAll();
+                                  Provider.of<List<FoodOffer>>(context,
+                                          listen: false)
+                                      .clear(); //MARKER
                                   setState(() {});
                                   print('FoodSelector envía: ${list}');
                                 });
