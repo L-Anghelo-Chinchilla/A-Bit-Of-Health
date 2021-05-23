@@ -102,15 +102,15 @@ Widget getAppBar({BuildContext context, String route}) {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text('${Provider.of<UserModel>(context, listen: false).name}'),
-                  TextButton.icon(
+                  TextButton(
                       onPressed: () async {
                         await AuthProvider.signOut();
                         Provider.of<UserModel>(context, listen: false).delete();
                        Navigator.of(context)
     .pushNamedAndRemoveUntil('Login', (Route<dynamic> route) => false); 
                       },
-                      icon: Icon(Icons.person),
-                      label: Text('Cerrar sesión')),
+                     // Icon(Icons.person),
+                      child: Text('Cerrar sesión')),
                 ],
               ),
              padding: EdgeInsets.fromLTRB(10, 5, 20, 0))
