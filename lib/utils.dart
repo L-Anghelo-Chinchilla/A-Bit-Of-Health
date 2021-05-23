@@ -94,18 +94,27 @@ Widget getAppBar({BuildContext context, String route}) {
         
         
         if (Provider.of<UserModel>(context, listen: false).name != null)
-          Padding(
-              child: TextButton.icon(
-                  onPressed: () async {
-                    await AuthProvider.signOut();
-                    Provider.of<UserModel>(context, listen: false).delete();
-                   Navigator.of(context)
+         Padding(
+          
+  
+             child:
+               Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text('${Provider.of<UserModel>(context, listen: false).name}'),
+                  TextButton.icon(
+                      onPressed: () async {
+                        await AuthProvider.signOut();
+                        Provider.of<UserModel>(context, listen: false).delete();
+                       Navigator.of(context)
     .pushNamedAndRemoveUntil('Login', (Route<dynamic> route) => false); 
-                  },
-                  icon: Icon(Icons.person),
-                  label: Text('''${Provider.of<UserModel>(context, listen: false).name}
-Cerrar sesión''')),
-              padding: EdgeInsets.fromLTRB(10, 10, 20, 10))
+                      },
+                      icon: Icon(Icons.person),
+                      label: Text('Cerrar sesión')),
+                ],
+              ),
+             padding: EdgeInsets.fromLTRB(10, 5, 20, 0))
+           
         else
           Padding(
               child: TextButton.icon(
