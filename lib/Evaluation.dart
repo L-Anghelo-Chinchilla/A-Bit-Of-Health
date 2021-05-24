@@ -64,8 +64,9 @@ class Evaluation extends StatelessWidget {
         body: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-                image: NetworkImage('https://images.unsplash.com/photo-1586985290301-8db40143d525?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80'),fit: BoxFit.cover)
-  ,
+                image: NetworkImage(
+                    'https://images.unsplash.com/photo-1586985290301-8db40143d525?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80'),
+                fit: BoxFit.cover),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -135,7 +136,7 @@ class Evaluation extends StatelessWidget {
                                                 Align(
                                                     alignment: Alignment.center,
                                                     child: Text(
-                                                      'PORCIONES ',
+                                                      '     PORCIONES',
                                                       style: TextStyle(
                                                           fontFamily: 'Mont2',
                                                           fontSize: 19,
@@ -146,7 +147,7 @@ class Evaluation extends StatelessWidget {
                                                 Align(
                                                     alignment: Alignment.center,
                                                     child: Text(
-                                                      'CALORÍAS',
+                                                      'CAL/PORC.',
                                                       style: TextStyle(
                                                           fontFamily: 'Mont2',
                                                           fontSize: 19,
@@ -306,7 +307,7 @@ class Evaluation extends StatelessWidget {
                                             children: [
                                               if (kindoffood == 'Cena')
                                                 Text(
-                                                  '\nUn tipo de ${kindoffood} para ser balanceada, debería contener aproximadamente ${healthyQuantity} cal. Entonces....',
+                                                  '\nUna ${kindoffood} para ser balanceada, debería contener aproximadamente ${healthyQuantity} cal. Entonces....',
                                                   style: TextStyle(
                                                     color: Colors.black,
                                                     fontFamily: 'Mont2',
@@ -315,7 +316,7 @@ class Evaluation extends StatelessWidget {
                                                 )
                                               else
                                                 Text(
-                                                  '\nUn tipo de ${kindoffood} para ser balanceada, debería contener aproximadamente ${healthyQuantity} cal. Entonces....',
+                                                  '\nUn ${kindoffood} para ser balanceado, debería contener aproximadamente ${healthyQuantity} cal. Entonces....',
                                                   style: TextStyle(
                                                     color: Colors.black,
                                                     fontFamily: 'Mont2',
