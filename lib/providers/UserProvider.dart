@@ -18,7 +18,7 @@ class UserProvider {
     final answer = await http.get(uri);
     Map<String, dynamic> data = json.decode(answer.body);
     UserModel userData = (UserModel.fromJson(data));
-      
+
     userData.setID(userID);
     print(userData.toJson());
     return userData;
@@ -66,9 +66,48 @@ class UserProvider {
       user.glasses = 0;
       user.lastConnection = DateTime.now().toString().split(" ").first;
       final url = '$_url$userID.json';
-      Uri uri = Uri.parse(url); 
+      Uri uri = Uri.parse(url);
       http.put(uri, body: user.toJson().toString());
     }
+  }
+
+  Future<void> updateDailyCalories(String userID) async {
+    UserModel user = await getUserData(userID);
+    var lastCon = DateTime.parse(user.lastConnection);
+    var daysoff = DateTime.now().difference(lastCon).inDays;
+
+    if (daysoff != 0) {
+      for (int i = 0; i < daysoff; i++) {
+        user.dailyCalories.insert(i, 0);
+        user.dailyCalories.removeLast();
+      }
+      final url = '$_url$userID.json';
+      Uri uri = Uri.parse(url);
+      http.put(uri, body: user.toJson().toString());
+    }
+  }
+
+  Future<void> addToTodaysCalories(String userID, double calories) async {
+    UserModel user = await getUserData(userID);
+
+    user.dailyCalories.insert(0, calories);
+    user.dailyCalories.removeAt(1);
+
+    final url = '$_url/$userID.json';
+    Uri uri = Uri.parse(url);
+    await http.put(uri, body: user.toJson().toString());
+  }
+
+  Future<double> getAllTodayCalories(String userID) async {
+    UserModel user = await getUserData(userID);
+
+    double res = user.dailyCalories.first;
+
+    final url = '$_url/$userID.json';
+    Uri uri = Uri.parse(url);
+    await http.put(uri, body: user.toJson().toString());
+
+    return res;
   }
 
   Future<void> updateTodayCalories(
@@ -120,9 +159,9 @@ class UserProvider {
     return res;
   }
 
- /*Future <Tuple2<bool ,String >> login(email, password){
+  /*Future <Tuple2<bool ,String >> login(email, password){
 
 
     return 
-  }*/ 
+  }*/
 }

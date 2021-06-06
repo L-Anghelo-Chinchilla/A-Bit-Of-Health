@@ -471,7 +471,7 @@ void UpdateFood(
 }
 
 void UploadRegister(FoodProvider _provider, BuildContext context, int score,
-    double thecalories, FoodOffer thefood) {
+    double thecalories, FoodOffer thefood) async {
   final DateTime now = DateTime.now();
   final DateFormat formatter = DateFormat('yyyy/MM/dd');
   final String formatted = formatter.format(now);
@@ -496,6 +496,13 @@ void UploadRegister(FoodProvider _provider, BuildContext context, int score,
       date: formatted,
       food: thefood);
   print(food.foodRegisterToJson(food));
+
+  double cal = await UserProvider().getAllTodayCalories(
+      Provider.of<UserModel>(context, listen: false).userID);
+  cal += thecalories;
+
+  await UserProvider().addToTodaysCalories(
+      Provider.of<UserModel>(context, listen: false).userID, cal);
 }
 
 class CounterView extends StatefulWidget {

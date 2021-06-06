@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:convert';
 
 UserModel userModelFromJson(String str) => UserModel.fromJson(json.decode(str));
@@ -20,6 +21,7 @@ class UserModel {
   String lastLunch;
   String lastDinner;
   String lastSnack;
+  List<double> dailyCalories;
 
   UserModel(
       {this.userID,
@@ -36,7 +38,8 @@ class UserModel {
       this.lastBreakfast,
       this.lastLunch,
       this.lastDinner,
-      this.lastSnack});
+      this.lastSnack,
+      this.dailyCalories});
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
       weight: json["weight"],
@@ -52,8 +55,8 @@ class UserModel {
       lastBreakfast: json['lastBreakfast'],
       lastLunch: json['lastLunch'],
       lastDinner: json['lastDinner'],
-      lastSnack: json['lastSnack']);
-
+      lastSnack: json['lastSnack'],
+      dailyCalories: json['dailyCalories']);
 
   Map<String, dynamic> toJson() => {
         '"weight"': jsonEncode(weight),
@@ -69,12 +72,13 @@ class UserModel {
         '"lastBreakfast"': jsonEncode(lastBreakfast),
         '"lastLunch"': jsonEncode(lastLunch),
         '"lastDinner"': jsonEncode(lastDinner),
-        '"lastSnack"': jsonEncode(lastSnack)
+        '"lastSnack"': jsonEncode(lastSnack),
+        '"dailyCalories"': jsonEncode(dailyCalories),
       };
 
   @override
   String toString() =>
-      '{ ${userID.toString()},${weight.toString()}, ${height.toString()}, ${email.toString()}, ${gender.toString()}, ${waterLimit.toString()},  ${name.toString()},${newWaterLimit.toString()},${waterLimitDate.toString()},${glasses.toString()},${lastConnection.toString()}},${lastBreakfast.toString()}},${lastLunch.toString()}},${lastDinner.toString()}},${lastSnack.toString()}}';
+      '{ ${userID.toString()},${weight.toString()}, ${height.toString()}, ${email.toString()}, ${gender.toString()}, ${waterLimit.toString()},  ${name.toString()},${newWaterLimit.toString()},${waterLimitDate.toString()},${glasses.toString()},${lastConnection.toString()},${lastBreakfast.toString()},${lastLunch.toString()},${lastDinner.toString()},${lastSnack.toString()}, ${dailyCalories.toString()}';
 
   void setID(String id) {
     this.userID = id;
@@ -128,8 +132,10 @@ class UserModel {
     lastLunch = usr.lastLunch;
     lastDinner = usr.lastDinner;
     lastSnack = usr.lastSnack;
+    dailyCalories = usr.dailyCalories;
   }
 
-  void delete(){
-    setUser(UserModel());}
+  void delete() {
+    setUser(UserModel());
+  }
 }

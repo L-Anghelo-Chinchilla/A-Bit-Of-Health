@@ -40,33 +40,42 @@ class Stats extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              ImagestoDisplay(imageName: "frios"),
+                              ImagestoDisplay(imageName: "vaso_lleno"),
                               MaterialButton(
-                                  child: Text('Vasos',
+                                  child: Text('Vasos de Agua',
                                       style: new TextStyle(fontSize: 22)),
                                   height: 50,
                                   minWidth: 140,
                                   color: Colors.blue,
                                   textColor: Colors.white,
-                                  onPressed: () {})
+                                  onPressed: () {
+                                    Navigator.pushNamed(
+                                        context, 'Stat_Glasses');
+                                  })
                             ],
                           ),
                           Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              ImagestoDisplay(imageName: "frios"),
+                              ImagestoDisplay(imageName: "vaso_vacio"),
                               MaterialButton(
-                                  child: Text('Alimentos',
+                                  child: Text('Puntuación',
                                       style: new TextStyle(fontSize: 22)),
                                   height: 50,
                                   minWidth: 140,
                                   color: Colors.blue,
                                   textColor: Colors.white,
-                                  onPressed: () {})
+                                  onPressed: () {
+                                    Navigator.pushNamed(context, 'Stat_Score');
+                                  })
                             ],
                           ),
                           Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              ImagestoDisplay(imageName: "frios"),
+                              ImagestoDisplay(imageName: "Calorias"),
                               MaterialButton(
                                   child: Text(
                                     'Algo',
@@ -76,7 +85,10 @@ class Stats extends StatelessWidget {
                                   minWidth: 140,
                                   color: Colors.blue,
                                   textColor: Colors.white,
-                                  onPressed: () {})
+                                  onPressed: () {
+                                    Navigator.pushNamed(
+                                        context, 'Stat_Calories');
+                                  })
                             ],
                           )
                         ],
@@ -98,8 +110,7 @@ class ImagestoDisplay extends StatelessWidget {
     return Container(
         padding: EdgeInsets.all(15),
         child: Image.asset(
-          'assets/$imageName.png',
-          alignment: Alignment.center,
+          'lib/assets/$imageName.png',
           width: 130,
           height: 130,
         ));
