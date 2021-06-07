@@ -2,6 +2,7 @@ import 'package:a_bit_of_health/Login.dart';
 import 'package:a_bit_of_health/models/FoodModel.dart';
 import 'package:a_bit_of_health/models/UserModel.dart';
 import 'package:a_bit_of_health/providers/FoodProvider.dart';
+import 'package:a_bit_of_health/providers/UserProvider.dart';
 import 'package:a_bit_of_health/providers/authentification.dart';
 import 'package:a_bit_of_health/utils.dart';
 import 'package:flutter/material.dart';
@@ -61,16 +62,17 @@ class _TodayPageState extends State<TodayPage> {
         appBar: getAppBar(context: context),
         body: Container(
           decoration: BoxDecoration(
-            image: DecorationImage(
-                image: NetworkImage('https://images.unsplash.com/photo-1495195134817-aeb325a55b65?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1055&q=80'),fit: BoxFit.cover)
-            ),
+              image: DecorationImage(
+                  image: NetworkImage(
+                      'https://images.unsplash.com/photo-1495195134817-aeb325a55b65?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1055&q=80'),
+                  fit: BoxFit.cover)),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               getDirectionsBar(context, 'Today'),
               Expanded(
                   child: Padding(
-                padding: EdgeInsets.fromLTRB(50 ,20 ,50,20),
+                padding: EdgeInsets.fromLTRB(50, 20, 50, 20),
                 child: FutureBuilder(
                   future: provider.getUserRegister(
                       Provider.of<UserModel>(context, listen: false).userID,
@@ -203,14 +205,14 @@ class _TodayRegisterState extends State<TodayRegister> {
                                             widget.map.values
                                                 .elementAt(len - 1 - i)
                                                 .id);
-
+                                        RemoveRegister(context, caloriesSum);
                                       })
                                 ])),
                         Align(
                           alignment: Alignment.centerLeft,
                           child: Container(
                             height: 250,
-                            width:double.infinity ,// 500,
+                            width: double.infinity, // 500,
                             child: SingleChildScrollView(
                               child: DataTable(
                                   columns: [
@@ -260,7 +262,7 @@ class _TodayRegisterState extends State<TodayRegister> {
                                 child: Text(
                                     'Puntuación: ${widget.map.values.elementAt(len - 1 - i).score}'))
                           ],
-                        ), 
+                        ),
                         Divider()
                       ],
                     );
@@ -344,5 +346,15 @@ class _TodayRegisterState extends State<TodayRegister> {
         return alert;
       },
     );
+  }
+
+  void RemoveRegister(BuildContext context, double calories) async {
+    double cal = await UserProvider().getAllTodayCalories(
+        Provider.of<UserModel>(context, listen: false).userID);
+
+    cal -= calories;
+
+    await UserProvider().addToTodaysCalories(
+        Provider.of<UserModel>(context, listen: false).userID, cal);
   }
 }

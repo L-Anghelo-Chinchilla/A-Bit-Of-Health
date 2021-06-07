@@ -25,7 +25,7 @@ class Stat_Calories extends StatelessWidget {
                 children: [
                   getDirectionsBar(context, 'Stats'),
                   Text(
-                    'Estadisticas de los ultimos 7 dias \n               Calorias',
+                    'Estadisticas de los ultimos 7 dias \n                   Calorias',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontStyle: FontStyle.italic,

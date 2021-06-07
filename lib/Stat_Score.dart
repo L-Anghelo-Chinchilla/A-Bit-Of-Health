@@ -25,7 +25,7 @@ class Stat_Score extends StatelessWidget {
                 children: [
                   getDirectionsBar(context, 'Stats'),
                   Text(
-                    'Estadisticas de los ultimos 7 dias \n               Puntuacion',
+                    'Estadisticas de los ultimos 7 dias \n                   Puntuacion',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontStyle: FontStyle.italic,

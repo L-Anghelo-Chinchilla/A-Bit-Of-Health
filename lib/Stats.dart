@@ -78,7 +78,7 @@ class Stats extends StatelessWidget {
                               ImagestoDisplay(imageName: "Calorias"),
                               MaterialButton(
                                   child: Text(
-                                    'Algo',
+                                    'Calorias',
                                     style: new TextStyle(fontSize: 22),
                                   ),
                                   height: 50,
