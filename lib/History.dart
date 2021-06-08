@@ -3,6 +3,7 @@ import 'package:a_bit_of_health/models/UserModel.dart';
 import 'package:a_bit_of_health/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class History extends StatelessWidget {
   const History
@@ -27,10 +28,33 @@ class History extends StatelessWidget {
 
           children: [
             getDirectionsBar(context , 'History'),
-            Expanded(child: Container())
+            Expanded(child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Container(
+                  child: Text("Selecciona el intervalo de fechas para ver tu historial", style: TextStyle(fontFamily: 'Mont', fontSize: 28)),
+                ),
+                Container(
+                  color: Colors.white.withOpacity(0.8),
+                  width: MediaQuery.of(context).size.width/2.5,
+                  height: MediaQuery.of(context).size.height/2,
+                 child: SfDateRangePicker(
+                      onSelectionChanged: _onSelectionChanged,
+                       selectionMode: DateRangePickerSelectionMode.range,
+                    ),
+                ),
+                ElevatedButton(
+                onPressed: (){Navigator.pushNamed(context, 'HistoryView');},
+                child: Text("Ver", style: TextStyle(fontSize: 20),)),
+              ],
+            ))
           ],
         ),
       ),
     );
   }
+}
+
+void _onSelectionChanged(DateRangePickerSelectionChangedArgs args) {
+  // TODO: implement your code here
 }

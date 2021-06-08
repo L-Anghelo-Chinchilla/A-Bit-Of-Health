@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'FoodCounter.dart';
 import 'FoodSelector.dart';
 import 'GlassesOfWater.dart';
+import 'HistoryView.dart';
 
 //Mapa de Rutas de la aplicación
 //parametros(nombre de ruta , contructor)
@@ -20,6 +21,7 @@ Map<String, WidgetBuilder> getRoutes() {
     'FoodCounter': (context) => FoodCounter(),
     'GlassesOfWater': (context) => GlassesOfWater(),
     'History': (context) => History(),
+    'HistoryView': (context) => HistoryView(),
     'Stats': (context) => Stats(),
     'Evaluation': (context) => Evaluation(),
     'Login': (context) => Login(),

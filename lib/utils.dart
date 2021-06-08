@@ -68,6 +68,19 @@ Widget getDirectionsBar(BuildContext context, String name) {
                           Icons.star,
                         ),
                         text: 'Hoy')),
+            (name == 'History')
+                ? Tab(
+                    icon: Icon(Icons.history, color: Colors.white),
+                    text: 'Historial')
+                : GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, 'History');
+                    },
+                    child: const Tab(
+                        icon: Icon(
+                          Icons.history,
+                        ),
+                        text: 'Historial')),
           ]));
 }
 

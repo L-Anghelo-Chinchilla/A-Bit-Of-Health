@@ -188,7 +188,7 @@ class _TodayRegisterState extends State<TodayRegister> {
                                   Text(
                                       '${widget.map.values.elementAt(len - 1 - i).food.typeOfFood} ${getEmoji(widget.map.values.elementAt(len - 1 - i).food.typeOfFood)}'),
                                   Text(
-                                      '🕰️ ${widget.map.values.elementAt(len - 1 - i).time}'),
+                                      '🕰️ ${widget.map.values.elementAt(len - 1 - i).date}, ${widget.map.values.elementAt(len - 1 - i).time}'),
                                   IconButton(
                                       icon: Icon(Icons.delete),
                                       onPressed: () async {
