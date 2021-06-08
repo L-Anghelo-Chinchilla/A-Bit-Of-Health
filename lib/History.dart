@@ -11,6 +11,8 @@ class History extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String date1;
+    String date2;
      if(Provider.of<UserModel>(context).userID ==null)
       return Login();
     else
@@ -39,7 +41,11 @@ class History extends StatelessWidget {
                   width: MediaQuery.of(context).size.width/2.5,
                   height: MediaQuery.of(context).size.height/2,
                  child: SfDateRangePicker(
-                      onSelectionChanged: _onSelectionChanged,
+                      onSelectionChanged: (DateRangePickerSelectionChangedArgs args) {
+                        date1 = args.value.startDate.toString().split(' ').first;
+                        date2 = args.value.endDate.toString().split(' ').first;
+                        print(date1);
+                        print(date2);},
                        selectionMode: DateRangePickerSelectionMode.range,
                     ),
                 ),
@@ -55,6 +61,3 @@ class History extends StatelessWidget {
   }
 }
 
-void _onSelectionChanged(DateRangePickerSelectionChangedArgs args) {
-  // TODO: implement your code here
-}

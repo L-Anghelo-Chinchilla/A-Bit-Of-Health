@@ -31,7 +31,26 @@ class HistoryView extends StatelessWidget {
             Expanded(child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                
+                Text(
+                  'Registros desde 01-05-2021 Hasta 10-05-2021'
+                ),
+                Container(
+                  color: Colors.white.withOpacity(0.8),
+                  width: MediaQuery.of(context).size.width*0.5,
+                  height: MediaQuery.of(context).size.height/2.2,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ElevatedButton(
+                      child: Text('Atras'),
+                      onPressed: (){
+                        Navigator.pop(context);
+                      },
+                    ),
+                    ElevatedButton(onPressed: (){}, child: Text('Descargar'))
+                  ],
+                )
               ],
             ))
           ],
