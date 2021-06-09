@@ -47,6 +47,8 @@ class History extends StatelessWidget {
                         print(date1);
                         print(date2);},
                        selectionMode: DateRangePickerSelectionMode.range,
+                       maxDate: DateTime.now(),
+                       
                     ),
                 ),
                 ElevatedButton(

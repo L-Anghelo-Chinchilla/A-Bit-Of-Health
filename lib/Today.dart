@@ -168,102 +168,7 @@ class _TodayRegisterState extends State<TodayRegister> {
                   itemBuilder: (context, i) {
                     String key = widget.map.keys.elementAt(i);
                     final len = widget.map.length;
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                            margin: EdgeInsets.fromLTRB(5, 5, 20, 5),
-                            decoration: BoxDecoration(
-                              color: Colors.orange[400],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(7)),
-                              border: Border.all(color: Colors.black45),
-                            ),
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 15, vertical: 2),
-                            child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                      '${widget.map.values.elementAt(len - 1 - i).food.typeOfFood} ${getEmoji(widget.map.values.elementAt(len - 1 - i).food.typeOfFood)}'),
-                                  Text(
-                                      '🕰️ ${widget.map.values.elementAt(len - 1 - i).date}, ${widget.map.values.elementAt(len - 1 - i).time}'),
-                                  IconButton(
-                                      icon: Icon(Icons.delete),
-                                      onPressed: () async {
-                                        showAlertDialog(
-                                            context,
-                                            Provider.of<UserModel>(context,
-                                                    listen: false)
-                                                .userID,
-                                            widget.map.values
-                                                .elementAt(len - 1 - i)
-                                                .date,
-                                            widget.map.values
-                                                .elementAt(len - 1 - i)
-                                                .id);
-
-                                      })
-                                ])),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Container(
-                            height: 250,
-                            width:double.infinity ,// 500,
-                            child: SingleChildScrollView(
-                              child: DataTable(
-                                  columns: [
-                                    DataColumn(
-                                      label: Text('Alimento(s)'),
-                                    ),
-                                    DataColumn(label: Text('Porción(es)')),
-                                    DataColumn(label: Text('Calorías')),
-                                  ],
-                                  rows: widget.map.values
-                                      .elementAt(len - 1 - i)
-                                      .food
-                                      .aliments
-                                      .map((element) => DataRow(cells: [
-                                            DataCell(Text(element.name)),
-                                            DataCell(Text('${element.cant}')),
-                                            DataCell(Text(
-                                                '${element.calories * element.cant}'))
-                                          ]))
-                                      .toList()),
-                            ),
-                          ),
-                        ),
-                        Row(
-                          children: [
-                            Container(
-                                margin: EdgeInsets.all(5),
-                                decoration: BoxDecoration(
-                                    color: Color(0xFFF4D03F),
-                                    border: Border.all(color: Colors.black45),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(7))),
-                                padding: EdgeInsets.all(10),
-                                child: Text(
-                                    'Calorías: ${widget.map.values.elementAt(len - 1 - i).calories.toStringAsFixed(1)}')),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Container(
-                                margin: EdgeInsets.all(5),
-                                decoration: BoxDecoration(
-                                    color: Color(0xFFF4D03F),
-                                    border: Border.all(color: Colors.black45),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(7))),
-                                padding: EdgeInsets.all(10),
-                                child: Text(
-                                    'Puntuación: ${widget.map.values.elementAt(len - 1 - i).score}'))
-                          ],
-                        ), 
-                        Divider()
-                      ],
-                    );
+                    return getRegisterList(context, widget.map.values.elementAt(len - 1 - i) , true );
                   },
                 ),
               )))
@@ -291,6 +196,108 @@ class _TodayRegisterState extends State<TodayRegister> {
       ],
     );
   }
+
+}
+
+
+Widget getRegisterList(BuildContext context, FoodRegister foodRegister , bool canDelete){
+
+  return Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
+                            margin: EdgeInsets.fromLTRB(5, 5, 20, 5),
+                            decoration: BoxDecoration(
+                              color: Colors.orange[400],
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(7)),
+                              border: Border.all(color: Colors.black45),
+                            ),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 15, vertical: 2),
+                            child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                      '${foodRegister.food.typeOfFood} ${getEmoji(foodRegister.food.typeOfFood)}'),
+                                  Text(
+                          '🕰️ ${foodRegister.date}, ${foodRegister.time}'),
+                                  (canDelete) ? IconButton(
+                                      icon: Icon(Icons.delete),
+                                      onPressed: () async {
+                                        showAlertDialog(
+                                            context,
+                                            Provider.of<UserModel>(context,
+                                                    listen: false)
+                                                .userID,
+                                            foodRegister
+                                                .date,
+                                            foodRegister.id);
+
+                                      }) : Container(height:  35,) 
+                                ])),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Container(
+                            height: 250,
+                            width:double.infinity ,// 500,
+                            child: SingleChildScrollView(
+                              child: DataTable(
+                                  columns: [
+                                    DataColumn(
+                                      label: Text('Alimento(s)'),
+                                    ),
+                                    DataColumn(label: Text('Porción(es)')),
+                                    DataColumn(label: Text('Calorías')),
+                                  ],
+                                  rows: foodRegister
+                                      .food
+                                      .aliments
+                                      .map((element) => DataRow(cells: [
+                                            DataCell(Text(element.name)),
+                                            DataCell(Text('${element.cant}')),
+                                            DataCell(Text(
+                                                '${element.calories * element.cant}'))
+                                          ]))
+                                      .toList()),
+                            ),
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            Container(
+                                margin: EdgeInsets.all(5),
+                                decoration: BoxDecoration(
+                                    color: Color(0xFFF4D03F),
+                                    border: Border.all(color: Colors.black45),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(7))),
+                                padding: EdgeInsets.all(10),
+                                child: Text(
+                                    'Calorías: ${foodRegister.calories.toStringAsFixed(1)}')),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Container(
+                                margin: EdgeInsets.all(5),
+                                decoration: BoxDecoration(
+                                    color: Color(0xFFF4D03F),
+                                    border: Border.all(color: Colors.black45),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(7))),
+                                padding: EdgeInsets.all(10),
+                                child: Text(
+                                    'Puntuación: ${foodRegister.score}'))
+                          ],
+                        ), 
+                        Divider()
+                      ],
+                    );
+
+}
+
+
 
   String getEmoji(type) {
     switch (type) {
@@ -341,8 +348,7 @@ class _TodayRegisterState extends State<TodayRegister> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return alert;
+        return alert; 
       },
     );
   }
-}
