@@ -205,7 +205,7 @@ class _TodayRegisterState extends State<TodayRegister> {
                                             widget.map.values
                                                 .elementAt(len - 1 - i)
                                                 .id);
-                                        RemoveRegister(context, caloriesSum);
+                                        //RemoveRegister(context, caloriesSum);
                                       })
                                 ])),
                         Align(
@@ -348,7 +348,7 @@ class _TodayRegisterState extends State<TodayRegister> {
     );
   }
 
-  void RemoveRegister(BuildContext context, double calories) async {
+  /*void RemoveRegister(BuildContext context, double calories) async {
     double cal = await UserProvider().getAllTodayCalories(
         Provider.of<UserModel>(context, listen: false).userID);
 
@@ -356,5 +356,5 @@ class _TodayRegisterState extends State<TodayRegister> {
 
     await UserProvider().addToTodaysCalories(
         Provider.of<UserModel>(context, listen: false).userID, cal);
-  }
+  }*/
 }

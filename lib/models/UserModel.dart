@@ -21,7 +21,7 @@ class UserModel {
   String lastLunch;
   String lastDinner;
   String lastSnack;
-  List dailyCalories;
+  List<dynamic> dailyCalories;
 
   UserModel(
       {this.userID,
@@ -56,7 +56,7 @@ class UserModel {
       lastLunch: json['lastLunch'],
       lastDinner: json['lastDinner'],
       lastSnack: json['lastSnack'],
-      dailyCalories: json['dailyCalories']);
+      dailyCalories: json['dailyCalories'].cast<double>());
 
   Map<String, dynamic> toJson() => {
         '"weight"': jsonEncode(weight),
@@ -78,7 +78,7 @@ class UserModel {
 
   @override
   String toString() =>
-      '{ ${userID.toString()},${weight.toString()}, ${height.toString()}, ${email.toString()}, ${gender.toString()}, ${waterLimit.toString()},  ${name.toString()},${newWaterLimit.toString()},${waterLimitDate.toString()},${glasses.toString()},${lastConnection.toString()},${lastBreakfast.toString()},${lastLunch.toString()},${lastDinner.toString()},${lastSnack.toString()}, ${dailyCalories.toString()}';
+      '{ ${userID.toString()},${weight.toString()}, ${height.toString()}, ${email.toString()}, ${gender.toString()}, ${waterLimit.toString()},  ${name.toString()},${newWaterLimit.toString()},${waterLimitDate.toString()},${glasses.toString()},${lastConnection.toString()},${lastBreakfast.toString()},${lastLunch.toString()},${lastDinner.toString()},${lastSnack.toString()}';
 
   void setID(String id) {
     this.userID = id;
@@ -118,18 +118,18 @@ class UserModel {
 
   void setTodaysCals(var daysoff) {
     for (int i = 0; i < daysoff; i++) {
-      dailyCalories.insert(daysoff, 0);
-      dailyCalories.removeLast();
+      this.dailyCalories.insert(i, 0);
+      this.dailyCalories.removeLast();
     }
   }
 
   void addToTodayCals(double calories) {
-    dailyCalories.insert(0, calories);
-    dailyCalories.removeAt(1);
+    this.dailyCalories.insert(0, calories);
+    this.dailyCalories.removeAt(1);
   }
 
   double getFirstofDaily() {
-    double res = dailyCalories.first;
+    double res = this.dailyCalories.first;
     return res;
   }
 

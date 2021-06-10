@@ -385,6 +385,7 @@ class Evaluation extends StatelessWidget {
                                       onPressed: () async {
                                         UpdateFood(
                                             kindoffood, thetotal, context);
+
                                         //THE USER REGISTER
                                         UploadRegister(
                                             _provider,
@@ -392,6 +393,20 @@ class Evaluation extends StatelessWidget {
                                             score,
                                             thelist.item1,
                                             thelist.item2);
+                                        //EXTRACT OF THE OTHER DAYS CALORIES
+                                        double cal = await UserProvider()
+                                            .getAllTodayCalories(
+                                                Provider.of<UserModel>(context,
+                                                        listen: false)
+                                                    .userID);
+                                        cal += thelist.item1;
+
+                                        UserProvider().addToTodaysCalories(
+                                            Provider.of<UserModel>(context,
+                                                    listen: false)
+                                                .userID,
+                                            cal);
+                                        //CLEAR THE LIST
                                         Provider.of<List<FoodOffer>>(context,
                                                 listen: false)
                                             .clear();
@@ -471,7 +486,7 @@ void UpdateFood(
 }
 
 void UploadRegister(FoodProvider _provider, BuildContext context, int score,
-    double thecalories, FoodOffer thefood) async {
+    double thecalories, FoodOffer thefood) {
   final DateTime now = DateTime.now();
   final DateFormat formatter = DateFormat('yyyy/MM/dd');
   final String formatted = formatter.format(now);
@@ -501,12 +516,6 @@ void UploadRegister(FoodProvider _provider, BuildContext context, int score,
 
   UserProvider().updateDailyCalories(
       Provider.of<UserModel>(context, listen: false).userID);
-  double cal = await UserProvider().getAllTodayCalories(
-      Provider.of<UserModel>(context, listen: false).userID);
-  cal += thecalories;
-
-  await UserProvider().addToTodaysCalories(
-      Provider.of<UserModel>(context, listen: false).userID, cal);
 }
 
 class CounterView extends StatefulWidget {

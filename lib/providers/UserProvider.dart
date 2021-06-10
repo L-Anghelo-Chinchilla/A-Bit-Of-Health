@@ -89,7 +89,7 @@ class UserProvider {
   Future<void> addToTodaysCalories(String userID, double calories) async {
     UserModel user = await getUserData(userID);
 
-    user.setTodaysCals(calories);
+    user.addToTodayCals(calories);
 
     print('Lo que se envía es: ${calories}');
 
@@ -104,10 +104,6 @@ class UserProvider {
     double res = user.getFirstofDaily();
 
     print('Lo que se obtiene es: ${res}');
-
-    /*final url = '$_url/$userID.json';
-    Uri uri = Uri.parse(url);
-    await http.put(uri, body: user.toJson().toString());*/
 
     return res;
   }
