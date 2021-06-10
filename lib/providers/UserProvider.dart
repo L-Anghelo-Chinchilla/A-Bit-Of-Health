@@ -76,11 +76,10 @@ class UserProvider {
     var lastCon = DateTime.parse(user.lastConnection);
     var daysoff = DateTime.now().difference(lastCon).inDays;
 
+    print('El proceso actualiza');
+
     if (daysoff != 0) {
-      for (int i = 0; i < daysoff; i++) {
-        user.dailyCalories.insert(i, 0);
-        user.dailyCalories.removeLast();
-      }
+      user.setTodaysCals(daysoff);
       final url = '$_url$userID.json';
       Uri uri = Uri.parse(url);
       http.put(uri, body: user.toJson().toString());
@@ -90,8 +89,9 @@ class UserProvider {
   Future<void> addToTodaysCalories(String userID, double calories) async {
     UserModel user = await getUserData(userID);
 
-    user.dailyCalories.insert(0, calories);
-    user.dailyCalories.removeAt(1);
+    user.setTodaysCals(calories);
+
+    print('Lo que se envía es: ${calories}');
 
     final url = '$_url/$userID.json';
     Uri uri = Uri.parse(url);
@@ -101,11 +101,13 @@ class UserProvider {
   Future<double> getAllTodayCalories(String userID) async {
     UserModel user = await getUserData(userID);
 
-    double res = user.dailyCalories.first;
+    double res = user.getFirstofDaily();
 
-    final url = '$_url/$userID.json';
+    print('Lo que se obtiene es: ${res}');
+
+    /*final url = '$_url/$userID.json';
     Uri uri = Uri.parse(url);
-    await http.put(uri, body: user.toJson().toString());
+    await http.put(uri, body: user.toJson().toString());*/
 
     return res;
   }

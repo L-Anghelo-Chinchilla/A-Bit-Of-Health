@@ -497,6 +497,10 @@ void UploadRegister(FoodProvider _provider, BuildContext context, int score,
       food: thefood);
   print(food.foodRegisterToJson(food));
 
+  print('Todo bien hasta aquí');
+
+  UserProvider().updateDailyCalories(
+      Provider.of<UserModel>(context, listen: false).userID);
   double cal = await UserProvider().getAllTodayCalories(
       Provider.of<UserModel>(context, listen: false).userID);
   cal += thecalories;

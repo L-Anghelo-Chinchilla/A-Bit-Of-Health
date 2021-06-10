@@ -21,7 +21,7 @@ class UserModel {
   String lastLunch;
   String lastDinner;
   String lastSnack;
-  List<double> dailyCalories;
+  List dailyCalories;
 
   UserModel(
       {this.userID,
@@ -114,6 +114,23 @@ class UserModel {
 
   String getLastSnack() {
     return this.lastSnack;
+  }
+
+  void setTodaysCals(var daysoff) {
+    for (int i = 0; i < daysoff; i++) {
+      dailyCalories.insert(daysoff, 0);
+      dailyCalories.removeLast();
+    }
+  }
+
+  void addToTodayCals(double calories) {
+    dailyCalories.insert(0, calories);
+    dailyCalories.removeAt(1);
+  }
+
+  double getFirstofDaily() {
+    double res = dailyCalories.first;
+    return res;
   }
 
   void setUser(UserModel usr) {

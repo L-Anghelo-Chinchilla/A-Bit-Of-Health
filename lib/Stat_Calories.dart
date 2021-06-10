@@ -37,18 +37,29 @@ class Stat_Calories extends StatelessWidget {
                       child: Column(),
                     ),
                   ),
-                  MaterialButton(
-                      child: Text(
-                        'Atrás',
-                        style: new TextStyle(fontSize: 22),
-                      ),
-                      height: 50,
-                      minWidth: 140,
-                      color: Colors.blue,
-                      textColor: Colors.white,
-                      onPressed: () {
-                        Navigator.pop(context);
-                      }),
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Row(
+                      // ROW OF BUTTONS----------------
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //crossAxisAlignment: CrossAxisAlignment.center,
+                      // mainAxisSize: MainAxisSize.max,
+                      children: [
+                        MaterialButton(
+                            child: Text(
+                              'Atrás',
+                              style: new TextStyle(fontSize: 22),
+                            ),
+                            height: 50,
+                            minWidth: 140,
+                            color: Colors.blue,
+                            textColor: Colors.white,
+                            onPressed: () {
+                              Navigator.pop(context);
+                            }),
+                      ],
+                    ),
+                  ),
                 ]),
           ));
     }
