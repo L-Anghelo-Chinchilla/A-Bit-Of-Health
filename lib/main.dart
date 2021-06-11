@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:a_bit_of_health/models/FoodModel.dart';
 import 'package:a_bit_of_health/models/UserModel.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:syncfusion_localizations/syncfusion_localizations.dart';
 import 'routes.dart';
 
 void main()  {
@@ -32,10 +34,20 @@ class MyApp extends StatelessWidget {
       
     
               child: MaterialApp(
+                localizationsDelegates: [
+                        SfGlobalLocalizations.delegate,
+                         GlobalMaterialLocalizations.delegate,
+                         GlobalWidgetsLocalizations.delegate,
+                         GlobalCupertinoLocalizations.delegate
+                  ],
+                supportedLocales: [
+                        const Locale('en'),
+                        const Locale('es')
+                  ],
+              locale: const Locale('es'),
+
           debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
-
-        
         theme: ThemeData(
           /*  scrollbarTheme: ScrollbarThemeData( crossAxisMargin: 15 , trackBorderColor:MaterialStateProperty.resolveWith( 
                 (Set<MaterialState> state){

@@ -2,15 +2,22 @@ import 'package:a_bit_of_health/Login.dart';
 import 'package:a_bit_of_health/models/UserModel.dart';
 import 'package:a_bit_of_health/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+import 'package:syncfusion_localizations/syncfusion_localizations.dart';
+
 
 class History extends StatelessWidget {
   const History
   ({Key key}) : super(key: key);
 
+
+
+
   @override
   Widget build(BuildContext context) {
+    
     String date1;
     String date2;
      if(Provider.of<UserModel>(context).userID ==null)
@@ -19,6 +26,7 @@ class History extends StatelessWidget {
          return Scaffold(
       appBar:getAppBar(context:context),
       body: Container(
+        //GlobalWidgetsLocalizations localizations = Localizations.of<GlobalWidgetsLocalizations>(context, GlobalWidgetsLocalizations);
         decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage('fondo_historial.jpg'),
@@ -48,7 +56,7 @@ class History extends StatelessWidget {
                         print(date2);},
                        selectionMode: DateRangePickerSelectionMode.range,
                        maxDate: DateTime.now(),
-                       
+                       minDate: DateTime.parse(Provider.of<UserModel>(context, listen: false).creationDate),
                     ),
                 ),
                 ElevatedButton(

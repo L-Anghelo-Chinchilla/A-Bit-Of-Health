@@ -20,6 +20,7 @@ class UserModel {
   String lastLunch;
   String lastDinner;
   String lastSnack;
+  String creationDate;
 
   UserModel(
       {this.userID,
@@ -36,7 +37,8 @@ class UserModel {
       this.lastBreakfast,
       this.lastLunch,
       this.lastDinner,
-      this.lastSnack});
+      this.lastSnack,
+      this.creationDate});
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
       weight: json["weight"],
@@ -52,7 +54,8 @@ class UserModel {
       lastBreakfast: json['lastBreakfast'],
       lastLunch: json['lastLunch'],
       lastDinner: json['lastDinner'],
-      lastSnack: json['lastSnack']);
+      lastSnack: json['lastSnack'],
+      creationDate: json['creationDate']);
 
 
   Map<String, dynamic> toJson() => {
@@ -69,7 +72,8 @@ class UserModel {
         '"lastBreakfast"': jsonEncode(lastBreakfast),
         '"lastLunch"': jsonEncode(lastLunch),
         '"lastDinner"': jsonEncode(lastDinner),
-        '"lastSnack"': jsonEncode(lastSnack)
+        '"lastSnack"': jsonEncode(lastSnack),
+        '"creationDate"': jsonEncode(creationDate)
       };
 
   @override
@@ -128,6 +132,7 @@ class UserModel {
     lastLunch = usr.lastLunch;
     lastDinner = usr.lastDinner;
     lastSnack = usr.lastSnack;
+    creationDate = usr.creationDate;
   }
 
   void delete(){
