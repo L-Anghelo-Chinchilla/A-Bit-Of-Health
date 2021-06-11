@@ -30,6 +30,7 @@ class Stats extends StatelessWidget {
                   ),
                   Expanded(
                     child: Container(
+                        
                       alignment: Alignment.center,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -40,12 +41,12 @@ class Stats extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              ImagestoDisplay(imageName: "vaso_lleno"),
+                              ImagestoDisplay(imageName: "agua_trasnparente"),
                               MaterialButton(
                                   child: Text('Vasos de Agua',
                                       style: new TextStyle(fontSize: 22)),
-                                  height: 50,
-                                  minWidth: 140,
+                                  height: 80,
+                                  minWidth: 150,
                                   color: Colors.blue,
                                   textColor: Colors.white,
                                   onPressed: () {
@@ -58,12 +59,12 @@ class Stats extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              ImagestoDisplay(imageName: "vaso_vacio"),
+                              ImagestoDisplay(imageName: "estrellas transparentes"),
                               MaterialButton(
                                   child: Text('Puntuación',
                                       style: new TextStyle(fontSize: 22)),
-                                  height: 50,
-                                  minWidth: 140,
+                                  height: 80,
+                                  minWidth: 150,
                                   color: Colors.blue,
                                   textColor: Colors.white,
                                   onPressed: () {
@@ -75,14 +76,14 @@ class Stats extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              ImagestoDisplay(imageName: "Calorias"),
+                              ImagestoDisplay(imageName: "kcal transparente"),
                               MaterialButton(
                                   child: Text(
                                     'Calorias',
                                     style: new TextStyle(fontSize: 22),
                                   ),
-                                  height: 50,
-                                  minWidth: 140,
+                                  height: 80,
+                                  minWidth: 150,
                                   color: Colors.blue,
                                   textColor: Colors.white,
                                   onPressed: () {
