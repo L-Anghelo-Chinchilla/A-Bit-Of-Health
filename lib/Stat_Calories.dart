@@ -133,7 +133,7 @@ class LineTitles {
   show: true,
   bottomTitles: SideTitles(
   showTitles: true,
-  reservedSize: 80,
+  reservedSize: 100,
   getTextStyles: (value) => const TextStyle(
     color: Color(0xFF212121),
     fontWeight: FontWeight.bold,
@@ -159,7 +159,7 @@ class LineTitles {
 
   return '';
   },
-  margin: 20,
+  margin: 50,
   ),
 
   leftTitles: SideTitles(
@@ -186,8 +186,8 @@ class LineTitles {
 
   return '';
   },
-   reservedSize: 80,
-   margin: 20,
+   reservedSize: 120,
+   margin: 50,
   )
 
  );
