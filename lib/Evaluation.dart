@@ -394,18 +394,19 @@ class Evaluation extends StatelessWidget {
                                             thelist.item1,
                                             thelist.item2);
                                         //EXTRACT OF THE OTHER DAYS CALORIES
+                                        String userID = Provider.of<UserModel>(
+                                                context,
+                                                listen: false)
+                                            .userID;
+
                                         double cal = await UserProvider()
-                                            .getAllTodayCalories(
-                                                Provider.of<UserModel>(context,
-                                                        listen: false)
-                                                    .userID);
+                                            .getAllTodayCalories(userID);
                                         cal += thelist.item1;
 
-                                        UserProvider().addToTodaysCalories(
-                                            Provider.of<UserModel>(context,
-                                                    listen: false)
-                                                .userID,
-                                            cal);
+                                        UserProvider()
+                                            .addToTodaysCalories(userID, cal);
+                                        UserProvider().addToTodaysScore(
+                                            userID, score.toDouble());
                                         //CLEAR THE LIST
                                         Provider.of<List<FoodOffer>>(context,
                                                 listen: false)
@@ -494,8 +495,10 @@ void UploadRegister(FoodProvider _provider, BuildContext context, int score,
   final DateFormat thetime = DateFormat('hh:mm:ss');
   final String times = thetime.format(now);
 
+  String userID = Provider.of<UserModel>(context, listen: false).userID;
+
   _provider.uploadUserRegiter(
-      Provider.of<UserModel>(context, listen: false).userID,
+      userID,
       formatted,
       FoodRegister(
           score: score,
@@ -512,10 +515,8 @@ void UploadRegister(FoodProvider _provider, BuildContext context, int score,
       food: thefood);
   print(food.foodRegisterToJson(food));
 
-  print('Todo bien hasta aquí');
-
-  UserProvider().updateDailyCalories(
-      Provider.of<UserModel>(context, listen: false).userID);
+  UserProvider().updateDailyCalories(userID);
+  UserProvider().updateDailyScore(userID);
 }
 
 class CounterView extends StatefulWidget {

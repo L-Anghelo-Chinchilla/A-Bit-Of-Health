@@ -3,6 +3,7 @@ import 'package:a_bit_of_health/models/UserModel.dart';
 import 'package:a_bit_of_health/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class History extends StatelessWidget {
   const History
@@ -10,6 +11,8 @@ class History extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String date1;
+    String date2;
      if(Provider.of<UserModel>(context).userID ==null)
       return Login();
     else
@@ -27,10 +30,36 @@ class History extends StatelessWidget {
 
           children: [
             getDirectionsBar(context , 'History'),
-            Expanded(child: Container())
+            Expanded(child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Container(
+                  child: Text("Selecciona el intervalo de fechas para ver tu historial", style: TextStyle(fontFamily: 'Mont', fontSize: 28)),
+                ),
+                Container(
+                  color: Colors.white.withOpacity(0.8),
+                  width: MediaQuery.of(context).size.width/2.5,
+                  height: MediaQuery.of(context).size.height/2,
+                 child: SfDateRangePicker(
+                      onSelectionChanged: (DateRangePickerSelectionChangedArgs args) {
+                        date1 = args.value.startDate.toString().split(' ').first;
+                        date2 = args.value.endDate.toString().split(' ').first;
+                        print(date1);
+                        print(date2);},
+                       selectionMode: DateRangePickerSelectionMode.range,
+                       maxDate: DateTime.now(),
+                       
+                    ),
+                ),
+                ElevatedButton(
+                onPressed: (){Navigator.pushNamed(context, 'HistoryView');},
+                child: Text("Ver", style: TextStyle(fontSize: 20),)),
+              ],
+            ))
           ],
         ),
       ),
     );
   }
 }
+
