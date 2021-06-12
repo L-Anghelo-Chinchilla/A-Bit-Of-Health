@@ -15,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 int score = 1;
+double reciprocal(double d) => 1 / d;
 
 class Evaluation extends StatelessWidget {
   Evaluation({Key key}) : super(key: key);
@@ -400,13 +401,16 @@ class Evaluation extends StatelessWidget {
                                             .userID;
 
                                         double cal = await UserProvider()
-                                            .getAllTodayCalories(userID);
+                                            .getAllTodayCalories(
+                                                Provider.of<UserModel>(context,
+                                                        listen: false)
+                                                    .userID);
                                         cal += thelist.item1;
-
-                                        UserProvider()
-                                            .addToTodaysCalories(userID, cal);
-                                        UserProvider().addToTodaysScore(
-                                            userID, score.toDouble());
+                                        UserProvider().addToTodaysCalories(
+                                            Provider.of<UserModel>(context,
+                                                    listen: false)
+                                                .userID,
+                                            cal);
                                         //CLEAR THE LIST
                                         Provider.of<List<FoodOffer>>(context,
                                                 listen: false)
@@ -515,8 +519,10 @@ void UploadRegister(FoodProvider _provider, BuildContext context, int score,
       food: thefood);
   print(food.foodRegisterToJson(food));
 
-  UserProvider().updateDailyCalories(userID);
-  UserProvider().updateDailyScore(userID);
+  UserProvider().updateDailyCalories(
+      Provider.of<UserModel>(context, listen: false).userID);
+  UserProvider()
+      .updateDailyScore(Provider.of<UserModel>(context, listen: false).userID);
 }
 
 class CounterView extends StatefulWidget {

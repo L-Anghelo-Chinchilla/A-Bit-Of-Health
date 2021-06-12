@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:a_bit_of_health/models/UserModel.dart';
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:tuple/tuple.dart';
@@ -71,12 +72,16 @@ class UserProvider {
     }
   }
 
+  DateFormat formatter = DateFormat('d');
+
   Future<void> updateDailyCalories(String userID) async {
     UserModel user = await getUserData(userID);
     var lastCon = DateTime.parse(user.lastConnection);
     var daysoff = DateTime.now().difference(lastCon).inDays;
+    String today = formatter.format(DateTime.now());
+    String thelastCon = formatter.format(lastCon);
 
-    if (daysoff != 0) {
+    if (int.parse(today) != int.parse(thelastCon)) {
       user.setTodaysCals(daysoff);
       final url = '$_url$userID.json';
       Uri uri = Uri.parse(url);
@@ -106,8 +111,10 @@ class UserProvider {
     UserModel user = await getUserData(userID);
     var lastCon = DateTime.parse(user.lastConnection);
     var daysoff = DateTime.now().difference(lastCon).inDays;
+    String today = formatter.format(DateTime.now());
+    String thelastCon = formatter.format(lastCon);
 
-    if (daysoff != 0) {
+    if (int.parse(today) != int.parse(thelastCon)) {
       user.setTodaysGlasses(daysoff);
       final url = '$_url$userID.json';
       Uri uri = Uri.parse(url);
@@ -137,8 +144,10 @@ class UserProvider {
     UserModel user = await getUserData(userID);
     var lastCon = DateTime.parse(user.lastConnection);
     var daysoff = DateTime.now().difference(lastCon).inDays;
+    String today = formatter.format(DateTime.now());
+    String thelastCon = formatter.format(lastCon);
 
-    if (daysoff != 0) {
+    if (int.parse(today) != int.parse(thelastCon)) {
       user.setTodaysScore(daysoff);
       final url = '$_url$userID.json';
       Uri uri = Uri.parse(url);
@@ -149,7 +158,7 @@ class UserProvider {
   Future<void> addToTodaysScore(String userID, double score) async {
     UserModel user = await getUserData(userID);
 
-    user.addToTodayCals(score);
+    user.addToTodayScore(score);
 
     final url = '$_url/$userID.json';
     Uri uri = Uri.parse(url);
