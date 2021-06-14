@@ -21,7 +21,6 @@ String dayformat= formato.format(now);
 class Stat_Calories extends StatelessWidget {
    Stat_Calories({Key key}) : super(key: key);
    List<Color> gradientColors = [ Color(0xff23b6e6), Color(0xff02d39a)];
-
   @override
   Widget build(BuildContext context) {
     if (Provider.of<UserModel>(context).userID == null)
