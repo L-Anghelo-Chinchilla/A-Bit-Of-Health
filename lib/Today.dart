@@ -140,6 +140,11 @@ class _TodayRegisterState extends State<TodayRegister> {
     double todayScore = widget.map.values
         .fold(0, (previousValue, element) => previousValue + element.score);
     todayScore = (todayScore + 0.0) / widget.map.length;
+
+    UserProvider().addToTodaysScore(
+        Provider.of<UserModel>(context, listen: false).userID,
+        todayScore.toDouble());
+
     return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,

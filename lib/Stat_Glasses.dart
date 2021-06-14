@@ -4,6 +4,11 @@ import 'package:a_bit_of_health/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:intl/intl.dart';
+
+DateTime now = new DateTime.now();
+final DateFormat format1 = DateFormat('EEEE');
+String dayformat = format1.format(now);
 
 class Stat_Glasses extends StatelessWidget {
   Stat_Glasses({Key key}) : super(key: key);
@@ -50,10 +55,10 @@ class Stat_Glasses extends StatelessWidget {
                     child: LineChart(
                       LineChartData(
                           //borderData: FlBorderData(show: false),
-                          minX: 1,
-                          maxX: 7,
+                          //minX:1,
+                          //  maxX:7,
                           minY: 1,
-                          maxY: 8,
+                          maxY: 16,
                           titlesData: LineTitles.getTitleData(),
                           gridData: FlGridData(
                             show: true,
@@ -137,19 +142,137 @@ class LineTitles {
           fontSize: 16,
         ),
         getTitles: (value) {
-          switch (value.toInt()) {
-            case 2:
-              return "2";
-            case 3:
-              return "3";
-            case 4:
-              return "4";
-            case 5:
-              return "5";
-            case 6:
-              return "6";
-            case 7:
-              return "7";
+          if (dayformat == "Friday") {
+            switch (value.toInt()) {
+              case 1:
+                return "Sabado";
+              case 2:
+                return "Domingo";
+              case 3:
+                return "Lunes";
+              case 4:
+                return "Martes";
+              case 5:
+                return "Miercoles";
+              case 6:
+                return "jueves";
+              case 7:
+                return "Viernes";
+            }
+          } else {
+            if (dayformat == "Saturday") {
+              switch (value.toInt()) {
+                case 1:
+                  return "Domingo";
+                case 2:
+                  return "Lunes";
+                case 3:
+                  return "Martes";
+                case 4:
+                  return "Miercoles";
+                case 5:
+                  return "Jueves";
+                case 6:
+                  return "Viernes";
+                case 7:
+                  return "Sabado";
+              }
+            } else {
+              if (dayformat == "Sunday") {
+                switch (value.toInt()) {
+                  case 1:
+                    return "Lunes";
+                  case 2:
+                    return "Martes";
+                  case 3:
+                    return "Miercoles";
+                  case 4:
+                    return "Jueves";
+                  case 5:
+                    return "Viernes";
+                  case 6:
+                    return "Sabado";
+                  case 7:
+                    return "Domingo";
+                }
+              } else {
+                if (dayformat == "Monday") {
+                  switch (value.toInt()) {
+                    case 1:
+                      return "Martes";
+                    case 2:
+                      return "Miercoles";
+                    case 3:
+                      return "Jueves";
+                    case 4:
+                      return "Viernes";
+                    case 5:
+                      return "Sabado";
+                    case 6:
+                      return "Domingo";
+                    case 7:
+                      return "Lunes";
+                  }
+                } else {
+                  if (dayformat == "Tuesday") {
+                    switch (value.toInt()) {
+                      case 1:
+                        return "Miercoles";
+                      case 2:
+                        return "Jueves";
+                      case 3:
+                        return "Viernes";
+                      case 4:
+                        return "Sabado";
+                      case 5:
+                        return "Domingo";
+                      case 6:
+                        return "Lunes";
+                      case 7:
+                        return "Martes";
+                    }
+                  } else {
+                    if (dayformat == "Wednesday") {
+                      switch (value.toInt()) {
+                        case 1:
+                          return "Jueves";
+                        case 2:
+                          return "Viernes";
+                        case 3:
+                          return "Sabado";
+                        case 4:
+                          return "Domingo";
+                        case 5:
+                          return "Lunes";
+                        case 6:
+                          return "Martes";
+                        case 7:
+                          return "Miercoles";
+                      }
+                    } else {
+                      if (dayformat == "Thursday") {
+                        switch (value.toInt()) {
+                          case 1:
+                            return "Viernes";
+                          case 2:
+                            return "Sabado";
+                          case 3:
+                            return "Domingo";
+                          case 4:
+                            return "Lunes";
+                          case 5:
+                            return "Martes";
+                          case 6:
+                            return "Miercoles";
+                          case 7:
+                            return "Jueves";
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
 
           return '';
@@ -182,11 +305,74 @@ class LineTitles {
               return "7";
             case 8:
               return "8";
+            case 9:
+              return "9";
+            case 10:
+              return "10";
+            case 11:
+              return "11";
+            case 12:
+              return "12";
+            case 13:
+              return "13";
+            case 14:
+              return "14";
+            case 15:
+              return "15";
+            case 16:
+              return "Vasos Tomados";
           }
 
           return '';
         },
-        reservedSize: 100,
+        reservedSize: 120,
         margin: 20,
+      ),
+      rightTitles: SideTitles(
+        showTitles: true,
+        getTextStyles: (value) => const TextStyle(
+          color: Color(0xFF212121),
+          fontWeight: FontWeight.bold,
+          fontSize: 16,
+        ),
+        getTitles: (value) {
+          switch (value.toInt()) {
+            case 1:
+              return "";
+            case 2:
+              return "";
+            case 3:
+              return "";
+            case 4:
+              return "";
+            case 5:
+              return "";
+            case 6:
+              return "";
+            case 7:
+              return "";
+            case 8:
+              return "";
+            case 9:
+              return "";
+            case 10:
+              return "";
+            case 11:
+              return "";
+            case 12:
+              return "";
+            case 13:
+              return "";
+            case 14:
+              return "";
+            case 15:
+              return "";
+            case 16:
+              return "";
+          }
+
+          return '';
+        },
+        reservedSize: 90,
       ));
 }

@@ -6,10 +6,11 @@ import 'package:a_bit_of_health/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-double reciprocal(double d) => 1 / d;
+//double reciprocal(double d) => 1 / d;
 
 class GlassesOfWater extends StatefulWidget {
   GlassesOfWater({Key key}) : super(key: key);
+
   @override
   _GlassesOfWaterState createState() => _GlassesOfWaterState();
 }
@@ -153,11 +154,9 @@ class _GlassesOfWatterState extends State<GlassesOfWater1> {
                       widget.user.glasses--;
                       provider.setUserWaterGlasses(
                           widget.user.userID, widget.user.glasses);
-                      Update(Provider.of<UserModel>(context, listen: false)
-                          .userID);
                       UserProvider().addToTodaysGlasses(
                           Provider.of<UserModel>(context, listen: false).userID,
-                          reciprocal(widget.user.glasses.toDouble()));
+                          widget.user.glasses.toDouble());
                     } else {
                       final snackBar = SnackBar(
                         content: Text('Ya no puedes quitar más vasos!, ¿o sí?'),
@@ -180,8 +179,6 @@ class _GlassesOfWatterState extends State<GlassesOfWater1> {
                         widget.user.glasses++;
                         await provider.setUserWaterGlasses(
                             widget.user.userID, widget.user.glasses);
-                        Update(Provider.of<UserModel>(context, listen: false)
-                            .userID);
                         UserProvider().addToTodaysGlasses(
                             Provider.of<UserModel>(context, listen: false)
                                 .userID,
@@ -226,10 +223,6 @@ class _GlassesOfWatterState extends State<GlassesOfWater1> {
             ])
           ],
         ));
-  }
-
-  void Update(String userID) {
-    UserProvider().updateDailyGlasses(userID);
   }
 }
 
