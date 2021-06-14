@@ -23,6 +23,7 @@ class Stat_Calories extends StatelessWidget {
    List<Color> gradientColors = [ Color(0xff23b6e6), Color(0xff02d39a)];
   @override
   Widget build(BuildContext context) {
+    
     if (Provider.of<UserModel>(context).userID == null)
       return Login();
     else {
