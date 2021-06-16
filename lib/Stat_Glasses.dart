@@ -6,25 +6,63 @@ import 'package:provider/provider.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:intl/intl.dart';
 
+double cero;
+double one;
+double two;
+double three;
+double four;
+double five;
+double six;
 DateTime now = new DateTime.now();
 final DateFormat format1 = DateFormat('EEEE');
 String dayformat = format1.format(now);
 
+/*List<String> thedaysESP = [
+  "Lunes",
+  "Martes",
+  "Miércoles",
+  "Jueves",
+  "Viernes",
+  "Sábado",
+  "Domingo"
+];
+List<String> thedaysENG = [
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+  "Sunday"
+];
+int index = thedaysENG.indexOf(dayformat);
+List<String> theorder;
+for (int i = index; i >= 0; i--) {
+      theorder.add(thedaysESP[i]);
+    }
+    for (int j = 6; j > index; j--) {
+      theorder.add(thedaysESP[j]);
+    }
+*/
 class Stat_Glasses extends StatelessWidget {
   Stat_Glasses({Key key}) : super(key: key);
   List<Color> gradientColors = [Color(0xff23b6e6), Color(0xff02d39a)];
-  List<FlSpot> _list = [
-    FlSpot(1, 1),
-    FlSpot(2, 3),
-    FlSpot(3, 5),
-    FlSpot(4, 7),
-    FlSpot(5, 6),
-    FlSpot(6, 2),
-    FlSpot(7, 6),
-  ];
 
   @override
   Widget build(BuildContext context) {
+    List<dynamic> thelist = Provider.of<UserModel>(context).dailyGlasses;
+    double themax = thelist[0];
+    for (int i = 0; i < thelist.length; i++) {
+      if (thelist[i] > themax) themax = thelist[i];
+    }
+    cero = thelist[6];
+    one = thelist[5];
+    two = thelist[4];
+    three = thelist[3];
+    four = thelist[2];
+    five = thelist[1];
+    six = thelist[0];
+
     if (Provider.of<UserModel>(context).userID == null)
       return Login();
     else {
@@ -57,7 +95,7 @@ class Stat_Glasses extends StatelessWidget {
                           //borderData: FlBorderData(show: false),
                           //minX:1,
                           //  maxX:7,
-                          minY: 1,
+                          minY: 0,
                           maxY: 16,
                           titlesData: LineTitles.getTitleData(),
                           gridData: FlGridData(
@@ -85,7 +123,15 @@ class Stat_Glasses extends StatelessWidget {
                           ),
                           lineBarsData: [
                             LineChartBarData(
-                              spots: _list,
+                              spots: [
+                                FlSpot(0, cero),
+                                FlSpot(1, one),
+                                FlSpot(2, two),
+                                FlSpot(3, three),
+                                FlSpot(4, four),
+                                FlSpot(5, five),
+                                FlSpot(6, six),
+                              ],
                               isCurved: true,
                               colors: gradientColors,
                               barWidth: 5,
@@ -144,127 +190,127 @@ class LineTitles {
         getTitles: (value) {
           if (dayformat == "Friday") {
             switch (value.toInt()) {
-              case 1:
+              case 0:
                 return "Sabado";
-              case 2:
+              case 1:
                 return "Domingo";
-              case 3:
+              case 2:
                 return "Lunes";
-              case 4:
+              case 3:
                 return "Martes";
-              case 5:
+              case 4:
                 return "Miercoles";
-              case 6:
+              case 5:
                 return "jueves";
-              case 7:
+              case 6:
                 return "Viernes";
             }
           } else {
             if (dayformat == "Saturday") {
               switch (value.toInt()) {
-                case 1:
+                case 0:
                   return "Domingo";
-                case 2:
+                case 1:
                   return "Lunes";
-                case 3:
+                case 2:
                   return "Martes";
-                case 4:
+                case 3:
                   return "Miercoles";
-                case 5:
+                case 4:
                   return "Jueves";
-                case 6:
+                case 5:
                   return "Viernes";
-                case 7:
+                case 6:
                   return "Sabado";
               }
             } else {
               if (dayformat == "Sunday") {
                 switch (value.toInt()) {
-                  case 1:
+                  case 0:
                     return "Lunes";
-                  case 2:
+                  case 1:
                     return "Martes";
-                  case 3:
+                  case 2:
                     return "Miercoles";
-                  case 4:
+                  case 3:
                     return "Jueves";
-                  case 5:
+                  case 4:
                     return "Viernes";
-                  case 6:
+                  case 5:
                     return "Sabado";
-                  case 7:
+                  case 6:
                     return "Domingo";
                 }
               } else {
                 if (dayformat == "Monday") {
                   switch (value.toInt()) {
-                    case 1:
+                    case 0:
                       return "Martes";
-                    case 2:
+                    case 1:
                       return "Miercoles";
-                    case 3:
+                    case 2:
                       return "Jueves";
-                    case 4:
+                    case 3:
                       return "Viernes";
-                    case 5:
+                    case 4:
                       return "Sabado";
-                    case 6:
+                    case 5:
                       return "Domingo";
-                    case 7:
+                    case 6:
                       return "Lunes";
                   }
                 } else {
                   if (dayformat == "Tuesday") {
                     switch (value.toInt()) {
-                      case 1:
+                      case 0:
                         return "Miercoles";
-                      case 2:
+                      case 1:
                         return "Jueves";
-                      case 3:
+                      case 2:
                         return "Viernes";
-                      case 4:
+                      case 3:
                         return "Sabado";
-                      case 5:
+                      case 4:
                         return "Domingo";
-                      case 6:
+                      case 5:
                         return "Lunes";
-                      case 7:
+                      case 6:
                         return "Martes";
                     }
                   } else {
                     if (dayformat == "Wednesday") {
                       switch (value.toInt()) {
-                        case 1:
+                        case 0:
                           return "Jueves";
-                        case 2:
+                        case 1:
                           return "Viernes";
-                        case 3:
+                        case 2:
                           return "Sabado";
-                        case 4:
+                        case 3:
                           return "Domingo";
-                        case 5:
+                        case 4:
                           return "Lunes";
-                        case 6:
+                        case 5:
                           return "Martes";
-                        case 7:
+                        case 6:
                           return "Miercoles";
                       }
                     } else {
                       if (dayformat == "Thursday") {
                         switch (value.toInt()) {
-                          case 1:
+                          case 0:
                             return "Viernes";
-                          case 2:
+                          case 1:
                             return "Sabado";
-                          case 3:
+                          case 2:
                             return "Domingo";
-                          case 4:
+                          case 3:
                             return "Lunes";
-                          case 5:
+                          case 4:
                             return "Martes";
-                          case 6:
+                          case 5:
                             return "Miercoles";
-                          case 7:
+                          case 6:
                             return "Jueves";
                         }
                       }
@@ -289,6 +335,8 @@ class LineTitles {
         // ignore: missing_return
         getTitles: (value) {
           switch (value.toInt()) {
+            case 0:
+              return "0";
             case 1:
               return "1";
             case 2:
@@ -337,6 +385,8 @@ class LineTitles {
         ),
         getTitles: (value) {
           switch (value.toInt()) {
+            case 0:
+              return "";
             case 1:
               return "";
             case 2:

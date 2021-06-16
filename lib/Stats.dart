@@ -40,7 +40,7 @@ class Stats extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              ImagestoDisplay(imageName: "vaso_lleno"),
+                              ImagestoDisplay(imageName: "aguatransparente"),
                               MaterialButton(
                                   child: Text('Vasos de Agua',
                                       style: new TextStyle(fontSize: 22)),
@@ -58,7 +58,8 @@ class Stats extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              ImagestoDisplay(imageName: "vaso_vacio"),
+                              ImagestoDisplay(
+                                  imageName: "estrellastransparentes"),
                               MaterialButton(
                                   child: Text('Puntuación',
                                       style: new TextStyle(fontSize: 22)),
@@ -75,7 +76,7 @@ class Stats extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              ImagestoDisplay(imageName: "Calorias"),
+                              ImagestoDisplay(imageName: "kcaltransparente"),
                               MaterialButton(
                                   child: Text(
                                     'Calorias',

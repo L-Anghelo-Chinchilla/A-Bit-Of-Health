@@ -140,6 +140,11 @@ class UserProvider {
     return res;
   }
 
+  Future<List<dynamic>> obtainDailyGlasses(String userID) async {
+    UserModel user = await getUserData(userID);
+    return user.dailyGlasses;
+  }
+
   Future<void> updateDailyScore(String userID) async {
     UserModel user = await getUserData(userID);
     var lastCon = DateTime.parse(user.lastConnection);
