@@ -19,6 +19,7 @@ class Stat_Score extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
+    List<dynamic> thelist = Provider.of<UserModel>(context).dailyScore;
     if (Provider.of<UserModel>(context).userID == null)
       return Login();
     else {

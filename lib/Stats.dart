@@ -40,7 +40,7 @@ class Stats extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              ImagestoDisplay(imageName: "aguatransparente"),
+                              ImagestoDisplay(imageName: "aguaEST"),
                               MaterialButton(
                                   child: Text('Vasos de Agua',
                                       style: new TextStyle(fontSize: 22)),
@@ -58,8 +58,7 @@ class Stats extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              ImagestoDisplay(
-                                  imageName: "estrellastransparentes"),
+                              ImagestoDisplay(imageName: "estrellasEST"),
                               MaterialButton(
                                   child: Text('Puntuación',
                                       style: new TextStyle(fontSize: 22)),
@@ -76,7 +75,8 @@ class Stats extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              ImagestoDisplay(imageName: "kcaltransparente"),
+                              ImagestoDisplay(
+                                  imageName: "kcalEST".toLowerCase()),
                               MaterialButton(
                                   child: Text(
                                     'Calorias',
@@ -111,7 +111,7 @@ class ImagestoDisplay extends StatelessWidget {
     return Container(
         padding: EdgeInsets.all(15),
         child: Image.asset(
-          'lib/assets/$imageName.png',
+          'assets/$imageName.png',
           width: 130,
           height: 130,
         ));

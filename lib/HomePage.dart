@@ -25,6 +25,12 @@ class _HomePageState extends State<HomePage> {
           builder: (context, AsyncSnapshot<bool> future) {
             if (future.hasData) {
               if (future.data) {
+                UserProvider().updateDailyCalories(
+                    Provider.of<UserModel>(context, listen: false).userID);
+                UserProvider().updateDailyScore(
+                    Provider.of<UserModel>(context, listen: false).userID);
+                UserProvider().updateDailyGlasses(
+                    Provider.of<UserModel>(context, listen: false).userID);
                 return Home();
               } else
                 return Home();
