@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'package:a_bit_of_health/Login.dart';
 import 'package:a_bit_of_health/models/UserModel.dart';
 import 'package:a_bit_of_health/utils.dart';
@@ -6,14 +7,15 @@ import 'package:provider/provider.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:intl/intl.dart';
 
-double cero = num[0];
-double one = num[1];
-double two = num[2];
-double three = num[3];
-double four = num[4];
-double five = num[5];
-double six = num[6];
-List<double> num= [1,3,2,1,2,3,4];
+double cero;
+double one ;
+double two ;
+double three ;
+double four; 
+double five;
+double six ;
+double themax;
+double ult;
 DateTime now = new DateTime.now();
 final DateFormat formato = DateFormat('EEEE');
 String dayformat= formato.format(now);
@@ -25,6 +27,17 @@ class Stat_Score extends StatelessWidget {
                       
   @override
   Widget build(BuildContext context) {
+     List<dynamic> thelist = Provider.of<UserModel>(context).dailyScore;
+    cero = thelist[6];
+    one = thelist[5];
+    two = thelist[4];
+    three = thelist[3];
+    four = thelist[2];
+    five = thelist[1];
+    six = thelist[0];
+    themax = thelist[0];
+     for (int i = 0; i < thelist.length; i++) { if (thelist[i] > themax) themax = thelist[i]; }
+     ult = themax + 1;
     if (Provider.of<UserModel>(context).userID == null)
       return Login();
     else {
@@ -55,11 +68,15 @@ class Stat_Score extends StatelessWidget {
               child: LineChart(
                 LineChartData(
                 //borderData: FlBorderData(show: false),
-              //  minX:1,
-               // maxX:7,
-                minY:1,
-                maxY:6,
+                         minX: 1,
+                          maxX: 7,
+                          minY: 0,
+                          maxY: 5,
                 titlesData: LineTitles.getTitleData(),
+                 axisTitleData: FlAxisTitleData(
+                 leftTitle: AxisTitle(
+                 showTitle: true, titleText: 'Puntiación', margin: 10),
+                 ),
                 gridData: FlGridData(
                    show: true,
                    getDrawingHorizontalLine: (value){
@@ -294,62 +311,83 @@ class Stat_Score extends StatelessWidget {
   
   margin: 20,
   ),
-
   leftTitles: SideTitles(
-    showTitles: true,
-    getTextStyles: (value) => const TextStyle(
-    color: Color(0xFF212121),
-    fontWeight: FontWeight.bold,
-    fontSize: 16,
-  ),
-    // ignore: missing_return
-   getTitles: (value){
-   switch (value.toInt()){
-    case 1:
-     return "1";
-     case 2:
-     return "2";
-     case 3:
-     return "3";
-     case 4:
-     return "4";
-     case 5: 
-     return "5";
-     case 6: 
-     return "Puntuacion";     
-   }
+        showTitles: true,
+        getTextStyles: (value) => const TextStyle(
+          color: Color(0xFF212121),
+          fontWeight: FontWeight.bold,
+          fontSize: 16,
+        ),
+        // ignore: missing_return
+        getTitles: (value) {
+          switch (value.toInt()) {
+            case 0:
+              return "0";
+            case 1:
+              return "1";
+            case 2:
+              return "2";
+            case 3:
+              return "3";
+            case 4:
+              return "4";
+            case 5:
+              return "5";
+          }
 
-  return '';
-  },
-   reservedSize: 80,
-   margin: 20,
-  ),
-  rightTitles: SideTitles(
-    showTitles: true,
-    getTextStyles: (value) => const TextStyle(
-    color: Color(0xFF212121),
-    fontWeight: FontWeight.bold,
-    fontSize: 16,
-  ),
-   getTitles: (value){
-   switch (value.toInt()){
-    case 1:
-     return "";
-     case 2:
-     return "";
-     case 3:
-     return "";
-     case 4:
-     return "";
-     case 5: 
-     return "";
-     case 6: 
-     return "";     
-   }
+          return '';
+        },
+        reservedSize: 80,
+        margin: 20,
+      ),
+      rightTitles: SideTitles(
+        showTitles: true,
+        getTextStyles: (value) => const TextStyle(
+          color: Color(0xFF212121),
+          fontWeight: FontWeight.bold,
+          fontSize: 16,
+        ),
+        getTitles: (value) {
+          switch (value.toInt()) {
+            case 0:
+              return "";
+            case 1:
+              return "";
+            case 2:
+              return "";
+            case 3:
+              return "";
+            case 4:
+              return "";
+            case 5:
+              return "";
+            case 6:
+              return "";
+            case 7:
+              return "";
+            case 8:
+              return "";
+            case 9:
+              return "";
+            case 10:
+              return "";
+            case 11:
+              return "";
+            case 12:
+              return "";
+            case 13:
+              return "";
+            case 14:
+              return "";
+            case 15:
+              return "";
+            case 16:
+              return "";
+          }
 
-  return '';
-  },
-  reservedSize: 80,
-  )
+          return '';
+        },
+        reservedSize: 90,
+      )
  );
 }

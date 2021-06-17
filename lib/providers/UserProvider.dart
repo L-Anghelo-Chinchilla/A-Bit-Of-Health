@@ -140,12 +140,26 @@ class UserProvider {
     return res;
   }
 
+  Future<List<dynamic>> obtainDailyGlasses(String userID) async {
+    UserModel user = await getUserData(userID);
+    return user.dailyGlasses;
+  }
+
   Future<void> updateDailyScore(String userID) async {
     UserModel user = await getUserData(userID);
+    var prueba = DateTime.parse("2021-06-16 20:18:04Z");
     var lastCon = DateTime.parse(user.lastConnection);
     var daysoff = DateTime.now().difference(lastCon).inDays;
+    var diferenciaprueba = DateTime.now().difference(prueba).inDays;
     String today = formatter.format(DateTime.now());
     String thelastCon = formatter.format(lastCon);
+
+    print("El último día updateado del Daily score es: " +
+        int.parse(thelastCon).toString());
+    print("El día de hoy updateado del Daily score es: " +
+        int.parse(today).toString());
+    print(
+        "La diferencia en días de ayer a las 8pm y hoy ahora es:  ${diferenciaprueba}");
 
     if (int.parse(today) != int.parse(thelastCon)) {
       user.setTodaysScore(daysoff);

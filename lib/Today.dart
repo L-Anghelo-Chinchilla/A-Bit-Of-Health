@@ -82,9 +82,12 @@ class _TodayPageState extends State<TodayPage> {
                           .first
                           .replaceAll('-', '/')),
                   builder: (context, data) {
-                    if (data.hasData) if (data.data.isEmpty)
+                    if (data.hasData) if (data.data.isEmpty) {
+                      UserProvider().addToTodaysScore(
+                          Provider.of<UserModel>(context, listen: false).userID,
+                          0);
                       return getNoFoodSignal();
-                    else
+                    } else
                       return TodayRegister(map: data.data);
                     else
                       return CircularProgressIndicator();
