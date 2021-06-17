@@ -6,6 +6,7 @@ import 'package:carousel_pro/carousel_pro.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:math';
+import 'package:a_bit_of_health/providers/UserProvider.dart';
 import 'package:a_bit_of_health/Login.dart';
 import 'package:a_bit_of_health/models/UserModel.dart';
 import 'package:a_bit_of_health/providers/authentification.dart';
@@ -23,9 +24,9 @@ class _HomePageState extends State<HomePage> {
           future: AuthProvider.getUser(context),
           builder: (context, AsyncSnapshot<bool> future) {
             if (future.hasData) {
-              if (future.data)
+              if (future.data) {
                 return Home();
-              else
+              } else
                 return Home();
             } else {
               return Center(
@@ -36,8 +37,16 @@ class _HomePageState extends State<HomePage> {
               ));
             }
           });
-    else
+    else {
+      UserProvider().updateDailyCalories(
+          Provider.of<UserModel>(context, listen: false).userID);
+      UserProvider().updateDailyScore(
+          Provider.of<UserModel>(context, listen: false).userID);
+      UserProvider().updateDailyGlasses(
+          Provider.of<UserModel>(context, listen: false).userID);
+
       return Home();
+    }
   }
 }
 

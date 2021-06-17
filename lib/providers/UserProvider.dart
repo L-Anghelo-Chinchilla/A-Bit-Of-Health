@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:a_bit_of_health/models/UserModel.dart';
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:tuple/tuple.dart';
@@ -71,14 +72,16 @@ class UserProvider {
     }
   }
 
+  DateFormat formatter = DateFormat('d');
+
   Future<void> updateDailyCalories(String userID) async {
     UserModel user = await getUserData(userID);
     var lastCon = DateTime.parse(user.lastConnection);
     var daysoff = DateTime.now().difference(lastCon).inDays;
+    String today = formatter.format(DateTime.now());
+    String thelastCon = formatter.format(lastCon);
 
-    print('El proceso actualiza');
-
-    if (daysoff != 0) {
+    if (int.parse(today) != int.parse(thelastCon)) {
       user.setTodaysCals(daysoff);
       final url = '$_url$userID.json';
       Uri uri = Uri.parse(url);
@@ -89,9 +92,7 @@ class UserProvider {
   Future<void> addToTodaysCalories(String userID, double calories) async {
     UserModel user = await getUserData(userID);
 
-    user.setTodaysCals(calories);
-
-    print('Lo que se envía es: ${calories}');
+    user.addToTodayCals(calories);
 
     final url = '$_url/$userID.json';
     Uri uri = Uri.parse(url);
@@ -103,11 +104,71 @@ class UserProvider {
 
     double res = user.getFirstofDaily();
 
-    print('Lo que se obtiene es: ${res}');
+    return res;
+  }
 
-    /*final url = '$_url/$userID.json';
+  Future<void> updateDailyGlasses(String userID) async {
+    UserModel user = await getUserData(userID);
+    var lastCon = DateTime.parse(user.lastConnection);
+    var daysoff = DateTime.now().difference(lastCon).inDays;
+    String today = formatter.format(DateTime.now());
+    String thelastCon = formatter.format(lastCon);
+
+    if (int.parse(today) != int.parse(thelastCon)) {
+      user.setTodaysGlasses(daysoff);
+      final url = '$_url$userID.json';
+      Uri uri = Uri.parse(url);
+      http.put(uri, body: user.toJson().toString());
+    }
+  }
+
+  Future<void> addToTodaysGlasses(String userID, double glass) async {
+    UserModel user = await getUserData(userID);
+
+    user.addToTodayGlasses(glass);
+
+    final url = '$_url/$userID.json';
     Uri uri = Uri.parse(url);
-    await http.put(uri, body: user.toJson().toString());*/
+    await http.put(uri, body: user.toJson().toString());
+  }
+
+  Future<double> getAllTodayGlasses(String userID) async {
+    UserModel user = await getUserData(userID);
+
+    double res = user.getFirstofGlasses();
+
+    return res;
+  }
+
+  Future<void> updateDailyScore(String userID) async {
+    UserModel user = await getUserData(userID);
+    var lastCon = DateTime.parse(user.lastConnection);
+    var daysoff = DateTime.now().difference(lastCon).inDays;
+    String today = formatter.format(DateTime.now());
+    String thelastCon = formatter.format(lastCon);
+
+    if (int.parse(today) != int.parse(thelastCon)) {
+      user.setTodaysScore(daysoff);
+      final url = '$_url$userID.json';
+      Uri uri = Uri.parse(url);
+      http.put(uri, body: user.toJson().toString());
+    }
+  }
+
+  Future<void> addToTodaysScore(String userID, double score) async {
+    UserModel user = await getUserData(userID);
+
+    user.addToTodayScore(score);
+
+    final url = '$_url/$userID.json';
+    Uri uri = Uri.parse(url);
+    await http.put(uri, body: user.toJson().toString());
+  }
+
+  Future<double> getAllTodayScore(String userID) async {
+    UserModel user = await getUserData(userID);
+
+    double res = user.getFirstofScore();
 
     return res;
   }

@@ -15,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 int score = 1;
+double reciprocal(double d) => 1 / d;
 
 class Evaluation extends StatelessWidget {
   Evaluation({Key key}) : super(key: key);
@@ -385,6 +386,7 @@ class Evaluation extends StatelessWidget {
                                       onPressed: () async {
                                         UpdateFood(
                                             kindoffood, thetotal, context);
+
                                         //THE USER REGISTER
                                         UploadRegister(
                                             _provider,
@@ -392,6 +394,24 @@ class Evaluation extends StatelessWidget {
                                             score,
                                             thelist.item1,
                                             thelist.item2);
+                                        //EXTRACT OF THE OTHER DAYS CALORIES
+                                        String userID = Provider.of<UserModel>(
+                                                context,
+                                                listen: false)
+                                            .userID;
+
+                                        double cal = await UserProvider()
+                                            .getAllTodayCalories(
+                                                Provider.of<UserModel>(context,
+                                                        listen: false)
+                                                    .userID);
+                                        cal += thelist.item1;
+                                        UserProvider().addToTodaysCalories(
+                                            Provider.of<UserModel>(context,
+                                                    listen: false)
+                                                .userID,
+                                            cal);
+                                        //CLEAR THE LIST
                                         Provider.of<List<FoodOffer>>(context,
                                                 listen: false)
                                             .clear();
@@ -471,7 +491,7 @@ void UpdateFood(
 }
 
 void UploadRegister(FoodProvider _provider, BuildContext context, int score,
-    double thecalories, FoodOffer thefood) async {
+    double thecalories, FoodOffer thefood) {
   final DateTime now = DateTime.now();
   final DateFormat formatter = DateFormat('yyyy/MM/dd');
   final String formatted = formatter.format(now);
@@ -479,8 +499,10 @@ void UploadRegister(FoodProvider _provider, BuildContext context, int score,
   final DateFormat thetime = DateFormat('hh:mm:ss');
   final String times = thetime.format(now);
 
+  String userID = Provider.of<UserModel>(context, listen: false).userID;
+
   _provider.uploadUserRegiter(
-      Provider.of<UserModel>(context, listen: false).userID,
+      userID,
       formatted,
       FoodRegister(
           score: score,
@@ -497,16 +519,10 @@ void UploadRegister(FoodProvider _provider, BuildContext context, int score,
       food: thefood);
   print(food.foodRegisterToJson(food));
 
-  print('Todo bien hasta aquí');
-
   UserProvider().updateDailyCalories(
       Provider.of<UserModel>(context, listen: false).userID);
-  double cal = await UserProvider().getAllTodayCalories(
-      Provider.of<UserModel>(context, listen: false).userID);
-  cal += thecalories;
-
-  await UserProvider().addToTodaysCalories(
-      Provider.of<UserModel>(context, listen: false).userID, cal);
+  UserProvider()
+      .updateDailyScore(Provider.of<UserModel>(context, listen: false).userID);
 }
 
 class CounterView extends StatefulWidget {

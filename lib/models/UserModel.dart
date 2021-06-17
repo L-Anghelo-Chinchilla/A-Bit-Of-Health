@@ -21,7 +21,9 @@ class UserModel {
   String lastLunch;
   String lastDinner;
   String lastSnack;
-  List dailyCalories;
+  List<dynamic> dailyCalories;
+  List<dynamic> dailyGlasses;
+  List<dynamic> dailyScore;
 
   UserModel(
       {this.userID,
@@ -39,7 +41,9 @@ class UserModel {
       this.lastLunch,
       this.lastDinner,
       this.lastSnack,
-      this.dailyCalories});
+      this.dailyCalories,
+      this.dailyGlasses,
+      this.dailyScore});
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
       weight: json["weight"],
@@ -56,7 +60,9 @@ class UserModel {
       lastLunch: json['lastLunch'],
       lastDinner: json['lastDinner'],
       lastSnack: json['lastSnack'],
-      dailyCalories: json['dailyCalories']);
+      dailyCalories: json['dailyCalories'].cast<double>(),
+      dailyGlasses: json['dailyGlasses'].cast<double>(),
+      dailyScore: json['dailyScore'].cast<double>());
 
   Map<String, dynamic> toJson() => {
         '"weight"': jsonEncode(weight),
@@ -74,11 +80,13 @@ class UserModel {
         '"lastDinner"': jsonEncode(lastDinner),
         '"lastSnack"': jsonEncode(lastSnack),
         '"dailyCalories"': jsonEncode(dailyCalories),
+        '"dailyGlasses"': jsonEncode(dailyGlasses),
+        '"dailyScore"': jsonEncode(dailyScore)
       };
 
   @override
   String toString() =>
-      '{ ${userID.toString()},${weight.toString()}, ${height.toString()}, ${email.toString()}, ${gender.toString()}, ${waterLimit.toString()},  ${name.toString()},${newWaterLimit.toString()},${waterLimitDate.toString()},${glasses.toString()},${lastConnection.toString()},${lastBreakfast.toString()},${lastLunch.toString()},${lastDinner.toString()},${lastSnack.toString()}, ${dailyCalories.toString()}';
+      '{ ${userID.toString()},${weight.toString()}, ${height.toString()}, ${email.toString()}, ${gender.toString()}, ${waterLimit.toString()},  ${name.toString()},${newWaterLimit.toString()},${waterLimitDate.toString()},${glasses.toString()},${lastConnection.toString()},${lastBreakfast.toString()},${lastLunch.toString()},${lastDinner.toString()},${lastSnack.toString()},${dailyCalories.toString()},${dailyGlasses.toString()},${dailyScore.toString()}';
 
   void setID(String id) {
     this.userID = id;
@@ -118,18 +126,52 @@ class UserModel {
 
   void setTodaysCals(var daysoff) {
     for (int i = 0; i < daysoff; i++) {
-      dailyCalories.insert(daysoff, 0);
-      dailyCalories.removeLast();
+      this.dailyCalories.insert(i, 0);
+      this.dailyCalories.removeLast();
     }
   }
 
   void addToTodayCals(double calories) {
-    dailyCalories.insert(0, calories);
-    dailyCalories.removeAt(1);
+    this.dailyCalories.insert(0, calories);
+    this.dailyCalories.removeAt(1);
   }
 
   double getFirstofDaily() {
-    double res = dailyCalories.first;
+    double res = this.dailyCalories.first;
+    return res;
+  }
+
+  void setTodaysGlasses(var daysoff) {
+    for (int i = 0; i < daysoff; i++) {
+      this.dailyGlasses.insert(i, 0);
+      this.dailyGlasses.removeLast();
+    }
+  }
+
+  void addToTodayGlasses(double glass) {
+    this.dailyGlasses.insert(0, glass);
+    this.dailyGlasses.removeAt(1);
+  }
+
+  double getFirstofGlasses() {
+    double res = this.dailyGlasses.first;
+    return res;
+  }
+
+  void setTodaysScore(var daysoff) {
+    for (int i = 0; i < daysoff; i++) {
+      this.dailyScore.insert(i, 0);
+      this.dailyScore.removeLast();
+    }
+  }
+
+  void addToTodayScore(double score) {
+    this.dailyScore.insert(0, score);
+    this.dailyScore.removeAt(1);
+  }
+
+  double getFirstofScore() {
+    double res = this.dailyScore.first;
     return res;
   }
 
@@ -150,6 +192,8 @@ class UserModel {
     lastDinner = usr.lastDinner;
     lastSnack = usr.lastSnack;
     dailyCalories = usr.dailyCalories;
+    dailyGlasses = usr.dailyGlasses;
+    dailyScore = usr.dailyScore;
   }
 
   void delete() {
