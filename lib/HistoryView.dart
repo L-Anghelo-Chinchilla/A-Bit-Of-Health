@@ -41,17 +41,17 @@ class HistoryView extends StatelessWidget {
                     width: MediaQuery.of(context).size.width * 0.5,
                     height: MediaQuery.of(context).size.height / 2.2,
                     child: FutureBuilder(
-                        future: FoodProvider.getUserRegisterRange(
+                      future:FoodProvider.getUserRegisterRange(
                             Provider.of<UserModel>(context, listen: false)
                                 .userID,
-                            '',
-                            ''),
+                            range.item1,
+                            range.item2),
                         builder: (context, snapshot) {
                           if (snapshot.hasData) {
                             return ListView.builder(
                               itemBuilder: (context, i) {
                                 return getRegisterList(
-                                    context, FoodRegister(), false);
+                                    context, snapshot.data.values.elementAt(i), false);
                               },
                             );
                           } else {
@@ -67,7 +67,7 @@ class HistoryView extends StatelessWidget {
                         onPressed: () {
                           Navigator.pop(context);
                         },
-                      ),
+ ),
                       ElevatedButton(onPressed: () {}, child: Text('Descargar'))
                     ],
                   )

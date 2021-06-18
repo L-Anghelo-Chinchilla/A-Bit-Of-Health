@@ -60,23 +60,22 @@ class FoodProvider {
     final uri = Uri.parse(url);
     final answer = await http.get(uri);
     var sorted = SplayTreeMap<String, FoodRegister>();
-    DateTime start, end;
-    start = DateTime.parse(startDate);
-    end = DateTime.parse(endDate);
+   
     if (answer.bodyBytes.length > 4) {
       Map<String, dynamic> jsonYear = jsonDecode(answer.body);
       jsonYear.forEach((key, value) {
-        Map<String, dynamic> jsonMonth = jsonDecode(value);
-        jsonMonth.forEach((key, value) {
-          Map<String, dynamic> jsonDay = jsonDecode(value);
-          jsonDay.forEach((key, value) {
-            FoodRegister register = FoodRegister.fromJson(value);
-            DateTime aux = DateTime.parse(register.date);
-            
-            if (aux.compareTo(start) >= 0  && aux.compareTo(end) <= 0 ) {
+       // if(int.parse(startDate.substring(0,4)) >=  )
+        value.forEach((key, value) {
+        
+          value.forEach((key, value) {
+
+          value.forEach((key, value) {
+        
+            FoodRegister register = FoodRegister.fromJson( value);
               register.id = key;
-              sorted[register.time] = register;
-            }
+              sorted['${register.date}${register.time}'] = register;
+              
+          });
           });
         });
       });
