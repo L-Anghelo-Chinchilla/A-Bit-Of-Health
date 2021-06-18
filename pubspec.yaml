@@ -25,6 +25,11 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+  path_provider: ^2.0.2
+  open_file: ^3.2.1
+  syncfusion_flutter_pdf: ^19.1.69-beta
+  universal_html: ^2.0.8
+  io: ^1.0.0
 
   
   # The following adds the Cupertino Icons font to your application.
@@ -72,6 +77,7 @@ provider:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
