@@ -1,5 +1,6 @@
 import 'package:a_bit_of_health/Login.dart';
 import 'package:a_bit_of_health/models/UserModel.dart';
+import 'package:a_bit_of_health/providers/UserProvider.dart';
 import 'package:a_bit_of_health/providers/authentification.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -128,6 +129,9 @@ Widget getAppBar({BuildContext context, String route}) {
                   TextButton(
                       onPressed: () async {
                         await AuthProvider.signOut();
+                        UserProvider().updateLastConnection(
+                            Provider.of<UserModel>(context, listen: false)
+                                .userID);
                         Provider.of<UserModel>(context, listen: false).delete();
                         Navigator.of(context).pushNamedAndRemoveUntil(
                             'Login', (Route<dynamic> route) => false);

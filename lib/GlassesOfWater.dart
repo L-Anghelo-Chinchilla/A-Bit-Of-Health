@@ -18,6 +18,9 @@ class GlassesOfWater extends StatefulWidget {
 class _GlassesOfWaterState extends State<GlassesOfWater> {
   @override
   Widget build(BuildContext context) {
+    /*UserProvider().updateDailyGlasses(
+        Provider.of<UserModel>(context, listen: false).userID);*/
+
     print(Provider.of<UserModel>(context, listen: false).userID);
     if (Provider.of<UserModel>(context, listen: false).userID == null)
       return FutureBuilder<bool>(

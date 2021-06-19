@@ -519,8 +519,6 @@ void UploadRegister(FoodProvider _provider, BuildContext context, int score,
       food: thefood);
   print(food.foodRegisterToJson(food));
 
-  UserProvider().updateDailyCalories(
-      Provider.of<UserModel>(context, listen: false).userID);
   UserProvider()
       .updateDailyScore(Provider.of<UserModel>(context, listen: false).userID);
 }

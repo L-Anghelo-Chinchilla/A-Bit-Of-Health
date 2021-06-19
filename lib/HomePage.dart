@@ -1,6 +1,7 @@
 import 'dart:js';
 
 import 'package:a_bit_of_health/utils.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:provider/provider.dart';
@@ -10,6 +11,7 @@ import 'package:a_bit_of_health/providers/UserProvider.dart';
 import 'package:a_bit_of_health/Login.dart';
 import 'package:a_bit_of_health/models/UserModel.dart';
 import 'package:a_bit_of_health/providers/authentification.dart';
+import 'dart:io';
 
 class HomePage extends StatefulWidget {
   @override
@@ -25,12 +27,6 @@ class _HomePageState extends State<HomePage> {
           builder: (context, AsyncSnapshot<bool> future) {
             if (future.hasData) {
               if (future.data) {
-                UserProvider().updateDailyCalories(
-                    Provider.of<UserModel>(context, listen: false).userID);
-                UserProvider().updateDailyScore(
-                    Provider.of<UserModel>(context, listen: false).userID);
-                UserProvider().updateDailyGlasses(
-                    Provider.of<UserModel>(context, listen: false).userID);
                 return Home();
               } else
                 return Home();
@@ -46,14 +42,20 @@ class _HomePageState extends State<HomePage> {
     else {
       UserProvider().updateDailyCalories(
           Provider.of<UserModel>(context, listen: false).userID);
-      UserProvider().updateDailyScore(
-          Provider.of<UserModel>(context, listen: false).userID);
+      sleep(const Duration(seconds: 3));
       UserProvider().updateDailyGlasses(
+          Provider.of<UserModel>(context, listen: false).userID);
+      sleep(const Duration(seconds: 3));
+      UserProvider().updateDailyScore(
           Provider.of<UserModel>(context, listen: false).userID);
 
       return Home();
     }
   }
+}
+
+Future sleep1() {
+  return new Future.delayed(const Duration(seconds: 2), () => "2");
 }
 
 class Home extends StatelessWidget {

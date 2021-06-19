@@ -21,9 +21,9 @@ class UserModel {
   String lastLunch;
   String lastDinner;
   String lastSnack;
-  List<dynamic> dailyCalories;
-  List<dynamic> dailyGlasses;
-  List<dynamic> dailyScore;
+  List<double> dailyCalories;
+  List<double> dailyGlasses;
+  List<double> dailyScore;
 
   UserModel(
       {this.userID,
@@ -88,6 +88,10 @@ class UserModel {
   String toString() =>
       '{ ${userID.toString()},${weight.toString()}, ${height.toString()}, ${email.toString()}, ${gender.toString()}, ${waterLimit.toString()},  ${name.toString()},${newWaterLimit.toString()},${waterLimitDate.toString()},${glasses.toString()},${lastConnection.toString()},${lastBreakfast.toString()},${lastLunch.toString()},${lastDinner.toString()},${lastSnack.toString()},${dailyCalories.toString()},${dailyGlasses.toString()},${dailyScore.toString()}';
 
+  void setlastConnection(String date) {
+    this.lastConnection = date;
+  }
+
   void setID(String id) {
     this.userID = id;
   }
@@ -125,10 +129,12 @@ class UserModel {
   }
 
   void setTodaysCals(var daysoff) {
+    print("La lista de calorías es: ${this.dailyCalories}");
     for (int i = 0; i < daysoff; i++) {
-      this.dailyCalories.insert(i, 0);
-      this.dailyCalories.removeLast();
+      dailyCalories.insert(i, 0);
+      dailyCalories.removeLast();
     }
+    print("Tras aumentar los días es: ${this.dailyCalories}");
   }
 
   void addToTodayCals(double calories) {
@@ -142,10 +148,12 @@ class UserModel {
   }
 
   void setTodaysGlasses(var daysoff) {
+    print("La lista de vasos es: ${this.dailyGlasses}");
     for (int i = 0; i < daysoff; i++) {
-      this.dailyGlasses.insert(i, 0);
-      this.dailyGlasses.removeLast();
+      dailyGlasses.insert(i, 0);
+      dailyGlasses.removeLast();
     }
+    print("Tras aumentar los días es: ${this.dailyCalories}");
   }
 
   void addToTodayGlasses(double glass) {
@@ -159,10 +167,12 @@ class UserModel {
   }
 
   void setTodaysScore(var daysoff) {
+    print("La lista de calorías es: ${this.dailyScore}");
     for (int i = 0; i < daysoff; i++) {
-      this.dailyScore.insert(i, 0);
-      this.dailyScore.removeLast();
+      dailyScore.insert(i, 0);
+      dailyScore.removeLast();
     }
+    print("Tras aumentar los días es: ${this.dailyCalories}");
   }
 
   void addToTodayScore(double score) {

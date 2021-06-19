@@ -25,6 +25,10 @@ class UserProvider {
     return userData;
   }
 
+  Future sleep1() {
+    return new Future.delayed(const Duration(seconds: 2), () => "2");
+  }
+
   //@param  user ID from database , the new limit to set
   //retunrs true if  success
   Future<bool> setUserWaterLimit(String userID, int newLimit) async {
@@ -65,7 +69,7 @@ class UserProvider {
 
     if (user.lastConnection != DateTime.now().toString().split(" ").first) {
       user.glasses = 0;
-      user.lastConnection = DateTime.now().toString().split(" ").first;
+      //user.lastConnection = DateTime.now().toString().split(" ").first;
       final url = '$_url$userID.json';
       Uri uri = Uri.parse(url);
       http.put(uri, body: user.toJson().toString());
@@ -73,13 +77,34 @@ class UserProvider {
   }
 
   DateFormat formatter = DateFormat('d');
+  DateFormat formatter2 = DateFormat('yyyy-MM-dd');
+
+  Future<void> updateLastConnection(String userID) async {
+    sleep1();
+    UserModel user = await getUserData(userID);
+    String today = formatter2.format(DateTime.now());
+    user.setlastConnection(today);
+    final url = '$_url$userID.json';
+    Uri uri = Uri.parse(url);
+    http.put(uri, body: user.toJson().toString());
+  }
 
   Future<void> updateDailyCalories(String userID) async {
     UserModel user = await getUserData(userID);
     var lastCon = DateTime.parse(user.lastConnection);
     var daysoff = DateTime.now().difference(lastCon).inDays;
     String today = formatter.format(DateTime.now());
+    String today2 = formatter2.format(DateTime.now());
     String thelastCon = formatter.format(lastCon);
+
+    print("El último día updateado del Daily Calories es: " +
+        int.parse(thelastCon).toString());
+    print("El día de hoy updateado del Daily Calories es: " +
+        int.parse(today).toString());
+    print(
+        "La diferencia en días de ayer y hoy ahora en calories es:  ${daysoff}");
+
+    print("El día de hoy con el formato de hoy2 en calories se lee: ${today2}");
 
     if (int.parse(today) != int.parse(thelastCon)) {
       user.setTodaysCals(daysoff);
@@ -112,7 +137,18 @@ class UserProvider {
     var lastCon = DateTime.parse(user.lastConnection);
     var daysoff = DateTime.now().difference(lastCon).inDays;
     String today = formatter.format(DateTime.now());
+    String today2 = formatter2.format(DateTime.now());
+
     String thelastCon = formatter.format(lastCon);
+
+    print("El último día updateado del Daily Glasses es: " +
+        int.parse(thelastCon).toString());
+    print("El día de hoy updateado del Daily Glasses es: " +
+        int.parse(today).toString());
+    print(
+        "La diferencia en días de ayer y hoy ahora en Galasses es:  ${daysoff}");
+
+    print("El día de hoy con el formato de hoy2 en Glasses se lee: ${today2}");
 
     if (int.parse(today) != int.parse(thelastCon)) {
       user.setTodaysGlasses(daysoff);
@@ -147,19 +183,20 @@ class UserProvider {
 
   Future<void> updateDailyScore(String userID) async {
     UserModel user = await getUserData(userID);
-    var prueba = DateTime.parse("2021-06-16 20:18:04Z");
     var lastCon = DateTime.parse(user.lastConnection);
     var daysoff = DateTime.now().difference(lastCon).inDays;
-    var diferenciaprueba = DateTime.now().difference(prueba).inDays;
+
     String today = formatter.format(DateTime.now());
+    String today2 = formatter2.format(DateTime.now());
     String thelastCon = formatter.format(lastCon);
 
     print("El último día updateado del Daily score es: " +
         int.parse(thelastCon).toString());
     print("El día de hoy updateado del Daily score es: " +
         int.parse(today).toString());
-    print(
-        "La diferencia en días de ayer a las 8pm y hoy ahora es:  ${diferenciaprueba}");
+    print("La diferencia en días de ayer y hoy ahora en Score es:  ${daysoff}");
+
+    print("El día de hoy con el formato de hoy2 en Score se lee: ${today2}");
 
     if (int.parse(today) != int.parse(thelastCon)) {
       user.setTodaysScore(daysoff);
