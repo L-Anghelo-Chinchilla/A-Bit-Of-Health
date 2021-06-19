@@ -97,11 +97,13 @@ class Stat_Glasses extends StatelessWidget {
                 //minX:1,
               //  maxX:7,
                 minY: 0,
-                          maxY: 16,
+                          maxY: 15,
                 titlesData: LineTitles.getTitleData(),
                 axisTitleData: FlAxisTitleData(
         leftTitle: AxisTitle(
-            showTitle: true, titleText: 'Vasos', margin: 10),
+            showTitle: true, titleText: 'Vasos',textStyle: TextStyle(color: Color(0xFF212121),
+          fontWeight: FontWeight.bold,
+          fontSize: 16,), margin: 10),
             ),
                 gridData: FlGridData(
                    show: true,
@@ -379,8 +381,7 @@ class LineTitles {
               return "14";
             case 15:
               return "15";
-            case 16:
-              return "Vasos Tomados";
+            
           }
 
           return '';

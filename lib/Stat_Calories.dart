@@ -73,7 +73,9 @@ class Stat_Calories extends StatelessWidget {
                titlesData: LineTitles.getTitleData(),
                  axisTitleData: FlAxisTitleData(
                  leftTitle: AxisTitle(
-                 showTitle: true, titleText: 'Calorias', margin: 10),
+                 showTitle: true, titleText: 'Calorias',textStyle: TextStyle(color: Color(0xFF212121),
+          fontWeight: FontWeight.bold,
+          fontSize: 16,), margin: 10),
                  ),
                 gridData: FlGridData(
                    show: true,

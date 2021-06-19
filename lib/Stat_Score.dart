@@ -1,4 +1,4 @@
-import 'dart:ffi';
+//import 'dart:ffi';
 import 'package:a_bit_of_health/Login.dart';
 import 'package:a_bit_of_health/models/UserModel.dart';
 import 'package:a_bit_of_health/utils.dart';
@@ -68,14 +68,16 @@ class Stat_Score extends StatelessWidget {
               child: LineChart(
                 LineChartData(
                 //borderData: FlBorderData(show: false),
-                         minX: 1,
-                          maxX: 7,
+                         minX: 0,
+                          maxX: 6,
                           minY: 0,
                           maxY: 5,
                 titlesData: LineTitles.getTitleData(),
                  axisTitleData: FlAxisTitleData(
                  leftTitle: AxisTitle(
-                 showTitle: true, titleText: 'Puntiación', margin: 10),
+                 showTitle: true, titleText: 'Puntiación',textStyle: TextStyle(color: Color(0xFF212121),
+          fontWeight: FontWeight.bold,
+          fontSize: 16,), margin: 10),
                  ),
                 gridData: FlGridData(
                    show: true,
