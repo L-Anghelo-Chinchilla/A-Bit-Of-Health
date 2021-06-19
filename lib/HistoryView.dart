@@ -73,7 +73,7 @@ class HistoryView extends StatelessWidget {
                           Navigator.pop(context);
                         },
  ),
-                      ElevatedButton(onPressed: _createPDF, child: Text('Descargar'))
+                      ElevatedButton(onPressed: ()=> _createPDF(Provider.of<UserModel>(context, listen: false).name, range.item1, range.item2), child: Text('Descargar'))
                     ],
                   )
                 ],
@@ -84,19 +84,15 @@ class HistoryView extends StatelessWidget {
       );
   }
 
-  Future<void> _createPDF() async {
+  Future<void> _createPDF(String name, String date1, String date2) async {
     PdfDocument document = PdfDocument();
-
-    String name = 'Sancho Panza';
-    String date1 = '2021-05-01 00:00:00';
-    String date2 = '2021-05-03 00:00:00';
     var day = DateTime.parse(date1);
-    String dateRegister = date1.substring(0,11);
+    String dateRegister = date1;
     var next;
     int diference = substractionDates(date1, date2);
     //var imagen = await rootBundle.load('assets/image.png');
 
-    createFirst(document, date1.substring(0, 11), date2.substring(0, 11), name);
+    createFirst(document, date1, date2, name);
 
     for(int i = 0; i < diference+1; i++){
 
@@ -107,7 +103,7 @@ class HistoryView extends StatelessWidget {
 
       next = new DateTime(day.year, day.month, day.day+1);
       day = next;
-      dateRegister = next.toString().substring(0,11);
+      dateRegister = next.toString().substring(0, 11);
     }
 
     List<int> bytes = document.save();

@@ -46,27 +46,21 @@ class History extends StatelessWidget {
                     child: SfDateRangePicker(
                       onSelectionChanged:
                           (DateRangePickerSelectionChangedArgs args) {
-                        date1 =
-                            args.value.startDate.toString().split(' ').first;
+                        date1 = args.value.startDate.toString().split(' ').first;
                         date2 = args.value.endDate.toString().split(' ').first;
                         print(date1);
                         print(date2);
                       },
                       selectionMode: DateRangePickerSelectionMode.range,
                       maxDate: DateTime.now(),
-                      minDate: DateTime.parse(
-                          Provider.of<UserModel>(context, listen: false)
-                              .creationDate),
+                      //minDate: DateTime.parse(Provider.of<UserModel>(context, listen: false).creationDate),
                     ),
                   ),
                   ElevatedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, 'HistoryView',
-                            arguments: Tuple2(date1, date2));
+                        Navigator.pushNamed(context, 'HistoryView', arguments: Tuple2(date1, date2));
                       },
-                      child: Text(
-                        "Ver",
-                        style: TextStyle(fontSize: 20),
+                      child: Text("Ver", style: TextStyle(fontSize: 20),
                       )),
                 ],
               ))
