@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'dart:io';
 
+String theId;
+
 class Login extends StatefulWidget {
   const Login({Key key}) : super(key: key);
 
@@ -21,6 +23,18 @@ class _LoginState extends State<Login> {
     setState(() {
       _hide = !_hide;
     });
+  }
+
+  Future<void> theUpdate1() async {
+    await UserProvider().updateDailyCalories(theId);
+  }
+
+  Future<void> theUpdate2() async {
+    await UserProvider().updateDailyGlasses(theId);
+  }
+
+  Future<void> theUpdate3() async {
+    await UserProvider().updateDailyScore(theId);
   }
 
   @override
@@ -82,6 +96,15 @@ class _LoginState extends State<Login> {
                                           if (user.uid != null)
                                             Navigator.pushReplacementNamed(
                                                 context, '/');
+
+                                          theId = Provider.of<UserModel>(
+                                                  context,
+                                                  listen: false)
+                                              .userID;
+
+                                          await theUpdate1();
+                                          await theUpdate2();
+                                          await theUpdate3();
                                         }
                                       },
                                       child: Text('Iniciar sesión'),

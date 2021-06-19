@@ -128,12 +128,13 @@ class UserModel {
     return this.lastSnack;
   }
 
-  void setTodaysCals(var daysoff) {
+  Future<void> setTodaysCals(var daysoff) async {
     print("La lista de calorías es: ${this.dailyCalories}");
     for (int i = 0; i < daysoff; i++) {
-      dailyCalories.insert(i, 0);
-      dailyCalories.removeLast();
+      this.dailyCalories.insert(i, 0);
+      this.dailyCalories.removeLast();
     }
+    Future.delayed(Duration(seconds: 1));
     print("Tras aumentar los días es: ${this.dailyCalories}");
   }
 
@@ -147,12 +148,13 @@ class UserModel {
     return res;
   }
 
-  void setTodaysGlasses(var daysoff) {
-    print("La lista de vasos es: ${this.dailyGlasses}");
+  Future<void> setTodaysGlasses(var daysoff) async {
+    print("La lista de vasos (calorías) son: ${this.dailyCalories}");
     for (int i = 0; i < daysoff; i++) {
-      dailyGlasses.insert(i, 0);
-      dailyGlasses.removeLast();
+      this.dailyGlasses.insert(i, 0);
+      this.dailyGlasses.removeLast();
     }
+    Future.delayed(Duration(seconds: 1));
     print("Tras aumentar los días es: ${this.dailyCalories}");
   }
 
@@ -166,12 +168,13 @@ class UserModel {
     return res;
   }
 
-  void setTodaysScore(var daysoff) {
-    print("La lista de calorías es: ${this.dailyScore}");
+  Future<void> setTodaysScore(var daysoff) async {
+    print("La lista de calorías es: ${this.dailyCalories}");
     for (int i = 0; i < daysoff; i++) {
-      dailyScore.insert(i, 0);
-      dailyScore.removeLast();
+      this.dailyScore.insert(i, 0);
+      this.dailyScore.removeLast();
     }
+    Future.delayed(Duration(seconds: 1));
     print("Tras aumentar los días es: ${this.dailyCalories}");
   }
 

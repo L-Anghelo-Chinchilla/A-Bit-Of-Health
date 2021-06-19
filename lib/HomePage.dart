@@ -13,6 +13,8 @@ import 'package:a_bit_of_health/models/UserModel.dart';
 import 'package:a_bit_of_health/providers/authentification.dart';
 import 'dart:io';
 
+String theId;
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -40,18 +42,28 @@ class _HomePageState extends State<HomePage> {
             }
           });
     else {
-      UserProvider().updateDailyCalories(
-          Provider.of<UserModel>(context, listen: false).userID);
-      sleep(const Duration(seconds: 3));
-      UserProvider().updateDailyGlasses(
-          Provider.of<UserModel>(context, listen: false).userID);
-      sleep(const Duration(seconds: 3));
-      UserProvider().updateDailyScore(
-          Provider.of<UserModel>(context, listen: false).userID);
+      theId = Provider.of<UserModel>(context, listen: false).userID;
 
+      theUpdate1();
+      print(
+          'Lo que debería ser la lista de cal es: ${Provider.of<UserModel>(context, listen: false).dailyCalories}');
+      //theUpdate2();
+      //theUpdate3();
       return Home();
     }
   }
+}
+
+Future<void> theUpdate1() async {
+  await UserProvider().updateDailyCalories(theId);
+}
+
+Future<void> theUpdate2() async {
+  await UserProvider().updateDailyGlasses(theId);
+}
+
+Future<void> theUpdate3() async {
+  await UserProvider().updateDailyScore(theId);
 }
 
 Future sleep1() {

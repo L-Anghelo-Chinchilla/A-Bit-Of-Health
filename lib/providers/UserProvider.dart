@@ -72,7 +72,7 @@ class UserProvider {
       //user.lastConnection = DateTime.now().toString().split(" ").first;
       final url = '$_url$userID.json';
       Uri uri = Uri.parse(url);
-      http.put(uri, body: user.toJson().toString());
+      await http.put(uri, body: user.toJson().toString());
     }
   }
 
@@ -86,7 +86,7 @@ class UserProvider {
     user.setlastConnection(today);
     final url = '$_url$userID.json';
     Uri uri = Uri.parse(url);
-    http.put(uri, body: user.toJson().toString());
+    await http.put(uri, body: user.toJson().toString());
   }
 
   Future<void> updateDailyCalories(String userID) async {
@@ -97,20 +97,11 @@ class UserProvider {
     String today2 = formatter2.format(DateTime.now());
     String thelastCon = formatter.format(lastCon);
 
-    print("El último día updateado del Daily Calories es: " +
-        int.parse(thelastCon).toString());
-    print("El día de hoy updateado del Daily Calories es: " +
-        int.parse(today).toString());
-    print(
-        "La diferencia en días de ayer y hoy ahora en calories es:  ${daysoff}");
-
-    print("El día de hoy con el formato de hoy2 en calories se lee: ${today2}");
-
     if (int.parse(today) != int.parse(thelastCon)) {
-      user.setTodaysCals(daysoff);
+      await user.setTodaysCals(daysoff);
       final url = '$_url$userID.json';
       Uri uri = Uri.parse(url);
-      http.put(uri, body: user.toJson().toString());
+      await http.put(uri, body: user.toJson().toString());
     }
   }
 
@@ -141,20 +132,11 @@ class UserProvider {
 
     String thelastCon = formatter.format(lastCon);
 
-    print("El último día updateado del Daily Glasses es: " +
-        int.parse(thelastCon).toString());
-    print("El día de hoy updateado del Daily Glasses es: " +
-        int.parse(today).toString());
-    print(
-        "La diferencia en días de ayer y hoy ahora en Galasses es:  ${daysoff}");
-
-    print("El día de hoy con el formato de hoy2 en Glasses se lee: ${today2}");
-
     if (int.parse(today) != int.parse(thelastCon)) {
-      user.setTodaysGlasses(daysoff);
+      await user.setTodaysGlasses(daysoff);
       final url = '$_url$userID.json';
       Uri uri = Uri.parse(url);
-      http.put(uri, body: user.toJson().toString());
+      await http.put(uri, body: user.toJson().toString());
     }
   }
 
@@ -190,19 +172,11 @@ class UserProvider {
     String today2 = formatter2.format(DateTime.now());
     String thelastCon = formatter.format(lastCon);
 
-    print("El último día updateado del Daily score es: " +
-        int.parse(thelastCon).toString());
-    print("El día de hoy updateado del Daily score es: " +
-        int.parse(today).toString());
-    print("La diferencia en días de ayer y hoy ahora en Score es:  ${daysoff}");
-
-    print("El día de hoy con el formato de hoy2 en Score se lee: ${today2}");
-
     if (int.parse(today) != int.parse(thelastCon)) {
-      user.setTodaysScore(daysoff);
+      await user.setTodaysScore(daysoff);
       final url = '$_url$userID.json';
       Uri uri = Uri.parse(url);
-      http.put(uri, body: user.toJson().toString());
+      await http.put(uri, body: user.toJson().toString());
     }
   }
 
