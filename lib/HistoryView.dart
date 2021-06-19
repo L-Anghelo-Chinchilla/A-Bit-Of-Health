@@ -18,6 +18,8 @@ class HistoryView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool enabled = false  ; 
+    Map<String  , FoodRegister> map  = Map(); 
     Tuple2<String, String> range = ModalRoute.of(context).settings.arguments;
     if (Provider.of<UserModel>(context).userID == null)
       return Login();
@@ -34,74 +36,129 @@ class HistoryView extends StatelessWidget {
             children: [
               getDirectionsBar(context, 'History'),
               Expanded(
-                  child: Column(
+                  child: Padding(
+                      padding:  EdgeInsets.all(19),
+                                      child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Text('Registros desde ${range.item1} hasta ${range.item2}',
-                      style: TextStyle(fontFamily: 'Mont2', fontSize: 20)),
-                  Expanded(
-                      child: Container(
-                    color: Colors.white.withOpacity(0.8),
-                    width: MediaQuery.of(context).size.width * 0.5,
-                    height: MediaQuery.of(context).size.height / 2.2,
-                    child: FutureBuilder(
-                      future:FoodProvider.getUserRegisterRange(
-                            Provider.of<UserModel>(context, listen: false)
-                                .userID,
-                            range.item1,
-                            range.item2),
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData) {
-                            return ListView.builder(
-                              itemCount: snapshot.data.length,
-                              itemBuilder: (context, i) {
-                                return getRegisterList(
-                                    context, snapshot.data.values.elementAt(i), false);
-                              },
-                            );
-                          } else {
-                            return CircularProgressIndicator();
-                          }
-                        }),
-                  )),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      ElevatedButton(
-                        child: Text('Atras'),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
- ),
-                      ElevatedButton(onPressed: ()=> _createPDF(Provider.of<UserModel>(context, listen: false).name, range.item1, range.item2), child: Text('Descargar'))
-                    ],
-                  )
+                    Text('Registros desde ${range.item1} hasta ${range.item2}',
+                        style: TextStyle(fontFamily: 'Mont2', fontSize: 20)),
+                    Expanded(
+                        child: Container(
+                      color: Colors.white.withOpacity(0.8),
+                      width: MediaQuery.of(context).size.width * 0.5,
+                      height: MediaQuery.of(context).size.height / 2.2,
+                      child: FutureBuilder(
+                          future: FoodProvider.getUserRegisterRange(
+                              Provider.of<UserModel>(context, listen: false)
+                                  .userID,
+                              range.item1,
+                              range.item2),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              if (snapshot.data.length > 0){
+                               map = snapshot.data;  
+                               enabled  = true ; 
+                                return ListView.builder(
+                                  itemCount: snapshot.data.length,
+                                  itemBuilder: (context, i) {
+                                    return getRegisterList(context,
+                                        snapshot.data.values.elementAt(i), false);
+                                  },
+                                );
+                              }else
+                                return getNoRegisterSignal();
+                            } else {
+                              return CircularProgressIndicator();
+                            }
+                          }),
+                    )),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ElevatedButton(
+                          child: Text('Atras'),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                        ),
+                        ElevatedButton(
+                            //onLongPress:  ,
+                            onPressed:    () {
+                              if(enabled){
+                               _createPDF(
+                                Provider.of<UserModel>(context, listen: false)
+                                    .name,
+                                range.item1,
+                                range.item2, 
+                                 map );
+                                }
+                                else{
+
+                                  showMessage(context);
+                                                                  }
+                                
+                                },
+                            child: Text('Descargar'))
+                      ],
+                    )
                 ],
-              ))
+              ),
+                  ))
             ],
           ),
         ),
       );
   }
 
-  Future<void> _createPDF(String name, String date1, String date2) async {
+  showMessage(context) {
+    final snackBar = SnackBar(
+      content: Text('Nada que descargar :('),
+      action: SnackBarAction(
+        label: 'Aceptar',
+        onPressed: () {
+          // Some code to undo the change.
+        },
+      ),
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+
+  Widget getNoRegisterSignal(){
+    return Padding(
+            padding: EdgeInsets.all(19),
+           child: Column(
+             mainAxisAlignment: MainAxisAlignment.center,
+             crossAxisAlignment: CrossAxisAlignment.center,
+             children: [
+               Text('No existen registros entre estas fechas.', style: TextStyle(fontSize:  23 , fontFamily: 'Mont3'),),
+               SizedBox(height: 50,), 
+               Image.asset('assets/patata.png')
+
+             ],
+      ),
+    );
+
+  }
+
+  Future<void> _createPDF(String name, String date1, String date2 , Map map ) async {
     PdfDocument document = PdfDocument();
     var day = DateTime.parse(date1);
     String dateRegister = date1;
     var next;
     int diference = substractionDates(date1, date2);
     //var imagen = await rootBundle.load('assets/image.png');
-
+    name += '${map.length}'; 
     createFirst(document, date1, date2, name);
 
-    for(int i = 0; i < diference+1; i++){
-
+    for (int i = 0; i < diference + 1; i++) {
       //Si hay registro
-      if(registerExists()==true){
+      if (registerExists() == true) {
         createNext(document, dateRegister);
       }
 
-      next = new DateTime(day.year, day.month, day.day+1);
+      next = new DateTime(day.year, day.month, day.day + 1);
       day = next;
       dateRegister = next.toString().substring(0, 11);
     }
@@ -113,41 +170,41 @@ class HistoryView extends StatelessWidget {
   }
 
   void createNext(PdfDocument document, String dateRegister) {
-      String typeFood = 'Almuerzo';
-      String timeFood = '12:15';
-      PdfLayoutResult layoutResult;
-      //Creamos una nueva pagina para escribir
-      final page = document.pages.add();
-      //Ponemos el header con la fecha
-      //PdfPageTemplateElement header = PdfPageTemplateElement(const Rect.fromLTWH(0, 0, 515, 50));
-      /*header.graphics.drawString(
+    String typeFood = 'Almuerzo';
+    String timeFood = '12:15';
+    PdfLayoutResult layoutResult;
+    //Creamos una nueva pagina para escribir
+    final page = document.pages.add();
+    //Ponemos el header con la fecha
+    //PdfPageTemplateElement header = PdfPageTemplateElement(const Rect.fromLTWH(0, 0, 515, 50));
+    /*header.graphics.drawString(
         'Fecha: $dateRegister', PdfStandardFont(PdfFontFamily.helvetica, 20),
         bounds: const Rect.fromLTWH(0, 15, 200, 30));
       document.template.top = header;*/
 
-      PdfGrid gridH = PdfGrid();
-      gridH.columns.add(count: 1);
-      PdfGridRow row = gridH.rows.add();
-      row.cells[0].value = '$dateRegister';
-      gridH.style.cellPadding = PdfPaddings(left: 5, top: 5);
-      row.cells[0].style = PdfGridCellStyle(
-        font: PdfStandardFont(PdfFontFamily.timesRoman, 24),
-      );
-      row.cells[0].style.borders.all = PdfPens.transparent;
+    PdfGrid gridH = PdfGrid();
+    gridH.columns.add(count: 1);
+    PdfGridRow row = gridH.rows.add();
+    row.cells[0].value = '$dateRegister';
+    gridH.style.cellPadding = PdfPaddings(left: 5, top: 5);
+    row.cells[0].style = PdfGridCellStyle(
+      font: PdfStandardFont(PdfFontFamily.timesRoman, 24),
+    );
+    row.cells[0].style.borders.all = PdfPens.transparent;
 
-      layoutResult = gridH.draw(
-        page: page,
-        bounds: Rect.fromLTWH(0, 0, page.getClientSize().width, page.getClientSize().height),
-      );
-      
-      writeFood(document, typeFood, timeFood, page, layoutResult);
-      
-      
+    layoutResult = gridH.draw(
+      page: page,
+      bounds: Rect.fromLTWH(
+          0, 0, page.getClientSize().width, page.getClientSize().height),
+    );
+
+    writeFood(document, typeFood, timeFood, page, layoutResult);
   }
 
-  void writeFood(PdfDocument document, String typeFood, String timeFood, final page, PdfLayoutResult lr) {
+  void writeFood(PdfDocument document, String typeFood, String timeFood,
+      final page, PdfLayoutResult lr) {
     PdfLayoutResult layoutResult = lr;
-    
+
     //Escribimos el tipo de comida y la hora
     PdfGrid gridTF = PdfGrid();
     gridTF.columns.add(count: 1);
@@ -156,51 +213,55 @@ class HistoryView extends StatelessWidget {
     gridTF.style.cellPadding = PdfPaddings(left: 5, top: 5);
     layoutResult = gridTF.draw(
       page: page,
-      bounds: Rect.fromLTWH(0, layoutResult.bounds.bottom + 10, page.getClientSize().width, page.getClientSize().height),
+      bounds: Rect.fromLTWH(0, layoutResult.bounds.bottom + 10,
+          page.getClientSize().width, page.getClientSize().height),
     );
-      
-      //EScribimos la tabla de detalles
-      PdfGrid grid = PdfGrid();
 
-      grid.columns.add(count: 3);
+    //EScribimos la tabla de detalles
+    PdfGrid grid = PdfGrid();
 
-      final PdfGridRow headerRow = grid.headers.add(1)[0];
-      headerRow.cells[0].value = 'Alimento';
-      headerRow.cells[1].value = 'Porción';
-      headerRow.cells[2].value = 'Calorías';
+    grid.columns.add(count: 3);
 
-      headerRow.style.font = PdfStandardFont(PdfFontFamily.helvetica, 10, style: PdfFontStyle.bold);
+    final PdfGridRow headerRow = grid.headers.add(1)[0];
+    headerRow.cells[0].value = 'Alimento';
+    headerRow.cells[1].value = 'Porción';
+    headerRow.cells[2].value = 'Calorías';
 
-      for(int i = 0; i < 35; i ++){
-        PdfGridRow row = grid.rows.add();
-        row.cells[0].value = 'Anvorguesa';
-        row.cells[1].value = '550 g';
-        row.cells[2].value = '1000';
-      }
+    headerRow.style.font =
+        PdfStandardFont(PdfFontFamily.helvetica, 10, style: PdfFontStyle.bold);
 
-      grid.style.cellPadding = PdfPaddings(left: 5, top: 5);
+    for (int i = 0; i < 35; i++) {
+      PdfGridRow row = grid.rows.add();
+      row.cells[0].value = 'Anvorguesa';
+      row.cells[1].value = '550 g';
+      row.cells[2].value = '1000';
+    }
 
-      layoutResult = grid.draw(
-        page: page,
-        bounds: Rect.fromLTWH(0, layoutResult.bounds.bottom + 10, page.getClientSize().width, page.getClientSize().height),
-      );
-      
-      //Escribimos las clorias y la puntuacion total
-      PdfGrid grid2 = PdfGrid();
-      grid2.columns.add(count: 2);
-      
-      PdfGridRow row2 = grid2.rows.add();
-      row2.cells[0].value = 'Puntuación: ';
-      row2.cells[1].value = 'Total de calorías: ';
-      
-      grid2.style.cellPadding = PdfPaddings(left: 5, top: 5);
-      layoutResult = grid2.draw(
-        page: page,
-        bounds: Rect.fromLTWH(0, layoutResult.bounds.bottom + 10, page.getClientSize().width, page.getClientSize().height),
-      );
+    grid.style.cellPadding = PdfPaddings(left: 5, top: 5);
+
+    layoutResult = grid.draw(
+      page: page,
+      bounds: Rect.fromLTWH(0, layoutResult.bounds.bottom + 10,
+          page.getClientSize().width, page.getClientSize().height),
+    );
+
+    //Escribimos las clorias y la puntuacion total
+    PdfGrid grid2 = PdfGrid();
+    grid2.columns.add(count: 2);
+
+    PdfGridRow row2 = grid2.rows.add();
+    row2.cells[0].value = 'Puntuación: ';
+    row2.cells[1].value = 'Total de calorías: ';
+
+    grid2.style.cellPadding = PdfPaddings(left: 5, top: 5);
+    layoutResult = grid2.draw(
+      page: page,
+      bounds: Rect.fromLTWH(0, layoutResult.bounds.bottom + 10,
+          page.getClientSize().width, page.getClientSize().height),
+    );
   }
 
-  int substractionDates(String date1, String date2){
+  int substractionDates(String date1, String date2) {
     var day1 = DateTime.parse(date1);
     var day2 = DateTime.parse(date2);
     int diference;
@@ -208,16 +269,17 @@ class HistoryView extends StatelessWidget {
     return diference;
   }
 
-  void createFirst(PdfDocument document, String date1, String date2, String name) {
+  void createFirst(
+      PdfDocument document, String date1, String date2, String name) {
     final page = document.pages.add();
 
     //Poner logo
     page.graphics.drawString(
-    'A BIT OF HEALTH', PdfStandardFont(PdfFontFamily.helvetica, 25),
-    brush: PdfBrushes.black, bounds: Rect.fromLTWH(0, 0, 300, 30));
-    page.graphics.drawString(
-    'Diario de comidas, seguimiento y control', PdfStandardFont(PdfFontFamily.helvetica, 15),
-    brush: PdfBrushes.black, bounds: Rect.fromLTWH(0, 35, 500, 20));
+        'A BIT OF HEALTH', PdfStandardFont(PdfFontFamily.helvetica, 25),
+        brush: PdfBrushes.black, bounds: Rect.fromLTWH(0, 0, 300, 30));
+    page.graphics.drawString('Diario de comidas, seguimiento y control',
+        PdfStandardFont(PdfFontFamily.helvetica, 15),
+        brush: PdfBrushes.black, bounds: Rect.fromLTWH(0, 35, 500, 20));
     /*page.graphics.drawImage(
       PdfBitmap(await _readImageData('image.png')),
       Rect.fromLTWH(
@@ -240,18 +302,21 @@ class HistoryView extends StatelessWidget {
 
     //Poner titulo
     page.graphics.drawString(
-    'Resumen de registros', PdfStandardFont(PdfFontFamily.helvetica, 25),
-    brush: PdfBrushes.black, bounds: Rect.fromLTWH(135, page.getClientSize().height-550, 300, 50));
-    
+        'Resumen de registros', PdfStandardFont(PdfFontFamily.helvetica, 25),
+        brush: PdfBrushes.black,
+        bounds: Rect.fromLTWH(135, page.getClientSize().height - 550, 300, 50));
+
     //Poner limite de fechas
-    page.graphics.drawString(
-    'Desde: $date1 \n Hasta: $date2', PdfStandardFont(PdfFontFamily.helvetica, 16),
-    brush: PdfBrushes.black, bounds: Rect.fromLTWH(180, page.getClientSize().height-500, 300, 50));
+    page.graphics.drawString('Desde: $date1 \n Hasta: $date2',
+        PdfStandardFont(PdfFontFamily.helvetica, 16),
+        brush: PdfBrushes.black,
+        bounds: Rect.fromLTWH(180, page.getClientSize().height - 500, 300, 50));
 
     //Poner nombre de usuario
     page.graphics.drawString(
-    'NOMBRE: $name', PdfStandardFont(PdfFontFamily.helvetica, 18),
-    brush: PdfBrushes.black, bounds: Rect.fromLTWH(150, page.getClientSize().height-400, 300, 50));
+        'NOMBRE: $name', PdfStandardFont(PdfFontFamily.helvetica, 18),
+        brush: PdfBrushes.black,
+        bounds: Rect.fromLTWH(150, page.getClientSize().height - 400, 300, 50));
   }
 
   /*Future<List<int>> _readImageData(String name) async {

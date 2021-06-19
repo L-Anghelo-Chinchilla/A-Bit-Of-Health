@@ -13,8 +13,8 @@ class History extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String date1;
-    String date2;
+    String date1 = '' ;
+    String date2 = '' ;
     if (Provider.of<UserModel>(context).userID == null)
       return Login();
     else
@@ -46,21 +46,29 @@ class History extends StatelessWidget {
                     child: SfDateRangePicker(
                       onSelectionChanged:
                           (DateRangePickerSelectionChangedArgs args) {
-                        date1 = args.value.startDate.toString().split(' ').first;
+                        date1 =
+                            args.value.startDate.toString().split(' ').first;
                         date2 = args.value.endDate.toString().split(' ').first;
                         print(date1);
                         print(date2);
                       },
                       selectionMode: DateRangePickerSelectionMode.range,
                       maxDate: DateTime.now(),
-                      //minDate: DateTime.parse(Provider.of<UserModel>(context, listen: false).creationDate),
+                      minDate: DateTime.parse(Provider.of<UserModel>(context, listen: false).creationDate),
                     ),
                   ),
                   ElevatedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, 'HistoryView', arguments: Tuple2(date1, date2));
+                        if (date1.length > 5 && date2.length > 5 )
+                            Navigator.pushNamed(context, 'HistoryView',
+                              arguments: Tuple2(date1, date2));
+                         else
+                          showMessage(context);
+                         
                       },
-                      child: Text("Ver", style: TextStyle(fontSize: 20),
+                      child: Text(
+                        "Ver",
+                        style: TextStyle(fontSize: 20),
                       )),
                 ],
               ))
@@ -68,5 +76,18 @@ class History extends StatelessWidget {
           ),
         ),
       );
+  }
+
+  showMessage(context) {
+    final snackBar = SnackBar(
+      content: Text('Por favor seleccione dos fechas'),
+      action: SnackBarAction(
+        label: 'Aceptar',
+        onPressed: () {
+          // Some code to undo the change.
+        },
+      ),
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }

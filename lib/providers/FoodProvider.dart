@@ -52,7 +52,7 @@ class FoodProvider {
     final response =
         http.post(uri, body: register.foodRegisterToJson(register));
   }
-
+  //YYYY-MM-DD
   static  Future<Map<String, FoodRegister>> getUserRegisterRange(
       String userID, String startDate, String endDate) async {
     final url = '$_url/database/calendar/$userID.json';
@@ -64,10 +64,15 @@ class FoodProvider {
     if (answer.bodyBytes.length > 4) {
       Map<String, dynamic> jsonYear = jsonDecode(answer.body);
       jsonYear.forEach((key, value) {
-       // if(int.parse(startDate.substring(0,4)) >=  )
+      if(int.parse(key) >= int.parse(startDate.substring(0,4))   && 
+         int.parse(key) <= int.parse(endDate.substring(0,4) )) 
         value.forEach((key, value) {
         
+        if(int.parse(key) >= int.parse(startDate.substring(5,7))   && 
+            int.parse(key) <= int.parse(endDate.substring(5,7) )) 
           value.forEach((key, value) {
+          if(int.parse(key) >= int.parse(startDate.substring(8,10))   && 
+            int.parse(key) <= int.parse(endDate.substring( 8,10 ) )) 
 
           value.forEach((key, value) {
         
