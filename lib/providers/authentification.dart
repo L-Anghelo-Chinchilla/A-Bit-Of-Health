@@ -9,99 +9,90 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class AuthProvider{
+class AuthProvider {
+  static final FirebaseAuth _auth = FirebaseAuth.instance;
 
-static final FirebaseAuth _auth = FirebaseAuth.instance;
+  static String uid;
+  static String userEmail;
+  static String userName;
 
-static String uid;
-static String userEmail;
-static String userName;
+  static Future<User> signInWithEmailPassword(
+      context, String email, String password) async {
+    //await Firebase.initializeApp();
+    User user;
 
-static Future<User> signInWithEmailPassword(context,String email, String password) async {
-  //await Firebase.initializeApp();
-  User user;
+    try {
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      user = userCredential.user;
 
-  try {
-    UserCredential userCredential = await _auth.signInWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
-    user = userCredential.user;
-
-    if (user != null) {
-      
-      Provider.of<UserModel>(context , listen:false).setUser(await UserProvider.getUserData(user.uid));
-      uid = user.uid;
-      userEmail = user.email;
-      //final username = user.displayName; 
+      if (user != null) {
+        Provider.of<UserModel>(context, listen: false)
+            .setUser(await UserProvider.getUserData(user.uid));
+        uid = user.uid;
+        userEmail = user.email;
+        //final username = user.displayName;
         //print (username);
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.setBool('auth', true);
-     // await prefs.setString('userName', username);
-      await prefs.setString('userID', uid);
-      await prefs.setString('userName',
-      Provider.of<UserModel>(context , listen:false).name);
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setBool('auth', true);
+        // await prefs.setString('userName', username);
+        await prefs.setString('userID', uid);
+        await prefs.setString(
+            'userName', Provider.of<UserModel>(context, listen: false).name);
+      }
+      userName = Provider.of<UserModel>(context, listen: false).name;
+    } on FirebaseAuthException catch (e) {
+      final snackbar = SnackBar(content: Text('Usuario no válido'));
+      ScaffoldMessenger.of(context).showSnackBar(snackbar);
 
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided.');
+      }
     }
-    userName = Provider.of<UserModel>(context , listen:false).name;
-  } on FirebaseAuthException catch (e) {
-    final snackbar = SnackBar(content: Text('Usuario no válido') );
-    ScaffoldMessenger.of(context).showSnackBar(snackbar);    
 
-    if (e.code == 'user-not-found') {
-      print('No user found for that email.');
-    } else if (e.code == 'wrong-password') {
-      print('Wrong password provided.');
-    }
+    return user;
   }
 
-  return user;
-}
+  static Future<bool> getUser(BuildContext context) async {
+    // Initialize Firebase
+    // await Firebase.initializeApp();
 
+    SharedPreferences prefs = await SharedPreferences.getInstance();
 
-static Future<bool> getUser(BuildContext context) async {
-  // Initialize Firebase
- // await Firebase.initializeApp();
+    bool authSignedIn = prefs.getBool('auth') ?? false;
 
+    bool exist = false;
 
-  
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  
-  bool authSignedIn = prefs.getBool('auth') ?? false;
-  
-  bool exist = false;
-  
-  print(authSignedIn);
-  final User user = _auth.currentUser;
-  
-  //var model =UserModel();
-  if (authSignedIn) {
-  
+    print(authSignedIn);
+    final User user = _auth.currentUser;
+
+    //var model =UserModel();
+    if (authSignedIn) {
       String s = prefs.getString('userID');
-  
 
-    if (s != null) {
-      print(s);
-  
-      UserModel usr =  await UserProvider.getUserData(s);
-      print(usr);
-      Provider.of<UserModel>(context, listen:false).setUser(usr);
-       await UserProvider().checkUserGlasses(usr.userID);
-    await UserProvider().updateTodayGlasses(usr.userID);
- 
-      exist = true;
-    //  name = user.displayName;
-  
-     // userEmail = user.email;
-    //  imageUrl = user.photoURL;
+      if (s != null) {
+        print(s);
+
+        UserModel usr = await UserProvider.getUserData(s);
+        print(usr);
+        Provider.of<UserModel>(context, listen: false).setUser(usr);
+        await UserProvider().checkUserGlasses(usr.userID);
+        await UserProvider().updateTodayGlasses(usr.userID);
+        await UserProvider().updateLastConnection(
+            Provider.of<UserModel>(context, listen: false).userID);
+
+        exist = true;
+      }
     }
+
+    return exist;
   }
-  
-  return exist;
-}
 
-
-static getName() => userName; 
+  static getName() => userName;
 /*
 
 static Future<User> registerWithEmailPassword(String email, String password) async {
@@ -130,22 +121,20 @@ static Future<User> registerWithEmailPassword(String email, String password) asy
 
 
 */
-static Future<String> signOut() async {
+  static Future<String> signOut() async {
 //  await Firebase.initializeApp();
-   await _auth.signOut();
+    await _auth.signOut();
 
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  await prefs.setBool('auth', false);
-  await prefs.setString('userName' , '');
-  await prefs.setString('userID', '' );
-  await prefs.remove('userName');
-  await prefs.remove('userID');
-  
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('auth', false);
+    await prefs.setString('userName', '');
+    await prefs.setString('userID', '');
+    await prefs.remove('userName');
+    await prefs.remove('userID');
 
-   uid = null;
-   userEmail = null;
-  print('done!');
-  return 'User signed out';
-}
-
+    uid = null;
+    userEmail = null;
+    print('done!');
+    return 'User signed out';
+  }
 }

@@ -1,14 +1,19 @@
 import 'dart:js';
 
 import 'package:a_bit_of_health/utils.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:math';
+import 'package:a_bit_of_health/providers/UserProvider.dart';
 import 'package:a_bit_of_health/Login.dart';
 import 'package:a_bit_of_health/models/UserModel.dart';
 import 'package:a_bit_of_health/providers/authentification.dart';
+import 'dart:io';
+
+String theId;
 
 class HomePage extends StatefulWidget {
   @override
@@ -23,9 +28,9 @@ class _HomePageState extends State<HomePage> {
           future: AuthProvider.getUser(context),
           builder: (context, AsyncSnapshot<bool> future) {
             if (future.hasData) {
-              if (future.data)
+              if (future.data) {
                 return Home();
-              else
+              } else
                 return Home();
             } else {
               return Center(
@@ -36,9 +41,33 @@ class _HomePageState extends State<HomePage> {
               ));
             }
           });
-    else
+    else {
+      theId = Provider.of<UserModel>(context, listen: false).userID;
+
+      theUpdate1();
+      print(
+          'Lo que debería ser la lista de cal es: ${Provider.of<UserModel>(context, listen: false).dailyCalories}');
+      //theUpdate2();
+      //theUpdate3();
       return Home();
+    }
   }
+}
+
+Future<void> theUpdate1() async {
+  await UserProvider().updateDailyCalories(theId);
+}
+
+Future<void> theUpdate2() async {
+  await UserProvider().updateDailyGlasses(theId);
+}
+
+Future<void> theUpdate3() async {
+  await UserProvider().updateDailyScore(theId);
+}
+
+Future sleep1() {
+  return new Future.delayed(const Duration(seconds: 2), () => "2");
 }
 
 class Home extends StatelessWidget {

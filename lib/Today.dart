@@ -1,8 +1,8 @@
 import 'package:a_bit_of_health/Login.dart';
 import 'package:a_bit_of_health/models/FoodModel.dart';
+import 'package:a_bit_of_health/providers/UserProvider.dart';
 import 'package:a_bit_of_health/models/UserModel.dart';
 import 'package:a_bit_of_health/providers/FoodProvider.dart';
-import 'package:a_bit_of_health/providers/UserProvider.dart';
 import 'package:a_bit_of_health/providers/authentification.dart';
 import 'package:a_bit_of_health/utils.dart';
 import 'package:flutter/material.dart';
@@ -82,9 +82,12 @@ class _TodayPageState extends State<TodayPage> {
                           .first
                           .replaceAll('-', '/')),
                   builder: (context, data) {
-                    if (data.hasData) if (data.data.isEmpty)
+                    if (data.hasData) if (data.data.isEmpty) {
+                      UserProvider().addToTodaysScore(
+                          Provider.of<UserModel>(context, listen: false).userID,
+                          0);
                       return getNoFoodSignal();
-                    else
+                    } else
                       return TodayRegister(map: data.data);
                     else
                       return CircularProgressIndicator();
@@ -140,6 +143,11 @@ class _TodayRegisterState extends State<TodayRegister> {
     double todayScore = widget.map.values
         .fold(0, (previousValue, element) => previousValue + element.score);
     todayScore = (todayScore + 0.0) / widget.map.length;
+
+    UserProvider().addToTodaysScore(
+        Provider.of<UserModel>(context, listen: false).userID,
+        todayScore.toDouble());
+
     return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -170,102 +178,8 @@ class _TodayRegisterState extends State<TodayRegister> {
                   itemBuilder: (context, i) {
                     String key = widget.map.keys.elementAt(i);
                     final len = widget.map.length;
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                            margin: EdgeInsets.fromLTRB(5, 5, 20, 5),
-                            decoration: BoxDecoration(
-                              color: Colors.orange[400],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(7)),
-                              border: Border.all(color: Colors.black45),
-                            ),
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 15, vertical: 2),
-                            child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                      '${widget.map.values.elementAt(len - 1 - i).food.typeOfFood} ${getEmoji(widget.map.values.elementAt(len - 1 - i).food.typeOfFood)}'),
-                                  Text(
-                                      '🕰️ ${widget.map.values.elementAt(len - 1 - i).time}'),
-                                  IconButton(
-                                      icon: Icon(Icons.delete),
-                                      onPressed: () async {
-                                        showAlertDialog(
-                                            context,
-                                            Provider.of<UserModel>(context,
-                                                    listen: false)
-                                                .userID,
-                                            widget.map.values
-                                                .elementAt(len - 1 - i)
-                                                .date,
-                                            widget.map.values
-                                                .elementAt(len - 1 - i)
-                                                .id);
-                                        RemoveRegister(context, caloriesSum);
-                                      })
-                                ])),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Container(
-                            height: 250,
-                            width: double.infinity, // 500,
-                            child: SingleChildScrollView(
-                              child: DataTable(
-                                  columns: [
-                                    DataColumn(
-                                      label: Text('Alimento(s)'),
-                                    ),
-                                    DataColumn(label: Text('Porción(es)')),
-                                    DataColumn(label: Text('Calorías')),
-                                  ],
-                                  rows: widget.map.values
-                                      .elementAt(len - 1 - i)
-                                      .food
-                                      .aliments
-                                      .map((element) => DataRow(cells: [
-                                            DataCell(Text(element.name)),
-                                            DataCell(Text('${element.cant}')),
-                                            DataCell(Text(
-                                                '${element.calories * element.cant}'))
-                                          ]))
-                                      .toList()),
-                            ),
-                          ),
-                        ),
-                        Row(
-                          children: [
-                            Container(
-                                margin: EdgeInsets.all(5),
-                                decoration: BoxDecoration(
-                                    color: Color(0xFFF4D03F),
-                                    border: Border.all(color: Colors.black45),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(7))),
-                                padding: EdgeInsets.all(10),
-                                child: Text(
-                                    'Calorías: ${widget.map.values.elementAt(len - 1 - i).calories.toStringAsFixed(1)}')),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Container(
-                                margin: EdgeInsets.all(5),
-                                decoration: BoxDecoration(
-                                    color: Color(0xFFF4D03F),
-                                    border: Border.all(color: Colors.black45),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(7))),
-                                padding: EdgeInsets.all(10),
-                                child: Text(
-                                    'Puntuación: ${widget.map.values.elementAt(len - 1 - i).score}'))
-                          ],
-                        ),
-                        Divider()
-                      ],
-                    );
+                    return getRegisterList(context,
+                        widget.map.values.elementAt(len - 1 - i), true);
                   },
                 ),
               )))
@@ -293,68 +207,150 @@ class _TodayRegisterState extends State<TodayRegister> {
       ],
     );
   }
+}
 
-  String getEmoji(type) {
-    switch (type) {
-      case 'Desayuno':
-        return '☕';
-      case 'Almuerzo':
-        return '🥣';
-      case 'Cena':
-        return '🥗';
-      case 'Snack':
-        return '🍟';
-      default:
-        return '';
-    }
+Widget getRegisterList(
+    BuildContext context, FoodRegister foodRegister, bool canDelete) {
+  return Column(
+    mainAxisAlignment: MainAxisAlignment.start,
+    children: [
+      Container(
+          margin: EdgeInsets.fromLTRB(5, 5, 20, 5),
+          decoration: BoxDecoration(
+            color: Colors.orange[400],
+            borderRadius: BorderRadius.all(Radius.circular(7)),
+            border: Border.all(color: Colors.black45),
+          ),
+          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 2),
+          child:
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Text(
+                '${foodRegister.food.typeOfFood} ${getEmoji(foodRegister.food.typeOfFood)}'),
+            Text('🕰️ ${foodRegister.date}, ${foodRegister.time}'),
+            (canDelete)
+                ? IconButton(
+                    icon: Icon(Icons.delete),
+                    onPressed: () async {
+                      showAlertDialog(
+                          context,
+                          Provider.of<UserModel>(context, listen: false).userID,
+                          foodRegister.date,
+                          foodRegister.id);
+                      double cal = await UserProvider().getAllTodayCalories(
+                          Provider.of<UserModel>(context, listen: false)
+                              .userID);
+                      cal -= foodRegister.calories;
+                      UserProvider().addToTodaysCalories(
+                          Provider.of<UserModel>(context, listen: false).userID,
+                          cal);
+                    })
+                : Container(
+                    height: 35,
+                  )
+          ])),
+      Align(
+        alignment: Alignment.centerLeft,
+        child: Container(
+          height: 250,
+          width: double.infinity, // 500,
+          child: SingleChildScrollView(
+            child: DataTable(
+                columns: [
+                  DataColumn(
+                    label: Text('Alimento(s)'),
+                  ),
+                  DataColumn(label: Text('Porción(es)')),
+                  DataColumn(label: Text('Calorías')),
+                ],
+                rows: foodRegister.food.aliments
+                    .map((element) => DataRow(cells: [
+                          DataCell(Text(element.name)),
+                          DataCell(Text('${element.cant}')),
+                          DataCell(Text('${element.calories * element.cant}'))
+                        ]))
+                    .toList()),
+          ),
+        ),
+      ),
+      Row(
+        children: [
+          Container(
+              margin: EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                  color: Color(0xFFF4D03F),
+                  border: Border.all(color: Colors.black45),
+                  borderRadius: BorderRadius.all(Radius.circular(7))),
+              padding: EdgeInsets.all(10),
+              child: Text(
+                  'Calorías: ${foodRegister.calories.toStringAsFixed(1)}')),
+          SizedBox(
+            width: 10,
+          ),
+          Container(
+              margin: EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                  color: Color(0xFFF4D03F),
+                  border: Border.all(color: Colors.black45),
+                  borderRadius: BorderRadius.all(Radius.circular(7))),
+              padding: EdgeInsets.all(10),
+              child: Text('Puntuación: ${foodRegister.score}'))
+        ],
+      ),
+      Divider()
+    ],
+  );
+}
+
+String getEmoji(type) {
+  switch (type) {
+    case 'Desayuno':
+      return '☕';
+    case 'Almuerzo':
+      return '🥣';
+    case 'Cena':
+      return '🥗';
+    case 'Snack':
+      return '🍟';
+    default:
+      return '';
   }
+}
 
-  showAlertDialog(
-      BuildContext context, String userID, String date, String registerID) {
-    // set up the buttons
-    Widget cancelButton = TextButton(
-      child: Text("Cancelar"),
-      onPressed: () {
-        Navigator.pop(context);
-      },
-    );
-    Widget continueButton = TextButton(
-      child: Text("Eliminar"),
-      onPressed: () async {
-        final provider = FoodProvider();
-        await provider.deleteRegisterByDate(userID, date, registerID);
+showAlertDialog(
+    BuildContext context, String userID, String date, String registerID) {
+  // set up the buttons
+  Widget cancelButton = TextButton(
+    child: Text("Cancelar"),
+    onPressed: () {
+      Navigator.pop(context);
+    },
+  );
+  Widget continueButton = TextButton(
+    child: Text("Eliminar"),
+    onPressed: () async {
+      final provider = FoodProvider();
+      await provider.deleteRegisterByDate(userID, date, registerID);
 
-        Navigator.pop(context);
-        Navigator.pushReplacementNamed(context, 'Today');
-      },
-    );
+      Navigator.pop(context);
+      Navigator.pushReplacementNamed(context, 'Today');
+    },
+  );
 
-    // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      title: Text("Eliminar registro"),
-      content: Text("¿Eliminar éste registro de comida?"),
-      actions: [
-        cancelButton,
-        continueButton,
-      ],
-    );
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: Text("Eliminar registro"),
+    content: Text("¿Eliminar éste registro de comida?"),
+    actions: [
+      cancelButton,
+      continueButton,
+    ],
+  );
 
-    // show the dialog
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
-  }
-
-  void RemoveRegister(BuildContext context, double calories) async {
-    double cal = await UserProvider().getAllTodayCalories(
-        Provider.of<UserModel>(context, listen: false).userID);
-
-    cal -= calories;
-
-    await UserProvider().addToTodaysCalories(
-        Provider.of<UserModel>(context, listen: false).userID, cal);
-  }
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }

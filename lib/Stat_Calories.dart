@@ -6,14 +6,16 @@ import 'package:provider/provider.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:intl/intl.dart';
 
-double cero = num[0];
-double one = num[1];
-double two = num[2];
-double three = num[3];
-double four = num[4];
-double five = num[5];
-double six = num[6];
-List<double> num= [2000,3000,4200,4300,4900,4552,4560];
+double cero;
+double one ;
+double two ;
+double three ;
+double four; 
+double five;
+double six ;
+double themax;
+double ult;
+
 DateTime now = new DateTime.now();
 final DateFormat formato = DateFormat('EEEE');
 String dayformat= formato.format(now);
@@ -23,7 +25,17 @@ class Stat_Calories extends StatelessWidget {
    List<Color> gradientColors = [ Color(0xff23b6e6), Color(0xff02d39a)];
   @override
   Widget build(BuildContext context) {
-    
+    List<dynamic> thelist = Provider.of<UserModel>(context).dailyCalories;
+    cero = thelist[6];
+    one = thelist[5];
+    two = thelist[4];
+    three = thelist[3];
+    four = thelist[2];
+    five = thelist[1];
+    six = thelist[0];
+    themax = thelist[0];
+     for (int i = 0; i < thelist.length; i++) { if (thelist[i] > themax) themax = thelist[i]; }
+     ult = themax + 1;
     if (Provider.of<UserModel>(context).userID == null)
       return Login();
     else {
@@ -57,8 +69,14 @@ class Stat_Calories extends StatelessWidget {
                // minX:1,
                 //maxX:7,
                // minY:1000,
-                maxY:8000,
+                maxY:ult,
                titlesData: LineTitles.getTitleData(),
+                 axisTitleData: FlAxisTitleData(
+                 leftTitle: AxisTitle(
+                 showTitle: true, titleText: 'Calorias',textStyle: TextStyle(color: Color(0xFF212121),
+          fontWeight: FontWeight.bold,
+          fontSize: 16,), margin: 10),
+                 ),
                 gridData: FlGridData(
                    show: true,
                    getDrawingHorizontalLine: (value){
@@ -294,41 +312,16 @@ class LineTitles {
   
   margin: 20,
   ),
-
   leftTitles: SideTitles(
-    showTitles: true,
-    getTextStyles: (value) => const TextStyle(
-    color: Color(0xFF212121),
-    fontWeight: FontWeight.bold,
-    fontSize: 16,
-  ),
-    // ignore: missing_return
-   getTitles: (value){
-   switch (value.toInt()){
-     case 1000:
-     return "1000";
-     case 2000:
-     return "2000";
-     case 3000:
-     return "3000";
-     case 4000:
-     return "4000";
-     case 5000:
-     return "5000";
-     case 6000:
-     return "6000";
-     case 7000:
-     return "7000";
-     case 8000:
-     return "Calorias";
-   }
-
-  return '';
-  },
-   reservedSize: 120,
-   margin: 50,
-  ),
-  rightTitles: SideTitles(
+          showTitles: true,
+          getTitles: (value) {
+            return (value.toInt()).toString();
+          },
+          interval: themax/10,
+          reservedSize: 28,
+          margin: 12,
+        ),
+   rightTitles: SideTitles(
     showTitles: true,
     getTextStyles: (value) => const TextStyle(
     color: Color(0xFF212121),
@@ -353,5 +346,6 @@ class LineTitles {
   },
   reservedSize: 80,
   )
+  
  );
 }

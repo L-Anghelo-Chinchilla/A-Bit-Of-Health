@@ -1,4 +1,3 @@
-
 import 'package:a_bit_of_health/Login.dart';
 import 'package:a_bit_of_health/models/UserModel.dart';
 import 'package:a_bit_of_health/providers/UserProvider.dart';
@@ -6,6 +5,8 @@ import 'package:a_bit_of_health/providers/authentification.dart';
 import 'package:a_bit_of_health/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+//double reciprocal(double d) => 1 / d;
 
 class GlassesOfWater extends StatefulWidget {
   GlassesOfWater({Key key}) : super(key: key);
@@ -17,7 +18,10 @@ class GlassesOfWater extends StatefulWidget {
 class _GlassesOfWaterState extends State<GlassesOfWater> {
   @override
   Widget build(BuildContext context) {
-     print(Provider.of<UserModel>(context, listen: false).userID);
+    /*UserProvider().updateDailyGlasses(
+        Provider.of<UserModel>(context, listen: false).userID);*/
+
+    print(Provider.of<UserModel>(context, listen: false).userID);
     if (Provider.of<UserModel>(context, listen: false).userID == null)
       return FutureBuilder<bool>(
           future: AuthProvider.getUser(context),
@@ -37,12 +41,9 @@ class _GlassesOfWaterState extends State<GlassesOfWater> {
             }
           });
     else
-      return GlassesOfWaterPage(); 
+      return GlassesOfWaterPage();
   }
 }
-
-
-
 
 class GlassesOfWaterPage extends StatefulWidget {
   @override
@@ -54,42 +55,44 @@ class _GlassesOfWaterPageState extends State<GlassesOfWaterPage> {
 
   @override
   Widget build(BuildContext context) {
-    if(Provider.of<UserModel>(context).userID ==null)
+    if (Provider.of<UserModel>(context).userID == null)
       return Login();
     else
-      
-    return Scaffold(appBar: getAppBar(context:context),
-        body: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/fondo_agua.jpg'),
-              fit: BoxFit.cover
+      return Scaffold(
+          appBar: getAppBar(context: context),
+          body: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/fondo_agua.jpg'),
+                  fit: BoxFit.cover),
             ),
-          ),
-          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-            getDirectionsBar(context , 'GlassesOfWater'),
-            Expanded(
-                child: Center(
-                    child:
-           FutureBuilder<UserModel>(
-              future: UserProvider.getUserData(
-                  Provider.of<UserModel>(context, listen: false).userID), // a previously-obtained Future<String> or null
-              builder: (BuildContext context, AsyncSnapshot<UserModel> snapshot) {
-                if (snapshot.hasData) {
-                  return GlassesOfWater1(user: snapshot.data);
-                } else {
-                  return Center(
-                      child: SizedBox(
-                    child: CircularProgressIndicator(),
-                    width: 60,
-                    height: 60,
-                  ));
-                }
-              }) //
+            child:
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+              getDirectionsBar(context, 'GlassesOfWater'),
+              Expanded(
+                  child: Center(
+                      child: FutureBuilder<UserModel>(
+                          future: UserProvider.getUserData(Provider.of<
+                                  UserModel>(context, listen: false)
+                              .userID), // a previously-obtained Future<String> or null
+                          builder: (BuildContext context,
+                              AsyncSnapshot<UserModel> snapshot) {
+                            if (snapshot.hasData) {
+                              return GlassesOfWater1(user: snapshot.data);
+                            } else {
+                              return Center(
+                                  child: SizedBox(
+                                child: CircularProgressIndicator(),
+                                width: 60,
+                                height: 60,
+                              ));
+                            }
+                          }) //
 
-          // GlassesOfWater1(user: UserModel(weight: 85.3, height: 1.7, email: "sanchopanza@gmail.com", gender: "M", name: "Sancho Panza", waterLimit: 10, newWaterLimit: 8, waterLimitDate: "14/04/2021", glasses: 3) )//ModalRoute.of(context).settings.arguments )
-          ))]),
-        ));
+                      // GlassesOfWater1(user: UserModel(weight: 85.3, height: 1.7, email: "sanchopanza@gmail.com", gender: "M", name: "Sancho Panza", waterLimit: 10, newWaterLimit: 8, waterLimitDate: "14/04/2021", glasses: 3) )//ModalRoute.of(context).settings.arguments )
+                      ))
+            ]),
+          ));
   }
 }
 
@@ -104,143 +107,127 @@ class GlassesOfWater1 extends StatefulWidget {
 class _GlassesOfWatterState extends State<GlassesOfWater1> {
   UserProvider provider = UserProvider();
 
-
-
   @override
   Widget build(BuildContext context) {
-    return
-                       Padding(
-                          padding: EdgeInsets.all(15),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text('Vasos de agua\n', style: TextStyle(fontFamily: 'Mont', fontSize: 32)),
-                              Expanded(
-                                  child:
-                                   Container(
-                                      decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10)),
-                                      color: Colors.white.withOpacity(0.7),
-                                      ),
-                                      height:double.infinity ,
-                                      child: ListView.builder(
-                                        shrinkWrap: true,
-                                        itemCount: widget.user.waterLimit,
-                                        padding: EdgeInsets.all(7),
-                                        scrollDirection: Axis.horizontal,
-                                        itemBuilder: (context, i) {
-                                          print(
-                                              '$i  ${widget.user.waterLimit}');
-                                          var state = (i < widget.user.glasses)
-                                              ? 'lleno'
-                                              : 'vacio';
-                                          return Stack(
-                                              alignment: Alignment.center,
-                                              children: [
-                                                Image.asset(
-                                                  'lib/assets/vaso_$state.png',
-                                                  width: 150,
-                                                  height: 150,
-                                                ),
-                                                Text('${i + 1}',
-                                                    style: TextStyle(
-                                                        color:  (i < widget.user.glasses) 
-                                                        ?Colors.white
-                                                        :Color(0xFF3FBCF0))),
-                                              ]);
-                                        },
-                                      )
-                                      ),
-                                      ),
-                              SizedBox(),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  ElevatedButton(
-                                    child: Text('Vaciar un vaso'),
-                                    onPressed: () async {
-                                      if (widget.user.glasses > 0) {
-                                        widget.user.glasses--;
-                                        provider.setUserWaterGlasses(
-                                            widget.user.userID,
-                                            widget.user.glasses);
-                                      } else {
-                                        final snackBar = SnackBar(
-                                          content: Text(
-                                              'Ya no puedes quitar más vasos!, ¿o sí?'),
-                                          action: SnackBarAction(
-                                            label: 'No. no puedo',
-                                            onPressed: () {
-                                              // Some code to undo the change.
-                                            },
-                                          ),
-                                        );
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(snackBar);
-                                      }
-                                      setState(() {});
-                                    },
-                                  ),
-                                  ElevatedButton(
-                                      child: Text('Llenar un vaso'),
-                                      onPressed: () async {
-                                        if (widget.user.glasses <
-                                            widget.user.waterLimit) {
-                                          widget.user.glasses++;
-                                          await provider.setUserWaterGlasses(
-                                              widget.user.userID,
-                                              widget.user.glasses);
-                                            if(widget.user.glasses == widget.user.waterLimit){
-                                              final snackBar = SnackBar(
-                                            content: Text('''¡¡¡Felicidades!!! ¡Completaste tus vasos diarios!.'''),
-                                            action: SnackBarAction(
-                                              label: 'Gracias!',
-                                              onPressed: () {
-                                                // Some code to undo the change.
-                                              },
-                                            ),
-                                          );
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(snackBar);
-
-
-
-                                            }
-                                        } else {
-                                          final snackBar = SnackBar(
-                                            content: Text('''No tienes mas vasos que llenar, si quieres puedes aumentar tu limite diario de vasos de agua.'''),
-                                            action: SnackBarAction(
-                                              label: 'Gracias!',
-                                              onPressed: () {
-                                                // Some code to undo the change.
-                                              },
-                                            ),
-                                          );
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(snackBar);
-                                        }
-                                        setState(() {});
-                                      })
-                                ],
-                              ),
-
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children:[
-                                Text('''¿Cuántos vasos puedes tomar al día?: 
-(Los cambios se harán el día de mañana.)'''
-                                  , style: TextStyle(fontFamily: 'Sans', fontSize: 22.0),),
-
-                                CounterView(initNumber: widget.user.newWaterLimit),
-                              
-                                ]
-                                  )
-                            ],
-                          ));
+    return Padding(
+        padding: EdgeInsets.all(15),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('Vasos de agua\n',
+                style: TextStyle(fontFamily: 'Mont', fontSize: 32)),
+            Expanded(
+              child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    color: Colors.white.withOpacity(0.7),
+                  ),
+                  height: double.infinity,
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: widget.user.waterLimit,
+                    padding: EdgeInsets.all(7),
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, i) {
+                      print('$i  ${widget.user.waterLimit}');
+                      var state = (i < widget.user.glasses) ? 'lleno' : 'vacio';
+                      return Stack(alignment: Alignment.center, children: [
+                        Image.asset(
+                          'lib/assets/vaso_$state.png',
+                          width: 150,
+                          height: 150,
+                        ),
+                        Text('${i + 1}',
+                            style: TextStyle(
+                                color: (i < widget.user.glasses)
+                                    ? Colors.white
+                                    : Color(0xFF3FBCF0))),
+                      ]);
+                    },
+                  )),
+            ),
+            SizedBox(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ElevatedButton(
+                  child: Text('Vaciar un vaso'),
+                  onPressed: () async {
+                    if (widget.user.glasses > 0) {
+                      widget.user.glasses--;
+                      provider.setUserWaterGlasses(
+                          widget.user.userID, widget.user.glasses);
+                      UserProvider().addToTodaysGlasses(
+                          Provider.of<UserModel>(context, listen: false).userID,
+                          widget.user.glasses.toDouble());
+                    } else {
+                      final snackBar = SnackBar(
+                        content: Text('Ya no puedes quitar más vasos!, ¿o sí?'),
+                        action: SnackBarAction(
+                          label: 'No. no puedo',
+                          onPressed: () {
+                            // Some code to undo the change.
+                          },
+                        ),
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    }
+                    setState(() {});
+                  },
+                ),
+                ElevatedButton(
+                    child: Text('Llenar un vaso'),
+                    onPressed: () async {
+                      if (widget.user.glasses < widget.user.waterLimit) {
+                        widget.user.glasses++;
+                        await provider.setUserWaterGlasses(
+                            widget.user.userID, widget.user.glasses);
+                        UserProvider().addToTodaysGlasses(
+                            Provider.of<UserModel>(context, listen: false)
+                                .userID,
+                            widget.user.glasses.toDouble());
+                        if (widget.user.glasses == widget.user.waterLimit) {
+                          final snackBar = SnackBar(
+                            content: Text(
+                                '''¡¡¡Felicidades!!! ¡Completaste tus vasos diarios!.'''),
+                            action: SnackBarAction(
+                              label: 'Gracias!',
+                              onPressed: () {
+                                // Some code to undo the change.
+                              },
+                            ),
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        }
+                      } else {
+                        final snackBar = SnackBar(
+                          content: Text(
+                              '''No tienes mas vasos que llenar, si quieres puedes aumentar tu limite diario de vasos de agua.'''),
+                          action: SnackBarAction(
+                            label: 'Gracias!',
+                            onPressed: () {
+                              // Some code to undo the change.
+                            },
+                          ),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      }
+                      setState(() {});
+                    })
+              ],
+            ),
+            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Text(
+                '''¿Cuántos vasos puedes tomar al día?: 
+(Los cambios se harán el día de mañana.)''',
+                style: TextStyle(fontFamily: 'Sans', fontSize: 22.0),
+              ),
+              CounterView(initNumber: widget.user.newWaterLimit),
+            ])
+          ],
+        ));
   }
 }
-
-
 
 class CounterView extends StatefulWidget {
   final int initNumber;
@@ -283,7 +270,7 @@ class _CounterViewState extends State<CounterView> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           _createIncrementDicrementButton(Icons.remove, () => _dicrement()),
-          Text( '  ${_currentCount.toString()}  ' ),
+          Text('  ${_currentCount.toString()}  '),
           _createIncrementDicrementButton(Icons.add, () => _increment()),
         ],
       ),
@@ -291,15 +278,17 @@ class _CounterViewState extends State<CounterView> {
   }
 
   void _increment() {
-    setState((){
-      if(_currentCount < 15){
-      
-      _currentCount++;
-      _counterCallback(_currentCount);
-      _increaseCallback();
-      final provider =UserProvider();
-      provider.setUserWaterLimit(Provider.of<UserModel>(context,listen:false).userID, _currentCount );
-    }});
+    setState(() {
+      if (_currentCount < 15) {
+        _currentCount++;
+        _counterCallback(_currentCount);
+        _increaseCallback();
+        final provider = UserProvider();
+        provider.setUserWaterLimit(
+            Provider.of<UserModel>(context, listen: false).userID,
+            _currentCount);
+      }
+    });
   }
 
   void _dicrement() {
@@ -308,9 +297,10 @@ class _CounterViewState extends State<CounterView> {
         _currentCount--;
         _counterCallback(_currentCount);
         _decreaseCallback();
-         final provider =UserProvider();
-       provider.setUserWaterLimit(Provider.of<UserModel>(context,listen:false).userID, _currentCount );
-
+        final provider = UserProvider();
+        provider.setUserWaterLimit(
+            Provider.of<UserModel>(context, listen: false).userID,
+            _currentCount);
       }
     });
   }

@@ -1,8 +1,12 @@
 import 'package:a_bit_of_health/models/UserModel.dart';
 import 'package:a_bit_of_health/providers/authentification.dart';
+import 'package:a_bit_of_health/providers/UserProvider.dart';
 import 'package:a_bit_of_health/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'dart:io';
+
+String theId;
 
 class Login extends StatefulWidget {
   const Login({Key key}) : super(key: key);
@@ -21,6 +25,18 @@ class _LoginState extends State<Login> {
     });
   }
 
+  Future<void> theUpdate1() async {
+    await UserProvider().updateDailyCalories(theId);
+  }
+
+  Future<void> theUpdate2() async {
+    await UserProvider().updateDailyGlasses(theId);
+  }
+
+  Future<void> theUpdate3() async {
+    await UserProvider().updateDailyScore(theId);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,16 +44,18 @@ class _LoginState extends State<Login> {
         backgroundColor: Colors.grey[400],
         body: Container(
             decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: NetworkImage('https://images.unsplash.com/photo-1493770348161-369560ae357d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=4350&q=80'),fit: BoxFit.cover)
-                  /* CachedNetworkImage(
+                image: DecorationImage(
+                    image: NetworkImage(
+                        'https://images.unsplash.com/photo-1493770348161-369560ae357d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=4350&q=80'),
+                    fit: BoxFit.cover)
+                /* CachedNetworkImage(
    imageUrl: "http://via.placeholder.com/350x150",
    placeholder: (context, url) => new CircularProgressIndicator(),
    errorWidget: (context, url, error) => new Icon(Icons.error),
  ),*/
                 //  image: AssetImage('fondo_login.jpg'), fit: BoxFit.cover),
-            ),
-            child: Center( 
+                ),
+            child: Center(
               child: SizedBox(
                 height: 700,
                 width: 700,
@@ -78,6 +96,15 @@ class _LoginState extends State<Login> {
                                           if (user.uid != null)
                                             Navigator.pushReplacementNamed(
                                                 context, '/');
+
+                                          theId = Provider.of<UserModel>(
+                                                  context,
+                                                  listen: false)
+                                              .userID;
+
+                                          await theUpdate1();
+                                          await theUpdate2();
+                                          await theUpdate3();
                                         }
                                       },
                                       child: Text('Iniciar sesión'),

@@ -7,25 +7,63 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:intl/intl.dart';
 
 
-double cero = num[0];
-double one = num[1];
-double two = num[2];
-double three = num[3];
-double four = num[4];
-double five = num[5];
-double six = num[6];
-List<double> num= [4,5,7,6,10,9,13];
+double cero;
+double one ;
+double two ;
+double three ;
+double four; 
+double five;
+double six ;
+double themax;
+double ult;
 DateTime now = new DateTime.now();
 final DateFormat format1 = DateFormat('EEEE');
 String dayformat = format1.format(now);
+List<String> thedaysESP = [
+  "Lunes",
+  "Martes",
+  "Miércoles",
+  "Jueves",
+  "Viernes",
+  "Sábado",
+  "Domingo"
+];
+List<String> thedaysENG = [
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+  "Sunday"
+];
+int index = thedaysENG.indexOf(dayformat);
+List<String> theorder;
+// ignore: camel_case_types
+
+    
 
 class Stat_Glasses extends StatelessWidget {
+
    Stat_Glasses({Key key}) : super(key: key);
    List<Color> gradientColors = [ Color(0xff23b6e6), Color(0xff02d39a)];
  
 
   @override
   Widget build(BuildContext context) {
+    List<dynamic> thelist = Provider.of<UserModel>(context).dailyGlasses;
+     cero = thelist[0];
+     one = thelist[1];
+    two = thelist[2];
+     three = thelist[3];
+    four = thelist[4];
+    five = thelist[5];
+    six = thelist[6];
+    themax = thelist[0];
+     for (int i = 0; i < thelist.length; i++) { if (thelist[i] > themax) themax = thelist[i]; }
+     ult = themax + 1;
+     
+
     if (Provider.of<UserModel>(context).userID == null)
       return Login();
     else {
@@ -58,9 +96,15 @@ class Stat_Glasses extends StatelessWidget {
                 //borderData: FlBorderData(show: false),
                 //minX:1,
               //  maxX:7,
-                minY:1,
-                maxY:16,
+                minY: 0,
+                          maxY: 15,
                 titlesData: LineTitles.getTitleData(),
+                axisTitleData: FlAxisTitleData(
+        leftTitle: AxisTitle(
+            showTitle: true, titleText: 'Vasos',textStyle: TextStyle(color: Color(0xFF212121),
+          fontWeight: FontWeight.bold,
+          fontSize: 16,), margin: 10),
+            ),
                 gridData: FlGridData(
                    show: true,
                    getDrawingHorizontalLine: (value){
@@ -108,6 +152,7 @@ class Stat_Glasses extends StatelessWidget {
                     ),
                   )
                 ]
+                
               ), 
               ),
               
@@ -294,102 +339,104 @@ class LineTitles {
   
   margin: 20,
   ),
-
   leftTitles: SideTitles(
-    showTitles: true,
-    getTextStyles: (value) => const TextStyle(
-    color: Color(0xFF212121),
-    fontWeight: FontWeight.bold,
-    fontSize: 16,
-  ),
-    // ignore: missing_return
-   getTitles: (value){
-   switch (value.toInt()){
-     case 1:
-     return "1";
-     case 2:
-     return "2";
-     case 3:
-     return "3";
-     case 4:
-     return "4";
-     case 5:
-     return "5";
-     case 6:
-     return "6";
-     case 7:
-     return "7";
-     case 8:
-     return "8";
-     case 9:
-     return "9";
-      case 10:
-     return "10";
-     case 11:
-     return "11";
-     case 12:
-     return "12";
-     case 13:
-     return "13";
-     case 14:
-     return "14";
-     case 15:
-     return "15";
-     case 16:
-     return "Vasos Tomados";
-   }
+        showTitles: true,
+        getTextStyles: (value) => const TextStyle(
+          color: Color(0xFF212121),
+          fontWeight: FontWeight.bold,
+          fontSize: 16,
+        ),
+        // ignore: missing_return
+        getTitles: (value) {
+          switch (value.toInt()) {
+            case 0:
+              return "0";
+            case 1:
+              return "1";
+            case 2:
+              return "2";
+            case 3:
+              return "3";
+            case 4:
+              return "4";
+            case 5:
+              return "5";
+            case 6:
+              return "6";
+            case 7:
+              return "7";
+            case 8:
+              return "8";
+            case 9:
+              return "9";
+            case 10:
+              return "10";
+            case 11:
+              return "11";
+            case 12:
+              return "12";
+            case 13:
+              return "13";
+            case 14:
+              return "14";
+            case 15:
+              return "15";
+            
+          }
 
-  return '';
-  },
-   reservedSize: 120,
-   margin: 20,
-  ),
-   rightTitles: SideTitles(
-    showTitles: true,
-    getTextStyles: (value) => const TextStyle(
-    color: Color(0xFF212121),
-    fontWeight: FontWeight.bold,
-    fontSize: 16,
-  ),
-   getTitles: (value){
-   switch (value.toInt()){
-    case 1:
-     return "";
-     case 2:
-     return "";
-     case 3:
-     return "";
-     case 4:
-     return "";
-     case 5:
-     return "";
-     case 6:
-     return "";
-     case 7:
-     return "";
-     case 8:
-     return "";
-     case 9:
-     return "";
-      case 10:
-     return "";
-     case 11:
-     return "";
-     case 12:
-     return "";
-     case 13:
-     return "";
-     case 14:
-     return "";
-     case 15:
-     return "";
-     case 16:
-     return "";    
-   }
+          return '';
+        },
+        reservedSize: 120,
+        margin: 20,
+      ),
+      rightTitles: SideTitles(
+        showTitles: true,
+        getTextStyles: (value) => const TextStyle(
+          color: Color(0xFF212121),
+          fontWeight: FontWeight.bold,
+          fontSize: 16,
+        ),
+        getTitles: (value) {
+          switch (value.toInt()) {
+            case 0:
+              return "";
+            case 1:
+              return "";
+            case 2:
+              return "";
+            case 3:
+              return "";
+            case 4:
+              return "";
+            case 5:
+              return "";
+            case 6:
+              return "";
+            case 7:
+              return "";
+            case 8:
+              return "";
+            case 9:
+              return "";
+            case 10:
+              return "";
+            case 11:
+              return "";
+            case 12:
+              return "";
+            case 13:
+              return "";
+            case 14:
+              return "";
+            case 15:
+              return "";
+            case 16:
+              return "";
+          }
 
-  return '';
-  },
-  reservedSize: 90,
-  )
- );
+          return '';
+        },
+        reservedSize: 90,
+      )
+  );
 }
