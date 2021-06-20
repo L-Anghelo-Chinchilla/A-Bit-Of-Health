@@ -142,25 +142,35 @@ class HistoryView extends StatelessWidget {
 
   }
 
-  Future<void> _createPDF(String name, String date1, String date2 , Map map ) async {
+  Future<void> _createPDF(String name, String date1, String date2 , Map<String, FoodRegister> map ) async {
     PdfDocument document = PdfDocument();
     var day = DateTime.parse(date1);
     String dateRegister = date1;
     var next;
     int diference = substractionDates(date1, date2);
     //var imagen = await rootBundle.load('assets/image.png');
-    name += '${map.length}'; 
+    
     createFirst(document, date1, date2, name);
-
-    for (int i = 0; i < diference + 1; i++) {
+    dateRegister = map.values.elementAt(0).date; 
+    for (int i = 0; i < map.length ; ) {
       //Si hay registro
       if (registerExists() == true) {
-        createNext(document, dateRegister);
+        Tuple2 tuple = createNext(document, dateRegister);
+        FoodRegister register = map.values.elementAt(i);
+        while(register.date == dateRegister && i < map.length -1 ){
+          
+          
+         writeFood(document,register , tuple.item1, tuple.item2);
+          i++; 
+          register = map.values.elementAt(i); 
+        }
+        dateRegister  = register.date;
       }
 
-      next = new DateTime(day.year, day.month, day.day + 1);
+   /*   next = new DateTime(day.year, day.month, day.day + 1);
       day = next;
       dateRegister = next.toString().substring(0, 11);
+      */
     }
 
     List<int> bytes = document.save();
@@ -169,9 +179,8 @@ class HistoryView extends StatelessWidget {
     saveAndLaunchFile(bytes, 'Output.pdf');
   }
 
-  void createNext(PdfDocument document, String dateRegister) {
-    String typeFood = 'Almuerzo';
-    String timeFood = '12:15';
+Tuple2 createNext(PdfDocument document, String dateRegister) {
+    
     PdfLayoutResult layoutResult;
     //Creamos una nueva pagina para escribir
     final page = document.pages.add();
@@ -197,11 +206,11 @@ class HistoryView extends StatelessWidget {
       bounds: Rect.fromLTWH(
           0, 0, page.getClientSize().width, page.getClientSize().height),
     );
-
-    writeFood(document, typeFood, timeFood, page, layoutResult);
+    return Tuple2(page , layoutResult);
+   // writeFood(document, typeFood, timeFood, page, layoutResult);
   }
 
-  void writeFood(PdfDocument document, String typeFood, String timeFood,
+  void writeFood(PdfDocument document, FoodRegister register,
       final page, PdfLayoutResult lr) {
     PdfLayoutResult layoutResult = lr;
 
@@ -209,7 +218,7 @@ class HistoryView extends StatelessWidget {
     PdfGrid gridTF = PdfGrid();
     gridTF.columns.add(count: 1);
     PdfGridRow rowTF = gridTF.rows.add();
-    rowTF.cells[0].value = '$typeFood   $timeFood';
+    rowTF.cells[0].value = '${register.food.typeOfFood}   ${register.time}';
     gridTF.style.cellPadding = PdfPaddings(left: 5, top: 5);
     layoutResult = gridTF.draw(
       page: page,
@@ -220,22 +229,24 @@ class HistoryView extends StatelessWidget {
     //EScribimos la tabla de detalles
     PdfGrid grid = PdfGrid();
 
-    grid.columns.add(count: 3);
+    grid.columns.add(count: 4);
 
     final PdfGridRow headerRow = grid.headers.add(1)[0];
     headerRow.cells[0].value = 'Alimento';
-    headerRow.cells[1].value = 'Porción';
-    headerRow.cells[2].value = 'Calorías';
+    headerRow.cells[1].value = 'Cantidad';
+    headerRow.cells[2].value = 'Porción unitaria';
+    headerRow.cells[3].value = 'Calorías por porción';
 
     headerRow.style.font =
         PdfStandardFont(PdfFontFamily.helvetica, 10, style: PdfFontStyle.bold);
 
-    for (int i = 0; i < 35; i++) {
+    register.food.aliments.forEach((element) { 
       PdfGridRow row = grid.rows.add();
-      row.cells[0].value = 'Anvorguesa';
-      row.cells[1].value = '550 g';
-      row.cells[2].value = '1000';
-    }
+      row.cells[0].value = element.name;
+      row.cells[1].value = element.cant;
+      row.cells[2].value = element.portion; 
+      row.cells[3].value = element.calories; 
+    });
 
     grid.style.cellPadding = PdfPaddings(left: 5, top: 5);
 
