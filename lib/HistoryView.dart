@@ -158,12 +158,24 @@ class HistoryView extends StatelessWidget {
     //var imagen = await rootBundle.load('assets/image.png');
 
     createFirst(document, date1, date2, name);
-
+    int g = 0;
+    String pageDate = '';
+    PdfLayoutResult lr;
     for (int i = 0; i < map.length; i++) {
-      //Si hay registro
-      if (registerExists() == true) {
-        createNext(document, map.values.elementAt(i));
-      }
+        
+        String auxDate = map.values.elementAt(i).date;
+        
+        if(auxDate==pageDate){
+          lr = writeFood(document, map.values.elementAt(i), lr);
+          //pageDate = map.values.elementAt(g).date;
+        }
+        else{
+          lr = createNext(document, map.values.elementAt(i));
+          g = i;
+          //pageDate = map.values.elementAt(g).date;
+        }
+        pageDate = map.values.elementAt(g).date;
+        
     }
 
     List<int> bytes = document.save();
@@ -172,16 +184,10 @@ class HistoryView extends StatelessWidget {
     saveAndLaunchFile(bytes, 'Output.pdf');
   }
 
-  void createNext(PdfDocument document, FoodRegister register) {
+  PdfLayoutResult createNext(PdfDocument document, FoodRegister register) {
     PdfLayoutResult layoutResult;
     //Creamos una nueva pagina para escribir
     final page = document.pages.add();
-    //Ponemos el header con la fecha
-    //PdfPageTemplateElement header = PdfPageTemplateElement(const Rect.fromLTWH(0, 0, 515, 50));
-    /*header.graphics.drawString(
-        'Fecha: $dateRegister', PdfStandardFont(PdfFontFamily.helvetica, 20),
-        bounds: const Rect.fromLTWH(0, 15, 200, 30));
-      document.template.top = header;*/
 
     PdfGrid gridH = PdfGrid();
     gridH.columns.add(count: 1);
@@ -189,7 +195,7 @@ class HistoryView extends StatelessWidget {
     row.cells[0].value = '${register.date}';
     gridH.style.cellPadding = PdfPaddings(left: 5, top: 5);
     row.cells[0].style = PdfGridCellStyle(
-      font: PdfStandardFont(PdfFontFamily.timesRoman, 24),
+      font: PdfStandardFont(PdfFontFamily.helvetica, 24),
     );
     row.cells[0].style.borders.all = PdfPens.transparent;
 
@@ -199,18 +205,25 @@ class HistoryView extends StatelessWidget {
           0, 0, page.getClientSize().width, page.getClientSize().height),
     );
 
-    writeFood(document, register, page, layoutResult);
+    PdfLayoutResult lr = writeFood(document, register, layoutResult);
+    layoutResult = lr;
+    return layoutResult;
   }
 
-  void writeFood(PdfDocument document, FoodRegister register, final page,
-      PdfLayoutResult lr) {
+  PdfLayoutResult writeFood(PdfDocument document, FoodRegister register, PdfLayoutResult lr) {
     PdfLayoutResult layoutResult = lr;
+    var page = document.pages[document.pages.count-1];
 
     //Escribimos el tipo de comida y la hora
     PdfGrid gridTF = PdfGrid();
     gridTF.columns.add(count: 1);
-    PdfGridRow rowTF = gridTF.rows.add();
-    rowTF.cells[0].value = '${register.food.typeOfFood}   ${register.time}';
+    //PdfGridRow rowTF = gridTF.rows.add();
+    PdfGridRow rowTF = gridTF.headers.add(1)[0];
+    rowTF.cells[0].value = '${register.food.typeOfFood}         ${register.time}';
+    rowTF.cells[0].style = PdfGridCellStyle(
+        font: PdfStandardFont(PdfFontFamily.helvetica, 12, style: PdfFontStyle.regular),
+        backgroundBrush: PdfBrushes.orange
+    );
     gridTF.style.cellPadding = PdfPaddings(left: 5, top: 5);
     layoutResult = gridTF.draw(
       page: page,
@@ -243,7 +256,7 @@ class HistoryView extends StatelessWidget {
     grid.style.cellPadding = PdfPaddings(left: 5, top: 5);
 
     layoutResult = grid.draw(
-      page: page,
+      page: document.pages[document.pages.count-1],
       bounds: Rect.fromLTWH(0, layoutResult.bounds.bottom + 10,
           page.getClientSize().width, page.getClientSize().height),
     );
@@ -257,11 +270,18 @@ class HistoryView extends StatelessWidget {
     row2.cells[1].value = 'Total de calorías: ${register.calories}';
 
     grid2.style.cellPadding = PdfPaddings(left: 5, top: 5);
+    row2.cells[0].style = PdfGridCellStyle(
+        font: PdfStandardFont(PdfFontFamily.helvetica, 10),
+    );
+    row2.cells[1].style = PdfGridCellStyle(
+        font: PdfStandardFont(PdfFontFamily.helvetica, 10),
+    );
     layoutResult = grid2.draw(
-      page: page,
+      page: document.pages[document.pages.count-1],
       bounds: Rect.fromLTWH(0, layoutResult.bounds.bottom + 10,
           page.getClientSize().width, page.getClientSize().height),
     );
+    return layoutResult;
   }
 
   int substractionDates(String date1, String date2) {
@@ -327,7 +347,5 @@ class HistoryView extends StatelessWidget {
     return data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
   }*/
 
-  bool registerExists() {
-    return true;
-  }
+  
 }
