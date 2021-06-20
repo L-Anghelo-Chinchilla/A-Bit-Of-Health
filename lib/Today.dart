@@ -61,16 +61,17 @@ class _TodayPageState extends State<TodayPage> {
         appBar: getAppBar(context: context),
         body: Container(
           decoration: BoxDecoration(
-            image: DecorationImage(
-                image: NetworkImage('https://images.unsplash.com/photo-1495195134817-aeb325a55b65?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1055&q=80'),fit: BoxFit.cover)
-            ),
+              image: DecorationImage(
+                  image: NetworkImage(
+                      'https://images.unsplash.com/photo-1495195134817-aeb325a55b65?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1055&q=80'),
+                  fit: BoxFit.cover)),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               getDirectionsBar(context, 'Today'),
               Expanded(
                   child: Padding(
-                padding: EdgeInsets.fromLTRB(50 ,20 ,50,20),
+                padding: EdgeInsets.fromLTRB(50, 20, 50, 20),
                 child: FutureBuilder(
                   future: provider.getUserRegister(
                       Provider.of<UserModel>(context, listen: false).userID,
@@ -143,11 +144,11 @@ class _TodayRegisterState extends State<TodayRegister> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           getScoreView(
-            'Calorías de día',
+            'Calorías del día',
             '${caloriesSum.toStringAsFixed(1)}',
           ),
           getScoreView(
-            'Puntuación de día',
+            'Puntuación del día',
             '${todayScore.toStringAsFixed(1)}',
           ),
         ],
@@ -168,7 +169,8 @@ class _TodayRegisterState extends State<TodayRegister> {
                   itemBuilder: (context, i) {
                     String key = widget.map.keys.elementAt(i);
                     final len = widget.map.length;
-                    return getRegisterList(context, widget.map.values.elementAt(len - 1 - i) , true );
+                    return getRegisterList(context,
+                        widget.map.values.elementAt(len - 1 - i), true);
                   },
                 ),
               )))
@@ -189,166 +191,161 @@ class _TodayRegisterState extends State<TodayRegister> {
           child: Center(
               child: Text(
             score,
-            style: TextStyle(fontSize: 30),
+            style: TextStyle(fontSize: 30, fontFamily: 'Mont2'),
           )),
         ),
-        Text(title, style: TextStyle(fontSize: 30))
+        Text(title, style: TextStyle(fontSize: 30, fontFamily: 'Mont2'))
       ],
     );
   }
-
 }
 
-
-Widget getRegisterList(BuildContext context, FoodRegister foodRegister , bool canDelete){
-
+Widget getRegisterList(
+    BuildContext context, FoodRegister foodRegister, bool canDelete) {
   return Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                            margin: EdgeInsets.fromLTRB(5, 5, 20, 5),
-                            decoration: BoxDecoration(
-                              color: Colors.orange[400],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(7)),
-                              border: Border.all(color: Colors.black45),
-                            ),
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 15, vertical: 2),
-                            child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                      '${foodRegister.food.typeOfFood} ${getEmoji(foodRegister.food.typeOfFood)}'),
-                                  Text(
-                          '🕰️ ${foodRegister.date}, ${foodRegister.time}'),
-                                  (canDelete) ? IconButton(
-                                      icon: Icon(Icons.delete),
-                                      onPressed: () async {
-                                        showAlertDialog(
-                                            context,
-                                            Provider.of<UserModel>(context,
-                                                    listen: false)
-                                                .userID,
-                                            foodRegister
-                                                .date,
-                                            foodRegister.id);
-
-                                      }) : Container(height:  35,) 
-                                ])),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Container(
-                            height: 250,
-                            width:double.infinity ,// 500,
-                            child: SingleChildScrollView(
-                              child: DataTable(
-                                  columns: [
-                                    DataColumn(
-                                      label: Text('Alimento(s)'),
-                                    ),
-                                    DataColumn(label: Text('Porción(es)')),
-                                    DataColumn(label: Text('Calorías')),
-                                  ],
-                                  rows: foodRegister
-                                      .food
-                                      .aliments
-                                      .map((element) => DataRow(cells: [
-                                            DataCell(Text(element.name)),
-                                            DataCell(Text('${element.cant}')),
-                                            DataCell(Text(
-                                                '${(element.calories * element.cant).toStringAsFixed(1)}'))
-                                          ]))
-                                      .toList()),
-                            ),
-                          ),
-                        ),
-                        Row(
-                          children: [
-                            Container(
-                                margin: EdgeInsets.all(5),
-                                decoration: BoxDecoration(
-                                    color: Color(0xFFF4D03F),
-                                    border: Border.all(color: Colors.black45),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(7))),
-                                padding: EdgeInsets.all(10),
-                                child: Text(
-                                    'Calorías: ${foodRegister.calories.toStringAsFixed(1)}')),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Container(
-                                margin: EdgeInsets.all(5),
-                                decoration: BoxDecoration(
-                                    color: Color(0xFFF4D03F),
-                                    border: Border.all(color: Colors.black45),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(7))),
-                                padding: EdgeInsets.all(10),
-                                child: Text(
-                                    'Puntuación: ${foodRegister.score}'))
-                          ],
-                        ), 
-                        Divider()
-                      ],
-                    );
-
+    mainAxisAlignment: MainAxisAlignment.start,
+    children: [
+      Container(
+          margin: EdgeInsets.fromLTRB(5, 5, 20, 5),
+          decoration: BoxDecoration(
+            color: Colors.orange[400],
+            borderRadius: BorderRadius.all(Radius.circular(7)),
+            border: Border.all(color: Colors.black45),
+          ),
+          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 2),
+          child:
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Text(
+                ' ${foodRegister.food.typeOfFood} ${getEmoji(foodRegister.food.typeOfFood)}',
+                style: TextStyle(fontFamily: 'Pt', fontSize: 24)),
+            Text('🕰️ ${foodRegister.date}, ${foodRegister.time}',
+                style: TextStyle(fontFamily: 'Pt', fontSize: 20)),
+            (canDelete)
+                ? IconButton(
+                    icon: Icon(Icons.delete),
+                    onPressed: () async {
+                      showAlertDialog(
+                          context,
+                          Provider.of<UserModel>(context, listen: false).userID,
+                          foodRegister.date,
+                          foodRegister.id);
+                    })
+                : Container(
+                    height: 35,
+                  )
+          ])),
+      Align(
+        alignment: Alignment.centerLeft,
+        child: Container(
+          height: 250,
+          width: double.infinity, // 500,
+          child: SingleChildScrollView(
+            child: DataTable(
+                columns: [
+                  DataColumn(
+                    label: Text('Alimento(s)', style: TextStyle(fontSize: 18)),
+                  ),
+                  DataColumn(
+                      label:
+                          Text('Porción(es)', style: TextStyle(fontSize: 18))),
+                  DataColumn(
+                      label: Text('Calorías', style: TextStyle(fontSize: 18))),
+                ],
+                rows: foodRegister.food.aliments
+                    .map((element) => DataRow(cells: [
+                          DataCell(Text(element.name,
+                              style: TextStyle(fontSize: 15))),
+                          DataCell(Text('${element.cant}',
+                              style: TextStyle(fontSize: 15))),
+                          DataCell(Text(
+                              '${(element.calories * element.cant).toStringAsFixed(1)}',
+                              style: TextStyle(fontSize: 15)))
+                        ]))
+                    .toList()),
+          ),
+        ),
+      ),
+      Row(
+        children: [
+          Container(
+              margin: EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                  color: Color(0xFFF4D03F),
+                  border: Border.all(color: Colors.black45),
+                  borderRadius: BorderRadius.all(Radius.circular(7))),
+              padding: EdgeInsets.all(10),
+              child: Text(
+                  'Total de calorías: ${foodRegister.calories.toStringAsFixed(1)}',
+                  style: TextStyle(fontFamily: 'Pt', fontSize: 20))),
+          SizedBox(
+            width: 10,
+          ),
+          Container(
+              margin: EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                  color: Color(0xFFF4D03F),
+                  border: Border.all(color: Colors.black45),
+                  borderRadius: BorderRadius.all(Radius.circular(7))),
+              padding: EdgeInsets.all(10),
+              child: Text('Puntuación total: ${foodRegister.score}',
+                  style: TextStyle(fontFamily: 'Pt', fontSize: 20)))
+        ],
+      ),
+      Divider()
+    ],
+  );
 }
 
-
-
-  String getEmoji(type) {
-    switch (type) {
-      case 'Desayuno':
-        return '☕';
-      case 'Almuerzo':
-        return '🥣';
-      case 'Cena':
-        return '🥗';
-      case 'Snack':
-        return '🍟';
-      default:
-        return '';
-    }
+String getEmoji(type) {
+  switch (type) {
+    case 'Desayuno':
+      return '☕';
+    case 'Almuerzo':
+      return '🥣';
+    case 'Cena':
+      return '🥗';
+    case 'Snack':
+      return '🍟';
+    default:
+      return '';
   }
+}
 
-  showAlertDialog(
-      BuildContext context, String userID, String date, String registerID) {
-    // set up the buttons
-    Widget cancelButton = TextButton(
-      child: Text("Cancelar"),
-      onPressed: () {
-        Navigator.pop(context);
-      },
-    );
-    Widget continueButton = TextButton(
-      child: Text("Eliminar"),
-      onPressed: () async {
-        final provider = FoodProvider();
-        await provider.deleteRegisterByDate(userID, date, registerID);
+showAlertDialog(
+    BuildContext context, String userID, String date, String registerID) {
+  // set up the buttons
+  Widget cancelButton = TextButton(
+    child: Text("Cancelar"),
+    onPressed: () {
+      Navigator.pop(context);
+    },
+  );
+  Widget continueButton = TextButton(
+    child: Text("Eliminar"),
+    onPressed: () async {
+      final provider = FoodProvider();
+      await provider.deleteRegisterByDate(userID, date, registerID);
 
-        Navigator.pop(context);
-        Navigator.pushReplacementNamed(context, 'Today');
-      },
-    );
+      Navigator.pop(context);
+      Navigator.pushReplacementNamed(context, 'Today');
+    },
+  );
 
-    // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      title: Text("Eliminar registro"),
-      content: Text("¿Eliminar éste registro de comida?"),
-      actions: [
-        cancelButton,
-        continueButton,
-      ],
-    );
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: Text("Eliminar registro"),
+    content: Text("¿Eliminar éste registro de comida?"),
+    actions: [
+      cancelButton,
+      continueButton,
+    ],
+  );
 
-    // show the dialog
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert; 
-      },
-    );
-  }
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
+}

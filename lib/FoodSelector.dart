@@ -151,7 +151,8 @@ class _FoodSelectorStatePage extends State<FoodSelectorPage> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           ElevatedButton(
-                            child: Text('Siguiente'),
+                            child: Text('Siguiente',
+                                style: TextStyle(fontSize: 18)),
                             onPressed: () {
                               List<FoodOffer> list = [];
                               list = Provider.of<FoodOfferModel>(context,

@@ -28,16 +28,18 @@ class _LoginState extends State<Login> {
         backgroundColor: Colors.grey[400],
         body: Container(
             decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: NetworkImage('https://images.unsplash.com/photo-1493770348161-369560ae357d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=4350&q=80'),fit: BoxFit.cover)
-                  /* CachedNetworkImage(
+                image: DecorationImage(
+                    image: NetworkImage(
+                        'https://images.unsplash.com/photo-1493770348161-369560ae357d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=4350&q=80'),
+                    fit: BoxFit.cover)
+                /* CachedNetworkImage(
    imageUrl: "http://via.placeholder.com/350x150",
    placeholder: (context, url) => new CircularProgressIndicator(),
    errorWidget: (context, url, error) => new Icon(Icons.error),
  ),*/
                 //  image: AssetImage('fondo_login.jpg'), fit: BoxFit.cover),
-            ),
-            child: Center( 
+                ),
+            child: Center(
               child: SizedBox(
                 height: 700,
                 width: 700,
@@ -80,7 +82,8 @@ class _LoginState extends State<Login> {
                                                 context, '/');
                                         }
                                       },
-                                      child: Text('Iniciar sesión'),
+                                      child: Text('Iniciar sesión',
+                                          style: TextStyle(fontSize: 18)),
                                     )
                                   ],
                                 ),

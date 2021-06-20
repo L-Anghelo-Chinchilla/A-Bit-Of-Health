@@ -18,8 +18,8 @@ class HistoryView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool enabled = false  ; 
-    Map<String  , FoodRegister> map  = Map(); 
+    bool enabled = false;
+    Map<String, FoodRegister> map = Map();
     Tuple2<String, String> range = ModalRoute.of(context).settings.arguments;
     if (Provider.of<UserModel>(context).userID == null)
       return Login();
@@ -37,74 +37,78 @@ class HistoryView extends StatelessWidget {
               getDirectionsBar(context, 'History'),
               Expanded(
                   child: Padding(
-                      padding:  EdgeInsets.all(19),
-                                      child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
+                padding: EdgeInsets.all(19),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
                     Text('Registros desde ${range.item1} hasta ${range.item2}',
-                        style: TextStyle(fontFamily: 'Mont2', fontSize: 20)),
+                        style: TextStyle(fontFamily: 'Mont', fontSize: 25)),
                     Expanded(
-                        child: Container(
-                      color: Colors.white.withOpacity(0.8),
-                      width: MediaQuery.of(context).size.width * 0.5,
-                      height: MediaQuery.of(context).size.height / 2.2,
-                      child: FutureBuilder(
-                          future: FoodProvider.getUserRegisterRange(
-                              Provider.of<UserModel>(context, listen: false)
-                                  .userID,
-                              range.item1,
-                              range.item2),
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                              if (snapshot.data.length > 0){
-                               map = snapshot.data;  
-                               enabled  = true ; 
-                                return ListView.builder(
-                                  itemCount: snapshot.data.length,
-                                  itemBuilder: (context, i) {
-                                    return getRegisterList(context,
-                                        snapshot.data.values.elementAt(i), false);
-                                  },
-                                );
-                              }else
-                                return getNoRegisterSignal();
-                            } else {
-                              return CircularProgressIndicator();
-                            }
-                          }),
+                        child: Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
+                      child: Container(
+                        color: Colors.white.withOpacity(0.8),
+                        width: MediaQuery.of(context).size.width * 0.5,
+                        height: MediaQuery.of(context).size.height / 2.2,
+                        child: FutureBuilder(
+                            future: FoodProvider.getUserRegisterRange(
+                                Provider.of<UserModel>(context, listen: false)
+                                    .userID,
+                                range.item1,
+                                range.item2),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData) {
+                                if (snapshot.data.length > 0) {
+                                  map = snapshot.data;
+                                  enabled = true;
+                                  return ListView.builder(
+                                    itemCount: snapshot.data.length,
+                                    itemBuilder: (context, i) {
+                                      return getRegisterList(
+                                          context,
+                                          snapshot.data.values.elementAt(i),
+                                          false);
+                                    },
+                                  );
+                                } else
+                                  return getNoRegisterSignal();
+                              } else {
+                                return CircularProgressIndicator();
+                              }
+                            }),
+                      ),
                     )),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         ElevatedButton(
-                          child: Text('Atras'),
+                          child: Text('Atras', style: TextStyle(fontSize: 18)),
                           onPressed: () {
                             Navigator.pop(context);
                           },
                         ),
                         ElevatedButton(
                             //onLongPress:  ,
-                            onPressed:    () {
-                              if(enabled){
-                               _createPDF(
-                                Provider.of<UserModel>(context, listen: false)
-                                    .name,
-                                range.item1,
-                                range.item2, 
-                                 map );
-                                }
-                                else{
-
-                                  showMessage(context);
-                                                                  }
-                                
-                                },
-                            child: Text('Descargar'))
+                            onPressed: () {
+                              if (enabled) {
+                                _createPDF(
+                                    Provider.of<UserModel>(context,
+                                            listen: false)
+                                        .name,
+                                    range.item1,
+                                    range.item2,
+                                    map);
+                              } else {
+                                showMessage(context);
+                              }
+                            },
+                            child: Text('Descargar',
+                                style: TextStyle(fontSize: 18)))
                       ],
                     )
-                ],
-              ),
-                  ))
+                  ],
+                ),
+              ))
             ],
           ),
         ),
@@ -124,41 +128,42 @@ class HistoryView extends StatelessWidget {
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
-
-  Widget getNoRegisterSignal(){
+  Widget getNoRegisterSignal() {
     return Padding(
-            padding: EdgeInsets.all(19),
-           child: Column(
-             mainAxisAlignment: MainAxisAlignment.center,
-             crossAxisAlignment: CrossAxisAlignment.center,
-             children: [
-               Text('No existen registros entre estas fechas.', style: TextStyle(fontSize:  23 , fontFamily: 'Mont3'),),
-               SizedBox(height: 50,), 
-               Image.asset('assets/patata.png')
-
-             ],
+      padding: EdgeInsets.all(19),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            'No existen registros entre estas fechas.',
+            style: TextStyle(fontSize: 23, fontFamily: 'Mont3'),
+          ),
+          SizedBox(
+            height: 50,
+          ),
+          Image.asset('assets/patata.png')
+        ],
       ),
     );
-
   }
 
-  Future<void> _createPDF(String name, String date1, String date2 , Map map ) async {
+  Future<void> _createPDF(
+      String name, String date1, String date2, Map map) async {
     PdfDocument document = PdfDocument();
     var day = DateTime.parse(date1);
     String dateRegister = date1;
     var next;
     int diference = substractionDates(date1, date2);
     //var imagen = await rootBundle.load('assets/image.png');
-  
+
     createFirst(document, date1, date2, name);
 
     for (int i = 0; i < map.length; i++) {
       //Si hay registro
       if (registerExists() == true) {
-        createNext(document , map.values.elementAt(i));
+        createNext(document, map.values.elementAt(i));
       }
-
-
     }
 
     List<int> bytes = document.save();
@@ -167,8 +172,7 @@ class HistoryView extends StatelessWidget {
     saveAndLaunchFile(bytes, 'Output.pdf');
   }
 
-  void createNext(PdfDocument document,  FoodRegister register) {
-    
+  void createNext(PdfDocument document, FoodRegister register) {
     PdfLayoutResult layoutResult;
     //Creamos una nueva pagina para escribir
     final page = document.pages.add();
@@ -198,8 +202,8 @@ class HistoryView extends StatelessWidget {
     writeFood(document, register, page, layoutResult);
   }
 
-  void writeFood(PdfDocument document, FoodRegister register,
-      final page, PdfLayoutResult lr) {
+  void writeFood(PdfDocument document, FoodRegister register, final page,
+      PdfLayoutResult lr) {
     PdfLayoutResult layoutResult = lr;
 
     //Escribimos el tipo de comida y la hora
@@ -233,7 +237,7 @@ class HistoryView extends StatelessWidget {
       row.cells[0].value = element.name;
       row.cells[1].value = element.portion;
       row.cells[2].value = '${element.cant}';
-      row.cells[3].value = (element.calories  * element.cant).toStringAsFixed(1);
+      row.cells[3].value = (element.calories * element.cant).toStringAsFixed(1);
     });
 
     grid.style.cellPadding = PdfPaddings(left: 5, top: 5);

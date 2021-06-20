@@ -100,7 +100,10 @@ class NextPage extends StatelessWidget {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   ElevatedButton(
-                      child: Text('Atrás'),
+                      child: Text(
+                        'Atrás',
+                        style: TextStyle(fontSize: 18),
+                      ),
                       style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.all<Color>(Colors.blue),
@@ -134,7 +137,8 @@ class NextPage extends StatelessWidget {
                             arguments: Tuple2<double, FoodOffer>(sum, offer));
                         print('FoodCounter envía: ${offer}');
                       },
-                      child: Text('Autoevaluar'))
+                      child:
+                          Text('Autoevaluar', style: TextStyle(fontSize: 18)))
                 ],
               ),
             ), //-----------------------------
