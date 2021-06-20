@@ -46,7 +46,8 @@ class Stat_Calories extends StatelessWidget {
         body: Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage('fondo_Stats.jpg'), fit: BoxFit.cover),
+                  image: AssetImage('fondo_estadisticas.jpg'),
+                  fit: BoxFit.cover),
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -80,7 +81,7 @@ class Stat_Calories extends StatelessWidget {
                                 textStyle: TextStyle(
                                   color: Color(0xFF212121),
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 16,
+                                  fontSize: 22,
                                 ),
                                 margin: 10),
                           ),
@@ -120,7 +121,7 @@ class Stat_Calories extends StatelessWidget {
                               ],
                               isCurved: true,
                               colors: gradientColors,
-                              barWidth: 5,
+                              barWidth: 6,
                               belowBarData: BarAreaData(
                                 show: true,
                                 colors: gradientColors
@@ -313,6 +314,11 @@ class LineTitles {
       ),
       leftTitles: SideTitles(
         showTitles: true,
+        getTextStyles: (value) => const TextStyle(
+          color: Color(0xFF212121),
+          fontWeight: FontWeight.bold,
+          fontSize: 18,
+        ),
         getTitles: (value) {
           return (value.toInt()).toString();
         },

@@ -105,8 +105,12 @@ class _LoginState extends State<Login> {
                                           await theUpdate1();
                                           await theUpdate2();
                                           await theUpdate3();
+<<<<<<< HEAD
                                           UserProvider()
                                               .updateLastConnection(theId);
+=======
+                                          UserProvider() .updateLastConnection(theId);
+>>>>>>> origin/StatsR
                                         }
                                       },
                                       child: Text('Iniciar sesión'),

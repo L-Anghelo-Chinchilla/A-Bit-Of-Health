@@ -17,7 +17,7 @@ class Stats extends StatelessWidget {
           body: Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage('fondo_Stats.jpg'), fit: BoxFit.cover),
+                  image: AssetImage('fondo_est.jpg'), fit: BoxFit.cover),
             ),
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -30,6 +30,7 @@ class Stats extends StatelessWidget {
                   ),
                   Expanded(
                     child: Container(
+                        
                       alignment: Alignment.center,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -44,8 +45,8 @@ class Stats extends StatelessWidget {
                               MaterialButton(
                                   child: Text('Vasos de Agua',
                                       style: new TextStyle(fontSize: 22)),
-                                  height: 50,
-                                  minWidth: 140,
+                                  height: 80,
+                                  minWidth: 150,
                                   color: Colors.blue,
                                   textColor: Colors.white,
                                   onPressed: () {
@@ -62,8 +63,8 @@ class Stats extends StatelessWidget {
                               MaterialButton(
                                   child: Text('Puntuación',
                                       style: new TextStyle(fontSize: 22)),
-                                  height: 50,
-                                  minWidth: 140,
+                                  height: 80,
+                                  minWidth: 150,
                                   color: Colors.blue,
                                   textColor: Colors.white,
                                   onPressed: () {
@@ -82,8 +83,8 @@ class Stats extends StatelessWidget {
                                     'Calorias',
                                     style: new TextStyle(fontSize: 22),
                                   ),
-                                  height: 50,
-                                  minWidth: 140,
+                                  height: 80,
+                                  minWidth: 150,
                                   color: Colors.blue,
                                   textColor: Colors.white,
                                   onPressed: () {
@@ -112,8 +113,8 @@ class ImagestoDisplay extends StatelessWidget {
         padding: EdgeInsets.all(15),
         child: Image.asset(
           'assets/$imageName.png',
-          width: 130,
-          height: 130,
+          width: 250,
+          height: 250,
         ));
   }
 }
