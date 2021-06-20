@@ -1,5 +1,6 @@
 import 'package:a_bit_of_health/Login.dart';
 import 'package:a_bit_of_health/models/UserModel.dart';
+import 'package:a_bit_of_health/providers/UserProvider.dart';
 import 'package:a_bit_of_health/providers/authentification.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -68,6 +69,20 @@ Widget getDirectionsBar(BuildContext context, String name) {
                           Icons.star,
                         ),
                         text: 'Hoy')),
+            (name == 'Stats')
+                ? Tab(
+                    icon:
+                        Icon(Icons.insert_chart_outlined, color: Colors.white),
+                    text: 'Estadísticas')
+                : GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, 'Stats');
+                    },
+                    child: const Tab(
+                        icon: Icon(
+                          Icons.insert_chart_outlined,
+                        ),
+                        text: 'Estadísticas')),
             (name == 'History')
                 ? Tab(
                     icon: Icon(Icons.history, color: Colors.white),
@@ -103,31 +118,29 @@ Widget getAppBar({BuildContext context, String route}) {
     backgroundColor: Color(0xff173749),
     brightness: Brightness.dark,
     actions: [
-      if (route == null) 
-        
-        
+      if (route == null)
         if (Provider.of<UserModel>(context, listen: false).name != null)
-         Padding(
-          
-  
-             child:
-               Column(
+          Padding(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text('${Provider.of<UserModel>(context, listen: false).name}'),
+                  Text(
+                      '${Provider.of<UserModel>(context, listen: false).name}'),
                   TextButton(
                       onPressed: () async {
                         await AuthProvider.signOut();
+                        //UserProvider().updateLastConnection(
+                        //   Provider.of<UserModel>(context, listen: false)
+                        //       .userID);
                         Provider.of<UserModel>(context, listen: false).delete();
-                       Navigator.of(context)
-    .pushNamedAndRemoveUntil('Login', (Route<dynamic> route) => false); 
+                        Navigator.of(context).pushNamedAndRemoveUntil(
+                            'Login', (Route<dynamic> route) => false);
                       },
-                     // Icon(Icons.person),
+                      // Icon(Icons.person),
                       child: Text('Cerrar sesión')),
                 ],
               ),
-             padding: EdgeInsets.fromLTRB(10, 5, 20, 0))
-           
+              padding: EdgeInsets.fromLTRB(10, 5, 20, 0))
         else
           Padding(
               child: TextButton.icon(

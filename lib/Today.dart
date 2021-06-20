@@ -1,5 +1,6 @@
 import 'package:a_bit_of_health/Login.dart';
 import 'package:a_bit_of_health/models/FoodModel.dart';
+import 'package:a_bit_of_health/providers/UserProvider.dart';
 import 'package:a_bit_of_health/models/UserModel.dart';
 import 'package:a_bit_of_health/providers/FoodProvider.dart';
 import 'package:a_bit_of_health/providers/authentification.dart';
@@ -81,9 +82,12 @@ class _TodayPageState extends State<TodayPage> {
                           .first
                           .replaceAll('-', '/')),
                   builder: (context, data) {
-                    if (data.hasData) if (data.data.isEmpty)
+                    if (data.hasData) if (data.data.isEmpty) {
+                      UserProvider().addToTodaysScore(
+                          Provider.of<UserModel>(context, listen: false).userID,
+                          0);
                       return getNoFoodSignal();
-                    else
+                    } else
                       return TodayRegister(map: data.data);
                     else
                       return CircularProgressIndicator();
@@ -139,6 +143,11 @@ class _TodayRegisterState extends State<TodayRegister> {
     double todayScore = widget.map.values
         .fold(0, (previousValue, element) => previousValue + element.score);
     todayScore = (todayScore + 0.0) / widget.map.length;
+
+    UserProvider().addToTodaysScore(
+        Provider.of<UserModel>(context, listen: false).userID,
+        todayScore.toDouble());
+
     return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -229,6 +238,13 @@ Widget getRegisterList(
                           Provider.of<UserModel>(context, listen: false).userID,
                           foodRegister.date,
                           foodRegister.id);
+                      double cal = await UserProvider().getAllTodayCalories(
+                          Provider.of<UserModel>(context, listen: false)
+                              .userID);
+                      cal -= foodRegister.calories;
+                      UserProvider().addToTodaysCalories(
+                          Provider.of<UserModel>(context, listen: false).userID,
+                          cal);
                     })
                 : Container(
                     height: 35,

@@ -6,6 +6,8 @@ import 'package:a_bit_of_health/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+//double reciprocal(double d) => 1 / d;
+
 class GlassesOfWater extends StatefulWidget {
   GlassesOfWater({Key key}) : super(key: key);
 
@@ -152,6 +154,9 @@ class _GlassesOfWatterState extends State<GlassesOfWater1> {
                       widget.user.glasses--;
                       provider.setUserWaterGlasses(
                           widget.user.userID, widget.user.glasses);
+                      UserProvider().addToTodaysGlasses(
+                          Provider.of<UserModel>(context, listen: false).userID,
+                          widget.user.glasses.toDouble());
                     } else {
                       final snackBar = SnackBar(
                         content: Text('Ya no puedes quitar más vasos!, ¿o sí?'),
@@ -175,6 +180,13 @@ class _GlassesOfWatterState extends State<GlassesOfWater1> {
                         widget.user.glasses++;
                         await provider.setUserWaterGlasses(
                             widget.user.userID, widget.user.glasses);
+                        //CHECK LAST CONNECTION BEFORE SENDING THE GLASSES
+
+                        //THE GLASSES ARE SENT AT THE TODAY'S LIST
+                        UserProvider().addToTodaysGlasses(
+                            Provider.of<UserModel>(context, listen: false)
+                                .userID,
+                            widget.user.glasses.toDouble());
                         if (widget.user.glasses == widget.user.waterLimit) {
                           final snackBar = SnackBar(
                             content: Text(

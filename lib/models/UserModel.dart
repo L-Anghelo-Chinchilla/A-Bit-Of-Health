@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:convert';
 
 UserModel userModelFromJson(String str) => UserModel.fromJson(json.decode(str));
@@ -21,6 +22,9 @@ class UserModel {
   String lastDinner;
   String lastSnack;
   String creationDate;
+  List<dynamic> dailyCalories;
+  List<dynamic> dailyGlasses;
+  List<dynamic> dailyScore;
 
   UserModel(
       {this.userID,
@@ -38,7 +42,10 @@ class UserModel {
       this.lastLunch,
       this.lastDinner,
       this.lastSnack,
-      this.creationDate});
+      this.creationDate,
+      this.dailyCalories,
+      this.dailyGlasses,
+      this.dailyScore});
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
       weight: json["weight"],
@@ -55,8 +62,10 @@ class UserModel {
       lastLunch: json['lastLunch'],
       lastDinner: json['lastDinner'],
       lastSnack: json['lastSnack'],
-      creationDate: json['creationDate']);
-
+      creationDate: json['creationDate'],
+      dailyCalories: json['dailyCalories'].cast<double>(),
+      dailyGlasses: json['dailyGlasses'].cast<double>(),
+      dailyScore: json['dailyScore'].cast<double>());
 
   Map<String, dynamic> toJson() => {
         '"weight"': jsonEncode(weight),
@@ -73,12 +82,19 @@ class UserModel {
         '"lastLunch"': jsonEncode(lastLunch),
         '"lastDinner"': jsonEncode(lastDinner),
         '"lastSnack"': jsonEncode(lastSnack),
-        '"creationDate"': jsonEncode(creationDate)
+        '"creationDate"': jsonEncode(creationDate),
+        '"dailyCalories"': jsonEncode(dailyCalories),
+        '"dailyGlasses"': jsonEncode(dailyGlasses),
+        '"dailyScore"': jsonEncode(dailyScore)
       };
 
   @override
   String toString() =>
-      '{ ${userID.toString()},${weight.toString()}, ${height.toString()}, ${email.toString()}, ${gender.toString()}, ${waterLimit.toString()},  ${name.toString()},${newWaterLimit.toString()},${waterLimitDate.toString()},${glasses.toString()},${lastConnection.toString()}},${lastBreakfast.toString()}},${lastLunch.toString()}},${lastDinner.toString()}},${lastSnack.toString()}}';
+      '{ ${userID.toString()},${weight.toString()}, ${height.toString()}, ${email.toString()}, ${gender.toString()}, ${waterLimit.toString()},  ${name.toString()},${newWaterLimit.toString()},${waterLimitDate.toString()},${glasses.toString()},${lastConnection.toString()},${lastBreakfast.toString()},${lastLunch.toString()},${lastDinner.toString()},${lastSnack.toString()},${dailyCalories.toString()},${dailyGlasses.toString()},${dailyScore.toString()}';
+
+  void setlastConnection(String date) {
+    this.lastConnection = date;
+  }
 
   void setID(String id) {
     this.userID = id;
@@ -116,6 +132,66 @@ class UserModel {
     return this.lastSnack;
   }
 
+  Future<void> setTodaysCals(var daysoff) async {
+    print("La lista de calorías es: ${this.dailyCalories}");
+    for (int i = 0; i < daysoff; i++) {
+      this.dailyCalories.insert(i, 0);
+      this.dailyCalories.removeLast();
+    }
+    Future.delayed(Duration(seconds: 1));
+    print("Tras aumentar los días es: ${this.dailyCalories}");
+  }
+
+  void addToTodayCals(double calories) {
+    this.dailyCalories.insert(0, calories);
+    this.dailyCalories.removeAt(1);
+  }
+
+  double getFirstofDaily() {
+    double res = this.dailyCalories.first;
+    return res;
+  }
+
+  Future<void> setTodaysGlasses(var daysoff) async {
+    print("La lista de vasos (calorías) son: ${this.dailyCalories}");
+    for (int i = 0; i < daysoff; i++) {
+      this.dailyGlasses.insert(i, 0);
+      this.dailyGlasses.removeLast();
+    }
+    Future.delayed(Duration(seconds: 1));
+    print("Tras aumentar los días es: ${this.dailyCalories}");
+  }
+
+  void addToTodayGlasses(double glass) {
+    this.dailyGlasses.insert(0, glass);
+    this.dailyGlasses.removeAt(1);
+  }
+
+  double getFirstofGlasses() {
+    double res = this.dailyGlasses.first;
+    return res;
+  }
+
+  Future<void> setTodaysScore(var daysoff) async {
+    print("La lista de calorías es: ${this.dailyCalories}");
+    for (int i = 0; i < daysoff; i++) {
+      this.dailyScore.insert(i, 0);
+      this.dailyScore.removeLast();
+    }
+    Future.delayed(Duration(seconds: 1));
+    print("Tras aumentar los días es: ${this.dailyCalories}");
+  }
+
+  void addToTodayScore(double score) {
+    this.dailyScore.insert(0, score);
+    this.dailyScore.removeAt(1);
+  }
+
+  double getFirstofScore() {
+    double res = this.dailyScore.first;
+    return res;
+  }
+
   void setUser(UserModel usr) {
     userID = usr.userID;
     weight = usr.weight;
@@ -133,8 +209,12 @@ class UserModel {
     lastDinner = usr.lastDinner;
     lastSnack = usr.lastSnack;
     creationDate = usr.creationDate;
+    dailyCalories = usr.dailyCalories;
+    dailyGlasses = usr.dailyGlasses;
+    dailyScore = usr.dailyScore;
   }
 
-  void delete(){
-    setUser(UserModel());}
+  void delete() {
+    setUser(UserModel());
+  }
 }

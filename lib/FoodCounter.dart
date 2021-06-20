@@ -31,9 +31,8 @@ class NextPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // String _formatdate = new DateFormat.yMMMd().format(_currentDate);
     int index = 4;
-    //List<FoodOffer> list = ModalRoute.of(context).settings.arguments;
+
     Tuple2<String, List<FoodOffer>> thelist =
         ModalRoute.of(context).settings.arguments;
     if (thelist == null) {
