@@ -21,9 +21,9 @@ class UserModel {
   String lastLunch;
   String lastDinner;
   String lastSnack;
-  List<double> dailyCalories;
-  List<double> dailyGlasses;
-  List<double> dailyScore;
+  List<dynamic> dailyCalories;
+  List<dynamic> dailyGlasses;
+  List<dynamic> dailyScore;
 
   UserModel(
       {this.userID,

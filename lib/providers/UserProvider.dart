@@ -198,6 +198,21 @@ class UserProvider {
     return res;
   }
 
+  Future<List<dynamic>> getGforStats(String userID) async {
+    UserModel user = await getUserData(userID);
+    return user.dailyGlasses;
+  }
+
+  Future<List<dynamic>> getCforStats(String userID) async {
+    UserModel user = await getUserData(userID);
+    return user.dailyCalories;
+  }
+
+  Future<List<dynamic>> getSforStats(String userID) async {
+    UserModel user = await getUserData(userID);
+    return user.dailyScore;
+  }
+
   Future<void> updateTodayCalories(
       String userID, String typeOdFood, String calories) async {
     UserModel user = await getUserData(userID);
