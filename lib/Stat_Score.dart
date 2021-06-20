@@ -46,7 +46,7 @@ class Stat_Score extends StatelessWidget {
           body: Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage('fondo_Stats.jpg'), fit: BoxFit.cover),
+                  image: AssetImage('fondo_estadisticas'), fit: BoxFit.cover),
             ),
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

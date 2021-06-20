@@ -113,8 +113,8 @@ class ImagestoDisplay extends StatelessWidget {
         padding: EdgeInsets.all(15),
         child: Image.asset(
           'assets/$imageName.png',
-          width: 130,
-          height: 130,
+          width: 250,
+          height: 250,
         ));
   }
 }
