@@ -77,7 +77,7 @@ class Stat_Score extends StatelessWidget {
                  leftTitle: AxisTitle(
                  showTitle: true, titleText: 'Puntiación',textStyle: TextStyle(color: Color(0xFF212121),
           fontWeight: FontWeight.bold,
-          fontSize: 16,), margin: 10),
+          fontSize: 22,), margin: 10),
                  ),
                 gridData: FlGridData(
                    show: true,
@@ -118,7 +118,7 @@ class Stat_Score extends StatelessWidget {
                     ],
                   isCurved: true,
                   colors: gradientColors,
-                  barWidth: 5,
+                  barWidth: 6,
                   belowBarData: BarAreaData(
                     show: true,
                     colors: gradientColors
@@ -318,7 +318,7 @@ class Stat_Score extends StatelessWidget {
         getTextStyles: (value) => const TextStyle(
           color: Color(0xFF212121),
           fontWeight: FontWeight.bold,
-          fontSize: 16,
+          fontSize: 18,
         ),
         // ignore: missing_return
         getTitles: (value) {

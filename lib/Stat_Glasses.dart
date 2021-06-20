@@ -52,13 +52,13 @@ class Stat_Glasses extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<dynamic> thelist = Provider.of<UserModel>(context).dailyGlasses;
-     cero = thelist[0];
-     one = thelist[1];
-    two = thelist[2];
-     three = thelist[3];
-    four = thelist[4];
-    five = thelist[5];
-    six = thelist[6];
+     cero = thelist[6];
+    one = thelist[5];
+    two = thelist[4];
+    three = thelist[3];
+    four = thelist[2];
+    five = thelist[1];
+    six = thelist[0];
     themax = thelist[0];
      for (int i = 0; i < thelist.length; i++) { if (thelist[i] > themax) themax = thelist[i]; }
      ult = themax + 1;
@@ -72,7 +72,7 @@ class Stat_Glasses extends StatelessWidget {
         body: Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage('fondo_Stats.jpg'), fit: BoxFit.cover),
+                  image: AssetImage('fondo_estadisticas.jpg'), fit: BoxFit.cover),
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -103,7 +103,7 @@ class Stat_Glasses extends StatelessWidget {
         leftTitle: AxisTitle(
             showTitle: true, titleText: 'Vasos',textStyle: TextStyle(color: Color(0xFF212121),
           fontWeight: FontWeight.bold,
-          fontSize: 16,), margin: 10),
+          fontSize: 22,), margin: 10),
             ),
                 gridData: FlGridData(
                    show: true,
@@ -143,7 +143,7 @@ class Stat_Glasses extends StatelessWidget {
                     ],
                   isCurved: true,
                   colors: gradientColors,
-                  barWidth: 5,
+                  barWidth: 6,
                   belowBarData: BarAreaData(
                     show: true,
                     colors: gradientColors
@@ -197,7 +197,7 @@ class LineTitles {
   getTextStyles: (value) => const TextStyle(
     color: Color(0xFF212121),
     fontWeight: FontWeight.bold,
-    fontSize: 16,
+    fontSize: 22,
   ),
   getTitles: (value){
     
@@ -344,7 +344,7 @@ class LineTitles {
         getTextStyles: (value) => const TextStyle(
           color: Color(0xFF212121),
           fontWeight: FontWeight.bold,
-          fontSize: 16,
+          fontSize: 18,
         ),
         // ignore: missing_return
         getTitles: (value) {
