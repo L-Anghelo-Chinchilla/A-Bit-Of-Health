@@ -18,9 +18,6 @@ class GlassesOfWater extends StatefulWidget {
 class _GlassesOfWaterState extends State<GlassesOfWater> {
   @override
   Widget build(BuildContext context) {
-    /*UserProvider().updateDailyGlasses(
-        Provider.of<UserModel>(context, listen: false).userID);*/
-
     print(Provider.of<UserModel>(context, listen: false).userID);
     if (Provider.of<UserModel>(context, listen: false).userID == null)
       return FutureBuilder<bool>(
@@ -182,6 +179,9 @@ class _GlassesOfWatterState extends State<GlassesOfWater1> {
                         widget.user.glasses++;
                         await provider.setUserWaterGlasses(
                             widget.user.userID, widget.user.glasses);
+                        //CHECK LAST CONNECTION BEFORE SENDING THE GLASSES
+
+                        //THE GLASSES ARE SENT AT THE TODAY'S LIST
                         UserProvider().addToTodaysGlasses(
                             Provider.of<UserModel>(context, listen: false)
                                 .userID,

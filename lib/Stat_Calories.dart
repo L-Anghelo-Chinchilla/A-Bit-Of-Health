@@ -4,22 +4,40 @@ import 'package:a_bit_of_health/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:intl/intl.dart';
+
+double cero;
+double one;
+double two;
+double three;
+double four;
+double five;
+double six;
+double themax;
+double ult;
+
+DateTime now = new DateTime.now();
+final DateFormat formato = DateFormat('EEEE');
+String dayformat = formato.format(now);
 
 class Stat_Calories extends StatelessWidget {
   Stat_Calories({Key key}) : super(key: key);
   List<Color> gradientColors = [Color(0xff23b6e6), Color(0xff02d39a)];
-  List<FlSpot> _list = [
-    FlSpot(1, 2000),
-    FlSpot(2, 3100),
-    FlSpot(3, 3500),
-    FlSpot(4, 4200),
-    FlSpot(5, 4300),
-    FlSpot(6, 4900),
-    FlSpot(7, 4552),
-  ];
   @override
   Widget build(BuildContext context) {
     List<dynamic> thelist = Provider.of<UserModel>(context).dailyCalories;
+    cero = thelist[6];
+    one = thelist[5];
+    two = thelist[4];
+    three = thelist[3];
+    four = thelist[2];
+    five = thelist[1];
+    six = thelist[0];
+    themax = thelist[0];
+    for (int i = 0; i < thelist.length; i++) {
+      if (thelist[i] > themax) themax = thelist[i];
+    }
+    ult = themax + 1;
     if (Provider.of<UserModel>(context).userID == null)
       return Login();
     else {
@@ -53,8 +71,19 @@ class Stat_Calories extends StatelessWidget {
                           // minX:1,
                           //maxX:7,
                           // minY:1000,
-                          // maxY:6000,
+                          maxY: ult,
                           titlesData: LineTitles.getTitleData(),
+                          axisTitleData: FlAxisTitleData(
+                            leftTitle: AxisTitle(
+                                showTitle: true,
+                                titleText: 'Calorias',
+                                textStyle: TextStyle(
+                                  color: Color(0xFF212121),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                                margin: 10),
+                          ),
                           gridData: FlGridData(
                             show: true,
                             getDrawingHorizontalLine: (value) {
@@ -80,7 +109,15 @@ class Stat_Calories extends StatelessWidget {
                           ),
                           lineBarsData: [
                             LineChartBarData(
-                              spots: _list,
+                              spots: [
+                                FlSpot(0, cero),
+                                FlSpot(1, one),
+                                FlSpot(2, two),
+                                FlSpot(3, three),
+                                FlSpot(4, four),
+                                FlSpot(5, five),
+                                FlSpot(6, six),
+                              ],
                               isCurved: true,
                               colors: gradientColors,
                               barWidth: 5,
@@ -137,52 +174,175 @@ class LineTitles {
           fontSize: 16,
         ),
         getTitles: (value) {
-          switch (value.toInt()) {
-            case 1:
-              return "1";
-            case 2:
-              return "2";
-            case 3:
-              return "3";
-            case 4:
-              return "4";
-            case 5:
-              return "5";
-            case 6:
-              return "6";
-            case 7:
-              return "7";
+          if (dayformat == "Friday") {
+            switch (value.toInt()) {
+              case 0:
+                return "Sabado";
+              case 1:
+                return "Domingo";
+              case 2:
+                return "Lunes";
+              case 3:
+                return "Martes";
+              case 4:
+                return "Miercoles";
+              case 5:
+                return "jueves";
+              case 6:
+                return "Viernes";
+            }
+          } else {
+            if (dayformat == "Saturday") {
+              switch (value.toInt()) {
+                case 0:
+                  return "Domingo";
+                case 1:
+                  return "Lunes";
+                case 2:
+                  return "Martes";
+                case 3:
+                  return "Miercoles";
+                case 4:
+                  return "Jueves";
+                case 5:
+                  return "Viernes";
+                case 6:
+                  return "Sabado";
+              }
+            } else {
+              if (dayformat == "Sunday") {
+                switch (value.toInt()) {
+                  case 0:
+                    return "Lunes";
+                  case 1:
+                    return "Martes";
+                  case 2:
+                    return "Miercoles";
+                  case 3:
+                    return "Jueves";
+                  case 4:
+                    return "Viernes";
+                  case 5:
+                    return "Sabado";
+                  case 6:
+                    return "Domingo";
+                }
+              } else {
+                if (dayformat == "Monday") {
+                  switch (value.toInt()) {
+                    case 0:
+                      return "Martes";
+                    case 1:
+                      return "Miercoles";
+                    case 2:
+                      return "Jueves";
+                    case 3:
+                      return "Viernes";
+                    case 4:
+                      return "Sabado";
+                    case 5:
+                      return "Domingo";
+                    case 6:
+                      return "Lunes";
+                  }
+                } else {
+                  if (dayformat == "Tuesday") {
+                    switch (value.toInt()) {
+                      case 0:
+                        return "Miercoles";
+                      case 1:
+                        return "Jueves";
+                      case 2:
+                        return "Viernes";
+                      case 3:
+                        return "Sabado";
+                      case 4:
+                        return "Domingo";
+                      case 5:
+                        return "Lunes";
+                      case 6:
+                        return "Martes";
+                    }
+                  } else {
+                    if (dayformat == "Wednesday") {
+                      switch (value.toInt()) {
+                        case 0:
+                          return "Jueves";
+                        case 1:
+                          return "Viernes";
+                        case 2:
+                          return "Sabado";
+                        case 3:
+                          return "Domingo";
+                        case 4:
+                          return "Lunes";
+                        case 5:
+                          return "Martes";
+                        case 6:
+                          return "Miercoles";
+                      }
+                    } else {
+                      if (dayformat == "Thursday") {
+                        switch (value.toInt()) {
+                          case 0:
+                            return "Viernes";
+                          case 1:
+                            return "Sabado";
+                          case 2:
+                            return "Domingo";
+                          case 3:
+                            return "Lunes";
+                          case 4:
+                            return "Martes";
+                          case 5:
+                            return "Miercoles";
+                          case 6:
+                            return "Jueves";
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
 
           return '';
         },
-        margin: 50,
+        margin: 20,
       ),
       leftTitles: SideTitles(
+        showTitles: true,
+        getTitles: (value) {
+          return (value.toInt()).toString();
+        },
+        interval: themax / 10,
+        reservedSize: 28,
+        margin: 12,
+      ),
+      rightTitles: SideTitles(
         showTitles: true,
         getTextStyles: (value) => const TextStyle(
           color: Color(0xFF212121),
           fontWeight: FontWeight.bold,
           fontSize: 16,
         ),
-        // ignore: missing_return
         getTitles: (value) {
           switch (value.toInt()) {
             case 1000:
-              return "1000";
+              return "";
             case 2000:
-              return "2000";
+              return "";
             case 3000:
-              return "3000";
+              return "";
             case 4000:
-              return "4000";
+              return "";
             case 5000:
-              return "5000";
+              return "";
           }
 
           return '';
         },
-        reservedSize: 120,
-        margin: 50,
+        reservedSize: 80,
       ));
 }

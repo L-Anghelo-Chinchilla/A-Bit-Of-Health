@@ -13,11 +13,12 @@ double three;
 double four;
 double five;
 double six;
+double themax;
+double ult;
 DateTime now = new DateTime.now();
 final DateFormat format1 = DateFormat('EEEE');
 String dayformat = format1.format(now);
-
-/*List<String> thedaysESP = [
+List<String> thedaysESP = [
   "Lunes",
   "Martes",
   "Miércoles",
@@ -37,13 +38,8 @@ List<String> thedaysENG = [
 ];
 int index = thedaysENG.indexOf(dayformat);
 List<String> theorder;
-for (int i = index; i >= 0; i--) {
-      theorder.add(thedaysESP[i]);
-    }
-    for (int j = 6; j > index; j--) {
-      theorder.add(thedaysESP[j]);
-    }
-*/
+// ignore: camel_case_types
+
 class Stat_Glasses extends StatelessWidget {
   Stat_Glasses({Key key}) : super(key: key);
   List<Color> gradientColors = [Color(0xff23b6e6), Color(0xff02d39a)];
@@ -51,17 +47,18 @@ class Stat_Glasses extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<dynamic> thelist = Provider.of<UserModel>(context).dailyGlasses;
-    double themax = thelist[0];
+    cero = thelist[0];
+    one = thelist[1];
+    two = thelist[2];
+    three = thelist[3];
+    four = thelist[4];
+    five = thelist[5];
+    six = thelist[6];
+    themax = thelist[0];
     for (int i = 0; i < thelist.length; i++) {
       if (thelist[i] > themax) themax = thelist[i];
     }
-    cero = thelist[6];
-    one = thelist[5];
-    two = thelist[4];
-    three = thelist[3];
-    four = thelist[2];
-    five = thelist[1];
-    six = thelist[0];
+    ult = themax + 1;
 
     if (Provider.of<UserModel>(context).userID == null)
       return Login();
@@ -96,8 +93,19 @@ class Stat_Glasses extends StatelessWidget {
                           //minX:1,
                           //  maxX:7,
                           minY: 0,
-                          maxY: 16,
+                          maxY: 15,
                           titlesData: LineTitles.getTitleData(),
+                          axisTitleData: FlAxisTitleData(
+                            leftTitle: AxisTitle(
+                                showTitle: true,
+                                titleText: 'Vasos',
+                                textStyle: TextStyle(
+                                  color: Color(0xFF212121),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                                margin: 10),
+                          ),
                           gridData: FlGridData(
                             show: true,
                             getDrawingHorizontalLine: (value) {
@@ -367,8 +375,6 @@ class LineTitles {
               return "14";
             case 15:
               return "15";
-            case 16:
-              return "Vasos Tomados";
           }
 
           return '';
