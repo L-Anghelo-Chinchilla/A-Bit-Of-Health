@@ -8,8 +8,49 @@ import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:syncfusion_localizations/syncfusion_localizations.dart';
 import 'package:tuple/tuple.dart';
 
-class History extends StatelessWidget {
-  const History({Key key}) : super(key: key);
+import 'providers/authentification.dart';
+
+
+class History extends StatefulWidget {
+  History({Key key}) : super(key: key);
+
+  @override
+  _HistoryState createState() => _HistoryState();
+}
+
+class _HistoryState extends State<History> {
+  @override
+  Widget build(BuildContext context) {
+    print(Provider.of<UserModel>(context, listen: false).userID);
+    if (Provider.of<UserModel>(context, listen: false).userID == null)
+      return FutureBuilder<bool>(
+          future: AuthProvider.getUser(context),
+          builder: (context, AsyncSnapshot<bool> future) {
+            if (future.hasData) {
+              if (future.data)
+                return HistoryPage();
+              else
+                return Login();
+            } else {
+              return Center(
+                  child: SizedBox(
+                child: CircularProgressIndicator(),
+                height: 250,
+                width: 250,
+              ));
+            }
+          });
+    else
+      return HistoryPage();
+  }
+}
+
+
+
+
+
+class HistoryPage extends StatelessWidget {
+  const HistoryPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

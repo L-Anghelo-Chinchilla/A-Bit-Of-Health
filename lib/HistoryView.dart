@@ -1,3 +1,4 @@
+import 'package:a_bit_of_health/History.dart';
 import 'package:a_bit_of_health/Today.dart';
 import 'package:a_bit_of_health/models/FoodModel.dart';
 import 'package:a_bit_of_health/providers/FoodProvider.dart';
@@ -11,10 +12,49 @@ import 'models/UserModel.dart';
 
 import 'package:flutter/foundation.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
+import 'providers/authentification.dart';
 import 'webDownload.dart';
 
-class HistoryView extends StatelessWidget {
+
+class HistoryView extends StatefulWidget {
   HistoryView({Key key}) : super(key: key);
+
+  @override
+  _HistoryViewState createState() => _HistoryViewState();
+}
+
+class _HistoryViewState extends State<HistoryView> {
+  @override
+  Widget build(BuildContext context) {
+    print(Provider.of<UserModel>(context, listen: false).userID);
+    if (Provider.of<UserModel>(context, listen: false).userID == null)
+      return FutureBuilder<bool>(
+          future: AuthProvider.getUser(context),
+          builder: (context, AsyncSnapshot<bool> future) {
+            if (future.hasData) {
+              if (future.data)
+                return HistoryViewPage();
+              else
+                return Login();
+            } else {
+              return Center(
+                  child: SizedBox(
+                child: CircularProgressIndicator(),
+                height: 250,
+                width: 250,
+              ));
+            }
+          });
+    else
+      return HistoryViewPage();
+  }
+}
+
+
+
+
+class HistoryViewPage extends StatelessWidget {
+  HistoryViewPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +63,9 @@ class HistoryView extends StatelessWidget {
     Tuple2<String, String> range = ModalRoute.of(context).settings.arguments;
     if (Provider.of<UserModel>(context).userID == null)
       return Login();
+
+    else if(range == null )
+      return History();
     else
       return Scaffold(
         appBar: getAppBar(context: context),
