@@ -142,35 +142,23 @@ class HistoryView extends StatelessWidget {
 
   }
 
-  Future<void> _createPDF(String name, String date1, String date2 , Map<String, FoodRegister> map ) async {
+  Future<void> _createPDF(String name, String date1, String date2 , Map map ) async {
     PdfDocument document = PdfDocument();
     var day = DateTime.parse(date1);
     String dateRegister = date1;
     var next;
     int diference = substractionDates(date1, date2);
     //var imagen = await rootBundle.load('assets/image.png');
-    
+  
     createFirst(document, date1, date2, name);
-    dateRegister = map.values.elementAt(0).date; 
-    for (int i = 0; i < map.length ; ) {
+
+    for (int i = 0; i < map.length; i++) {
       //Si hay registro
       if (registerExists() == true) {
-        Tuple2 tuple = createNext(document, dateRegister);
-        FoodRegister register = map.values.elementAt(i);
-        while(register.date == dateRegister && i < map.length -1 ){
-          
-          
-         writeFood(document,register , tuple.item1, tuple.item2);
-          i++; 
-          register = map.values.elementAt(i); 
-        }
-        dateRegister  = register.date;
+        createNext(document , map.values.elementAt(i));
       }
 
-   /*   next = new DateTime(day.year, day.month, day.day + 1);
-      day = next;
-      dateRegister = next.toString().substring(0, 11);
-      */
+
     }
 
     List<int> bytes = document.save();
@@ -179,7 +167,7 @@ class HistoryView extends StatelessWidget {
     saveAndLaunchFile(bytes, 'Output.pdf');
   }
 
-Tuple2 createNext(PdfDocument document, String dateRegister) {
+  void createNext(PdfDocument document,  FoodRegister register) {
     
     PdfLayoutResult layoutResult;
     //Creamos una nueva pagina para escribir
@@ -194,7 +182,7 @@ Tuple2 createNext(PdfDocument document, String dateRegister) {
     PdfGrid gridH = PdfGrid();
     gridH.columns.add(count: 1);
     PdfGridRow row = gridH.rows.add();
-    row.cells[0].value = '$dateRegister';
+    row.cells[0].value = '${register.date}';
     gridH.style.cellPadding = PdfPaddings(left: 5, top: 5);
     row.cells[0].style = PdfGridCellStyle(
       font: PdfStandardFont(PdfFontFamily.timesRoman, 24),
@@ -206,8 +194,8 @@ Tuple2 createNext(PdfDocument document, String dateRegister) {
       bounds: Rect.fromLTWH(
           0, 0, page.getClientSize().width, page.getClientSize().height),
     );
-    return Tuple2(page , layoutResult);
-   // writeFood(document, typeFood, timeFood, page, layoutResult);
+
+    writeFood(document, register, page, layoutResult);
   }
 
   void writeFood(PdfDocument document, FoodRegister register,
@@ -233,19 +221,19 @@ Tuple2 createNext(PdfDocument document, String dateRegister) {
 
     final PdfGridRow headerRow = grid.headers.add(1)[0];
     headerRow.cells[0].value = 'Alimento';
-    headerRow.cells[1].value = 'Cantidad';
-    headerRow.cells[2].value = 'Porción unitaria';
-    headerRow.cells[3].value = 'Calorías por porción';
+    headerRow.cells[1].value = 'Porción';
+    headerRow.cells[2].value = 'Cantidad';
+    headerRow.cells[3].value = 'Calorías';
 
     headerRow.style.font =
         PdfStandardFont(PdfFontFamily.helvetica, 10, style: PdfFontStyle.bold);
 
-    register.food.aliments.forEach((element) { 
+    register.food.aliments.forEach((element) {
       PdfGridRow row = grid.rows.add();
       row.cells[0].value = element.name;
-      row.cells[1].value = element.cant;
-      row.cells[2].value = element.portion; 
-      row.cells[3].value = element.calories; 
+      row.cells[1].value = element.portion;
+      row.cells[2].value = '${element.cant}';
+      row.cells[3].value = (element.calories  * element.cant).toStringAsFixed(1);
     });
 
     grid.style.cellPadding = PdfPaddings(left: 5, top: 5);
@@ -261,8 +249,8 @@ Tuple2 createNext(PdfDocument document, String dateRegister) {
     grid2.columns.add(count: 2);
 
     PdfGridRow row2 = grid2.rows.add();
-    row2.cells[0].value = 'Puntuación: ';
-    row2.cells[1].value = 'Total de calorías: ';
+    row2.cells[0].value = 'Puntuación: ${register.score}';
+    row2.cells[1].value = 'Total de calorías: ${register.calories}';
 
     grid2.style.cellPadding = PdfPaddings(left: 5, top: 5);
     layoutResult = grid2.draw(

@@ -258,7 +258,7 @@ Widget getRegisterList(BuildContext context, FoodRegister foodRegister , bool ca
                                             DataCell(Text(element.name)),
                                             DataCell(Text('${element.cant}')),
                                             DataCell(Text(
-                                                '${element.calories * element.cant}'))
+                                                '${(element.calories * element.cant).toStringAsFixed(1)}'))
                                           ]))
                                       .toList()),
                             ),
