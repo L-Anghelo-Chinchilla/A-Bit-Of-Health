@@ -17,7 +17,7 @@ class Stats extends StatelessWidget {
           body: Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage('fondo_Stats.jpg'), fit: BoxFit.cover),
+                  image: AssetImage('fondo_est.jpg'), fit: BoxFit.cover),
             ),
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
