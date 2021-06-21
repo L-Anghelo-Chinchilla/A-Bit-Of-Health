@@ -1,51 +1,15 @@
 import 'package:a_bit_of_health/Login.dart';
+import 'package:a_bit_of_health/Stat_Calories.dart';
+import 'package:a_bit_of_health/Stat_Glasses.dart';
+import 'package:a_bit_of_health/Stat_Score.dart';
 import 'package:a_bit_of_health/models/UserModel.dart';
+import 'package:a_bit_of_health/providers/UserProvider.dart';
 import 'package:a_bit_of_health/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'providers/authentification.dart';
-
-
-
-class Stats extends StatefulWidget {
-  Stats({Key key}) : super(key: key);
-
-  @override
-  _CaloriesState createState() => _CaloriesState();
-}
-
-class _CaloriesState extends State<Stats> {
-  @override
-  Widget build(BuildContext context) {
-    print(Provider.of<UserModel>(context, listen: false).userID);
-    if (Provider.of<UserModel>(context, listen: false).userID == null)
-      return FutureBuilder<bool>(
-          future: AuthProvider.getUser(context),
-          builder: (context, AsyncSnapshot<bool> future) {
-            if (future.hasData) {
-              if (future.data)
-                return StatsPage();
-              else
-                return Login();
-            } else {
-              return Center(
-                  child: SizedBox(
-                child: CircularProgressIndicator(),
-                height: 250,
-                width: 250,
-              ));
-            }
-          });
-    else
-      return StatsPage();
-  }
-}
-
-
-
-class StatsPage extends StatelessWidget {
-  const StatsPage({Key key}) : super(key: key);
+class Stats extends StatelessWidget {
+  const Stats({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +34,6 @@ class StatsPage extends StatelessWidget {
                   ),
                   Expanded(
                     child: Container(
-                        
                       alignment: Alignment.center,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -89,9 +52,19 @@ class StatsPage extends StatelessWidget {
                                   minWidth: 150,
                                   color: Colors.blue,
                                   textColor: Colors.white,
-                                  onPressed: () {
-                                    Navigator.pushNamed(
-                                        context, 'Stat_Glasses');
+                                  onPressed: () async {
+                                    List<dynamic> theglass =
+                                        await UserProvider().getGforStats(
+                                            Provider.of<UserModel>(context,
+                                                    listen: false)
+                                                .userID);
+                                    Navigator.of(context)
+                                        .push(MaterialPageRoute<Null>(
+                                            builder: (context) => Stat_Glasses(
+                                                  list: theglass,
+                                                )));
+                                    /*Navigator.pushNamed(
+                                        context, 'Stat_Glasses');*/
                                   })
                             ],
                           ),
@@ -107,8 +80,18 @@ class StatsPage extends StatelessWidget {
                                   minWidth: 150,
                                   color: Colors.blue,
                                   textColor: Colors.white,
-                                  onPressed: () {
-                                    Navigator.pushNamed(context, 'Stat_Score');
+                                  onPressed: () async {
+                                    List<dynamic> thescore =
+                                        await UserProvider().getSforStats(
+                                            Provider.of<UserModel>(context,
+                                                    listen: false)
+                                                .userID);
+                                    Navigator.of(context)
+                                        .push(MaterialPageRoute<Null>(
+                                            builder: (context) => Stat_Score(
+                                                  list: thescore,
+                                                )));
+                                    //Navigator.pushNamed(context, 'Stat_Score');
                                   })
                             ],
                           ),
@@ -127,9 +110,19 @@ class StatsPage extends StatelessWidget {
                                   minWidth: 150,
                                   color: Colors.blue,
                                   textColor: Colors.white,
-                                  onPressed: () {
-                                    Navigator.pushNamed(
-                                        context, 'Stat_Calories');
+                                  onPressed: () async {
+                                    List<dynamic> thecals = await UserProvider()
+                                        .getCforStats(Provider.of<UserModel>(
+                                                context,
+                                                listen: false)
+                                            .userID);
+                                    Navigator.of(context)
+                                        .push(MaterialPageRoute<Null>(
+                                            builder: (context) => Stat_Calories(
+                                                  list: thecals,
+                                                )));
+                                    /*Navigator.pushNamed(
+                                        context, 'Stat_Calories');*/
                                   })
                             ],
                           )

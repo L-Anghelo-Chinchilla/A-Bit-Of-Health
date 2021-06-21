@@ -39,18 +39,19 @@ List<String> thedaysENG = [
   "Sunday"
 ];
 int index = thedaysENG.indexOf(dayformat);
-List<String> theorder;
-// ignore: camel_case_types
-
+//List<String> theorder;
 
 class Stat_Glasses extends StatefulWidget {
-  Stat_Glasses({Key key}) : super(key: key);
+  List<dynamic> list;
+  Stat_Glasses({Key key, this.list}) : super(key: key);
 
   @override
-  _CaloriesState createState() => _CaloriesState();
+  _CaloriesState createState() => _CaloriesState(list2: list);
 }
 
 class _CaloriesState extends State<Stat_Glasses> {
+  List<dynamic> list2;
+  _CaloriesState({this.list2});
   @override
   Widget build(BuildContext context) {
     print(Provider.of<UserModel>(context, listen: false).userID);
@@ -60,7 +61,7 @@ class _CaloriesState extends State<Stat_Glasses> {
           builder: (context, AsyncSnapshot<bool> future) {
             if (future.hasData) {
               if (future.data)
-                return Stat_Glasses_Page();
+                return Stat_Glasses_Page(thelist: list2);
               else
                 return Login();
             } else {
@@ -73,20 +74,17 @@ class _CaloriesState extends State<Stat_Glasses> {
             }
           });
     else
-      return Stat_Glasses_Page();
+      return Stat_Glasses_Page(thelist: list2);
   }
 }
 
-
-
-
 class Stat_Glasses_Page extends StatelessWidget {
-  Stat_Glasses_Page({Key key}) : super(key: key);
+  List<dynamic> thelist;
+  Stat_Glasses_Page({Key key, this.thelist}) : super(key: key);
   List<Color> gradientColors = [Color(0xff23b6e6), Color(0xff02d39a)];
 
   @override
   Widget build(BuildContext context) {
-    List<dynamic> thelist = Provider.of<UserModel>(context).dailyGlasses;
     cero = thelist[6];
     one = thelist[5];
     two = thelist[4];

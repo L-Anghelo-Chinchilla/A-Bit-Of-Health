@@ -8,20 +8,21 @@ import 'package:intl/intl.dart';
 
 import 'providers/authentification.dart';
 
-
 DateTime now = new DateTime.now();
 final DateFormat formato = DateFormat('EEEE');
 String dayformat = formato.format(now);
 
-
 class Stat_Calories extends StatefulWidget {
-  Stat_Calories({Key key}) : super(key: key);
+  List<dynamic> list;
+  Stat_Calories({Key key, this.list}) : super(key: key);
 
   @override
-  _CaloriesState createState() => _CaloriesState();
+  _CaloriesState createState() => _CaloriesState(list2: list);
 }
 
 class _CaloriesState extends State<Stat_Calories> {
+  List<dynamic> list2;
+  _CaloriesState({this.list2});
   @override
   Widget build(BuildContext context) {
     print(Provider.of<UserModel>(context, listen: false).userID);
@@ -31,7 +32,7 @@ class _CaloriesState extends State<Stat_Calories> {
           builder: (context, AsyncSnapshot<bool> future) {
             if (future.hasData) {
               if (future.data)
-                return Stat_Calories_Page();
+                return Stat_Calories_Page(thelist: list2);
               else
                 return Login();
             } else {
@@ -44,31 +45,28 @@ class _CaloriesState extends State<Stat_Calories> {
             }
           });
     else
-      return Stat_Calories_Page();
+      return Stat_Calories_Page(thelist: list2);
   }
 }
 
-
-double themax;
+double themax = 20;
 double ult;
 
 class Stat_Calories_Page extends StatelessWidget {
-  Stat_Calories_Page({Key key}) : super(key: key);
+  List<dynamic> thelist;
+  Stat_Calories_Page({Key key, this.thelist}) : super(key: key);
 
-  
-double cero;
-double one;
-double two;
-double three;
-double four;
-double five;
-double six;
-
+  double cero;
+  double one;
+  double two;
+  double three;
+  double four;
+  double five;
+  double six;
 
   List<Color> gradientColors = [Color(0xff23b6e6), Color(0xff02d39a)];
   @override
   Widget build(BuildContext context) {
-    List<dynamic> thelist = Provider.of<UserModel>(context).dailyCalories;
     cero = thelist[6];
     one = thelist[5];
     two = thelist[4];
@@ -76,7 +74,6 @@ double six;
     four = thelist[2];
     five = thelist[1];
     six = thelist[0];
-    themax = thelist[0];
     for (int i = 0; i < thelist.length; i++) {
       if (thelist[i] > themax) themax = thelist[i];
     }

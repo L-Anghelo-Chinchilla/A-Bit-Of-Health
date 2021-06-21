@@ -22,15 +22,17 @@ DateTime now = new DateTime.now();
 final DateFormat formato = DateFormat('EEEE');
 String dayformat = formato.format(now);
 
-
 class Stat_Score extends StatefulWidget {
-  Stat_Score({Key key}) : super(key: key);
+  List<dynamic> list;
+  Stat_Score({Key key, this.list}) : super(key: key);
 
   @override
-  _CaloriesState createState() => _CaloriesState();
+  _CaloriesState createState() => _CaloriesState(list2: list);
 }
 
 class _CaloriesState extends State<Stat_Score> {
+  List<dynamic> list2;
+  _CaloriesState({this.list2});
   @override
   Widget build(BuildContext context) {
     print(Provider.of<UserModel>(context, listen: false).userID);
@@ -40,7 +42,7 @@ class _CaloriesState extends State<Stat_Score> {
           builder: (context, AsyncSnapshot<bool> future) {
             if (future.hasData) {
               if (future.data)
-                return Stat_Score_Page();
+                return Stat_Score_Page(thelist: list2);
               else
                 return Login();
             } else {
@@ -53,19 +55,17 @@ class _CaloriesState extends State<Stat_Score> {
             }
           });
     else
-      return Stat_Score_Page();
+      return Stat_Score_Page(thelist: list2);
   }
 }
 
-
-
 class Stat_Score_Page extends StatelessWidget {
-  Stat_Score_Page({Key key}) : super(key: key);
+  List<dynamic> thelist;
+  Stat_Score_Page({Key key, this.thelist}) : super(key: key);
   List<Color> gradientColors = [Color(0xff23b6e6), Color(0xff02d39a)];
 
   @override
   Widget build(BuildContext context) {
-    List<dynamic> thelist = Provider.of<UserModel>(context).dailyScore;
     cero = thelist[6];
     one = thelist[5];
     two = thelist[4];

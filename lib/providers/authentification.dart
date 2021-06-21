@@ -82,8 +82,8 @@ class AuthProvider {
         Provider.of<UserModel>(context, listen: false).setUser(usr);
         await UserProvider().checkUserGlasses(usr.userID);
         await UserProvider().updateTodayGlasses(usr.userID);
-        await UserProvider().updateLastConnection(
-            Provider.of<UserModel>(context, listen: false).userID);
+        //await UserProvider().updateLastConnection(
+        //   Provider.of<UserModel>(context, listen: false).userID);
 
         exist = true;
       }
