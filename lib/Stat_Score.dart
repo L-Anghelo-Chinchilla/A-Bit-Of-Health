@@ -66,14 +66,29 @@ class Stat_Score_Page extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    cero = thelist[6];
-    one = thelist[5];
-    two = thelist[4];
-    three = thelist[3];
-    four = thelist[2];
-    five = thelist[1];
-    six = thelist[0];
-    themax = thelist[0];
+    List<String> thestrings = [];
+    for (int i = 0; i < thelist.length; i++) {
+      // Apply formatting to the string if necessary
+      thestrings.add(thelist[i].toStringAsFixed(2));
+      print('Los STRINGS son: ${thestrings[i]}');
+    }
+    cero = double.parse(thestrings[6]);
+    one = double.parse(thestrings[5]);
+    two = double.parse(thestrings[4]);
+    three = double.parse(thestrings[3]);
+    four = double.parse(thestrings[2]);
+    five = double.parse(thestrings[1]);
+    six = double.parse(thestrings[0]);
+
+    assert(cero is double);
+    assert(one is double);
+    assert(two is double);
+    assert(three is double);
+    assert(four is double);
+    assert(five is double);
+    assert(six is double);
+
+    themax = thelist[0].roundToDouble();
     for (int i = 0; i < thelist.length; i++) {
       if (thelist[i] > themax) themax = thelist[i];
     }

@@ -67,17 +67,35 @@ class Stat_Calories_Page extends StatelessWidget {
   List<Color> gradientColors = [Color(0xff23b6e6), Color(0xff02d39a)];
   @override
   Widget build(BuildContext context) {
-    cero = thelist[6];
-    one = thelist[5];
-    two = thelist[4];
-    three = thelist[3];
-    four = thelist[2];
-    five = thelist[1];
-    six = thelist[0];
+    List<String> thestrings = [];
+    for (int i = 0; i < thelist.length; i++) {
+      // Apply formatting to the string if necessary
+      thestrings.add(thelist[i].toStringAsFixed(2));
+      print('Los STRINGS son: ${thestrings[i]}');
+    }
+
+    cero = double.parse(thestrings[6]);
+    one = double.parse(thestrings[5]);
+    two = double.parse(thestrings[4]);
+    three = double.parse(thestrings[3]);
+    four = double.parse(thestrings[2]);
+    five = double.parse(thestrings[1]);
+    six = double.parse(thestrings[0]);
+
+//ASSERT
+    assert(cero is double);
+    assert(one is double);
+    assert(two is double);
+    assert(three is double);
+    assert(four is double);
+    assert(five is double);
+    assert(six is double);
+
     for (int i = 0; i < thelist.length; i++) {
       if (thelist[i] > themax) themax = thelist[i];
     }
     ult = themax + 1;
+    ult.roundToDouble();
     if (Provider.of<UserModel>(context).userID == null)
       return Login();
     else {
@@ -362,7 +380,7 @@ class LineTitles {
         getTitles: (value) {
           return (value.toInt()).toString();
         },
-        interval: themax / 10,
+        interval: themax.toDouble() / 10,
         reservedSize: 28,
         margin: 12,
       ),
