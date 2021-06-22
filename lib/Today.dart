@@ -64,7 +64,7 @@ class _TodayPageState extends State<TodayPage> {
           decoration: BoxDecoration(
               image: DecorationImage(
                   image: NetworkImage(
-                      'https://images.unsplash.com/photo-1495195134817-aeb325a55b65?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2560&q=80'),
+                      'https://images.unsplash.com/photo-1478144592103-25e218a04891?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2560&q=80'),
                   fit: BoxFit.cover)),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -165,7 +165,7 @@ class _TodayRegisterState extends State<TodayRegister> {
       Expanded(
           child: Container(
               decoration: BoxDecoration(
-                  color: Color(0xffffffff).withOpacity(0.9),
+                  color: Color(0xFFFEF9E7).withOpacity(0.8),
                   // border: Border.all(color: Colors.black),
                   borderRadius: BorderRadius.all(Radius.circular(7))),
               child: Scrollbar(

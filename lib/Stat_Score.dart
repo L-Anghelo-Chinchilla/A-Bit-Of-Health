@@ -146,14 +146,14 @@ class Stat_Score_Page extends StatelessWidget {
                             show: true,
                             getDrawingHorizontalLine: (value) {
                               return FlLine(
-                                color: const Color(0xFF5D6D7E),
+                                color: const Color(0xFFBDBDBD),
                                 strokeWidth: 1,
                               );
                             },
                             drawVerticalLine: true,
                             getDrawingVerticalLine: (value) {
                               return FlLine(
-                                color: const Color(0xFF5D6D7E),
+                                color: const Color(0xFFBDBDBD),
                                 strokeWidth: 1,
                               );
                             },
@@ -161,7 +161,7 @@ class Stat_Score_Page extends StatelessWidget {
                           borderData: FlBorderData(
                             show: true,
                             border: Border.all(
-                              color: const Color(0xFF5D6D7E),
+                              color: const Color(0xFFBDBDBD),
                               width: 1,
                             ),
                           ),
