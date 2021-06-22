@@ -45,6 +45,9 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ButtonStyle().copyWith(padding:MaterialStateProperty.all( EdgeInsets.symmetric( vertical:21,horizontal: 17) ))
+          ),
           scrollbarTheme: ScrollbarThemeData().copyWith(
               trackBorderColor:
                   MaterialStateProperty.all(Colors.black.withOpacity(0.1)),

@@ -104,7 +104,8 @@ class Stat_Calories_Page extends StatelessWidget {
         body: Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage('fondo_estadisticas.jpg'),
+                  image: NetworkImage(
+                      'https://images.unsplash.com/photo-1543352634-a1c51d9f1fa7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2560&q=80'),
                   fit: BoxFit.cover),
             ),
             child: Column(
@@ -113,16 +114,17 @@ class Stat_Calories_Page extends StatelessWidget {
               children: [
                 getDirectionsBar(context, 'Stats'),
                 Text(
-                  'Estadisticas de los ultimos 7 dias \n                   Calorias',
+                  'Estadísticas de los últimos 7 días  \n                   Calorías',
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontStyle: FontStyle.italic,
-                      fontSize: 32.0),
+                      fontSize: 30.0,
+                      fontFamily: 'Mont'),
                 ),
                 Expanded(
                   child: Container(
-                    //color: Color(0xFFC5CAE9),
-                    padding: EdgeInsets.all(10),
+                    color: Colors.white.withOpacity(0.7),
+                    padding: EdgeInsets.fromLTRB(70, 70, 10, 10),
                     width: double.infinity,
                     child: LineChart(
                       LineChartData(
@@ -135,7 +137,7 @@ class Stat_Calories_Page extends StatelessWidget {
                           axisTitleData: FlAxisTitleData(
                             leftTitle: AxisTitle(
                                 showTitle: true,
-                                titleText: 'Calorias',
+                                titleText: 'Calorías \n',
                                 textStyle: TextStyle(
                                   color: Color(0xFF212121),
                                   fontWeight: FontWeight.bold,
@@ -148,14 +150,14 @@ class Stat_Calories_Page extends StatelessWidget {
                             getDrawingHorizontalLine: (value) {
                               return FlLine(
                                 color: const Color(0xFFBDBDBD),
-                                strokeWidth: 0.4,
+                                strokeWidth: 0.5,
                               );
                             },
                             drawVerticalLine: true,
                             getDrawingVerticalLine: (value) {
                               return FlLine(
                                 color: const Color(0xFFBDBDBD),
-                                strokeWidth: 0.4,
+                                strokeWidth: 0.5,
                               );
                             },
                           ),
@@ -202,7 +204,7 @@ class Stat_Calories_Page extends StatelessWidget {
                       MaterialButton(
                           child: Text(
                             'Atrás',
-                            style: new TextStyle(fontSize: 22),
+                            style: new TextStyle(fontSize: 18),
                           ),
                           height: 50,
                           minWidth: 140,
@@ -230,7 +232,7 @@ class LineTitles {
         getTextStyles: (value) => const TextStyle(
           color: Color(0xFF212121),
           fontWeight: FontWeight.bold,
-          fontSize: 16,
+          fontSize: 20,
         ),
         getTitles: (value) {
           if (dayformat == "Friday") {
