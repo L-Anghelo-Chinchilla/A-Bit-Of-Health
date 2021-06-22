@@ -346,7 +346,8 @@ showAlertDialog(
       Navigator.pushReplacementNamed(context, 'Today');
     },
   );
-
+  
+  
   // set up the AlertDialog
   AlertDialog alert = AlertDialog(
     title: Text("Eliminar registro"),
