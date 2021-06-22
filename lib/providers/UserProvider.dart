@@ -49,7 +49,7 @@ class UserProvider {
     var user = await getUserData(userID);
     user.glasses = glass;
     final uri = Uri.parse(url);
-    http.put(uri, body: user.toJson().toString());
+    await http.put(uri, body: user.toJson().toString());
     return true;
   }
 
@@ -261,10 +261,4 @@ class UserProvider {
     }
     return res;
   }
-
-  /*Future <Tuple2<bool ,String >> login(email, password){
-
-
-    return 
-  }*/
 }

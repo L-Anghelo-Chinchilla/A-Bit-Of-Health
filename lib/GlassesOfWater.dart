@@ -106,6 +106,11 @@ class _GlassesOfWatterState extends State<GlassesOfWater1> {
 
   @override
   Widget build(BuildContext context) {
+    //CHANGES
+    /*widget.user.glasses = Provider.of<UserModel>(context, listen: false)
+        .getFirstofGlasses()
+        .round();*/
+
     return Padding(
         padding: EdgeInsets.all(15),
         child: Column(
@@ -127,6 +132,7 @@ class _GlassesOfWatterState extends State<GlassesOfWater1> {
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, i) {
                       print('$i  ${widget.user.waterLimit}');
+                      //CHANGES
                       var state = (i < widget.user.glasses) ? 'lleno' : 'vacio';
                       return Stack(alignment: Alignment.center, children: [
                         Image.asset(
@@ -152,7 +158,7 @@ class _GlassesOfWatterState extends State<GlassesOfWater1> {
                   onPressed: () async {
                     if (widget.user.glasses > 0) {
                       widget.user.glasses--;
-                      provider.setUserWaterGlasses(
+                      await provider.setUserWaterGlasses(
                           widget.user.userID, widget.user.glasses);
                       UserProvider().addToTodaysGlasses(
                           Provider.of<UserModel>(context, listen: false).userID,

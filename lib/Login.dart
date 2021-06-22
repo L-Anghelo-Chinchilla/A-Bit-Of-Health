@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'dart:io';
 
 String theId;
+double theGlass;
 
 class Login extends StatefulWidget {
   const Login({Key key}) : super(key: key);
@@ -35,6 +36,10 @@ class _LoginState extends State<Login> {
 
   Future<void> theUpdate3() async {
     await UserProvider().updateDailyScore(theId);
+  }
+
+  Future<void> theGlassSync() async {
+    await UserProvider().addToTodaysGlasses(theId, theGlass);
   }
 
   @override
@@ -101,10 +106,16 @@ class _LoginState extends State<Login> {
                                                   context,
                                                   listen: false)
                                               .userID;
+                                          theGlass = Provider.of<UserModel>(
+                                                  context,
+                                                  listen: false)
+                                              .glasses
+                                              .toDouble();
 
                                           await theUpdate1();
                                           await theUpdate2();
                                           await theUpdate3();
+                                          await theGlassSync();
                                           UserProvider()
                                               .updateLastConnection(theId);
                                         }
