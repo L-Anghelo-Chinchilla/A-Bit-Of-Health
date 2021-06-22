@@ -101,7 +101,8 @@ class Stat_Score_Page extends StatelessWidget {
         body: Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage('fondo_estadisticas.jpg'),
+                  image: NetworkImage(
+                      'https://images.unsplash.com/photo-1543352634-a1c51d9f1fa7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2560&q=80'),
                   fit: BoxFit.cover),
             ),
             child: Column(
@@ -110,16 +111,17 @@ class Stat_Score_Page extends StatelessWidget {
               children: [
                 getDirectionsBar(context, 'Stats'),
                 Text(
-                  'Estadisticas de los ultimos 7 dias \n                   Puntuacion',
+                  'Estadísticas de los últimos 7 días \n                   Puntuación',
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontStyle: FontStyle.italic,
-                      fontSize: 32.0),
+                      fontSize: 30.0,
+                      fontFamily: 'Mont'),
                 ),
                 Expanded(
                   child: Container(
-                    // color: Color(0xFFC5CAE9),
-                    padding: EdgeInsets.all(10),
+                    color: Colors.white.withOpacity(0.7),
+                    padding: EdgeInsets.fromLTRB(40, 70, 10, 10),
                     width: double.infinity,
                     child: LineChart(
                       LineChartData(
@@ -132,7 +134,7 @@ class Stat_Score_Page extends StatelessWidget {
                           axisTitleData: FlAxisTitleData(
                             leftTitle: AxisTitle(
                                 showTitle: true,
-                                titleText: 'Puntiación',
+                                titleText: 'Puntuación',
                                 textStyle: TextStyle(
                                   color: Color(0xFF212121),
                                   fontWeight: FontWeight.bold,
@@ -144,14 +146,14 @@ class Stat_Score_Page extends StatelessWidget {
                             show: true,
                             getDrawingHorizontalLine: (value) {
                               return FlLine(
-                                color: const Color(0xFFBDBDBD),
+                                color: const Color(0xFF5D6D7E),
                                 strokeWidth: 1,
                               );
                             },
                             drawVerticalLine: true,
                             getDrawingVerticalLine: (value) {
                               return FlLine(
-                                color: const Color(0xFFBDBDBD),
+                                color: const Color(0xFF5D6D7E),
                                 strokeWidth: 1,
                               );
                             },
@@ -159,7 +161,7 @@ class Stat_Score_Page extends StatelessWidget {
                           borderData: FlBorderData(
                             show: true,
                             border: Border.all(
-                              color: const Color(0xFFBDBDBD),
+                              color: const Color(0xFF5D6D7E),
                               width: 1,
                             ),
                           ),
@@ -180,7 +182,7 @@ class Stat_Score_Page extends StatelessWidget {
                               belowBarData: BarAreaData(
                                 show: true,
                                 colors: gradientColors
-                                    .map((color) => color.withOpacity(0.3))
+                                    .map((color) => color.withOpacity(0.35))
                                     .toList(),
                               ),
                             )
@@ -199,7 +201,7 @@ class Stat_Score_Page extends StatelessWidget {
                       MaterialButton(
                           child: Text(
                             'Atrás',
-                            style: new TextStyle(fontSize: 22),
+                            style: new TextStyle(fontSize: 18),
                           ),
                           height: 50,
                           minWidth: 140,
@@ -227,13 +229,13 @@ class LineTitles {
         getTextStyles: (value) => const TextStyle(
           color: Color(0xFF212121),
           fontWeight: FontWeight.bold,
-          fontSize: 16,
+          fontSize: 20,
         ),
         getTitles: (value) {
           if (dayformat == "Friday") {
             switch (value.toInt()) {
               case 0:
-                return "Sabado";
+                return "Sábado";
               case 1:
                 return "Domingo";
               case 2:
@@ -241,9 +243,9 @@ class LineTitles {
               case 3:
                 return "Martes";
               case 4:
-                return "Miercoles";
+                return "Miércoles";
               case 5:
-                return "jueves";
+                return "Jueves";
               case 6:
                 return "Viernes";
             }
@@ -257,13 +259,13 @@ class LineTitles {
                 case 2:
                   return "Martes";
                 case 3:
-                  return "Miercoles";
+                  return "Miércoles";
                 case 4:
                   return "Jueves";
                 case 5:
                   return "Viernes";
                 case 6:
-                  return "Sabado";
+                  return "Sábado";
               }
             } else {
               if (dayformat == "Sunday") {
@@ -273,13 +275,13 @@ class LineTitles {
                   case 1:
                     return "Martes";
                   case 2:
-                    return "Miercoles";
+                    return "Miércoles";
                   case 3:
                     return "Jueves";
                   case 4:
                     return "Viernes";
                   case 5:
-                    return "Sabado";
+                    return "Sábado";
                   case 6:
                     return "Domingo";
                 }
@@ -289,13 +291,13 @@ class LineTitles {
                     case 0:
                       return "Martes";
                     case 1:
-                      return "Miercoles";
+                      return "Miércoles";
                     case 2:
                       return "Jueves";
                     case 3:
                       return "Viernes";
                     case 4:
-                      return "Sabado";
+                      return "Sábado";
                     case 5:
                       return "Domingo";
                     case 6:
@@ -305,13 +307,13 @@ class LineTitles {
                   if (dayformat == "Tuesday") {
                     switch (value.toInt()) {
                       case 0:
-                        return "Miercoles";
+                        return "Miércoles";
                       case 1:
                         return "Jueves";
                       case 2:
                         return "Viernes";
                       case 3:
-                        return "Sabado";
+                        return "Sábado";
                       case 4:
                         return "Domingo";
                       case 5:
@@ -327,7 +329,7 @@ class LineTitles {
                         case 1:
                           return "Viernes";
                         case 2:
-                          return "Sabado";
+                          return "Sábado";
                         case 3:
                           return "Domingo";
                         case 4:
@@ -335,7 +337,7 @@ class LineTitles {
                         case 5:
                           return "Martes";
                         case 6:
-                          return "Miercoles";
+                          return "Miércoles";
                       }
                     } else {
                       if (dayformat == "Thursday") {
@@ -343,7 +345,7 @@ class LineTitles {
                           case 0:
                             return "Viernes";
                           case 1:
-                            return "Sabado";
+                            return "Sábado";
                           case 2:
                             return "Domingo";
                           case 3:
@@ -351,7 +353,7 @@ class LineTitles {
                           case 4:
                             return "Martes";
                           case 5:
-                            return "Miercoles";
+                            return "Miércoles";
                           case 6:
                             return "Jueves";
                         }

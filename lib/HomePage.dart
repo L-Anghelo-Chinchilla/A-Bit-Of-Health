@@ -122,7 +122,7 @@ class Home extends StatelessWidget {
             decoration: BoxDecoration(
               image: DecorationImage(
                   image: NetworkImage(
-                      'https://images.unsplash.com/photo-1517260911058-0fcfd733702f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1113&q=80'),
+                      'https://images.unsplash.com/photo-1517260911058-0fcfd733702f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2560&q=80'),
                   fit: BoxFit.cover),
             ),
             child: Column(

@@ -21,116 +21,127 @@ class Stats extends StatelessWidget {
           body: Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage('fondo_est.jpg'), fit: BoxFit.cover),
+                  image: NetworkImage(
+                      'https://images.unsplash.com/photo-1478144592103-25e218a04891?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2560&q=80'),
+                  fit: BoxFit.cover),
             ),
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  getDirectionsBar(context, 'Stats'),
-                  Text(
-                    'Seleccionar el tipo de Estadísticas',
-                    style: TextStyle(fontFamily: 'Mont', fontSize: 32.0),
-                  ),
-                  Expanded(
-                    child: Container(
-                      alignment: Alignment.center,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              ImagestoDisplay(imageName: "aguaEST"),
-                              MaterialButton(
-                                  child: Text('Vasos de Agua',
-                                      style: new TextStyle(fontSize: 22)),
-                                  height: 80,
-                                  minWidth: 150,
-                                  color: Colors.blue,
-                                  textColor: Colors.white,
-                                  onPressed: () async {
-                                    List<dynamic> theglass =
-                                        await UserProvider().getGforStats(
-                                            Provider.of<UserModel>(context,
-                                                    listen: false)
-                                                .userID);
-                                    Navigator.of(context)
-                                        .push(MaterialPageRoute<Null>(
-                                            builder: (context) => Stat_Glasses(
-                                                  list: theglass,
-                                                )));
-                                    /*Navigator.pushNamed(
-                                        context, 'Stat_Glasses');*/
-                                  })
-                            ],
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              ImagestoDisplay(imageName: "estrellasEST"),
-                              MaterialButton(
-                                  child: Text('Puntuación',
-                                      style: new TextStyle(fontSize: 22)),
-                                  height: 80,
-                                  minWidth: 150,
-                                  color: Colors.blue,
-                                  textColor: Colors.white,
-                                  onPressed: () async {
-                                    List<dynamic> thescore =
-                                        await UserProvider().getSforStats(
-                                            Provider.of<UserModel>(context,
-                                                    listen: false)
-                                                .userID);
-                                    Navigator.of(context)
-                                        .push(MaterialPageRoute<Null>(
-                                            builder: (context) => Stat_Score(
-                                                  list: thescore,
-                                                )));
-                                    //Navigator.pushNamed(context, 'Stat_Score');
-                                  })
-                            ],
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              ImagestoDisplay(
-                                  imageName: "kcalEST".toLowerCase()),
-                              MaterialButton(
-                                  child: Text(
-                                    'Calorias',
-                                    style: new TextStyle(fontSize: 22),
-                                  ),
-                                  height: 80,
-                                  minWidth: 150,
-                                  color: Colors.blue,
-                                  textColor: Colors.white,
-                                  onPressed: () async {
-                                    List<dynamic> thecals = await UserProvider()
-                                        .getCforStats(Provider.of<UserModel>(
-                                                context,
-                                                listen: false)
-                                            .userID);
-                                    Navigator.of(context)
-                                        .push(MaterialPageRoute<Null>(
-                                            builder: (context) => Stat_Calories(
-                                                  list: thecals,
-                                                )));
-                                    /*Navigator.pushNamed(
-                                        context, 'Stat_Calories');*/
-                                  })
-                            ],
-                          )
-                        ],
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    getDirectionsBar(context, 'Stats'),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
+                      child: Text(
+                        'Seleccionar el tipo de Estadísticas',
+                        style: TextStyle(fontFamily: 'Mont', fontSize: 32.0),
                       ),
                     ),
-                  )
-                ]),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 25, 0, 30),
+                        child: Container(
+                          alignment: Alignment.center,
+                          color: Colors.white.withOpacity(0.7),
+                          height: MediaQuery.of(context).size.height/2,
+                          width: MediaQuery.of(context).size.width/1.5,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  ImagestoDisplay(imageName: "aguaEST"),
+                                  MaterialButton(
+                                      child: Text('Vasos de Agua',
+                                          style: new TextStyle(fontSize: 22)),
+                                      height: 70,
+                                      minWidth: 150,
+                                      color: Colors.blue,
+                                      textColor: Colors.white,
+                                      onPressed: () async {
+                                        List<dynamic> theglass =
+                                            await UserProvider().getGforStats(
+                                                Provider.of<UserModel>(context,
+                                                        listen: false)
+                                                    .userID);
+                                        Navigator.of(context)
+                                            .push(MaterialPageRoute<Null>(
+                                                builder: (context) => Stat_Glasses(
+                                                      list: theglass,
+                                                    )));
+                                        /*Navigator.pushNamed(
+                                            context, 'Stat_Glasses');*/
+                                      })
+                                ],
+                              ),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  ImagestoDisplay(imageName: "estrellasEST"),
+                                  MaterialButton(
+                                      child: Text('Puntuación',
+                                          style: new TextStyle(fontSize: 22)),
+                                      height: 70,
+                                      minWidth: 150,
+                                      color: Colors.blue,
+                                      textColor: Colors.white,
+                                      onPressed: () async {
+                                        List<dynamic> thescore =
+                                            await UserProvider().getSforStats(
+                                                Provider.of<UserModel>(context,
+                                                        listen: false)
+                                                    .userID);
+                                        Navigator.of(context)
+                                            .push(MaterialPageRoute<Null>(
+                                                builder: (context) => Stat_Score(
+                                                      list: thescore,
+                                                    )));
+                                        //Navigator.pushNamed(context, 'Stat_Score');
+                                      })
+                                ],
+                              ),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  ImagestoDisplay(
+                                      imageName: "kcalEST".toLowerCase()),
+                                  MaterialButton(
+                                      child: Text(
+                                        'Calorías',
+                                        style: new TextStyle(fontSize: 22),
+                                      ),
+                                      height: 70,
+                                      minWidth: 150,
+                                      color: Colors.blue,
+                                      textColor: Colors.white,
+                                      onPressed: () async {
+                                        List<dynamic> thecals = await UserProvider()
+                                            .getCforStats(Provider.of<UserModel>(
+                                                    context,
+                                                    listen: false)
+                                                .userID);
+                                        Navigator.of(context)
+                                            .push(MaterialPageRoute<Null>(
+                                                builder: (context) => Stat_Calories(
+                                                      list: thecals,
+                                                    )));
+                                        /*Navigator.pushNamed(
+                                            context, 'Stat_Calories');*/
+                                      })
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    )
+                  ]),
           ));
   }
 }
