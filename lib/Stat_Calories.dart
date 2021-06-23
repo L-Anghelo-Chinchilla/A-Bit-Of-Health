@@ -238,7 +238,7 @@ class LineTitles {
           if (dayformat == "Friday") {
             switch (value.toInt()) {
               case 0:
-                return "Sabado";
+                return "Sábado";
               case 1:
                 return "Domingo";
               case 2:
@@ -246,7 +246,7 @@ class LineTitles {
               case 3:
                 return "Martes";
               case 4:
-                return "Miercoles";
+                return "Miércoles";
               case 5:
                 return "jueves";
               case 6:
@@ -262,13 +262,13 @@ class LineTitles {
                 case 2:
                   return "Martes";
                 case 3:
-                  return "Miercoles";
+                  return "Miércoles";
                 case 4:
                   return "Jueves";
                 case 5:
                   return "Viernes";
                 case 6:
-                  return "Sabado";
+                  return "Sábado";
               }
             } else {
               if (dayformat == "Sunday") {
@@ -278,13 +278,13 @@ class LineTitles {
                   case 1:
                     return "Martes";
                   case 2:
-                    return "Miercoles";
+                    return "Miércoles";
                   case 3:
                     return "Jueves";
                   case 4:
                     return "Viernes";
                   case 5:
-                    return "Sabado";
+                    return "Sábado";
                   case 6:
                     return "Domingo";
                 }
@@ -294,13 +294,13 @@ class LineTitles {
                     case 0:
                       return "Martes";
                     case 1:
-                      return "Miercoles";
+                      return "Miércoles";
                     case 2:
                       return "Jueves";
                     case 3:
                       return "Viernes";
                     case 4:
-                      return "Sabado";
+                      return "Sábado";
                     case 5:
                       return "Domingo";
                     case 6:
@@ -310,13 +310,13 @@ class LineTitles {
                   if (dayformat == "Tuesday") {
                     switch (value.toInt()) {
                       case 0:
-                        return "Miercoles";
+                        return "Miércoles";
                       case 1:
                         return "Jueves";
                       case 2:
                         return "Viernes";
                       case 3:
-                        return "Sabado";
+                        return "Sábado";
                       case 4:
                         return "Domingo";
                       case 5:
@@ -332,7 +332,7 @@ class LineTitles {
                         case 1:
                           return "Viernes";
                         case 2:
-                          return "Sabado";
+                          return "Sábado";
                         case 3:
                           return "Domingo";
                         case 4:
@@ -340,7 +340,7 @@ class LineTitles {
                         case 5:
                           return "Martes";
                         case 6:
-                          return "Miercoles";
+                          return "Miércoles";
                       }
                     } else {
                       if (dayformat == "Thursday") {
@@ -348,7 +348,7 @@ class LineTitles {
                           case 0:
                             return "Viernes";
                           case 1:
-                            return "Sabado";
+                            return "Sábado";
                           case 2:
                             return "Domingo";
                           case 3:
@@ -356,7 +356,7 @@ class LineTitles {
                           case 4:
                             return "Martes";
                           case 5:
-                            return "Miercoles";
+                            return "Miércoles";
                           case 6:
                             return "Jueves";
                         }

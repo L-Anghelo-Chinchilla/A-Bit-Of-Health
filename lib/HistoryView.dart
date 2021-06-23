@@ -15,7 +15,6 @@ import 'package:syncfusion_flutter_pdf/pdf.dart';
 import 'providers/authentification.dart';
 import 'webDownload.dart';
 
-
 class HistoryView extends StatefulWidget {
   HistoryView({Key key}) : super(key: key);
 
@@ -50,9 +49,6 @@ class _HistoryViewState extends State<HistoryView> {
   }
 }
 
-
-
-
 class HistoryViewPage extends StatelessWidget {
   HistoryViewPage({Key key}) : super(key: key);
 
@@ -63,8 +59,7 @@ class HistoryViewPage extends StatelessWidget {
     Tuple2<String, String> range = ModalRoute.of(context).settings.arguments;
     if (Provider.of<UserModel>(context).userID == null)
       return Login();
-
-    else if(range == null )
+    else if (range == null)
       return History();
     else
       return Scaffold(
@@ -73,8 +68,8 @@ class HistoryViewPage extends StatelessWidget {
           decoration: BoxDecoration(
             image: DecorationImage(
                 image: NetworkImage(
-                      'https://images.unsplash.com/photo-1543364195-077a16c30ff3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2560&q=80'),
-                  fit: BoxFit.cover),
+                    'https://images.unsplash.com/photo-1543364195-077a16c30ff3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2560&q=80'),
+                fit: BoxFit.cover),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -207,26 +202,23 @@ class HistoryViewPage extends StatelessWidget {
     String pageDate = '';
     PdfLayoutResult lr;
     for (int i = 0; i < map.length; i++) {
-        
-        String auxDate = map.values.elementAt(i).date;
-        
-        if(auxDate==pageDate){
-          lr = writeFood(document, map.values.elementAt(i), lr);
-          //pageDate = map.values.elementAt(g).date;
-        }
-        else{
-          lr = createNext(document, map.values.elementAt(i));
-          g = i;
-          //pageDate = map.values.elementAt(g).date;
-        }
-        pageDate = map.values.elementAt(g).date;
-        
+      String auxDate = map.values.elementAt(i).date;
+
+      if (auxDate == pageDate) {
+        lr = writeFood(document, map.values.elementAt(i), lr);
+        //pageDate = map.values.elementAt(g).date;
+      } else {
+        lr = createNext(document, map.values.elementAt(i));
+        g = i;
+        //pageDate = map.values.elementAt(g).date;
+      }
+      pageDate = map.values.elementAt(g).date;
     }
 
     List<int> bytes = document.save();
     document.dispose();
 
-    saveAndLaunchFile(bytes, 'Output.pdf');
+    saveAndLaunchFile(bytes, 'Historial.pdf');
   }
 
   PdfLayoutResult createNext(PdfDocument document, FoodRegister register) {
@@ -255,20 +247,22 @@ class HistoryViewPage extends StatelessWidget {
     return layoutResult;
   }
 
-  PdfLayoutResult writeFood(PdfDocument document, FoodRegister register, PdfLayoutResult lr) {
+  PdfLayoutResult writeFood(
+      PdfDocument document, FoodRegister register, PdfLayoutResult lr) {
     PdfLayoutResult layoutResult = lr;
-    var page = document.pages[document.pages.count-1];
+    var page = document.pages[document.pages.count - 1];
 
     //Escribimos el tipo de comida y la hora
     PdfGrid gridTF = PdfGrid();
     gridTF.columns.add(count: 1);
     //PdfGridRow rowTF = gridTF.rows.add();
     PdfGridRow rowTF = gridTF.headers.add(1)[0];
-    rowTF.cells[0].value = '${register.food.typeOfFood}         ${register.time}';
+    rowTF.cells[0].value =
+        '${register.food.typeOfFood}         ${register.time}';
     rowTF.cells[0].style = PdfGridCellStyle(
-        font: PdfStandardFont(PdfFontFamily.helvetica, 12, style: PdfFontStyle.regular),
-        backgroundBrush: PdfBrushes.orange
-    );
+        font: PdfStandardFont(PdfFontFamily.helvetica, 12,
+            style: PdfFontStyle.regular),
+        backgroundBrush: PdfBrushes.orange);
     gridTF.style.cellPadding = PdfPaddings(left: 5, top: 5);
     layoutResult = gridTF.draw(
       page: page,
@@ -301,7 +295,7 @@ class HistoryViewPage extends StatelessWidget {
     grid.style.cellPadding = PdfPaddings(left: 5, top: 5);
 
     layoutResult = grid.draw(
-      page: document.pages[document.pages.count-1],
+      page: document.pages[document.pages.count - 1],
       bounds: Rect.fromLTWH(0, layoutResult.bounds.bottom + 10,
           page.getClientSize().width, page.getClientSize().height),
     );
@@ -316,13 +310,13 @@ class HistoryViewPage extends StatelessWidget {
 
     grid2.style.cellPadding = PdfPaddings(left: 5, top: 5);
     row2.cells[0].style = PdfGridCellStyle(
-        font: PdfStandardFont(PdfFontFamily.helvetica, 10),
+      font: PdfStandardFont(PdfFontFamily.helvetica, 10),
     );
     row2.cells[1].style = PdfGridCellStyle(
-        font: PdfStandardFont(PdfFontFamily.helvetica, 10),
+      font: PdfStandardFont(PdfFontFamily.helvetica, 10),
     );
     layoutResult = grid2.draw(
-      page: document.pages[document.pages.count-1],
+      page: document.pages[document.pages.count - 1],
       bounds: Rect.fromLTWH(0, layoutResult.bounds.bottom + 10,
           page.getClientSize().width, page.getClientSize().height),
     );
@@ -392,5 +386,4 @@ class HistoryViewPage extends StatelessWidget {
     return data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
   }*/
 
-  
 }

@@ -58,7 +58,8 @@ class NextPage extends StatelessWidget {
         body: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('assets/fondo_cantidades.jpg'),
+                image: NetworkImage(
+                    'https://images.unsplash.com/photo-1516658713486-48a292b2eea3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2560&q=80'),
                 fit: BoxFit.cover),
           ),
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
