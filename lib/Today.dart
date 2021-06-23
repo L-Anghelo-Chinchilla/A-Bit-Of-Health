@@ -100,27 +100,34 @@ class _TodayPageState extends State<TodayPage> {
   }
 
   Widget getNoFoodSignal() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Text(
-          'Oops! Parece que no has registrado nada aún.',
-          style: TextStyle(fontSize: 30),
-        ),
-        Expanded(
-            child: Padding(
-          padding: const EdgeInsets.all(100.0),
-          child: Image.asset(
-            'assets/patata.png',
+    return Container(
+      padding: EdgeInsets.all(10.0),
+      height: double.infinity,
+      width: MediaQuery.of(context).size.width/2.1,
+      color: Color(0xFFFEF9E7).withOpacity(0.7),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            'Oops! Parece que no has registrado nada aún.',
+            style: TextStyle(fontSize: 30),
+            //textAlign: TextAlignVertical.center,
           ),
-        )),
-        /*ElevatedButton(
-            onPressed: () {
-              Navigator.pushReplacementNamed(context, 'FoodSelector');
-            },
-            child: Text('Añadir comida'))*/
-      ],
+          Expanded(
+              child: Padding(
+            padding: const EdgeInsets.all(100.0),
+            child: Image.asset(
+              'assets/patata.png',
+            ),
+          )),
+          /*ElevatedButton(
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, 'FoodSelector');
+              },
+              child: Text('Añadir comida'))*/
+        ],
+      ),
     );
   }
 }
