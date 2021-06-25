@@ -84,8 +84,8 @@ class _LoginState extends State<Login> {
                                       ),
                                     ),
                                     getTextForm(
-                                        _email, 'Correo electrónico', false),
-                                    getTextForm(_pass, 'Contraseña', _hide),
+                                       'emailField', _email, 'Correo electrónico', false),
+                                    getTextForm('passwordField',_pass, 'Contraseña', _hide),
                                     ElevatedButton(
                                       onPressed: () async {
                                         FormState state = _formKey.currentState;
@@ -131,10 +131,11 @@ class _LoginState extends State<Login> {
             )));
   }
 
-  Widget getTextForm(controller, hint, hide) {
+  Widget getTextForm( key , controller, hint, hide) {
     bool flag = hint == 'Contraseña';
 
     return TextFormField(
+      key: Key(key),
       decoration: InputDecoration(
         hintText: hint,
         icon: (flag) ? Icon(Icons.lock) : Icon(Icons.person_pin_rounded),
