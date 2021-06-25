@@ -122,7 +122,7 @@ class HistoryViewPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         ElevatedButton(
-                          child: Text('Atras', style: TextStyle(fontSize: 18)),
+                          child: Text('Atrás', style: TextStyle(fontSize: 18)),
                           onPressed: () {
                             Navigator.pop(context);
                           },
