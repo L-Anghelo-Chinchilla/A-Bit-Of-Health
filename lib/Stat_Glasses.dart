@@ -146,6 +146,15 @@ class Stat_Glasses_Page extends StatelessWidget {
                                   fontSize: 24,
                                 ),
                                 margin: 10),
+                            bottomTitle: AxisTitle(
+                                showTitle: true,
+                                margin: 10,
+                                titleText: 'Días',
+                                textStyle: TextStyle(
+                                  color: Color(0xFF212121),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 22,
+                                )),
                           ),
                           gridData: FlGridData(
                             show: true,
