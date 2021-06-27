@@ -86,6 +86,7 @@ class HistoryViewPage extends StatelessWidget {
                     Expanded(
                         child: Padding(
                       padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
+                      
                       child: Container(
                         color: Colors.white.withOpacity(0.8),
                         width: MediaQuery.of(context).size.width * 0.5,
