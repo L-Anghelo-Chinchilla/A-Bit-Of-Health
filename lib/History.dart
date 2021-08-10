@@ -2,10 +2,8 @@ import 'package:a_bit_of_health/Login.dart';
 import 'package:a_bit_of_health/models/UserModel.dart';
 import 'package:a_bit_of_health/utils.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
-import 'package:syncfusion_localizations/syncfusion_localizations.dart';
 import 'package:tuple/tuple.dart';
 
 import 'providers/authentification.dart';

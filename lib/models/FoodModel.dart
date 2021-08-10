@@ -77,9 +77,7 @@ class FoodOffer with ChangeNotifier {
   String toString() => '{ ${this.typeOfFood} , ${jsonEncode(this.aliments)} }';
 
   void setValueChanged(String name, bool value) {
-    aliments.forEach((element) {
-      if (name == element) print('$element set to $value');
-    });
+    
     notifyListeners();
   }
 

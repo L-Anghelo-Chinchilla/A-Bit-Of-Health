@@ -41,15 +41,16 @@ List<String> thedaysENG = [
 int index = thedaysENG.indexOf(dayformat);
 //List<String> theorder;
 
-class Stat_Glasses extends StatefulWidget {
+// ignore: must_be_immutable
+class StatGlasses extends StatefulWidget {
   List<dynamic> list;
-  Stat_Glasses({Key key, this.list}) : super(key: key);
+  StatGlasses({Key key, this.list}) : super(key: key);
 
   @override
   _CaloriesState createState() => _CaloriesState(list2: list);
 }
 
-class _CaloriesState extends State<Stat_Glasses> {
+class _CaloriesState extends State<StatGlasses> {
   List<dynamic> list2;
   _CaloriesState({this.list2});
   @override
@@ -61,7 +62,7 @@ class _CaloriesState extends State<Stat_Glasses> {
           builder: (context, AsyncSnapshot<bool> future) {
             if (future.hasData) {
               if (future.data)
-                return Stat_Glasses_Page(thelist: list2);
+                return StatGlassesPage(thelist: list2);
               else
                 return Login();
             } else {
@@ -74,13 +75,14 @@ class _CaloriesState extends State<Stat_Glasses> {
             }
           });
     else
-      return Stat_Glasses_Page(thelist: list2);
+      return StatGlassesPage(thelist: list2);
   }
 }
 
-class Stat_Glasses_Page extends StatelessWidget {
+// ignore: must_be_immutable
+class StatGlassesPage extends StatelessWidget {
   List<dynamic> thelist;
-  Stat_Glasses_Page({Key key, this.thelist}) : super(key: key);
+  StatGlassesPage({Key key, this.thelist}) : super(key: key);
   List<Color> gradientColors = [Color(0xff23b6e6), Color(0xff02d39a)];
 
   @override

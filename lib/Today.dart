@@ -132,8 +132,9 @@ class _TodayPageState extends State<TodayPage> {
   }
 }
 
+// ignore: must_be_immutable
 class TodayRegister extends StatefulWidget {
-  TodayRegister({Key key, this.map}) : super(key: key);
+  TodayRegister({Key key, this.map}) ;
   Map<String, FoodRegister> map;
 
   @override
@@ -141,7 +142,6 @@ class TodayRegister extends StatefulWidget {
 }
 
 class _TodayRegisterState extends State<TodayRegister> {
-  final _controller = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -183,7 +183,6 @@ class _TodayRegisterState extends State<TodayRegister> {
                   shrinkWrap: false,
                   itemCount: widget.map.length,
                   itemBuilder: (context, i) {
-                    String key = widget.map.keys.elementAt(i);
                     final len = widget.map.length;
                     return getRegisterList(context,
                         widget.map.values.elementAt(len - 1 - i), true);

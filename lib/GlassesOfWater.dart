@@ -48,7 +48,6 @@ class GlassesOfWaterPage extends StatefulWidget {
 }
 
 class _GlassesOfWaterPageState extends State<GlassesOfWaterPage> {
-  UserProvider _provider = UserProvider();
 
   @override
   Widget build(BuildContext context) {
@@ -94,6 +93,7 @@ class _GlassesOfWaterPageState extends State<GlassesOfWaterPage> {
   }
 }
 
+// ignore: must_be_immutable
 class GlassesOfWater1 extends StatefulWidget {
   GlassesOfWater1({Key key, this.user}) : super(key: key);
   UserModel user;

@@ -71,7 +71,7 @@ class Stats extends StatelessWidget {
                                       Navigator.of(context).push(
                                           MaterialPageRoute<Null>(
                                               builder: (context) =>
-                                                  Stat_Glasses(
+                                                  StatGlasses(
                                                     list: theglass,
                                                   )));
                                       /*Navigator.pushNamed(
@@ -99,7 +99,7 @@ class Stats extends StatelessWidget {
                                                   .userID);
                                       Navigator.of(context)
                                           .push(MaterialPageRoute<Null>(
-                                              builder: (context) => Stat_Score(
+                                              builder: (context) => StatScore(
                                                     list: thescore,
                                                   )));
                                       //Navigator.pushNamed(context, 'Stat_Score');
@@ -129,7 +129,7 @@ class Stats extends StatelessWidget {
                                       Navigator.of(context).push(
                                           MaterialPageRoute<Null>(
                                               builder: (context) =>
-                                                  Stat_Calories(
+                                                  StatCalories(
                                                     list: thecals,
                                                   )));
                                       /*Navigator.pushNamed(
@@ -147,6 +147,7 @@ class Stats extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class ImagestoDisplay extends StatelessWidget {
   String imageName;
 
@@ -164,6 +165,7 @@ class ImagestoDisplay extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class TitleDisplay extends StatelessWidget {
   String titleName;
 

@@ -8,15 +8,12 @@ import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
 import 'package:a_bit_of_health/models/FoodModel.dart';
 import 'package:intl/intl.dart';
-import 'package:a_bit_of_health/Login.dart';
-import 'package:a_bit_of_health/models/UserModel.dart';
-import 'package:a_bit_of_health/utils.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+
 
 int score = 1;
 double reciprocal(double d) => 1 / d;
 
+// ignore: must_be_immutable
 class Evaluation extends StatelessWidget {
   Evaluation({Key key}) : super(key: key);
   FoodProvider _provider = FoodProvider();
@@ -113,7 +110,7 @@ class Evaluation extends StatelessWidget {
                                           Align(
                                               alignment: Alignment.topLeft,
                                               child: Text(
-                                                'Tu comida: ${kindoffood}',
+                                                'Tu comida: $kindoffood',
                                                 style: TextStyle(
                                                   fontFamily: 'Mont',
                                                   fontSize: 24,
@@ -254,7 +251,7 @@ class Evaluation extends StatelessWidget {
                                           child: Column(
                                             children: [
                                               Text(
-                                                '\nTu última comida de ${kindoffood} contuvo: ${lastRegister} calorías.',
+                                                '\nTu última comida de $kindoffood contuvo: $lastRegister calorías.',
                                                 style: TextStyle(
                                                   fontFamily: 'Mont2',
                                                   fontSize: 18,
@@ -281,7 +278,7 @@ class Evaluation extends StatelessWidget {
                                                           ),
                                                           Container(
                                                               child: Text(
-                                                            '\n\n ${thetotal} Calorías',
+                                                            '\n\n $thetotal Calorías',
                                                             style: TextStyle(
                                                               fontFamily:
                                                                   'Mont',
@@ -308,7 +305,7 @@ class Evaluation extends StatelessWidget {
                                             children: [
                                               if (kindoffood == 'Cena')
                                                 Text(
-                                                  '\nUna ${kindoffood} para ser balanceada, debería contener aproximadamente ${healthyQuantity} cal. Entonces....',
+                                                  '\nUna $kindoffood para ser balanceada, debería contener aproximadamente $healthyQuantity cal. Entonces....',
                                                   style: TextStyle(
                                                     color: Colors.black,
                                                     fontFamily: 'Mont2',
@@ -317,7 +314,7 @@ class Evaluation extends StatelessWidget {
                                                 )
                                               else
                                                 Text(
-                                                  '\nUn ${kindoffood} para ser balanceado, debería contener aproximadamente ${healthyQuantity} cal. Entonces....',
+                                                  '\nUn $kindoffood para ser balanceado, debería contener aproximadamente $healthyQuantity cal. Entonces....',
                                                   style: TextStyle(
                                                     color: Colors.black,
                                                     fontFamily: 'Mont2',
@@ -384,21 +381,17 @@ class Evaluation extends StatelessWidget {
                                       textColor: Colors.white,
                                       //backgroundColor: Colors.limeAccent[700],
                                       onPressed: () async {
-                                        UpdateFood(
+                                        updateFood(
                                             kindoffood, thetotal, context);
 
                                         //THE USER REGISTER
-                                        UploadRegister(
+                                        uploadRegister(
                                             _provider,
                                             context,
                                             score,
                                             thelist.item1,
                                             thelist.item2);
                                         //EXTRACT OF THE OTHER DAYS CALORIES
-                                        String userID = Provider.of<UserModel>(
-                                                context,
-                                                listen: false)
-                                            .userID;
 
                                         double cal = await UserProvider()
                                             .getAllTodayCalories(
@@ -430,7 +423,7 @@ class Evaluation extends StatelessWidget {
                                           ModalRoute.withName('FoodSelector'),
                                         );
                                         //   await Navigator.pushReplacementNamed(context, 'Today');
-                                        print('Evaluation envía: ${score}');
+                                        print('Evaluation envía: $score');
                                         final snackBar = SnackBar(
                                           content: Text(
                                               'Tu registro se ha guardado'),
@@ -444,7 +437,7 @@ class Evaluation extends StatelessWidget {
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(snackBar);
                                         print(
-                                            'La puntuación del usuario es ${score}');
+                                            'La puntuación del usuario es $score');
                                       }),
                                 ],
                               ),
@@ -456,7 +449,7 @@ class Evaluation extends StatelessWidget {
   }
 }
 
-void UpdateFood(
+void updateFood(
     String kindOfFood, String thetotal, BuildContext context) async {
   switch (kindOfFood) {
     case "Desayuno":
@@ -490,7 +483,7 @@ void UpdateFood(
   }
 }
 
-void UploadRegister(FoodProvider _provider, BuildContext context, int score,
+void uploadRegister(FoodProvider _provider, BuildContext context, int score,
     double thecalories, FoodOffer thefood) {
   final DateTime now = DateTime.now();
   final DateFormat formatter = DateFormat('yyyy/MM/dd');

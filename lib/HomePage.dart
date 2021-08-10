@@ -1,17 +1,13 @@
-import 'dart:js';
-
 import 'package:a_bit_of_health/utils.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:math';
 import 'package:a_bit_of_health/providers/UserProvider.dart';
-import 'package:a_bit_of_health/Login.dart';
 import 'package:a_bit_of_health/models/UserModel.dart';
 import 'package:a_bit_of_health/providers/authentification.dart';
-import 'dart:io';
+
 
 String theId;
 
@@ -70,6 +66,7 @@ Future sleep1() {
   return new Future.delayed(const Duration(seconds: 2), () => "2");
 }
 
+// ignore: must_be_immutable
 class Home extends StatelessWidget {
   Home({Key key}) : super(key: key);
 

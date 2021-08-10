@@ -12,15 +12,16 @@ DateTime now = new DateTime.now();
 final DateFormat formato = DateFormat('EEEE');
 String dayformat = formato.format(now);
 
-class Stat_Calories extends StatefulWidget {
+// ignore: must_be_immutable
+class StatCalories extends StatefulWidget {
   List<dynamic> list;
-  Stat_Calories({Key key, this.list}) : super(key: key);
+  StatCalories({Key key, this.list}) : super(key: key);
 
   @override
   _CaloriesState createState() => _CaloriesState(list2: list);
 }
 
-class _CaloriesState extends State<Stat_Calories> {
+class _CaloriesState extends State<StatCalories> {
   List<dynamic> list2;
   _CaloriesState({this.list2});
   @override
@@ -32,7 +33,7 @@ class _CaloriesState extends State<Stat_Calories> {
           builder: (context, AsyncSnapshot<bool> future) {
             if (future.hasData) {
               if (future.data)
-                return Stat_Calories_Page(thelist: list2);
+                return StatCaloriesPage(thelist: list2);
               else
                 return Login();
             } else {
@@ -45,16 +46,17 @@ class _CaloriesState extends State<Stat_Calories> {
             }
           });
     else
-      return Stat_Calories_Page(thelist: list2);
+      return StatCaloriesPage(thelist: list2);
   }
 }
 
 double themax = 20;
 double ult;
 
-class Stat_Calories_Page extends StatelessWidget {
+// ignore: must_be_immutable
+class StatCaloriesPage extends StatelessWidget {
   List<dynamic> thelist;
-  Stat_Calories_Page({Key key, this.thelist}) : super(key: key);
+  StatCaloriesPage({Key key, this.thelist}) : super(key: key);
 
   double cero;
   double one;

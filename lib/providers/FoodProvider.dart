@@ -41,16 +41,15 @@ class FoodProvider {
 
   Future<void> deleteRegisterByDate(userID, date, registerID) async {
     final url = '$_url/database/calendar/$userID/$date/$registerID.json';
-    print(url);
-    final Uri uri = Uri.parse('url');
-    final response = await Dio().delete(url);
+ 
+    await Dio().delete(url);
   }
 
-  Future<void> uploadUserRegiter(userID, date, register) {
+  Future<void> uploadUserRegiter(userID, date, register) async {
     final url = '$_url/database/calendar/$userID/$date/.json';
     final Uri uri = Uri.parse(url);
-    final response =
-        http.post(uri, body: register.foodRegisterToJson(register));
+    
+    await http.post(uri, body: register.foodRegisterToJson(register));
   }
   //YYYY-MM-DD
   static  Future<Map<String, FoodRegister>> getUserRegisterRange(

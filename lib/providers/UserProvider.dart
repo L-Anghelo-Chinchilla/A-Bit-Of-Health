@@ -1,9 +1,7 @@
 import 'dart:convert';
 import 'package:a_bit_of_health/models/UserModel.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:tuple/tuple.dart';
 
 class UserProvider {
   static final _url =
@@ -94,7 +92,6 @@ class UserProvider {
     var lastCon = DateTime.parse(user.lastConnection);
     var daysoff = DateTime.now().difference(lastCon).inDays;
     String today = formatter.format(DateTime.now());
-    String today2 = formatter2.format(DateTime.now());
     String thelastCon = formatter.format(lastCon);
 
     if (int.parse(today) != int.parse(thelastCon)) {
@@ -128,7 +125,6 @@ class UserProvider {
     var lastCon = DateTime.parse(user.lastConnection);
     var daysoff = DateTime.now().difference(lastCon).inDays;
     String today = formatter.format(DateTime.now());
-    String today2 = formatter2.format(DateTime.now());
 
     String thelastCon = formatter.format(lastCon);
 
@@ -169,7 +165,6 @@ class UserProvider {
     var daysoff = DateTime.now().difference(lastCon).inDays;
 
     String today = formatter.format(DateTime.now());
-    String today2 = formatter2.format(DateTime.now());
     String thelastCon = formatter.format(lastCon);
 
     if (int.parse(today) != int.parse(thelastCon)) {

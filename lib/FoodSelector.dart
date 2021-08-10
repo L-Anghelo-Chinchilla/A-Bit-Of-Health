@@ -5,14 +5,13 @@ import 'package:a_bit_of_health/models/UserModel.dart';
 import 'package:a_bit_of_health/providers/authentification.dart';
 import 'package:a_bit_of_health/utils.dart';
 import 'package:flutter/material.dart';
-
 import 'package:provider/provider.dart';
 import 'package:a_bit_of_health/providers/FoodProvider.dart';
-import 'package:a_bit_of_health/providers/UserProvider.dart';
 import 'package:a_bit_of_health/models/FoodModel.dart';
 import 'package:tuple/tuple.dart';
-
 import 'models/UserModel.dart';
+
+
 
 class FoodSelector extends StatefulWidget {
   const FoodSelector({Key key}) : super(key: key);
@@ -57,7 +56,6 @@ class FoodSelectorPage extends StatefulWidget {
 
 class _FoodSelectorStatePage extends State<FoodSelectorPage> {
   FoodProvider _provider = FoodProvider();
-  FoodOfferModel _offer;
   String foodSelected = 'Desayuno';
   final items = ['Desayuno', 'Almuerzo', 'Cena', 'Snack']
       .map((value) => DropdownMenuItem<String>(
@@ -70,8 +68,8 @@ class _FoodSelectorStatePage extends State<FoodSelectorPage> {
 
   @override
   Widget build(BuildContext context) {
-    UserProvider user = UserProvider();
-    //
+ 
+    
     return Scaffold(
         appBar: getAppBar(context: context),
         body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -173,7 +171,7 @@ class _FoodSelectorStatePage extends State<FoodSelectorPage> {
                                           listen: false)
                                       .clear(); //MARKER
                                   setState(() {});
-                                  print('FoodSelector envía: ${list}');
+                                  print('FoodSelector envía: $list');
                                 });
                               } else {
                                 final snackBar = SnackBar(
@@ -199,6 +197,7 @@ class _FoodSelectorStatePage extends State<FoodSelectorPage> {
   }
 }
 
+// ignore: must_be_immutable
 class FoodOfferList extends StatefulWidget {
   FoodOfferModel offer;
   int position;
@@ -234,6 +233,7 @@ class _FoodOfferListState extends State<FoodOfferList> {
   }
 }
 
+// ignore: must_be_immutable
 class OfferScroll extends StatefulWidget {
   OfferScroll({Key key, this.list, this.position}) : super(key: key);
   FoodOffer list;
@@ -274,11 +274,7 @@ class _OfferScrollState extends State<OfferScroll> {
                                 .foodOffers[widget.position]
                                 .aliments[i]
                                 .name; //widget.list.aliments[i].name;
-                        bool value = Provider.of<FoodOfferModel>(context,
-                                listen: true)
-                            .foodOffers[widget.position]
-                            .aliments[i]
-                            .isSelected; //widget.list.aliments[i].isSelected;
+                 
                         return Consumer<Food>(builder: (context, food, child) {
                           Food fod =
                               Provider.of<FoodOfferModel>(context, listen: true)

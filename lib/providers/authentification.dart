@@ -1,8 +1,5 @@
-import 'dart:js';
-
 import 'package:a_bit_of_health/models/UserModel.dart';
 import 'package:a_bit_of_health/providers/UserProvider.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -58,8 +55,6 @@ class AuthProvider {
   }
 
   static Future<bool> getUser(BuildContext context) async {
-    // Initialize Firebase
-    // await Firebase.initializeApp();
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -67,10 +62,7 @@ class AuthProvider {
 
     bool exist = false;
 
-    print(authSignedIn);
-    final User user = _auth.currentUser;
-
-    //var model =UserModel();
+    
     if (authSignedIn) {
       String s = prefs.getString('userID');
 

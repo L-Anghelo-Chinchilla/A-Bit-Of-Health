@@ -22,15 +22,16 @@ DateTime now = new DateTime.now();
 final DateFormat formato = DateFormat('EEEE');
 String dayformat = formato.format(now);
 
-class Stat_Score extends StatefulWidget {
+// ignore: must_be_immutable
+class StatScore extends StatefulWidget {
   List<dynamic> list;
-  Stat_Score({Key key, this.list}) : super(key: key);
+  StatScore({Key key, this.list}) : super(key: key);
 
   @override
   _CaloriesState createState() => _CaloriesState(list2: list);
 }
 
-class _CaloriesState extends State<Stat_Score> {
+class _CaloriesState extends State<StatScore> {
   List<dynamic> list2;
   _CaloriesState({this.list2});
   @override
@@ -42,7 +43,7 @@ class _CaloriesState extends State<Stat_Score> {
           builder: (context, AsyncSnapshot<bool> future) {
             if (future.hasData) {
               if (future.data)
-                return Stat_Score_Page(thelist: list2);
+                return StatScorePage(thelist: list2);
               else
                 return Login();
             } else {
@@ -55,13 +56,14 @@ class _CaloriesState extends State<Stat_Score> {
             }
           });
     else
-      return Stat_Score_Page(thelist: list2);
+      return StatScorePage(thelist: list2);
   }
 }
 
-class Stat_Score_Page extends StatelessWidget {
+// ignore: must_be_immutable
+class StatScorePage extends StatelessWidget {
   List<dynamic> thelist;
-  Stat_Score_Page({Key key, this.thelist}) : super(key: key);
+  StatScorePage({Key key, this.thelist}) : super(key: key);
   List<Color> gradientColors = [Color(0xff23b6e6), Color(0xff02d39a)];
 
   @override
@@ -240,141 +242,10 @@ class LineTitles {
           fontWeight: FontWeight.bold,
           fontSize: 20,
         ),
-        getTitles: (value) {
-          if (dayformat == "Friday") {
-            switch (value.toInt()) {
-              case 0:
-                return "Sábado";
-              case 1:
-                return "Domingo";
-              case 2:
-                return "Lunes";
-              case 3:
-                return "Martes";
-              case 4:
-                return "Miércoles";
-              case 5:
-                return "Jueves";
-              case 6:
-                return "Viernes";
-            }
-          } else {
-            if (dayformat == "Saturday") {
-              switch (value.toInt()) {
-                case 0:
-                  return "Domingo";
-                case 1:
-                  return "Lunes";
-                case 2:
-                  return "Martes";
-                case 3:
-                  return "Miércoles";
-                case 4:
-                  return "Jueves";
-                case 5:
-                  return "Viernes";
-                case 6:
-                  return "Sábado";
-              }
-            } else {
-              if (dayformat == "Sunday") {
-                switch (value.toInt()) {
-                  case 0:
-                    return "Lunes";
-                  case 1:
-                    return "Martes";
-                  case 2:
-                    return "Miércoles";
-                  case 3:
-                    return "Jueves";
-                  case 4:
-                    return "Viernes";
-                  case 5:
-                    return "Sábado";
-                  case 6:
-                    return "Domingo";
-                }
-              } else {
-                if (dayformat == "Monday") {
-                  switch (value.toInt()) {
-                    case 0:
-                      return "Martes";
-                    case 1:
-                      return "Miércoles";
-                    case 2:
-                      return "Jueves";
-                    case 3:
-                      return "Viernes";
-                    case 4:
-                      return "Sábado";
-                    case 5:
-                      return "Domingo";
-                    case 6:
-                      return "Lunes";
-                  }
-                } else {
-                  if (dayformat == "Tuesday") {
-                    switch (value.toInt()) {
-                      case 0:
-                        return "Miércoles";
-                      case 1:
-                        return "Jueves";
-                      case 2:
-                        return "Viernes";
-                      case 3:
-                        return "Sábado";
-                      case 4:
-                        return "Domingo";
-                      case 5:
-                        return "Lunes";
-                      case 6:
-                        return "Martes";
-                    }
-                  } else {
-                    if (dayformat == "Wednesday") {
-                      switch (value.toInt()) {
-                        case 0:
-                          return "Jueves";
-                        case 1:
-                          return "Viernes";
-                        case 2:
-                          return "Sábado";
-                        case 3:
-                          return "Domingo";
-                        case 4:
-                          return "Lunes";
-                        case 5:
-                          return "Martes";
-                        case 6:
-                          return "Miércoles";
-                      }
-                    } else {
-                      if (dayformat == "Thursday") {
-                        switch (value.toInt()) {
-                          case 0:
-                            return "Viernes";
-                          case 1:
-                            return "Sábado";
-                          case 2:
-                            return "Domingo";
-                          case 3:
-                            return "Lunes";
-                          case 4:
-                            return "Martes";
-                          case 5:
-                            return "Miércoles";
-                          case 6:
-                            return "Jueves";
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-
-          return '';
+        getTitles: (value){
+          const translation = ['Lunes' , 'Martes','Miercoles','Jueves','Vieres','Sabado','Domingo']; 
+          const week = ['Monday','Tuesday','Wednesday','Truesday','Friday','Saturday','Sunday'];
+          return translation.elementAt((week.indexOf((dayformat))+value.toInt()+1)%7);
         },
         margin: 20,
       ),
@@ -386,24 +257,7 @@ class LineTitles {
           fontSize: 18,
         ),
         // ignore: missing_return
-        getTitles: (value) {
-          switch (value.toInt()) {
-            case 0:
-              return "0";
-            case 1:
-              return "1";
-            case 2:
-              return "2";
-            case 3:
-              return "3";
-            case 4:
-              return "4";
-            case 5:
-              return "5";
-          }
-
-          return '';
-        },
+        getTitles: (value) => value.toStringAsFixed(0),
         reservedSize: 80,
         margin: 20,
       ),

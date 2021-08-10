@@ -1,16 +1,13 @@
-import 'dart:convert';
-
 import 'package:a_bit_of_health/FoodSelector.dart';
 import 'package:a_bit_of_health/models/UserModel.dart';
 import 'package:a_bit_of_health/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:a_bit_of_health/providers/FoodProvider.dart';
 import 'package:a_bit_of_health/models/FoodModel.dart';
 import 'package:tuple/tuple.dart';
 import 'Login.dart';
 
-List<double> Thecalories = [];
+List<double> thecalories = [];
 
 int num;
 
@@ -24,14 +21,12 @@ class FoodCounter extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class NextPage extends StatelessWidget {
   //const NextPage({Key key}) : super(key: key);
 
-  DateTime _currentDate = new DateTime.now();
-
   @override
   Widget build(BuildContext context) {
-    int index = 4;
 
     Tuple2<String, List<FoodOffer>> thelist =
         ModalRoute.of(context).settings.arguments;
@@ -41,9 +36,8 @@ class NextPage extends StatelessWidget {
     Provider.of<List<FoodOffer>>(context, listen: false).addAll(thelist.item2);
 
     List<FoodOffer> list = thelist.item2;
-    String KindOfFood = thelist.item1;
+    String kindOfFood = thelist.item1;
 
-    Size size = MediaQuery.of(context).size;
 
     // CENTER OF THE HOME PAGE -----------------------------------------------------------
 
@@ -131,11 +125,11 @@ class NextPage extends StatelessWidget {
                           return prev;
                         });
                         final offer = FoodOffer(
-                            typeOfFood: KindOfFood, aliments: newList);
+                            typeOfFood: kindOfFood, aliments: newList);
                         print('La nueva lista es ${newList.toString()}');
                         Navigator.pushNamed(context, 'Evaluation',
                             arguments: Tuple2<double, FoodOffer>(sum, offer));
-                        print('FoodCounter envía: ${offer}');
+                        print('FoodCounter envía: $offer');
                       },
                       child:
                           Text('Autoevaluar', style: TextStyle(fontSize: 18)))
@@ -150,6 +144,7 @@ class NextPage extends StatelessWidget {
 }
 
 //--------------------------------COUNTER----------------------------------------
+// ignore: must_be_immutable
 class CounterView extends StatefulWidget {
   int x;
   int y;
@@ -253,6 +248,7 @@ class _CounterViewState extends State<CounterView> {
 }
 
 //-----------------------------------ITERATIVE FORMAT---------------------------------
+// ignore: must_be_immutable
 class ImagestoDisplay extends StatelessWidget {
   String imageName;
 
@@ -270,6 +266,7 @@ class ImagestoDisplay extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class TitleDisplay extends StatelessWidget {
   String titleName;
 
@@ -295,6 +292,7 @@ class TitleDisplay extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class ColumnsDisplay extends StatelessWidget {
   List<Food> foods;
   int index;
@@ -321,7 +319,7 @@ class ColumnsDisplay extends StatelessWidget {
               itemCount: foods.length,
               itemBuilder: (context, i) {
                 num = i;
-                Thecalories.add(foods[i].calories);
+                thecalories.add(foods[i].calories);
                 return Padding(
                     padding: EdgeInsets.fromLTRB(10, 5, 17, 5),
                     child: Row(

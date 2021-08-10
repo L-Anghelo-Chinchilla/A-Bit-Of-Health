@@ -4,7 +4,7 @@ import 'package:a_bit_of_health/providers/UserProvider.dart';
 import 'package:a_bit_of_health/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'dart:io';
+
 
 String theId;
 double theGlass;
@@ -20,7 +20,7 @@ class _LoginState extends State<Login> {
   bool _hide = true;
   final _email = TextEditingController(), _pass = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  void Function() change() {
+  void  change() {
     setState(() {
       _hide = !_hide;
     });

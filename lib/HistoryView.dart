@@ -86,7 +86,8 @@ class HistoryViewPage extends StatelessWidget {
                     Expanded(
                         child: Padding(
                       padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
-                      
+                       
+
                       child: Container(
                         color: Colors.white.withOpacity(0.8),
                         width: MediaQuery.of(context).size.width * 0.5,
@@ -192,10 +193,7 @@ class HistoryViewPage extends StatelessWidget {
   Future<void> _createPDF(
       String name, String date1, String date2, Map map) async {
     PdfDocument document = PdfDocument();
-    var day = DateTime.parse(date1);
-    String dateRegister = date1;
-    var next;
-    int diference = substractionDates(date1, date2);
+  
     //var imagen = await rootBundle.load('assets/image.png');
 
     createFirst(document, date1, date2, name);
